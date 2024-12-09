@@ -1,0 +1,29 @@
+# Ignore compiled files
+*.class
+
+# Ignore build directories (e.g., Maven, Gradle)
+/target/
+/build/
+
+# Ignore IDE files (e.g., IntelliJ IDEA, Eclipse)
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+
+# Ignore system files (e.g., macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore Maven wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ignore Gradle wrapper
+gradle-wrapper.jar
+gradle-wrapper.properties

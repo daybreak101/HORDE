@@ -1,0 +1,177 @@
+Music:
+"Night Of Shadows"
+created by Suno AI. Edited by myself.
+https://suno.com/
+
+"Farm Outro Music" by myself
+created using FLStudio
+using sounds from
+"ghostbreath" by qubodup or Iwan Gabovitch
+https://opengameart.org/users/qubodup
+
+Gun SFX:
+AA12 reload
+"aa12 reload 1" uploaded by MrBrightside
+Sound from "Counter-Strike (2000)" from Valve Corporation, Turtle Rock Studios
+https://www.youtube.com/watch?v=wWc7sz0PJsI
+https://www.youtube.com/@MrBrightsideAnimator
+
+AA12 shot
+"Shotgun AA-12 sound (Sound effect)" uploaded by BoostSound
+https://www.youtube.com/watch?v=_bXAzVdx-1w
+https://www.youtube.com/@BoostSound
+
+AK47 reload
+"AK12 Assault Rifle Unload" by PNMCarrieRailfan
+https://freesound.org/people/PNMCarrieRailfan/sounds/683309/
+"AK12 Assault Rifle Load" by PNMCarrieRailfan
+https://freesound.org/people/PNMCarrieRailfan/sounds/683308/
+"AK12 Assault Rifle Cocks 01" by PNMCarrieRailfan
+https://freesound.org/people/PNMCarrieRailfan/sounds/683306/
+
+AK47 shot
+"AK47 Shot" by LeMudCrab
+https://freesound.org/people/LeMudCrab/sounds/163457/
+
+AWP shot
+"THE REAL AWP SNIPER SOUND" uploaded by JUST PVP
+https://www.youtube.com/watch?v=dNlgqkG95n8
+https://www.youtube.com/@justpvp2899
+
+AWP reload
+"CS:GO AWP Reload sound effect" uploaded by CS Free Gun sound effects
+https://www.youtube.com/watch?v=rjOy86XL4jU
+https://www.youtube.com/@csfreegunsoundeffects
+
+Flamethrower shot
+Not sure how to cite since it's hard to trace back
+"FlameThrowerBurst_ZA01.268" by Partners In Rhyme
+Filename: mp3_446417
+
+Glock17 reload
+"Glock 17 Reload.wav" by KNO SFX
+https://freesound.org/people/KNO%20SFX/sounds/121766/
+
+Glock17 shot
+"Glock 17 Semi-Automatic Hand Gun Pistol" by gsparrysound
+https://freesound.org/people/gsparrysound/sounds/591428/
+
+Grenade Launcher explosion
+"Explosion VAR 2 (Close/Near) (Mixed)" by EFlexMusic
+https://freesound.org/people/EFlexMusic/sounds/387230/
+
+Grenade Launcher Reload
+"Custom Grenade Launcher Reload [SFM]" uploaded by LexuZ
+https://www.youtube.com/watch?v=2OxoLjH-ZOE
+https://www.youtube.com/@0LexuZ0
+
+Grenade Launcher shot
+"Grenade Launcher" by LeMudCrab
+https://freesound.org/people/LeMudCrab/sounds/163458/
+"Grenade_Bullet_Shell_Drop_01.wav" by xFormarge1
+https://freesound.org/people/xFromarge1/sounds/520035/
+
+M4 Reload 
+"m4a1 or m16 reload sound.mp3" by GFL7
+https://freesound.org/people/GFL7/sounds/276964/
+
+M4 Shot
+"M4 Carbine Rifle Gun Shot Sound Effect Loud" uploaded by SoundEffectsFactory
+https://www.youtube.com/watch?v=Vpi2EBTAOjc
+
+Minigun Firing
+"Complex Minigun Spin-Up Firing" by Hybrid_V
+https://freesound.org/people/Hybrid_V/sounds/320742/
+
+Minigun Overheat
+"minigun_Overheat.wav" by Marregheriti
+https://freesound.org/people/Marregheriti/sounds/266102/
+
+P90 Reload & Shot
+"FN P90 - Comparison in 20 Random Video Games" uploaded by Tigerfield
+https://www.youtube.com/watch?v=9wg_zCv4HDY
+https://www.youtube.com/@TigerfieldYT
+Reload sound from "Far Cry (2004)", developed by Crytek, published by Ubisoft
+Gun shot sound from "Counter-Strike: Global Offensive", developed and published by Valve
+
+RPD Reload
+"Call of Duty Black Ops Cold War : ALL Reload Animation Showcase" uploaded by EXILAS
+https://www.youtube.com/watch?v=-CdIO7iWVEo
+https://www.youtube.com/@exilas8699
+Sound from "Call Of Duty: Black Ops Cold War", developed by Treyarch and Raven Software, published by Activision
+
+RPD Shot
+"Rhodesian chopped full auto RPD" uploaded by everybodydrops
+https://www.youtube.com/watch?v=Gbv2ljpUZeA
+https://www.youtube.com/@suspectorange
+
+RPG Reload
+"RPG-7 Reload animation" uploaded by Nutcake
+https://www.youtube.com/watch?v=Kggi0nV8Pe4
+
+RPG Shot
+"RPG Sound Effect" uploaded by superfunnysheet
+https://www.youtube.com/watch?v=u8L3etGPSN8
+
+Winchester Shot and lever
+"Winchester 1901 lever-action shotgun POV firing" uploaded by Tenacious Trilobite
+https://www.youtube.com/watch?v=l-VDwAcfBw8
+
+Winchester Reload
+"M1887 - Comparison in 10 Different Games" uploaded by Tigerfield
+https://www.youtube.com/watch?v=0oEayJqlXJo
+https://youtube.com/@TigerfieldYT
+Sound from "Combat Arms (2007)", developed by Doobic Studios, published by Nexon and Valofe
+
+Upgraded Shot
+"Sci Fi Gun Shot.wav" by Bird_man
+https://freesound.org/people/Bird_man/sounds/317136/
+
+
+SFX:
+Interact purchase:
+"cha ching.wav" by creek23
+https://freesound.org/people/creek23/sounds/75235/
+
+Menu Golden coins purchase:
+"Coins Purchase 02" by rhodesmas
+https://freesound.org/people/rhodesmas/sounds/321262/
+
+Cant afford purchase:
+"incorrect buzzer retro" by EtherAudio
+https://freesound.org/people/EtherAudio/sounds/745159/
+
+Menu buttons click:
+"Incorrect 01" by rhodesmas
+https://freesound.org/people/rhodesmas/sounds/322931/
+
+Menu buttons denied:
+"UI_Cancel" by unfa
+https://freesound.org/people/unfa/sounds/565133/
+
+Nuke Sound
+"(Zombie Virus EAS Scenario) - The Awakening [ft. Harvester]" uploaded by eltic
+https://www.youtube.com/watch?v=CBWdwDTn4vE
+Starting at 17:28 to 17:56
+
+
+
+
+VFX:
+Explosion
+"exp2_0.png" by Cuzco
+https://opengameart.org/sites/default/files/exp2_0.png
+
+RPG rocket, cropped from
+https://n.b5z.net/i/u/10108121/i/RPG_LinkedIn_Article_pic_2.jpg
+https://www.eodbuyersguide.com/inert_products_llc_introduces_new_rpg_7_rocket_training_aids_line/
+
+Flamethrower flame
+"🔥 FREE Flame Thrower Stock Footage!!!" by Visionary Fire
+https://www.youtube.com/watch?v=KNb3q-hXt68
+
+Golden Coin animation
+"Spinning Coin" by JM.Atencia
+https://opengameart.org/content/spinning-coin
+https://opengameart.org/sites/default/files/coins_1.png
+

@@ -1,0 +1,78 @@
+package project.game.horde.entities.powerups;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.main.Handler;
+import project.game.horde.sounds.PowerupSounds;
+import project.game.horde.sounds.Sounds;
+
+public class Nuke extends PowerUps {
+
+	int alpha = 255;
+	boolean fulfilledInteraction = false;
+
+	public Nuke(Handler handler, int id, float x, float y, int z) {
+		super(handler, id, x, y, z, true);
+		name = "Nuke";
+		icon = null;
+		floatingAsset = null;
+	}
+
+	public void tick() {
+		cooldownTimer++;
+		trigger = new Rectangle((int) (x), (int) y, width, height);
+
+		if (cooldownTimer >= cooldown || activeCounter >= cooldown) {
+			unbuff();
+			handler.getWorld().getEntityManager().getPowerups().remove(this);
+			handler.getWorld().getRoundLogic().stopSpawningTemporarily(false);
+		} else if (fulfilledInteraction) {
+			cooldownTimer = 0;
+			if (activeCounter >= cooldownTimer) {
+				alpha--;
+			}
+			if (alpha <= 0) {
+				handler.getWorld().getEntityManager().getPowerups().remove(this);
+				handler.getWorld().getRoundLogic().stopSpawningTemporarily(false);
+
+			}
+		} else if (pickedUp) {
+			cooldownTimer = 0;
+			activeCounter++;
+			fulfillInteraction(playerPicked);
+
+			fulfilledInteraction = true;
+		} else if (!pickedUp && cooldownTimer < cooldown) {
+			checkPickedUp();
+		}
+	}
+
+	@Override
+	public void fulfillInteraction(String username) {
+		//Sounds.playClip(PowerupSounds.nukePickedUp, 1, "nuke", 1, false);
+		Sounds.playClip(PowerupSounds.NUKE_PICKED_UP_ID, 1, 1, false);
+		for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
+			e.dieByNuke();
+			handler.getWorld().getEntityManager().getEntities().remove(e);
+		}
+		handler.getWorld().getEntityManager().getZombies().clear();
+		handler.getCurrentPlayer().getInv().gainPoints(400);
+		handler.getWorld().getRoundLogic().stopSpawningTemporarily(true);
+	}
+
+	@Override
+	public void render(Graphics g) {
+		if (!pickedUp) {
+			g.setColor(Color.yellow);
+			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
+					(int) (y - handler.getGameCamera().getyOffset()), width, height);
+		} else {
+			g.setColor(new Color(255, 255, 255, alpha));
+			g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
+		}
+	}
+}

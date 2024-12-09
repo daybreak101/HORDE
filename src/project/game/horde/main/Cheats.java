@@ -1,0 +1,104 @@
+package project.game.horde.main;
+
+import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Wall;
+import project.game.horde.perks.DeadShot;
+import project.game.horde.perks.DoubleTap;
+import project.game.horde.perks.Juggernaut;
+import project.game.horde.perks.MuleKick;
+import project.game.horde.perks.PhD;
+import project.game.horde.perks.Revive;
+import project.game.horde.perks.SleightOfHand;
+import project.game.horde.perks.StaminUp;
+import project.game.horde.perks.Stronghold;
+import project.game.horde.perks.Vampire;
+import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.IceShotgun;
+import project.game.horde.weapons.M4;
+
+public class Cheats {
+
+	Handler handler;
+
+	public Cheats(Handler handler) {
+		this.handler = handler;
+		applyCheats();
+	}
+
+	public void applyCheats() {
+		// perks
+		handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new Luna(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new MuleKick(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Revive(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new SleightOfHand(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Stronghold(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
+
+		// points
+		int points = 100000;
+		handler.getCurrentPlayer().getInv().gainPoints(points);
+
+		// set round
+		int round = 10;
+		handler.getRoundLogic().setCurrentRound(round);
+
+		// give gun
+		Gun gun =
+				//new AWP(handler, handler.getCurrentPlayer());
+				//new AK47(handler);
+				//new RPD(handler);
+				//new GrenadeLauncher(handler, handler.getCurrentPlayer());
+				//new Winchester1901(handler, handler.getCurrentPlayer());
+				//new AA12(handler, handler.getCurrentPlayer());
+				//new RPG(handler, handler.getCurrentPlayer());
+				//new Flamethrower(handler, handler.getCurrentPlayer());
+				//new IceShotgun(handler);
+				//new P90(handler, handler.getCurrentPlayer());
+				//new Minigun(handler, handler.getCurrentPlayer());
+				//new M4(handler, handler.getCurrentPlayer());
+				new IceShotgun(handler, handler.getCurrentPlayer());
+		gun.upgradeWeapon();
+		handler.getCurrentPlayer().getInv().setGun(gun);
+		
+		//give gas grenades
+		handler.getCurrentPlayer().getInv().setSpecialGrenade(0);
+			
+		invisibleWalls();
+		nodesVisible();
+		showPlayerCoords();
+	}
+	
+	public void tick() {
+		//freezeZombies();	
+		//infiniteAmmo();
+	}
+	
+	public void infiniteAmmo() {
+		handler.getCurrentPlayer().getInv().infiniteAmmo();
+	}
+	
+	public void freezeZombies() {
+		for(Zombie z : handler.getWorld().getEntityManager().getZombies()) {
+			z.getFreezeStatus().freezeByBlessing();
+		}
+	}
+	
+	public void invisibleWalls() {
+		for(Wall w : handler.getWorld().getEntityManager().getWalls()) {
+			w.setVisible(false);
+		}
+	}
+	
+	public void nodesVisible() {
+		handler.getWorld().showNodesAndEdges();
+	}
+	
+	public void showPlayerCoords() {
+		handler.getCurrentPlayer().drawCoords();
+	}
+}
