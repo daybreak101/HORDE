@@ -8,8 +8,8 @@ import project.game.horde.main.Handler;
 
 public class Tree extends InteractableStaticEntity{
 
-	public Tree(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, 100, 200);
+	public Tree(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, 100, 200);
 		// TODO Auto-generated constructor stub
 //		bounds.x = 0;
 //		bounds.y = 0;

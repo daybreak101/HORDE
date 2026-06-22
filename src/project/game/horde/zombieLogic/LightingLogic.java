@@ -1,12 +1,8 @@
 package project.game.horde.zombieLogic;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.awt.GradientPaint;
-import java.awt.AlphaComposite;
 
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Utils;
@@ -39,14 +35,13 @@ public class LightingLogic {
 		int i = 0;
 
 		// process nodes
-		int x, y, z, radius, intensity;
+		int x, y, radius, intensity;
 		while (i < tokens.length) {
 			x = Utils.parseInt(tokens[i++]);
 			y = Utils.parseInt(tokens[i++]);
-			z = Utils.parseInt(tokens[i++]);
 			radius = Utils.parseInt(tokens[i++]);
 			intensity = Utils.parseInt(tokens[i++]);
-			lightPositions.add(new LightSource(handler, x, y, z, radius, intensity));
+			lightPositions.add(new LightSource(handler, x, y, radius, intensity));
 		}
 	}
 

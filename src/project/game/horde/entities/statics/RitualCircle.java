@@ -1,10 +1,10 @@
 package project.game.horde.entities.statics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-import java.awt.Color;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
@@ -19,8 +19,8 @@ public class RitualCircle extends InteractableStaticEntity {
 	private Timer pickupTimer;
 	private boolean canPickup;
 
-	public RitualCircle(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, 0, 0);
+	public RitualCircle(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, 0, 0);
 		triggerText = "Souls for a blessing";
 		blessing = "";
 		soulsFed = 0;

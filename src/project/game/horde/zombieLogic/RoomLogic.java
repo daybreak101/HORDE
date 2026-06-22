@@ -66,13 +66,12 @@ public class RoomLogic {
 		String file = Utils.loadFileAsString(spawnersPath);
 		String[] tokens = file.split("\\s+");
 		int i = 0;
-		int x, y, z, room;
+		int x, y, room;
 		while (i < tokens.length) {
 			x = Utils.parseInt(tokens[i++]);
 			y = Utils.parseInt(tokens[i++]);
-			z = Utils.parseInt(tokens[i++]);
 			room = Utils.parseInt(tokens[i++]);
-			spawners.add(new Spawner(handler, x, y, z, room));
+			spawners.add(new Spawner(handler, x, y, room));
 		}
 	}
 	
