@@ -2,11 +2,13 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Grenade;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class GrenadeLauncher extends Gun {
 
@@ -18,6 +20,9 @@ public class GrenadeLauncher extends Gun {
 		originalName = name;
 		upgradedName = GunVars.GRENADELAUNCHER_UPGRADEDNAME;
 		reloadSound = GunSounds.GRENADE_LAUNCHER_RELOAD_SHELL_ID;
+		top = Assets.grenadeLauncher_top;
+		//gunImageDim = new GunImageDim(40, 50, 20, 100);
+		gunImageDim = new GunImageDim(30, 45, 40, 100);
 	}
 
 	private Timer cockTimerlmao;

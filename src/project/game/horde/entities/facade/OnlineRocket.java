@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 
 import project.game.horde.entities.Entity;
 import project.game.horde.entities.bullets.Explosion;
@@ -25,8 +24,8 @@ public class OnlineRocket extends Entity {
 	protected boolean isUpgraded;
 
 	//online player bullet, just for visuals
-	public OnlineRocket(Handler handler, float x, float y, int z, int range, float angle, boolean isUpgraded) {
-		super(handler, x, y, z, 5, 5);	
+	public OnlineRocket(Handler handler, float x, float y, int range, float angle, boolean isUpgraded) {
+		super(handler, x, y, 5, 5);	
 		bounds = new Rectangle(0, 0, 0, 0);
 		this.handler = handler;
 		this.range = range;
@@ -62,7 +61,7 @@ public class OnlineRocket extends Entity {
 			travelTicker++;
 			if(checkForImpact()) {
 				//System.out.println("impacted");
-				handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 150, y - 150, z, 300, 300, isUpgraded));
+				handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 150, y - 150, 300, 300, isUpgraded));
 
 				break;	
 			}			

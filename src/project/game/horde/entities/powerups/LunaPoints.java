@@ -1,20 +1,21 @@
 package project.game.horde.entities.powerups;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.Luna;
 
 public class LunaPoints extends PowerUps {
-	public LunaPoints(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, false);
+	public LunaPoints(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, false);
 		name = "Luna Points";
 		icon = null;
 		floatingAsset = null;
+		glow = Assets.greenStar;
 	}
 
+        @Override
 	public void tick() {
 		cooldownTimer++;
 		trigger = new Rectangle((int) (x), (int) (y), width/2, height/2);
@@ -37,12 +38,12 @@ public class LunaPoints extends PowerUps {
 
 	}
 
-	@Override
-	public void render(Graphics g) {
-		if (!pickedUp) {
-			g.setColor(new Color(193, 255, 135));
-			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width/2, height/2);
-		}
-	}
+//	@Override
+//	public void render(Graphics g) {
+//		if (!pickedUp) {
+//			g.setColor(new Color(193, 255, 135));
+//			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
+//					(int) (y - handler.getGameCamera().getyOffset()), width/2, height/2);
+//		}
+//	}
 }

@@ -22,13 +22,15 @@ import project.game.horde.perks.Vampire;
 
 public class PerkBag extends PowerUps {
 
-	public PerkBag(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, true);
+	public PerkBag(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, true);
 		name = "Perk Bag";
 		icon = null;
 		floatingAsset = null;
+		glow = null;
 	}
 
+        @Override
 	public void tick() {
 		cooldownTimer++;
 		trigger = new Rectangle((int) (x), (int) (y), width, height);

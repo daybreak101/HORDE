@@ -1,19 +1,16 @@
 package project.game.horde.entities.powerups;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 
 public class InstaKill extends PowerUps{
 
-	public InstaKill(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, true);
+	public InstaKill(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, true);
 		name = "InstaKill";
 		icon = Assets.instakill;
-		floatingAsset = null;
+		floatingAsset = Assets.instakill;
+		glow = Assets.redStar;
 	}
 
 	@Override
@@ -26,12 +23,12 @@ public class InstaKill extends PowerUps{
 		handler.getRoundLogic().getPowerups().setInstakillActive(true);
 	}
 
-	@Override
-	public void render(Graphics g) {
-		if(!pickedUp) {	
-			g.setColor(Color.red);
-			g.drawOval((int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height);
-		}
-	}	
+//	@Override
+//	public void render(Graphics g) {
+//		if(!pickedUp) {	
+//			g.setColor(Color.red);
+//			g.drawOval((int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height);
+//		}
+//	}	
 	
 }

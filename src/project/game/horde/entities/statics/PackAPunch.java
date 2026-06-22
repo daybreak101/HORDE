@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
@@ -11,14 +12,25 @@ import project.game.horde.utils.Timer;
 import project.game.horde.weapons.AA12;
 import project.game.horde.weapons.AK47;
 import project.game.horde.weapons.AWP;
+import project.game.horde.weapons.Bren;
+import project.game.horde.weapons.DoubleBarrel;
 import project.game.horde.weapons.Flamethrower;
+import project.game.horde.weapons.G18;
 import project.game.horde.weapons.Glock17;
 import project.game.horde.weapons.GrenadeLauncher;
 import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.M16;
+import project.game.horde.weapons.M1911;
+import project.game.horde.weapons.M1Garand;
 import project.game.horde.weapons.M4;
+import project.game.horde.weapons.M60;
 import project.game.horde.weapons.P90;
+import project.game.horde.weapons.Python;
 import project.game.horde.weapons.RPD;
 import project.game.horde.weapons.RPG;
+import project.game.horde.weapons.Thompson;
+import project.game.horde.weapons.Type100;
+import project.game.horde.weapons.Uzi;
 import project.game.horde.weapons.Winchester1901;
 
 public class PackAPunch extends InteractableStaticEntity {
@@ -29,8 +41,8 @@ public class PackAPunch extends InteractableStaticEntity {
 	private boolean cantAfford = false;
 	private boolean cantUpgrade = false;
 
-	public PackAPunch(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, 150, 75);
+	public PackAPunch(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, 100, 50);
 		triggerText = "Press F to Upgrade Weapon: 5000";
 		packTimer = 1000;
 		isUpgrading = false;
@@ -38,6 +50,10 @@ public class PackAPunch extends InteractableStaticEntity {
 
 	@Override
 	public void fulfillInteraction(Player player) {
+		if(!handler.getWorld().isPowerOn()) {
+			return;
+		}
+		
 		if (usedByOtherPlayer) {
 
 		} else if (!isUpgrading && cooldownTimer >= cooldown && !player.getInv().getGun().isUpgraded()) {
@@ -82,6 +98,39 @@ public class PackAPunch extends InteractableStaticEntity {
 					break;
 				case "Winchester 1901":
 					gunPacked = new Winchester1901(handler, player);
+					break;
+				case "M1 Garand":
+					gunPacked = new M1Garand(handler, player);
+					break;
+				case "M16":
+					gunPacked = new M16(handler, player);
+					break;
+				case "Bren":
+					gunPacked = new Bren(handler, player);
+					break;
+				case "Double Barrel":
+					gunPacked = new DoubleBarrel(handler, player);
+					break;
+				case "G18":
+					gunPacked = new G18(handler, player);
+					break;
+				case "M60":
+					gunPacked = new M60(handler, player);
+					break;
+				case "Python":
+					gunPacked = new Python(handler, player);
+					break;
+				case "Thompson":
+					gunPacked = new Thompson(handler, player);
+					break;
+				case "Type100":
+					gunPacked = new Type100(handler, player);
+					break;
+				case "Uzi":
+					gunPacked = new Uzi(handler, player);
+					break;
+				case "M1911":
+					gunPacked = new M1911(handler, player);
 					break;
 				default:
 					System.out.println("oof");
@@ -167,6 +216,11 @@ public class PackAPunch extends InteractableStaticEntity {
 
 	@Override
 	public void postTick() {
+		if(!handler.getWorld().isPowerOn()) {
+			triggerText = "Requires power";
+			return;
+		}
+		
 		updateSound.tick();
 		if (updateSound.isReady()) {
 			fryingSounds();
@@ -201,12 +255,15 @@ public class PackAPunch extends InteractableStaticEntity {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-		g.setColor(Color.magenta);
-		g.fillRect((int) (x + 10 - handler.getGameCamera().getxOffset()),
-				(int) (y + 10 - handler.getGameCamera().getyOffset()), width - 40, height - 40);
+		g.drawImage(Assets.fryer, (int) (x - handler.getGameCamera().getxOffset()), 
+				(int) (y - handler.getGameCamera().getyOffset()),
+				width, height + 20, null);
+//		g.setColor(Color.black);
+//		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
+//				width, height);
+//		g.setColor(Color.magenta);
+//		g.fillRect((int) (x + 10 - handler.getGameCamera().getxOffset()),
+//				(int) (y + 10 - handler.getGameCamera().getyOffset()), width - 40, height - 40);
 
 	}
 

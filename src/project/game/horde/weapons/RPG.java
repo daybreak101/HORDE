@@ -2,10 +2,12 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Rocket;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.RandomUtil;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class RPG extends Gun{
 
@@ -22,6 +24,8 @@ public class RPG extends Gun{
 		originalName = name;
 		upgradedName = GunVars.RPG_UPGRADEDNAME;
 		reloadSound = GunSounds.RPG_RELOAD_ID;
+		top = Assets.rpg_top;
+		gunImageDim = new GunImageDim(50, 45, 20, 150);
 	}
 	
 	public void shoot() {		

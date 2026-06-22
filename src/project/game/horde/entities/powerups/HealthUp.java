@@ -1,21 +1,21 @@
 package project.game.horde.entities.powerups;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 
 public class HealthUp extends PowerUps {
 
-	public HealthUp(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, false);
+	public HealthUp(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, false);
 		name = "Health Up";
 		icon = null;
-		floatingAsset = null;
+		floatingAsset = Assets.healthUp;
+		glow = Assets.whiteStar;
 	}
 
+        @Override
 	public void tick() {
 		cooldownTimer++;
 		trigger = new Rectangle((int) (x), (int) (y), width, height);
@@ -45,13 +45,13 @@ public class HealthUp extends PowerUps {
 
 	}
 
-	@Override
-	public void render(Graphics g) {
-		if (!pickedUp) {
-			g.setColor(Color.CYAN);
-			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height);
-		}
-	}
+//	@Override
+//	public void render(Graphics g) {
+//		if (!pickedUp) {
+//			g.setColor(Color.CYAN);
+//			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
+//					(int) (y - handler.getGameCamera().getyOffset()), width, height);
+//		}
+//	}
 
 }

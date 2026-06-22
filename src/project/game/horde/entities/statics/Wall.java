@@ -43,8 +43,11 @@ public class Wall extends InteractableStaticEntity {
 			bounds.width = 25;
 			bounds.height = length;
 		}
+		width = bounds.width;
+		height = bounds.height;
+		
 		wallVisible = true;
-		showCoords = true;
+		showCoords = false;
 	}
 
 	@Override

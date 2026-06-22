@@ -47,7 +47,7 @@ public class DamageElement extends HudElement{
 	public void render(Graphics g) {
 		//g.setColor(new Color(r, gr, b, alpha));
 		
-		double zoomLevel = handler.getSettings().getZoomLevel();
+		double zoomLevel = handler.getSettings().getZoomLevel(false);
 		Graphics2D g2d = (Graphics2D) g;
 		AffineTransform old = g2d.getTransform();
 		

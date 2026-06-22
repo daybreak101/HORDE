@@ -22,7 +22,11 @@ public class BWAssets {
 								
 								powerup, doublepoints, instakill, deathmachine, infiniteammo,
 								
-								crawler, frozenZombie, iceEnhancedZombie;
+								crawler, frozenZombie, iceEnhancedZombie,
+								
+								aa12, ak47, awp, flamethrower, gasGrenades, glock17, grenadeLauncher,
+								m4, p90, rpd, rpg, winchester1901;
+	;
 	
 	public static BufferedImage factoryMap;
 	
@@ -213,6 +217,17 @@ public class BWAssets {
 		toxenBlood = sheet.crop(width, 3 * height, width, height);
 		stokerBlood = null;
 		
-		
+		aa12 = ImageLoader.loadImage(folder + "guns/aa12.png");
+		ak47  = ImageLoader.loadImage(folder + "guns/ak-47.png");
+		awp = ImageLoader.loadImage(folder + "guns/awp.png");
+		flamethrower = ImageLoader.loadImage(folder + "guns/flamethrower.png");
+		gasGrenades = ImageLoader.loadImage(folder + "guns/gas_grenades.png");
+		glock17 = ImageLoader.loadImage(folder + "guns/glock17.png");
+		grenadeLauncher = ImageLoader.loadImage(folder + "guns/grenade_launcher.png");
+		m4 = ImageLoader.loadImage(folder + "guns/m4.png");
+		p90 = ImageLoader.loadImage(folder + "guns/p90.png");
+		rpd = ImageLoader.loadImage(folder + "guns/rpd.png");
+		rpg = ImageLoader.loadImage(folder + "guns/rpg.png");
+		winchester1901 = ImageLoader.loadImage(folder + "guns/winchester1901.png");
 	}
 }

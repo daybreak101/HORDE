@@ -9,18 +9,21 @@ import project.game.horde.main.Handler;
 public class LightSource {
 
 	private float x, y;
+	private int z;
 	private int radius;
-	private float intensity;
+	private int intensity;
 	private BufferedImage lightImage;
 	private Handler handler;
 
 	// 0.0 - 1.0
-	public LightSource(Handler handler, int x, int y, int radius, float intensity) {
+	public LightSource(Handler handler, int x, int y, int z, int radius, int intensity) {
 		this.handler = handler;
 		this.x = x;
 		this.y = y;
+		this.z = z;
 		this.radius = radius;
-		this.intensity = ((float) intensity / 100);
+		this.intensity = intensity;
+		//intensity is out of 255, alpha value
 //        this.lightImage = updateLightImage(handler, new Color(0, 0, 0, 0));
 	}
 	
@@ -77,6 +80,10 @@ public class LightSource {
 	public float getY() {
 		return y;
 	}
+	
+	public int getZ() {
+		return z;
+	}
 
 	public int getRadius() {
 		return radius;
@@ -84,5 +91,10 @@ public class LightSource {
 
 	public BufferedImage getLightImage() {
 		return lightImage;
+	}
+
+	public int getIntensity() {
+		// TODO Auto-generated method stub
+		return (int) intensity;
 	}
 }

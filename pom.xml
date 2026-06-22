@@ -8,13 +8,19 @@
 	<name>HORDE</name>
 	<description>2D topdown round-based java zombie shooter survival game
 	</description>
-	<properties>
+	
+<!-- 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.basedir>C:\Users\ramir\Desktop\NewNetwork\NewNetwork</project.basedir>
 		<javafx.version>17</javafx.version>
-	</properties>
+	</properties> -->
+	    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+        <javafx.version>22.0.1</javafx.version>
+    </properties>
 
 
 	<repositories>
@@ -23,6 +29,8 @@
 			<url>https://clojars.org/repo/</url>
 		</repository>
 	</repositories>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>kryonet</groupId>
@@ -35,13 +43,6 @@
 			<version>5.6.0</version>
 		</dependency>
 		<!-- Add other dependencies here -->
-		<!-- <dependency> <groupId>org.openjfx</groupId> <artifactId>javafx-controls</artifactId> 
-			<version>${javafx.version}</version> </dependency> <dependency> <groupId>org.openjfx</groupId> 
-			<artifactId>javafx-graphics</artifactId> <version>${javafx.version}</version> 
-			</dependency> <dependency> <groupId>org.openjfx</groupId> <artifactId>javafx-swing</artifactId> 
-			<version>${javafx.version}</version> </dependency> <dependency> <groupId>org.openjfx</groupId> 
-			<artifactId>javafx-fxml</artifactId> <version>${javafx.version}</version> 
-			</dependency> -->
     <dependency>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-controls</artifactId>
@@ -77,64 +78,7 @@
         <artifactId>javafx-web</artifactId>
         <version>22.0.1</version>
     </dependency>
-<!-- 		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-base</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.base.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.controls.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-fxml</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.fxml.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.graphics.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-media</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.media.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-swing</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.swing.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-web</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx.web.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>javafx</groupId>
-			<artifactId>javafx-swt</artifactId>
-			<version>22.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/javafx-swt.jar</systemPath>
-		</dependency> -->
-
-	</dependencies>
+	</dependencies> 
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -163,38 +107,24 @@
 		</resources>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<release>16</release>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					  <compilerArgs>
-                    <arg>--module-path</arg>
-                    <arg>C:\Users\ramir\Desktop\javafx-sdk-22.0.1\lib</arg>
-                    <arg>--add-modules</arg>
-                    <arg>javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web</arg>
-                </compilerArgs>
-				</configuration>
-			</plugin>
+		            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
 
-<!-- 			<plugin>
-				<groupId>org.openjfx</groupId>
-				<artifactId>javafx-maven-plugin</artifactId>
-				<version>0.0.8</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>project.game.horde.main.Launcher</mainClass>
-				</configuration>
-			</plugin> -->
+            <!-- JavaFX Runner -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>project.game.horde.main.Launcher</mainClass>
+                </configuration>
+            </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

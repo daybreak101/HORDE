@@ -2,11 +2,13 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.ShotgunBullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class Winchester1901 extends Gun {
 
@@ -23,6 +25,8 @@ public class Winchester1901 extends Gun {
 		originalName = name;
 		upgradedName = GunVars.WINCHESTER1901_UPGRADEDNAME;
 		reloadSound = GunSounds.WINCHESTER1901_SHELL_RELOAD_ID;
+		top = Assets.winchester1901_top;
+		gunImageDim = new GunImageDim(30, 45, 20, 100);
 	}
 
 	private Timer cockTimerlmao;

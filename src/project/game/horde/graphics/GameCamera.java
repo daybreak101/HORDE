@@ -19,15 +19,15 @@ public class GameCamera {
 	
 	public void centerOnEntity(Entity e) {
 		
-		xOffset = (float) (e.getX() - handler.getWidth()/2/handler.getSettings().getZoomLevel() 
-				+ e.getWidth()/2  / handler.getSettings().getZoomLevel());
-		yOffset = (float) (e.getY() - handler.getHeight()/2/ handler.getSettings().getZoomLevel() 
-				+ e.getHeight()/2 / handler.getSettings().getZoomLevel());
+		xOffset = (float) (e.getX() - handler.getWidth()/2/handler.getSettings().getZoomLevel(false) 
+				+ e.getWidth()/2  / handler.getSettings().getZoomLevel(false));
+		yOffset = (float) (e.getY() - handler.getHeight()/2/ handler.getSettings().getZoomLevel(false) 
+				+ e.getHeight()/2 / handler.getSettings().getZoomLevel(false));
 	}
 	
 	public void move(float xAmt, float yAmt) {
-		xOffset += xAmt * handler.getSettings().getZoomLevel();
-		yOffset += yAmt * handler.getSettings().getZoomLevel();
+		xOffset += xAmt * handler.getSettings().getZoomLevel(false);
+		yOffset += yAmt * handler.getSettings().getZoomLevel(false);
 	}
 	
 	public float getxOffset() {

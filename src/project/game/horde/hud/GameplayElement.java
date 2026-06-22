@@ -73,17 +73,17 @@ public class GameplayElement extends HudElement {
 				skipInteracts = true;
 				userRevive = others.getUsername();
 			}
-				
+
 		}
 
 		if (!skipInteracts) {
 			for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
 				eDist = Utils.getEuclideanDistance(player.getX(), player.getY(), e.getX(), e.getY());
-				if (e.getZ() == player.getZ() && closestInteract == null) {
+				if (Math.abs(player.getZ() - e.getZ()) < 75 && closestInteract == null) {
 					closestInteract = e;
 					closestDist = eDist;
 				}
-				if (e.getZ() == player.getZ() && eDist < closestDist) {
+				if (Math.abs(player.getZ() - e.getZ()) < 75 && eDist < closestDist) {
 					closestInteract = e;
 					closestDist = eDist;
 				}
@@ -95,8 +95,7 @@ public class GameplayElement extends HudElement {
 
 				}
 			}
-		}
-		else {
+		} else {
 			interactText = "Hold F to revive " + userRevive;
 		}
 
@@ -111,6 +110,8 @@ public class GameplayElement extends HudElement {
 		gun = player.getInv().getGun();
 		if (gun == null)
 			gunText = "";
+		else if (gun.isDual())
+			gunText = gun.getName() + "         " + gun.getCurrentClip() + " | " + gun.getCurrentAltClip() + " / " + gun.getCurrentReserve();
 		else
 			gunText = gun.getName() + "         " + gun.getCurrentClip() + " / " + gun.getCurrentReserve();
 
@@ -137,18 +138,53 @@ public class GameplayElement extends HudElement {
 	}
 
 	public void renderGun(Graphics g) {
-		// render gun
-		g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
-		g.drawString(gunText, (int) handler.getWidth() - 300, (int) handler.getHeight() - 100);
+		if (gun != null) {
+			g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+			FontMetrics fm = g.getFontMetrics();
+			int textWidth = fm.stringWidth(gunText);
+			Rectangle rect = new Rectangle((int) handler.getWidth() - 300, (int) handler.getHeight() - 120, textWidth,
+					20);
 
-		if (gun == null) {
+			g.setColor(new Color(0, 0, 0, 30));
+			g.fillRect(rect.x, rect.y, rect.width, rect.height);
 
-		} else if (gun.getIsReloading()) {
-			g.setColor(Color.black);
-			g.fillRect((int) handler.getWidth() - 300, (int) handler.getHeight() - 95, 100, 10);
 			g.setColor(hudColor);
-			g.fillRect((int) handler.getWidth() - 300, (int) handler.getHeight() - 95,
-					(int) (gun.getReloadProgress() * 100), 10);
+			Utils.drawLeftAlignedString(g, gunText, rect, new Font(Font.DIALOG, Font.PLAIN, 20));
+
+			String alert = "";
+			Color color = Color.white;
+			if (gun.getIsReloading()) {
+				alert = "Reloading...";
+				color = Color.white;
+			} else if (gun.getCurrentClip() == 0 && gun.getCurrentReserve() == 0) {
+				alert = "No Ammo";
+				color = Color.red;
+			} else if (gun.getCurrentClip() < (float) (4 * gun.getClip() / 10) && gun.getCurrentReserve() == 0) {
+				alert = "Low Ammo";
+				color = Color.yellow;
+			} else if (gun.getCurrentClip() < (float) (4 * gun.getClip() / 10)) {
+				alert = "Reload";
+				color = Color.yellow;
+			}
+
+			g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+			fm = g.getFontMetrics();
+			textWidth = fm.stringWidth(alert);
+			rect = new Rectangle(handler.getWidth() / 2 - textWidth/2, 3 * handler.getHeight() / 4, textWidth, 20);
+
+			g.setColor(new Color(0, 0, 0, 30));
+			g.fillRect(rect.x, rect.y, rect.width, rect.height);
+
+			g.setColor(color);
+			Utils.drawCenteredString(g, alert, rect, new Font(Font.DIALOG, Font.PLAIN, 20));
+
+			if (gun.getIsReloading()) {
+				g.setColor(Color.black);
+				g.fillRect((int) handler.getWidth() - 300, (int) handler.getHeight() - 95, 100, 10);
+				g.setColor(hudColor);
+				g.fillRect((int) handler.getWidth() - 300, (int) handler.getHeight() - 95,
+						(int) (gun.getReloadProgress() * 100), 10);
+			}
 		}
 
 	}
@@ -175,7 +211,8 @@ public class GameplayElement extends HudElement {
 		g.setColor(new Color(220, 0, 0));
 		g.fillRect((int) 100 + health, (int) handler.getHeight() - 100, player.getTempHealth(), 50);
 
-		g.drawString(Integer.toString(health + player.getTempHealth()), 100, (int) handler.getHeight() - 100);
+		// g.drawString(Integer.toString(health + player.getTempHealth()), 100, (int)
+		// handler.getHeight() - 100);
 
 		g.setColor(Color.BLUE);
 		g.fillRect((int) 100, (int) handler.getHeight() - 60, armor, 10);
@@ -200,12 +237,14 @@ public class GameplayElement extends HudElement {
 
 	public void renderInteractionText(Graphics g) {
 		// render interact
-		g.setColor(hudColor);
+		g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+		FontMetrics fm = g.getFontMetrics();
+		int textWidth = fm.stringWidth(interactText);
+		Rectangle rect = new Rectangle((int) handler.getWidth() / 2 - textWidth / 2,
+				(int) handler.getHeight() / 2 + 150, textWidth, 20);
+		g.setColor(new Color(0, 0, 0, 30));
+		g.fillRect(rect.x, rect.y, rect.width, rect.height);
 
-		Rectangle rect = new Rectangle((int) handler.getWidth() / 2 - 210, (int) handler.getHeight() / 2 + 150, 420,
-				50);
-//		g.setColor(Color.black);
-//		g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		g.setColor(hudColor);
 		Utils.drawCenteredString(g, interactText, rect, new Font(Font.DIALOG, Font.PLAIN, 20));
 
@@ -227,7 +266,16 @@ public class GameplayElement extends HudElement {
 	public void renderPoints(Graphics g) {
 		// render points
 		g.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));
-		g.drawString(Integer.toString(points), (int) 40, (int) handler.getHeight() / 2 + 150);
+		String string = Integer.toString(points);
+		FontMetrics fm = g.getFontMetrics();
+		int textWidth = fm.stringWidth(string);
+		Rectangle rect = new Rectangle((int) 40, (int) handler.getHeight() / 2 + 150, textWidth, 20);
+
+		g.setColor(new Color(0, 0, 0, 30));
+		g.fillRect(rect.x, rect.y, rect.width, rect.height);
+
+		g.setColor(hudColor);
+		Utils.drawLeftAlignedString(g, string, rect, new Font(Font.DIALOG, Font.PLAIN, 30));
 	}
 
 	ArrayList<PowerUps> powerups = new ArrayList<PowerUps>(4);
@@ -361,7 +409,16 @@ public class GameplayElement extends HudElement {
 	public void renderZombiesLeft(Graphics g) {
 		// render zombiesleft
 		g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
-		g.drawString("Zombies Left: " + Integer.toString(zombiesLeft), (int) handler.getWidth() - 200, (int) 300);
+		String string = "Zombies Left: " + Integer.toString(zombiesLeft);
+		FontMetrics fm = g.getFontMetrics();
+		int textWidth = fm.stringWidth(string);
+		Rectangle rect = new Rectangle((int) handler.getWidth() - 200, 300, textWidth, 20);
+
+		g.setColor(new Color(0, 0, 0, 30));
+		g.fillRect(rect.x, rect.y, rect.width, rect.height);
+
+		g.setColor(hudColor);
+		Utils.drawLeftAlignedString(g, string, rect, new Font(Font.DIALOG, Font.PLAIN, 20));
 	}
 
 	public void renderBlessingMeter(Graphics g) {

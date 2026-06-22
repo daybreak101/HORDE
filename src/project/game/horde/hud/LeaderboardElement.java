@@ -15,7 +15,9 @@ import java.util.Comparator;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
+import project.game.horde.sounds.Sounds;
 import project.game.horde.states.GameState;
+import project.game.horde.states.LobbyState;
 import project.game.horde.states.State;
 import project.game.horde.utils.Utils;
 
@@ -32,6 +34,7 @@ public class LeaderboardElement extends HudElement {
 
 	public LeaderboardElement(Handler handler, Player player, User user) {
 		super(400, 100, 0, 0, handler);
+		Sounds.stopClip("backgroundMusic");
 		this.user = user;
 		this.player = player;
 		spots = new ArrayList<LeaderboardSpot>();
@@ -165,12 +168,21 @@ public class LeaderboardElement extends HudElement {
 			
 		}
 		else {
+			if(newGameTicker > newGameCountdown - 255){
+				transparency++;
+			}
 			newGameTicker++;
 			if(newGameTicker >= newGameCountdown) {
 				handler.getGlobalStats().addGame();
 				handler.getGlobalStats().writeToFile();
-				handler.getGame().gameState = new GameState(handler, user);
-				State.setState(handler.getGame().gameState);
+				//handler.getGame().gameState = new GameState(handler, user);
+				if(handler.getCurrentPlayer().getPeer() != null) {
+					State.setState(handler.getCurrentPlayer().getPeer().getLobby());
+				}
+				else {
+					State.setState(new LobbyState(handler, user));
+				}
+				//Sounds.shutdownThreadPool();
 			}
 		}
 
@@ -316,7 +328,7 @@ public class LeaderboardElement extends HudElement {
 		if(newGameTicker > newGameCountdown - 255){
 			
 			Color color = new Color(0, 0, 0, transparency);
-			transparency++;
+			//transparency++;
 			
 			g.setColor(color);
 			g.fillRect(0, 0, handler.getWidth(), handler.getHeight());

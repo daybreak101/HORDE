@@ -1,10 +1,5 @@
 package project.game.horde.utils;
 
-import java.awt.Color;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Graph {
 	private AdjacencyList[] list;
 	private Vertex[] vertices;

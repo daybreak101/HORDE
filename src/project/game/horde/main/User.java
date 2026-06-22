@@ -14,6 +14,8 @@ public class User implements Serializable {
     private String username;
     private transient Connection connection;
     public boolean isReady = false;
+    public int skin = 0;
+    public int hat = 0;
     
     public User() {}
     
@@ -67,5 +69,21 @@ public class User implements Serializable {
     
     public boolean getReady() {
     	return isReady;
+    }
+    
+    public void setHat(int hat) {
+    	this.hat = hat;
+    }
+    
+    public int getHat() {
+    	return hat;
+    }
+    
+    public void setSkin(int skin) {
+    	this.skin = skin;
+    }
+    
+    public int getSkin() {
+    	return skin;
     }
 }

@@ -25,6 +25,10 @@ public abstract class State {
 	public static State getState() {
 		return currentState;
 	}
+	public void selectedMap(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

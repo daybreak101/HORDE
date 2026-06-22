@@ -9,6 +9,7 @@ import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.powerups.PowerUpManager;
 import project.game.horde.main.Handler;
+import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 
 public class RoundLogic {
@@ -137,7 +138,7 @@ public class RoundLogic {
 
 	public void spawner() {
 		spawnTicker++;
-		System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZ");
+		//System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZ");
 		if (handler.getWorld().getEntityManager().getZombies().size() < 24 && zombiesLeft != 0
 				&& spawnTicker >= spawnRate) {
 			
@@ -192,6 +193,7 @@ public class RoundLogic {
 //	}
 
 	public void nextRound() {
+		Sounds.resetSounds();
 		boolean oneAlive = false;
 		for(PlayerMP player : handler.getWorld().getEntityManager().getOtherPlayers()) {
 			if (player.getHealth() > 0) {

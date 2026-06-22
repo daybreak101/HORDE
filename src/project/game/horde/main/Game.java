@@ -7,18 +7,23 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import project.game.horde.display.Display;
-import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
+import project.game.horde.graphics.CharAssets;
+import project.game.horde.graphics.ImageLoader;
 import project.game.horde.graphics.MenuAssets;
 import project.game.horde.input.GameMouseManager;
 import project.game.horde.input.KeyManager;
@@ -29,6 +34,7 @@ import project.game.horde.states.LoadingState;
 import project.game.horde.states.MenuState;
 import project.game.horde.states.State;
 import project.game.horde.ui.ColorIndex;
+import project.game.horde.utils.Timer;
 
 public class Game implements Runnable {
 	private Display display;
@@ -59,13 +65,29 @@ public class Game implements Runnable {
 	/// network shizz
 	private User user;
 
+	public boolean captureImage = false;
+
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
 		ColorIndex.init();
 		handler = new Handler(this);
-		String username = JOptionPane.showInputDialog(this, "Please enter a username");
+		// String username = JOptionPane.showInputDialog(this, "Please enter a
+		// username");
+		Random rand = new Random();
+		int rng = rand.nextInt(9999);
+		ImageIcon customIcon = new ImageIcon("/textures/normal/zombie.png");
+		// String username = JOptionPane.showInputDialog(null, "Please enter a
+		// username", "HORDE", JOptionPane.PLAIN_MESSAGE);
+		String username = (String) JOptionPane.showInputDialog(null, // Parent component (null for no parent)
+				"Please enter a username", // The message inside the dialog
+				"HORDE", // Title of the dialog
+				JOptionPane.PLAIN_MESSAGE, // Message type
+				customIcon, // No icon
+				null, // Custom options (null here)
+				"User" + rng // Default input text
+		);
 		user = new User(username);
 		start();
 
@@ -91,10 +113,11 @@ public class Game implements Runnable {
 
 		// Set the blank cursor to the JFrame.
 		display.getFrame().getContentPane().setCursor(blankCursor);
-		
+
 		Sounds.initHandler(handler);
 		MenuAssets.init();
 		MenuSounds.init(handler);
+		CharAssets.init();
 //		Assets.init();
 //		BWAssets.init();
 		menuState = new MenuState(handler, user);
@@ -121,6 +144,8 @@ public class Game implements Runnable {
 		this.bs = bs;
 	}
 
+	Timer setSave = new Timer(1000);
+
 	// draw all graphics to screen
 	private void render() {
 		if (display.getCanvas() == null || !display.getCanvas().isDisplayable() || display.isChangingDisplay()) {
@@ -138,37 +163,48 @@ public class Game implements Runnable {
 			return;
 		}
 
-		// add settings for these
-//        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//        g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-//        g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-//        g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-
 		// clear screen
 		g.clearRect(0, 0, width, height);
-		// g.setColor(Color.BLACK);
-		// g.drawRect(0,0,width, height);
-		// draw here
-	    GraphicsConfiguration gc = display.getFrame().getGraphicsConfiguration();
-	    AffineTransform tx = gc.getDefaultTransform();
-	 //   double scaleX = tx.getScaleX();
-	  //  double scaleY = tx.getScaleY();
+		GraphicsConfiguration gc = display.getFrame().getGraphicsConfiguration();
+		AffineTransform tx = gc.getDefaultTransform();
 		int targetWidth = 1920;
 		int targetHeight = 1080;
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Dimension screenSize = toolkit.getScreenSize();
-		int screenWidth = screenSize.width;
-		int screenHeight = screenSize.height;
-	    
+		Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+		int screenWidth = (int) screenBounds.getWidth();
+		int screenHeight = (int) screenBounds.getHeight();
+
 		double scaleX = (double) screenWidth / targetWidth * tx.getScaleX();
 		double scaleY = (double) screenHeight / targetHeight * tx.getScaleY();
 //		double scale = Math.min(scaleX, scaleY);
 		g.scale(scaleX, scaleY);
 		if (State.getState() != null) {
+			BufferedImage bufferedImage = null;
+			Graphics2D imageGraphics = null;
+			if (captureImage) {
+				bufferedImage = new BufferedImage(10200, 5100, BufferedImage.TYPE_INT_ARGB);
+				imageGraphics = bufferedImage.createGraphics();
+			}
+
 			State.getState().render(g);
-//	        Runtime runtime = Runtime.getRuntime();
-//
+
+			if (captureImage) {
+				State.getState().render(imageGraphics);
+				setSave.tick();
+				if (setSave.isReady()) {
+					// Step 4: Write the BufferedImage to a PNG file
+
+					File outputFile = new File("output_image.png");
+					try {
+						ImageIO.write(bufferedImage, "PNG", outputFile);
+						System.out.println("Image saved successfully!");
+					} catch (IOException e) {
+						System.err.println("Error saving image: " + e.getMessage());
+					}
+				}
+			}
+
+	//        Runtime runtime = Runtime.getRuntime();
+
 //	        long totalMemory = runtime.totalMemory();
 //	        long freeMemory = runtime.freeMemory();
 //	        long usedMemory = totalMemory - freeMemory;
@@ -190,71 +226,53 @@ public class Game implements Runnable {
 	@Override
 	public void run() {
 		init();
-		
-		int refreshRate = getRefreshRate();
-		double timePerFrame = 1000000000 / refreshRate;
+		final int TICKS_PER_SECOND = 60;
+		final long NS_PER_TICK = 1_000_000_000L / TICKS_PER_SECOND;
+		final long NS_PER_FRAME = 1_000_000_000L / getRefreshRate(); // render cap
 
-		int fps = 60;
-		double timePerTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-		int frameCount = 0;
-		
+		long lastTickTime = System.nanoTime();
+		long lastFrameTime = System.nanoTime();
+
+		long tickAccumulator = 0;
+
 		while (running) {
-			now = System.nanoTime();
-
-			delta += (now - lastTime) / timePerTick;
-			timer += now - lastTime;
-			lastTime = now;
-			
-			
-
 			if(State.getState() instanceof LoadingState) {
 				tick();
 			}
-			render();
-			frameCount++;
-			if (delta >= 1) {
-				tick();	
-				ticks++;
-				delta = delta - (int) delta;
+			long now = System.nanoTime();
+
+			long tickDelta = now - lastTickTime;
+			lastTickTime = now;
+			tickAccumulator += tickDelta;
+
+			// ----- FIXED LOGIC STEP -----
+			while (tickAccumulator >= NS_PER_TICK) {
+				tick();
+				tickAccumulator -= NS_PER_TICK;
 			}
 
-			if (timer >= 1000000000) {
-				//frames = ticks;
-				frames = frameCount;
-				frameCount = 0;
-				ticks = 0;
-				timer = 0;
+			// ----- CAPPED RENDER -----
+			if (now - lastFrameTime >= NS_PER_FRAME) {
+				render();
+				lastFrameTime = now;
+			} else {
+				// Yield instead of sleep for better precision
+				Thread.yield();
 			}
-			
-            long timeToWait = System.nanoTime() - now;
-            if (timeToWait < timePerFrame) {
-                try {
-                    Thread.sleep((long) ((timePerFrame - timeToWait) / 1000000));  // Sleep to maintain the refresh rate
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
 		}
 
 		try {
 			stop();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-    private int getRefreshRate() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int refreshRate = gd.getDisplayMode().getRefreshRate();
-        return refreshRate > 0 ? refreshRate : 60; // Default to 60Hz if unable to retrieve
-    }
+
+	private int getRefreshRate() {
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int refreshRate = gd.getDisplayMode().getRefreshRate();
+		return refreshRate > 0 ? refreshRate : 60; // Default to 60Hz if unable to retrieve
+	}
 
 	public KeyManager getKeyManager() {
 		return keyManager;

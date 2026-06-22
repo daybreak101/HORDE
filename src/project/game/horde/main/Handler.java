@@ -32,6 +32,8 @@ public class Handler {
 	public static final String SETTINGS_FILE = "horde_settings.txt";
 	public static final String UNLOCKS_FILE = "horde_unlocks.txt";
 	public static final String BLESSINGS_FILE = "horde_blessings.txt";
+	public static final String CUSTOMSKIN_FILE = "horde_skins.txt";
+	public static final String CUSTOMHAT_FILE = "horde_hats.txt";
 
 	private Game game;
 	private World world;
@@ -43,6 +45,8 @@ public class Handler {
 	private Player currentPlayer;
 	private Unlocks unlocks;
 	private BlessingInventory blessings;
+	private CustomSkinInventory customSkin;
+	private CustomHatInventory customHat;
 
 	public Handler(Game game) {
 		this.game = game;
@@ -51,6 +55,8 @@ public class Handler {
 		progression = new Progression(this);
 		unlocks = new Unlocks(this);
 		blessings = new BlessingInventory(this);
+		customSkin = new CustomSkinInventory(this);
+		customHat = new CustomHatInventory(this);
 	}
 
 	public void setCurrentPlayer(Player player) {
@@ -282,5 +288,17 @@ public class Handler {
 
 	public BlessingInventory getBlessings() {
 		return blessings;
+	}
+	
+	public void setCustomSkinsInv(CustomSkinInventory skins) {
+		this.customSkin = skins;
+	}
+	
+	public CustomSkinInventory getSkinInv() {
+		return customSkin;
+	}
+
+	public CustomHatInventory getHatInv() {
+		return customHat;
 	}
 }

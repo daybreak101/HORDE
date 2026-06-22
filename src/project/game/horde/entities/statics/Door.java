@@ -14,9 +14,9 @@ public class Door extends Wall{
 	private int price;
 	private int room1, room2;
 	
-	public Door(Handler handler, int id, float x, float y, int z, int length, int whatWall, int room1, int room2) {
-		super(handler, id, x, y, z, length, whatWall);
-		price = 1000;
+	public Door(Handler handler, int id, float x, float y, int length, int whatWall, int room1, int room2, int cost) {
+		super(handler, id, x, y, length, whatWall);
+		price = cost;
 		this.room1 = room1;
 		this.room2 = room2;
 	}
@@ -24,6 +24,9 @@ public class Door extends Wall{
 	@Override
 	public void render(Graphics g) {
 	    Graphics2D g2d = (Graphics2D) g;
+//		g2d.setColor(new Color(255, 0, 200, 100));
+//		g2d.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+//				(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
 		g2d.setColor(new Color(100, 50, 40));
 		g2d.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
 				(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
@@ -54,7 +57,7 @@ public class Door extends Wall{
 		} else if (cooldownTimer >= cooldown) {
 			triggerText = "Press F to open door: " + price;
 		} else {
-			triggerText = "";
+			triggerText = "How this happen?";
 		}
 	}
 	

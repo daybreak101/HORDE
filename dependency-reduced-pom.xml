@@ -33,17 +33,17 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.11.0</version>
         <configuration>
-          <release>16</release>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-          <compilerArgs>
-            <arg>--module-path</arg>
-            <arg>C:\Users\ramir\Desktop\javafx-sdk-22.0.1\lib</arg>
-            <arg>--add-modules</arg>
-            <arg>javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web</arg>
-          </compilerArgs>
+          <release>17</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <configuration>
+          <mainClass>project.game.horde.main.Launcher</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -90,10 +90,8 @@
     </repository>
   </repositories>
   <properties>
-    <project.basedir>C:\Users\ramir\Desktop\NewNetwork\NewNetwork</project.basedir>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>17</javafx.version>
+    <javafx.version>22.0.1</javafx.version>
   </properties>
 </project>

@@ -21,8 +21,6 @@ public class PathingLogic {
 	private Graph graph;
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 
-	private int[][] nextStep; // [src][dest]
-
 	public PathingLogic(Handler handler, World world, String nodesPath, String edgesPath) {
 		this.handler = handler;
 		this.world = world;
@@ -41,9 +39,6 @@ public class PathingLogic {
 	public void renderNodes(Graphics g) {
 		g.setColor(Color.red);
 		for (Node n : nodes) {
-			if(n.getZ() != handler.getCurrentPlayer().getZ())
-				continue;
-				
 			g.fillOval((int) (n.getX() - handler.getGameCamera().getxOffset()),
 					(int) (n.getY() - handler.getGameCamera().getyOffset()), 5, 5);
 			g.drawString(Integer.toString(n.getVertex()), (int) (n.getX() - handler.getGameCamera().getxOffset()),
@@ -92,7 +87,7 @@ public class PathingLogic {
 			Node m = nodes.get(n1);
 			Node n = nodes.get(n2);
 			float distance = Utils.getEuclideanDistance(m.getX(), m.getY(), n.getX(), n.getY());
-			if (!world.checkForStaticEntities(m.getX(), m.getY(), m.getZ(), n.getX(), n.getY(), n.getZ())) {
+			if (!world.checkForStaticEntities(m.getX(), m.getY(), n.getX(), n.getY())) {
 				graph.createEdge(m.getVertex(), n.getVertex(), distance);
 				graph.createEdge(n.getVertex(), m.getVertex(), distance);
 			}
@@ -108,15 +103,14 @@ public class PathingLogic {
 		int i = 0;
 
 		// process nodes
-		int vertex, x, y, z, room, nextFloor, withinPlayable;
+		int vertex, x, y, room, nextFloor, withinPlayable;
 		while (i < tokens.length) {
 			vertex = Utils.parseInt(tokens[i++]);
 			x = Utils.parseInt(tokens[i++]);
 			y = Utils.parseInt(tokens[i++]);
-			z = Utils.parseInt(tokens[i++]);
 			room = Utils.parseInt(tokens[i++]);
 			withinPlayable = Utils.parseInt(tokens[i++]);
-			nodes.add(new Node(vertex, x, y, z, room, withinPlayable));
+			nodes.add(new Node(vertex, x, y, room, withinPlayable));
 		}
 	}
 
@@ -125,12 +119,12 @@ public class PathingLogic {
 	}
 
 	// make sure no static entities in between
-	public int getClosestNode(float x, float y, int z) {
+	public int getClosestNode(float x, float y) {
 		Node closestNode = null;
 		float closestDistance = 2000000;
-		float currentDistance = 0;
+		float currentDistance;
 		for (Node n : nodes) {
-			if (z == n.getZ() && !world.checkForStaticEntities((int) x, (int) y, z, n.getX(), n.getY(), n.getZ())) {
+			if (!world.checkForStaticEntities((int) x, (int) y, n.getX(), n.getY())) {
 				currentDistance = Utils.getEuclideanDistance(x, y, n.getX(), n.getY());
 				if (closestNode == null || currentDistance < closestDistance) {
 					closestNode = n;
@@ -155,12 +149,12 @@ public class PathingLogic {
 	HashMap<String, Float> distances = new HashMap<String, Float>();
 
 	public void distanceToEveryNode() {
-		String start = "";
-		String end = "";
-		String complete = "";
+		String start;
+		String end;
+		String complete;
 		Node sumNode = null;
 		Node nextNode = null;
-		float distance = 0;
+		float distance;
 		for (Node n : nodes) {
 			start = Integer.toString(n.getVertex());
 			for (Node m : nodes) {

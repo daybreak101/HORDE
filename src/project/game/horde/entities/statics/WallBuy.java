@@ -7,8 +7,10 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
+import project.game.horde.weapons.Arisaka;
 import project.game.horde.weapons.Glock17;
 import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.M1Garand;
 import project.game.horde.weapons.P90;
 
 public class WallBuy extends InteractableStaticEntity {
@@ -54,8 +56,12 @@ public class WallBuy extends InteractableStaticEntity {
 			cost = 500;
 			break;
 		case 2:
-			gun4Sale = new P90(handler, handler.getCurrentPlayer());
-			cost = 2000;
+			gun4Sale = new Arisaka(handler, handler.getCurrentPlayer());
+			cost = 500;
+			break;
+		case 3:
+			gun4Sale = new M1Garand(handler, handler.getCurrentPlayer());
+			cost = 750;
 			break;
 		}
 		// don't give a weapon player already has

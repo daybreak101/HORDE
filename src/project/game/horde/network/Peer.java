@@ -16,8 +16,11 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.powerups.PowerUps;
+import project.game.horde.hud.PlayerConnectNotification;
 import project.game.horde.main.User;
+import project.game.horde.sounds.Sounds;
 import project.game.horde.states.GameState;
 import project.game.horde.states.LoadingState;
 import project.game.horde.states.MultiLobbyState;
@@ -26,6 +29,7 @@ public class Peer {
 	private Server server;
 	private Client client;
 	private boolean isServer;
+	public boolean gameAlreadyStarted = false;
 	private HashMap<Integer, User> users;
 	private MultiLobbyState multiLobbyState;
 	private LoadingState loadingState;
@@ -33,6 +37,7 @@ public class Peer {
 	private User localUser;
 	private final int KEEP_ALIVE_INTERVAL = 5000;
 	private Timer keepAliveTimer;
+	private String selectedMap = "test";
 
 	public Peer(MultiLobbyState multiLobbyState, User localUser, boolean isServer) {
 		this.multiLobbyState = multiLobbyState;
@@ -53,10 +58,18 @@ public class Peer {
 
 				public void connected(Connection connection) {
 					handleNewConnection(connection);
+					if (gameState != null) {
+						gameState.getWorld().getEntityManager().getCurrentPlayer().getHud().addObject(
+								new PlayerConnectNotification(gameState.getHandler(), localUser.getUsername(), true));
+					}
 				}
 
 				public void disconnected(Connection connection) {
 					handleDisconnectedConnection(connection);
+					if (gameState != null) {
+						gameState.getWorld().getEntityManager().getCurrentPlayer().getHud().addObject(
+								new PlayerConnectNotification(gameState.getHandler(), localUser.getUsername(), false));
+					}
 				}
 			});
 		} else {
@@ -64,30 +77,31 @@ public class Peer {
 			Kryo kryo = client.getKryo();
 			initKryo(kryo);
 			client.addListener(new Listener() {
-				public void received(Connection connection, Object object) {
-					if (object instanceof Message) {
-						// System.out.println("client listener received");
-						handleReceivedMessage(connection, (Message) object);
-					}
-				}
 
-				public void connected(Connection connection) {
-					System.out.println("client listener connected");
-					localUser.setConnection(connection);
-					connection
-							.sendTCP(new Message(Message.USER_JOIN, connection.getID(), localUser.getUsername(), null));
-				}
-
-				public void disconnected(Connection connection) {
-					System.out.println("client listener disconnected");
-					users.remove(connection.getID());
-					client.sendTCP(new Message(Message.USER_LEAVE, connection.getID(), localUser.getUsername(), null));
-				}
-			});
+	public void received(Connection connection, Object object) {
+		if (object instanceof Message) {
+			// System.out.println("client listener received");
+			handleReceivedMessage(connection, (Message) object);
 		}
-		keepAliveTimer = new Timer(KEEP_ALIVE_INTERVAL, e -> sendKeepAlive());
-		keepAliveTimer.start();
 	}
+
+	public void connected(Connection connection) {
+		System.out.println("client listener connected");
+		localUser.setConnection(connection);
+		connection.sendTCP(new Message(Message.USER_JOIN, connection.getID(), localUser.getUsername(), null));
+	}
+
+	public void disconnected(Connection connection) {
+		System.out.println("client listener disconnected");
+		users.remove(connection.getID());
+		client.sendTCP(new Message(Message.USER_LEAVE, connection.getID(), localUser.getUsername(), null));
+//					if(gameState != null) {
+//						gameState.getWorld().getEntityManager().getCurrentPlayer().getHud().addObject(
+//								new PlayerConnectNotification(gameState.getHandler(), localUser.getUsername(), false));
+//					}
+	}
+
+	});}keepAliveTimer=new Timer(KEEP_ALIVE_INTERVAL,e->sendKeepAlive());keepAliveTimer.start();}
 
 	private void initKryo(Kryo kryo) {
 		kryo.register(Message.class);
@@ -100,6 +114,8 @@ public class Peer {
 	private void handleReceivedMessage(Connection connection, Message message) {
 		switch (message.type) {
 		case Message.KEEP_ALIVE:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			handleKeepAlive(message);
 			break;
 		case Message.USER_JOIN:
@@ -110,15 +126,22 @@ public class Peer {
 			if (isServer) {
 				broadcastUserList();
 			}
+			if (gameState != null)
+				gameState.getWorld().getEntityManager().getCurrentPlayer().getHud().addObject(
+						new PlayerConnectNotification(gameState.getHandler(), localUser.getUsername(), true));
 			break;
 		case Message.USER_LEAVE:
-			if(gameState != null)
-			gameState.getWorld().getEntityManager().getOtherPlayers()
+			if (gameState != null)
+				gameState.getWorld().getEntityManager().getOtherPlayers()
 						.remove(gameState.getWorld().getEntityManager().getSpecificPlayer(message.username));
-			
+
 			users.remove(message.connectionId);
 			multiLobbyState.removeUser(message.connectionId);
-	
+			if (gameState != null) {
+				gameState.getWorld().getEntityManager().getCurrentPlayer().getHud().addObject(
+						new PlayerConnectNotification(gameState.getHandler(), localUser.getUsername(), false));
+			}
+
 			break;
 		case Message.USER_LIST:
 			users.clear();
@@ -140,41 +163,62 @@ public class Peer {
 			}
 			break;
 		case Message.USER_X_MOVE:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_X_MOVE, message.username, message.message));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.setX(Float.parseFloat(message.message));
 			;
 			break;
 		case Message.USER_Y_MOVE:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_Y_MOVE, message.username, message.message));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.setY(Float.parseFloat(message.message));
 			;
 			break;
+		case Message.USER_Z_MOVE:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (isServer) {
+				server.sendToAllTCP(new Message(Message.USER_Z_MOVE, message.username, message.message));
+			}
+			if (gameState != null && !localUser.getUsername().equals(message.username))
+				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
+						.setZ((int) Float.parseFloat(message.message));
+			;
+			break;
 		case Message.USER_ROTATE:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_ROTATE, message.username, message.message));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.setAngle(Float.parseFloat(message.message));
 			;
 			break;
 		case Message.USER_SHOT:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_SHOT, message.username, null));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).shootBullet();
 			break;
 		case Message.ZOMBIE_POSITIONS:
-			if (!isServer) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && !isServer) {
 				for (ZombiePosition zp : message.zombiePositions) {
 					if (gameState.getWorld().getEntityManager().getZombieById(zp.zombieID) != null) {
 						gameState.getWorld().getEntityManager().getZombieById(zp.zombieID).setX(zp.positionX);
@@ -184,78 +228,109 @@ public class Peer {
 			}
 			break;
 		case Message.ZOMBIE_SPAWN:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState == null)
+				break;
 			String[] info = message.message.split(":");
 			gameState.getWorld().getEntityManager().addZombieForClient(info);
 			break;
 		case Message.ZOMBIE_ATTACKED:
-			if (gameState.getWorld().getEntityManager().getZombieById(message.id) != null)
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && gameState.getWorld().getEntityManager().getZombieById(message.id) != null)
 				gameState.getWorld().getEntityManager().getZombieById(Integer.parseInt(message.message)).dontMove();
 			break;
 		case Message.USER_DAMAGED_ZOMBIE:
-			if (gameState.getWorld().getEntityManager().getZombieById(message.id) != null)
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && gameState.getWorld().getEntityManager().getZombieById(message.id) != null)
 				gameState.getWorld().getEntityManager().getZombieById(message.id).takeOnlineDamage(message.amount);
 			break;
 		case Message.NEW_ROUND:
-			if (!isServer) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (!isServer && gameState != null) {
 				gameState.getWorld().getRoundLogic().setCurrentRound(message.round);
 				gameState.getWorld().getRoundLogic().setZombiesLeft(message.zombiesLeft);
 				gameState.getWorld().getEntityManager().getCurrentPlayer().setHealth();
 				gameState.getWorld().getEntityManager().getCurrentPlayer().getInv().roundReplenishGrenades();
-
+				Sounds.resetSounds();
 			}
 			break;
 		case Message.USER_NEW_HEALTH:
-			if (!localUser.getUsername().equals(message.username)) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && !localUser.getUsername().equals(message.username) && gameState != null) {
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.setHealth(Integer.parseInt(message.message));
 			}
 			break;
 		case Message.USER_TOOK_DAMAGE:
-			if (!localUser.getUsername().equals(message.username)) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && !localUser.getUsername().equals(message.username) && gameState != null) {
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).justTookDamage();
 			}
 			break;
 		case Message.USER_REFILL_HEALTH:
-			if (!isServer) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && !isServer) {
 				gameState.getWorld().getEntityManager().getCurrentPlayer().setHealth();
 			}
 			break;
 		case Message.SPAWN_POWERUP:
-			if (!isServer) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && !isServer) {
 				gameState.getWorld().getEntityManager().addPowerUpForClient(message);
 			}
 			break;
 		case Message.USER_SPAWNED_POWERUP:
-			if (isServer) {
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && isServer) {
 				switch (message.powerup) {
 				case "doublePoints":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnDoublePoints(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnDoublePoints(message.x, message.y,
+							message.z);
 					break;
 				case "nuke":
 					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnNuke(message.x, message.y, message.z);
 					break;
 				case "maxAmmo":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnMaxAmmo(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnMaxAmmo(message.x, message.y,
+							message.z);
 					break;
 				case "infiniteAmmo":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnInfiniteAmmo(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnInfiniteAmmo(message.x, message.y,
+							message.z);
 					break;
 				case "instakill":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnInstaKill(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnInstaKill(message.x, message.y,
+							message.z);
 					break;
 				case "healthUp":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnHealthUp(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnHealthUp(message.x, message.y,
+							message.z);
 					break;
 				case "deathMachine":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnDeathMachine(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnDeathMachine(message.x, message.y,
+							message.z);
 					break;
 				case "perkBag":
-					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnPerkBag(message.x, message.y, message.z);
+					gameState.getWorld().getRoundLogic().getPowerups().forceSpawnPerkBag(message.x, message.y,
+							message.z);
 					break;
 				}
 			}
 			break;
 		case Message.USER_PICKED_POWERUP:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState == null)
+				break;
 			String username = message.powerup;
 			for (PowerUps p : gameState.getWorld().getEntityManager().getPowerups()) {
 				if (p.getID() == message.id)
@@ -267,110 +342,173 @@ public class Peer {
 
 			break;
 		case Message.USER_SWITCHED_WEAPON:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_SWITCHED_WEAPON, message.username, message.message));
 			}
-			if (!localUser.getUsername().equals(message.username)) {
+			if (gameState != null && !localUser.getUsername().equals(message.username)) {
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).getOnlineGun()
 						.switchWeapon(message.message);
 			}
 			break;
 		case Message.ZOMBIE_TURN_CRAWLER:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			// username is powerup
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.ZOMBIE_TURN_CRAWLER, message.powerup, message.id));
 			}
-			if (!localUser.getUsername().equals(message.powerup)) {
+			if (gameState != null && !localUser.getUsername().equals(message.powerup)) {
 				if (gameState.getWorld().getEntityManager().getZombieById(message.id) != null)
 					gameState.getWorld().getEntityManager().getZombieById(message.id).turnToCrawler();
 			}
 			break;
 		case Message.USER_GRENADE_TOSS:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_GRENADE_TOSS, message.username, message.grenade, message.x,
 						message.y, message.z));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.throwGrenade(message.grenade, message.x, message.y);
 			break;
 		case Message.USER_SHOT_GRENADE_LAUNCHER:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_SHOT_GRENADE_LAUNCHER, message.username, message.grenade,
 						message.x, message.y, message.z));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).getOnlineGun()
 						.shootGrenadeLauncher(message.x, message.y);
 			break;
 		case Message.FLAMETHROWER_SOUND:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.FLAMETHROWER_SOUND, message.username));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).playFlamethrower();
 			break;
 		case Message.USER_SPAWN_LUNA:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_SPAWN_LUNA, message.username));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).spawnLuna();
 			break;
 		case Message.USER_REMOVE_LUNA:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_REMOVE_LUNA, message.username));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).despawnLuna();
 			break;
 		case Message.USER_LUNA_MOVED:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
-				server.sendToAllTCP(
-						new Message(Message.USER_LUNA_MOVED, message.username, message.x, message.y, message.z, message.angle));
+				server.sendToAllTCP(new Message(Message.USER_LUNA_MOVED, message.username, message.x, message.y,
+						message.z, message.angle));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username).moveLuna(message.x,
 						message.y, message.angle);
 			break;
 		case Message.USER_REVIVED_USER:
-			if (localUser.getUsername().equals(message.message))
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
+			if (gameState != null && localUser.getUsername().equals(message.message))
 				gameState.getWorld().getEntityManager().getCurrentPlayer().gainHealth(message.amount);
 			break;
 		case Message.USER_INTERACT:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_INTERACT, message.username, message.id, message.isBusy));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificInteractable(message.id)
 						.setUsedByOther(message.isBusy);
 			break;
 		case Message.USER_ACTIVATED_BLESSING:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				server.sendToAllTCP(new Message(Message.USER_ACTIVATED_BLESSING, message.username, message.message));
 			}
-			if (!localUser.getUsername().equals(message.username))
+			if (gameState != null && !localUser.getUsername().equals(message.username))
 				gameState.getWorld().getEntityManager().getSpecificPlayer(message.username)
 						.activateBlessing(message.message);
 			;
 			break;
 		case Message.USER_READY:
+			if (!isServer)
+				multiLobbyState.gameAlreadyStarted = true;
 			if (isServer) {
 				for (Map.Entry<Integer, User> entry : users.entrySet()) {
 					if (entry.getValue().getUsername().equals(message.username)) {
 						entry.getValue().setReady(true);
+
+						if (gameAlreadyStarted && gameState != null) {
+							gameState.getWorld().getEntityManager()
+									.addOtherPlayer(new PlayerMP(gameState.getHandler(), 0, 0, 0, entry.getValue()));
+						}
 						break;
 					}
 				}
 			}
 			break;
+		case Message.HOST_CHANGE_MAP:
+			selectedMap = message.username;
+			multiLobbyState.selectedMap(message.username);
+			break;
 		case Message.HOST_SEND_LOADING:
-			multiLobbyState.startLoading();
+			multiLobbyState.startLoading(selectedMap);
 			break;
 		case Message.HOST_START_GAME:
-			multiLobbyState.startGame();
+			try {
+				multiLobbyState.startGame(selectedMap);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
+		case Message.USER_CHANGED_SKIN:
+			// if (isServer || !localUser.getUsername().equals(message.powerup)) {
+			for (Map.Entry<Integer, User> entry : users.entrySet()) {
+				if (entry.getValue().getUsername().equals(message.powerup)) {
+					entry.getValue().setSkin(message.id);
+					if (isServer)
+						server.sendToAllTCP(new Message(Message.USER_CHANGED_SKIN, message.powerup, message.id));
+					break;
+				}
+			}
+			break;
+		// }
+		case Message.USER_CHANGED_HAT:
+			// if (isServer || !localUser.getUsername().equals(message.powerup)) {
+			for (Map.Entry<Integer, User> entry : users.entrySet()) {
+				if (entry.getValue().getUsername().equals(message.powerup)) {
+					entry.getValue().setHat(message.id);
+					if (isServer)
+						server.sendToAllTCP(new Message(Message.USER_CHANGED_HAT, message.powerup, message.id));
+					break;
+				}
+			}
+			// }
+			break; 
 		}
+
 	}
 
 	private Map<String, Long> lastKeepAliveTimes = new HashMap<>();
@@ -427,6 +565,7 @@ public class Peer {
 
 				users.put(connection.getID(), localUser);
 				multiLobbyState.addUser(localUser);
+//				server.sendToAllTCP(new Message(Message.GAME_ALREADY_STARTED, connection.getID(), gameAlreadyStarted));
 			}
 			broadcastUserList();
 		}
@@ -481,6 +620,12 @@ public class Peer {
 		}
 	}
 
+	public void sendNewMapSelection(String s) {
+		if (isServer) {
+			server.sendToAllTCP(new Message(Message.HOST_CHANGE_MAP, s));
+		}
+	}
+
 	public void sendReady(String username) {
 		client.sendTCP(new Message(Message.USER_READY, username));
 	}
@@ -502,14 +647,14 @@ public class Peer {
 		}
 	}
 
-	public void sendNewZ(String username, int z) {
+	public void sendNewZ(String username, float z) {
 		if (isServer) {
-			server.sendToAllTCP(new Message(Message.USER_Y_MOVE, username, z));
+			server.sendToAllTCP(new Message(Message.USER_Z_MOVE, username, Float.toString(z)));
 		} else {
-			client.sendTCP(new Message(Message.USER_Y_MOVE, username, z));
+			client.sendTCP(new Message(Message.USER_Z_MOVE, username, Float.toString(z)));
 		}
 	}
-	
+
 	public void sendNewAngle(String username, float angle) {
 		if (isServer) {
 			server.sendToAllTCP(new Message(Message.USER_ROTATE, username, Float.toString(angle)));
@@ -533,8 +678,8 @@ public class Peer {
 	}
 
 	public void spawnZombie(Zombie zombie) {
-		String message = zombie.getID() + ":" + zombie.getX() + ":" + zombie.getY() + ":" + zombie.getZ() + ":" + zombie.getSpeed() + ":"
-				+ zombie.getHealth();
+		String message = zombie.getID() + ":" + zombie.getX() + ":" + zombie.getY() + ":" + zombie.getZ() + ":"
+				+ zombie.getSpeed() + ":" + zombie.getHealth();
 		if (isServer) {
 			server.sendToAllTCP(new Message(Message.ZOMBIE_SPAWN, null, message));
 		}
@@ -689,6 +834,22 @@ public class Peer {
 			server.sendToAllTCP(new Message(Message.USER_ACTIVATED_BLESSING, username, blessing));
 		} else {
 			client.sendTCP(new Message(Message.USER_ACTIVATED_BLESSING, username, blessing));
+		}
+	}
+	
+	public void sendUserSkinChange(String username, int id) {
+		if (isServer) {
+			server.sendToAllTCP(new Message(Message.USER_CHANGED_SKIN, username, id));
+		} else {
+			client.sendTCP(new Message(Message.USER_CHANGED_SKIN, username, id));
+		}
+	}
+	
+	public void sendUserHatChange(String username, int id) {
+		if (isServer) {
+			server.sendToAllTCP(new Message(Message.USER_CHANGED_HAT, username, id));
+		} else {
+			client.sendTCP(new Message(Message.USER_CHANGED_HAT, username, id));
 		}
 	}
 

@@ -18,14 +18,15 @@ public class Toxen extends Zombie {
 	
 	private Timer shootTimer;
 
-	public Toxen(Handler handler, int id, float x, float y, int z, float dspeed, int health) {
-		super(handler, id, x, y, z, dspeed, health);
+	public Toxen(Handler handler, int id, float x, float y, float dspeed, int health) {
+		super(handler, id, x, y, dspeed, health);
 		zombieType = TOXEN;
 		speed = 2.0f + dspeed - 1f;
 		this.health = health * 3;
 		shootTimer = new Timer(500);
 	}
 	
+        @Override
 	public void postTick() {
 //		shootTimer.tick();
 //		if(shootTimer.isReady()) {
@@ -99,9 +100,9 @@ public class Toxen extends Zombie {
 		}
 		player.getStats().gainKill();
 		if(burnStatus.isBurning()) {
-			new Grenade(handler, x + width/2, y + height/2, z, new Color(144, 238, 144)).findEntitiesInRadius();
+			new Grenade(handler, x + width/2, y + height/2, new Color(144, 238, 144)).findEntitiesInRadius();
 		}
 		else
-			handler.getWorld().getEntityManager().addBlood(new Blood(handler, x, y, z, ZombieType.TOXEN));
+			handler.getWorld().getEntityManager().addBlood(new Blood(handler, x, y, ZombieType.TOXEN));
 	}
 }

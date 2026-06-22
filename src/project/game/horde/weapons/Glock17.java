@@ -2,6 +2,7 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
@@ -24,6 +25,8 @@ public class Glock17 extends Gun {
 		originalName = name;
 		upgradedName = GunVars.GLOCK17_UPGRADEDNAME;
 		reloadSound = GunSounds.GLOCK17_RELOAD_ID;
+		top = Assets.glock17_top;
+		gunImageDim = new GunImageDim(40, 50, 20, 100);
 	}
 
 	public void shoot() {

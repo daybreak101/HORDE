@@ -19,8 +19,8 @@ public class FlameBullet extends Bullet {
 	ArrayList<Zombie> zombiesHit;
 	Ellipse2D.Float staticCollision;
 	
-	public FlameBullet(Handler handler, float x, float y, int z, int range, Gun gun) {
-		super(handler, x, y, z, range, gun);
+	public FlameBullet(Handler handler, float x, float y, int range, Gun gun) {
+		super(handler, x, y, range, gun);
 		this.speed = 4;	
 		this.width = 50;
 		this.height = 50;

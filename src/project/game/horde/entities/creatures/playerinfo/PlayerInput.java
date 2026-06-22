@@ -1,16 +1,14 @@
 package project.game.horde.entities.creatures.playerinfo;
 
-import project.game.horde.entities.bullets.Grenade;
 import project.game.horde.entities.creatures.Player;
-import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.hud.HudManager;
-import project.game.horde.hud.RevivingElement;
 import project.game.horde.input.GameMouseManager;
 import project.game.horde.input.KeyManager;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.sounds.MiscWeaponSounds;
 import project.game.horde.sounds.Sounds;
+import project.game.horde.states.GameState;
 import project.game.horde.states.PauseState;
 import project.game.horde.states.State;
 import project.game.horde.utils.Timer;
@@ -39,7 +37,6 @@ public class PlayerInput {
 
 	public void tick() {
 		keyManager.tick();
-		PlayerMovementState move = player.getMoveState();
 		PlayerActionState action = player.getActionState();
 
 		if (action == PlayerActionState.RECOVER) {
@@ -63,13 +60,13 @@ public class PlayerInput {
 				player.setActionState(PlayerActionState.RECOVER);
 				recoverTimer = new Timer(10);
 			}
-		} else if (action == PlayerActionState.RELOADING && !inv.getGun().getIsReloading()) {
+		} else if (action == PlayerActionState.RELOADING && (!inv.getGun().getIsReloading() && !inv.getGun().getIsAltReloading())) {
 			player.setActionState(PlayerActionState.IDLE);
-		} else if (action == PlayerActionState.SHOOTING && !mouseManager.isLeftPressed()) {
+		} else if (action == PlayerActionState.SHOOTING && (!mouseManager.isLeftPressed() || !mouseManager.isRightPressed())) {
 			player.setActionState(PlayerActionState.IDLE);
 		} else if (action == PlayerActionState.COOKING_GRENADE) {
 			if (!grenadeSoundPlayed) {
-				Sounds.playClip(MiscWeaponSounds.GRENADE_TOSS, 1, 1, false);
+				Sounds.playClip(MiscWeaponSounds.GRENADE_UNCLIP, 1, 1, false);
 				grenadeSoundPlayed = true;
 			}
 			cockNade.tick();
@@ -94,7 +91,7 @@ public class PlayerInput {
 			}
 		} else if (action == PlayerActionState.COOKING_SPECIAL_GRENADE) {
 			if (!grenadeSoundPlayed) {
-				Sounds.playClip(MiscWeaponSounds.GRENADE_TOSS, 1, 1, false);
+				Sounds.playClip(MiscWeaponSounds.GRENADE_UNCLIP, 1, 1, false);
 				grenadeSoundPlayed = true;
 			}
 			cockNade.tick();
@@ -108,7 +105,7 @@ public class PlayerInput {
 		} else if (action == PlayerActionState.SWITCHING_WEAPON) {
 			player.setActionState(PlayerActionState.RECOVER);
 			int time = Math.round(30 * (1.0f + inv.getGun().getWeight()));
-			System.out.println(inv.getGun().getName() + ": " + time);
+			//System.out.println(inv.getGun().getName() + ": " + time);
 			recoverTimer = new Timer(time);
 		} else if (action == PlayerActionState.MELEEING) {
 			player.setActionState(PlayerActionState.RECOVER);
@@ -188,15 +185,20 @@ public class PlayerInput {
 		PlayerMovementState move = player.getMoveState();
 		PlayerActionState action = player.getActionState();
 		return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
-				&& (action == PlayerActionState.IDLE || action == PlayerActionState.SHOOTING);
+				&& 
+				(action == PlayerActionState.IDLE 
+				|| action == PlayerActionState.SHOOTING
+				|| action == PlayerActionState.RELOADING);
 	}
 
 	public boolean canReload() {
 		PlayerMovementState move = player.getMoveState();
 		PlayerActionState action = player.getActionState();
 		return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
-				&& (action == PlayerActionState.IDLE || action == PlayerActionState.SHOOTING
-						|| action == PlayerActionState.RELOADING);
+				&& 
+				(action == PlayerActionState.IDLE 
+				|| action == PlayerActionState.SHOOTING
+				|| action == PlayerActionState.RELOADING);
 	}
 
 	public boolean canInteract() {
@@ -207,7 +209,8 @@ public class PlayerInput {
 	}
 
 	public void getInput() {
-
+		if(!(State.getState() instanceof GameState))
+			return;
 		movementInput();
 		switchWeaponInput();
 		reloadInput();
@@ -240,7 +243,8 @@ public class PlayerInput {
 		User user = player.getUser();
 		if (keyManager.escape) {
 			hud.setInvisible();
-			Sounds.pauseAllClips();
+			Sounds.pauseClips();
+			//Sounds.pauseAllClips();
 			State.setState(new PauseState(handler, user));
 		}
 		if (keyManager.capslock) {
@@ -265,11 +269,17 @@ public class PlayerInput {
 			inv.getGun().shoot();
 			player.setActionState(PlayerActionState.SHOOTING);
 		}
+		if (mouseManager.isRightPressed() && inv.getGun() != null && canShoot()) {
+			inv.getGun().altShoot();
+			player.setActionState(PlayerActionState.SHOOTING);
+		}
 	}
 
 	private void reloadInput() {
 		if (keyManager.reload && player.getInv().getGun() != null && canReload()) {
 			player.getInv().getGun().reload();
+			if(player.getInv().getGun().isDual())
+				player.getInv().getGun().altReload();
 			player.setActionState(PlayerActionState.RELOADING);
 		}
 	}
@@ -283,12 +293,12 @@ public class PlayerInput {
 	}
 
 	private void throwGrenadeInput() {
-		if (keyManager.grenade && canThrowGrenade())
+		if (keyManager.grenade && canThrowGrenade() && inv.getGrenades() > 0)
 			player.setActionState(PlayerActionState.COOKING_GRENADE);
 	}
 
 	private void throwSpecialGrenadeInput() {
-		if (keyManager.q && canThrowSpecialGrenade())
+		if (keyManager.q && canThrowSpecialGrenade() && inv.getSpecialGrenadeType() != -1 && inv.getSpecialGrenadeAmt() > 0)
 			player.setActionState(PlayerActionState.COOKING_SPECIAL_GRENADE);
 	}
 

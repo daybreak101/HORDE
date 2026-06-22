@@ -141,9 +141,9 @@ public class RoomLogic {
 			
 			o = e.getClosestNode();
 			node2 = world.getPathingLogic().getNodes().get(o);
-			System.out.println("zombie exist at node " + o);
+			//System.out.println("zombie exist at node " + o);
 			if(node2 != null && !activeRooms.contains(node2.getRoom())) {
-				System.out.println("The node's room: " + node2.getRoom());
+				//System.out.println("The node's room: " + node2.getRoom());
 				addBack++;
 				e.setActive(false);
 				//zombies.remove(e);
@@ -180,10 +180,15 @@ public class RoomLogic {
 	}
 	
 	public void render(Graphics g) {
-		g.drawString("Active Rooms:" + activeRooms, 100, 100);
+		//g.drawString("Active Rooms:" + activeRooms, 100, 100);
 	}
 	
 	public ArrayList<Spawner> getSpawners(){
 		return spawners;
 	}
+	
+	public Set<Integer> getOpenedRooms(){
+		return openedRooms;
+	}
+
 }

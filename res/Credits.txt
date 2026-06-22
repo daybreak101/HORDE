@@ -127,6 +127,10 @@ Upgraded Shot
 "Sci Fi Gun Shot.wav" by Bird_man
 https://freesound.org/people/Bird_man/sounds/317136/
 
+Double Barrel Shotgun
+46263__phreaksaccount__coachgun_fire2
+Coachgun_Fire2.wav by PhreaKsAccount
+https://freesound.org/people/PhreaKsAccount/sounds/46263/
 
 SFX:
 Interact purchase:
@@ -154,7 +158,77 @@ Nuke Sound
 https://www.youtube.com/watch?v=CBWdwDTn4vE
 Starting at 17:28 to 17:56
 
+Mystery box spinning sound
+"Ascending fast harp hlissando 4" downloaded at Zapsplat
+https://www.zapsplat.com/?s=harp&post_type=music&sound-effect-category-id=
 
+Mystery box close
+Cut from "Bedside cabinet wood drawer open or close 1" downloaded from Zapsplat
+https://www.zapsplat.com/music/bedside-cabinet-wood-drawer-open-or-close-1/
+
+Mystery box open
+"Bedroom furniture wood drawer open 2" downloaded from Zapsplat
+https://www.zapsplat.com/music/bedroom-furniture-wood-drawer-open-2/
+
+Barrier damage
+"Hammering hard on door attempting to break it 1" downloaded from Zapsplat
+https://www.zapsplat.com/music/hammering-hard-on-door-attempting-to-break-it-1/
+
+Barrier repair
+Cut and sped up from "Hammer hitting rock on a plastic surface inside garage"
+from Zapsplat, combined with "Hard wood impact, thump, smack" also from Zapsplat
+https://www.zapsplat.com/music/hammer-hitting-rock-on-a-plastic-surface-inside-garage/
+https://www.zapsplat.com/music/hard-wood-impact-thump-smack/
+
+Barrier break
+"Big wood impact, lots of large pieces of wood break, collapse" downloaded from Zapsplat
+https://www.zapsplat.com/music/big-wood-impact-lots-of-large-pieces-of-wood-break-collapse/
+
+
+
+Unknown, unused at this time
+"Dreamy washy harp glissando 3"
+zapsplat_sound_design_harp_glissando_dreamy_washy_003_64287
+https://www.zapsplat.com/music/dreamy-washy-harp-glissando-3/
+
+"Event, Power Up, Level Up, Healing, Tonal, Musical, Imaginary"
+PM_FN_Events_LvlUps_PowerUps_56
+https://www.zapsplat.com/music/event-power-up-level-up-healing-tonal-musical-imaginary-3/
+
+"Event, Power Up, Level Up, Healing, Tonal, Musical, Imaginary"
+PM_FN_Events_LvlUps_PowerUps_12 (1)
+https://www.zapsplat.com/music/event-power-up-level-up-healing-tonal-musical-imaginary/
+
+"Event, Power Up, Level Up, Healing, Tonal, Musical, Imaginary"
+PM_FN_Events_LvlUps_PowerUps_26.mp3
+https://www.zapsplat.com/music/event-power-up-level-up-healing-tonal-musical-imaginary-2/
+
+"Cinematic musical signature, dark and serious droning with piano 1"
+zapsplat_multimedia_musical_signature_dark_cinematic_droning_piano_serious_001_80163
+https://www.zapsplat.com/music/cinematic-musical-signature-dark-and-serious-droning-with-piano-1/
+
+"Deep and dark horror harp pluck"
+zapsplat_horror_harp_pluck_deep_dark_111822
+https://www.zapsplat.com/music/deep-and-dark-horror-harp-pluck/
+
+"Descending dark horror harp with drone"
+zapsplat_horror_descending_dark_harp_drone_12668
+https://www.zapsplat.com/music/descending-dark-horror-harp-with-drone/
+
+"Door open – wooden glass panel door opening"
+household_door_glass_panel_internal_open
+https://www.zapsplat.com/music/door-open-wooden-glass-panel-door-opening/
+
+"Blue Star" by ColorOptimist
+Blue Star.png
+https://opengameart.org/content/blue-star
+
+
+
+Knife Swing
+"Basic Melee Swing / Miss / Whoosh" by SypherZent
+420668__sypherzent__basic-melee-swing-miss-whoosh
+https://freesound.org/people/SypherZent/sounds/420668/
 
 
 VFX:
@@ -174,4 +248,6 @@ Golden Coin animation
 "Spinning Coin" by JM.Atencia
 https://opengameart.org/content/spinning-coin
 https://opengameart.org/sites/default/files/coins_1.png
+
+
 

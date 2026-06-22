@@ -15,28 +15,52 @@ public class GunVars {
 	public static final String RPD_NAME = "RPD";
 	public static final String RPG_NAME = "RPG";
 	public static final String WINCHESTER1901_NAME = "Winchester 1901";
+	public static final String M1GARAND_NAME = "M1 Garand";
+	public static final String ARISAKA_NAME = "Arisaka";
+	public static final String BREN_NAME = "Bren";
+	public static final String DB_NAME = "Double Barrel";
+	public static final String G18_NAME = "G18";
+	public static final String M16_NAME = "M16";
+	public static final String M1911_NAME = "M1911";
+	public static final String M60_NAME = "M60";
+	public static final String PYTHON_NAME = "Python";
+	public static final String THOMPSON_NAME = "Thompson";
+	public static final String TYPE100_NAME = "Type 100";
+	public static final String UZI_NAME = "Uzi";
 	
 	//upgraded names
-	public static final String AA12_UPGRADEDNAME = "AnarchAnonymous24";
-	public static final String AK47_UPGRADEDNAME = "Async Kombat 94";
-	public static final String AWP_UPGRADEDNAME = "A Weak Pistol";
+	public static final String AA12_UPGRADEDNAME = "ArmAggedon24";
+	public static final String AK47_UPGRADEDNAME = "AsyncKombat-94";
+	public static final String AWP_UPGRADEDNAME = "AWPful";
 	public static final String FLAMETHROWER_UPGRADEDNAME = "HotBox";
-	public static final String GLOCK17_UPGRADEDNAME = "This isn't COD bro";
+	public static final String GLOCK17_UPGRADEDNAME = "in my 'rari";
 	public static final String GRENADELAUNCHER_UPGRADEDNAME = "Rolling Thumper";
 	public static final String ICESHOTGUN_UPGRADEDNAME = "Wings of Pamola";
 	public static final String M4_UPGRADEDNAME = "Massacre '64";
 	public static final String MINIGUN_UPGRADEDNAME = "YOU'RE CHEATING!";
-	public static final String P90_UPGRADEDNAME = "Peashooter 180";
+	public static final String P90_UPGRADEDNAME = "Peashooter180";
 	public static final String RPD_UPGRADEDNAME = "Death by Reload";
 	public static final String RPG_UPGRADEDNAME = "Get sum protection (;";
 	public static final String WINCHESTER1901_UPGRADEDNAME = "Yee chester";
+	public static final String M1GARAND_UPGRADEDNAME = "FingerDinger";
+	public static final String ARISAKA_UPGRADEDNAME = "Nani Naze";
+	public static final String BREN_UPGRADEDNAME = "Upside Down?";
+	public static final String DB_UPGRADEDNAME = "Triple Barrel";
+	public static final String G18_UPGRADEDNAME = "Spray & Pray";
+	public static final String M16_UPGRADEDNAME = "Domebrusher";
+	public static final String M1911_UPGRADEDNAME = "Chips & Salsa";
+	public static final String M60_UPGRADEDNAME = "War Story";
+	public static final String PYTHON_UPGRADEDNAME = "Law";
+	public static final String THOMPSON_UPGRADEDNAME = "Typewriter";
+	public static final String TYPE100_UPGRADEDNAME = "Dojigiri";
+	public static final String UZI_UPGRADEDNAME = "NOS";
 	
 	//gun damage
 	public static final int AA12_DAMAGE = 120;
 	public static final int AK47_DAMAGE = 300;
 	public static final int AWP_DAMAGE = 2500;
 	public static final int FLAMETHROWER_DAMAGE = 150;
-	public static final int GLOCK17_DAMAGE = 25;
+	public static final int GLOCK17_DAMAGE = 140;
 	public static final int GRENADELAUNCHER_DAMAGE = 1000;
 	public static final int ICESHOTGUN_DAMAGE = 0;
 	public static final int M4_DAMAGE = 250;
@@ -45,6 +69,18 @@ public class GunVars {
 	public static final int RPD_DAMAGE = 180;
 	public static final int RPG_DAMAGE = 2000;
 	public static final int WINCHESTER1901_DAMAGE = 200;
+	public static final int M1GARAND_DAMAGE = 150;
+	public static final int ARISAKA_DAMAGE = 250;	
+	public static final int BREN_DAMAGE = 220;
+	public static final int DB_DAMAGE = 180;
+	public static final int G18_DAMAGE = 110;
+	public static final int M16_DAMAGE = 220;
+	public static final int M1911_DAMAGE = 25;
+	public static final int M60_DAMAGE = 190;
+	public static final int PYTHON_DAMAGE = 400;
+	public static final int THOMPSON_DAMAGE = 150;
+	public static final int TYPE100_DAMAGE = 140;
+	public static final int UZI_DAMAGE = 160;
 	
 	//gun fire rate
 	public static final int AA12_FIRERATE = 7;
@@ -60,6 +96,18 @@ public class GunVars {
 	public static final int RPD_FIRERATE = 4;
 	public static final int RPG_FIRERATE = 50;
 	public static final int WINCHESTER1901_FIRERATE = 80;
+	public static final int M1GARAND_FIRERATE = 20;
+	public static final int ARISAKA_FIRERATE = 75;
+	public static final int BREN_FIRERATE = 5;
+	public static final int DB_FIRERATE = 9;
+	public static final int G18_FIRERATE = 2;
+	public static final int M16_FIRERATE = 25;
+	public static final int M1911_FIRERATE = 20;
+	public static final int M60_FIRERATE = 6;
+	public static final int PYTHON_FIRERATE = 10;
+	public static final int THOMPSON_FIRERATE = 4;
+	public static final int TYPE100_FIRERATE = 5;
+	public static final int UZI_FIRERATE = 6;
 	
 	//gun reload speed
 	public static final int AA12_RELOADSPEED = 140;
@@ -75,6 +123,18 @@ public class GunVars {
 	public static final int RPD_RELOADSPEED = 330;
 	public static final int RPG_RELOADSPEED = 150;
 	public static final int WINCHESTER1901_RELOADSPEED = 50;
+	public static final int M1GARAND_RELOADSPEED = 125;
+	public static final int ARISAKA_RELOADSPEED = 180;
+	public static final int BREN_RELOADSPEED = 270;
+	public static final int DB_RELOADSPEED = 50;
+	public static final int G18_RELOADSPEED = 100;
+	public static final int M16_RELOADSPEED = 120;
+	public static final int M1911_RELOADSPEED = 150;
+	public static final int M60_RELOADSPEED = 360;
+	public static final int PYTHON_RELOADSPEED = 35;
+	public static final int THOMPSON_RELOADSPEED = 145;
+	public static final int TYPE100_RELOADSPEED = 130;
+	public static final int UZI_RELOADSPEED = 165;
 	
 	//gun clip
 	public static final int AA12_GUNCLIP = 12;
@@ -90,6 +150,18 @@ public class GunVars {
 	public static final int RPD_GUNCLIP = 100;
 	public static final int RPG_GUNCLIP = 1;
 	public static final int WINCHESTER1901_GUNCLIP = 5;
+	public static final int M1GARAND_GUNCLIP = 8;
+	public static final int ARISAKA_GUNCLIP = 5;
+	public static final int BREN_GUNCLIP = 28;
+	public static final int DB_GUNCLIP = 2;
+	public static final int G18_GUNCLIP = 19;
+	public static final int M16_GUNCLIP = 30;
+	public static final int M1911_GUNCLIP = 8;
+	public static final int M60_GUNCLIP = 100;
+	public static final int PYTHON_GUNCLIP = 6;
+	public static final int THOMPSON_GUNCLIP = 20;
+	public static final int TYPE100_GUNCLIP = 30;
+	public static final int UZI_GUNCLIP = 32;
 	
 	//gun max reserve
 	public static final int AA12_MAXRESERVE = 120;
@@ -105,6 +177,18 @@ public class GunVars {
 	public static final int RPD_MAXRESERVE = 400;
 	public static final int RPG_MAXRESERVE = 10;
 	public static final int WINCHESTER1901_MAXRESERVE = 60;
+	public static final int M1GARAND_MAXRESERVE = 80;
+	public static final int ARISAKA_MAXRESERVE = 50;
+	public static final int BREN_MAXRESERVE = 280;
+	public static final int DB_MAXRESERVE = 50;
+	public static final int G18_MAXRESERVE = 190;
+	public static final int M16_MAXRESERVE = 300;
+	public static final int M1911_MAXRESERVE = 80;
+	public static final int M60_MAXRESERVE = 400;
+	public static final int PYTHON_MAXRESERVE = 60;
+	public static final int THOMPSON_MAXRESERVE = 200;
+	public static final int TYPE100_MAXRESERVE = 210;
+	public static final int UZI_MAXRESERVE = 192;
 	
 	//gun weight
 	public static final float AA12_WEIGHT = 0.4f;
@@ -120,28 +204,53 @@ public class GunVars {
 	public static final float RPD_WEIGHT = 1.0f;
 	public static final float RPG_WEIGHT = 1.1f;
 	public static final float WINCHESTER1901_WEIGHT = 0.5f;
+	public static final float M1GARAND_WEIGHT = 0.35f;
+	public static final float ARISAKA_WEIGHT = 0.34f;
+	public static final float BREN_WEIGHT = 0.8f;
+	public static final float DB_WEIGHT = 0.4f;
+	public static final float G18_WEIGHT = 0.1f;
+	public static final float M16_WEIGHT = 0.4f;
+	public static final float M1911_WEIGHT = 0.1f;
+	public static final float M60_WEIGHT = 1.1f;
+	public static final float PYTHON_WEIGHT = 0.15f;
+	public static final float THOMPSON_WEIGHT = 0.33f;
+	public static final float TYPE100_WEIGHT = 0.31f;
+	public static final float UZI_WEIGHT = 0.3f;
 	
 	//gun range
-	public static final int AA12_RANGE = 5;
+	public static final int AA12_RANGE = 6;
 	public static final int AK47_RANGE = 14;
 	public static final int AWP_RANGE = 50;
 	public static final int FLAMETHROWER_RANGE = 20;
 	public static final int GLOCK17_RANGE = 10;
 	public static final int GRENADELAUNCHER_RANGE = 15;
 	public static final int ICESHOTGUN_RANGE = 15;
-	public static final int M4_RANGE = 10;
+	public static final int M4_RANGE = 14;
 	public static final int MINIGUN_RANGE = 50;
 	public static final int P90_RANGE = 10;
 	public static final int RPD_RANGE = 10;
 	public static final int RPG_RANGE = 100;
 	public static final int WINCHESTER1901_RANGE = 9;
+	public static final int M1GARAND_RANGE = 25;
+	public static final int ARISAKA_RANGE = 30;
+	public static final int BREN_RANGE = 15;
+	public static final int DB_RANGE = 9;
+	public static final int G18_RANGE = 6;
+	public static final int M16_RANGE = 14;
+	public static final int M1911_RANGE = 10;
+	public static final int M60_RANGE = 20;
+	public static final int PYTHON_RANGE = 15;
+	public static final int THOMPSON_RANGE = 10;
+	public static final int TYPE100_RANGE = 11;
+	public static final int UZI_RANGE = 14;
 	
 	//other gun vars
 	public static final int AA12_PELLET_COUNT = 6;
 	public static final int WINCHESTER1901_PELLET_COUNT = 10;
+	public static final int DB_PELLET_COUNT = 12;
 	public static final double AA12_PELLET_SPREAD = Math.PI/16;
 	public static final double WINCHESTER1901_PELLET_SPREAD = Math.PI/32;
-
+	public static final double DB_PELLET_SPREAD = Math.PI/24;
 	
 	//grenade vars
 	public static final String GRENADE_NAME = "Frag Grenade";

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.PowerupSounds;
 import project.game.horde.sounds.Sounds;
@@ -15,13 +15,15 @@ public class Nuke extends PowerUps {
 	int alpha = 255;
 	boolean fulfilledInteraction = false;
 
-	public Nuke(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, true);
+	public Nuke(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, true);
 		name = "Nuke";
 		icon = null;
-		floatingAsset = null;
+		floatingAsset = Assets.nuke;
+		glow = Assets.yellowStar;
 	}
 
+        @Override
 	public void tick() {
 		cooldownTimer++;
 		trigger = new Rectangle((int) (x), (int) y, width, height);
@@ -66,10 +68,11 @@ public class Nuke extends PowerUps {
 
 	@Override
 	public void render(Graphics g) {
-		if (!pickedUp) {
-			g.setColor(Color.yellow);
-			g.drawOval((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height);
+		if(!pickedUp) {
+			g.drawImage(glow, (int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+			
+			if(floatingAsset != null && isVisible)
+				g.drawImage(floatingAsset, (int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 		} else {
 			g.setColor(new Color(255, 255, 255, alpha));
 			g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());

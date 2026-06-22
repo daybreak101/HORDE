@@ -6,11 +6,13 @@ import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Utils;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class Minigun extends Gun {
 
@@ -24,6 +26,8 @@ public class Minigun extends Gun {
 		originalName = name;
 		upgradedName = GunVars.MINIGUN_UPGRADEDNAME;
 		reloadSound = GunSounds.MINIGUN_FAILSAFE_RELOAD_ID;
+		top = Assets.minigun_top;
+		gunImageDim = new GunImageDim(30, 45, 40, 100);
 	}
 
 	public Minigun(Handler handler, boolean isTurret, Player player) {

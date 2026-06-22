@@ -60,6 +60,7 @@ public class Sounds {
 
 	private static Handler thehandler;
 	private static float masterVolume;
+	private static boolean resetting = false;
 	private static ConcurrentHashMap<String, CopyOnWriteArrayList<Clip>> clipPools = new ConcurrentHashMap<>();
 	private static ExecutorService threadPool = Executors.newFixedThreadPool(2000);
 	private static CopyOnWriteArrayList<ClipWrapper> playingClips = new CopyOnWriteArrayList<>();
@@ -179,8 +180,49 @@ public class Sounds {
 
 	    return newAudioBytes;
 	}
+	
+	public static void pauseClips() {
+	    // Create and start a new thread to reset sounds
+	    new Thread(() -> {
+	    	resetting = true;
+	        pauseAllClips();
+	        resetting = false;
+	    }).start();
+	}
+	
+	public static void resumeClips() {
+	    // Create and start a new thread to reset sounds
+	    new Thread(() -> {
+	    	//wait to resume all clips to prevent crashing
+	    	while(resetting) {
+	    		
+	    	}
+	    	resetting = true;
+	        resumeAllClips();
+	        resetting = false;
+	    }).start();
+	}
+	
+	public static void resetSounds() {
+	    // Create and start a new thread to reset sounds
+	    new Thread(() -> {
+	    	resetting = true;
+	        pauseAllClips();
+
+	        //small delay so the pause completes properly
+	        try {
+	            Thread.sleep(100);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	        resumeAllClips();
+	        resetting = false;
+	    }).start();
+	}
 
 	public static void playClip(String clipId, float speed, float volume, boolean persist) {
+		if(resetting)
+			return;
 		threadPool.execute(() -> {
 			class AudioListener implements LineListener {
 				private boolean done = false;
@@ -231,6 +273,8 @@ public class Sounds {
 
 	public static void playClipFrom(String clipId, float speed, float volume, long millisecondPosition,
 			boolean persist) {
+		if(resetting)
+			return;
 		threadPool.execute(() -> {
 			class AudioListener implements LineListener {
 				private boolean done = false;

@@ -1,6 +1,5 @@
 package project.game.horde.entities.facade;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -29,8 +28,8 @@ public class OnlineFlameBullet extends Entity {
 	private Shape cb;
 	int currentAlpha = 0;
 
-	public OnlineFlameBullet(Handler handler, float x, float y, int z, int range, float angle, boolean isUpgraded) {
-		super(handler, x, y, z, 5, 5);
+	public OnlineFlameBullet(Handler handler, float x, float y, int range, float angle, boolean isUpgraded) {
+		super(handler, x, y, 5, 5);
 		frame = RandomUtil.nextInt(0, 13);
 		bounds = new Rectangle(0, 0, 0, 0);
 		width = 200;

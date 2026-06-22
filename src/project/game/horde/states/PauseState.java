@@ -34,7 +34,7 @@ public class PauseState extends State {
 			@Override
 			public void onClick(UIObject ui) {
 				handler.getMouseManager().setUIManager(null);
-				Sounds.resumeAllClips();
+				Sounds.resumeClips();
 				State.setState(handler.getGame().gameState);
 
 			}
@@ -85,6 +85,9 @@ public class PauseState extends State {
 
 	@Override
 	public void tick() {
+		if(handler.getWorld() != null && handler.getCurrentPlayer().getPeer() != null) {
+			handler.getWorld().tick();
+		}
 		uiManager.tick(); 
 	}
 

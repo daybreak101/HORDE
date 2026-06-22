@@ -23,9 +23,9 @@ public class OnlineGrenade extends OnlineBullet {
 	private float destX, destY;
 
 	// normal grenades
-	public OnlineGrenade(Handler handler, float x, float y, int z, boolean isImpact, float destX, float destY,
+	public OnlineGrenade(Handler handler, float x, float y, boolean isImpact, float destX, float destY,
 			float angle) {
-		super(handler, x, y, z, 10000, angle, false);
+		super(handler, x, y, 10000, angle, false);
 		x = (int) x;
 		y = (int) y;
 		width = 10;
@@ -44,6 +44,7 @@ public class OnlineGrenade extends OnlineBullet {
 		isUpgraded = isImpact;
 	}
 
+        @Override
 	public void tick() {
 		counter++;
 		if (counter >= timer && !isImpact) {
@@ -75,6 +76,7 @@ public class OnlineGrenade extends OnlineBullet {
 
 	boolean slowed = false;
 
+        @Override
 	public boolean checkForImpact() {
 		cb = new Rectangle((int) (x), (int) (y), width, height);
 
@@ -106,7 +108,7 @@ public class OnlineGrenade extends OnlineBullet {
 			if (explosionRadius.intersects(f.getHitBox(0, 0))) {
 			}
 		}
-		handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 100, y - 100, z, 200, 200, isUpgraded));
+		handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 100, y - 100, 200, 200, isUpgraded));
 		float dist = Utils.getEuclideanDistance(x, y, player.getX(), player.getY());
 		
 		//Sounds.playClip(GunSounds.grenade_launcher_explosion, 1, "grenade_explosion", ((float) 1.0f - dist / 2000), false);
@@ -116,9 +118,10 @@ public class OnlineGrenade extends OnlineBullet {
 
 	public void findPlayerInRadius() {
 		explosionRadius = new Ellipse2D.Float(x - 100, y - 100, 200, 200);
-		handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 100, y - 100, z, 200, 200, isUpgraded));
+		handler.getWorld().getEntityManager().addExplosion(new Explosion(handler, x - 100, y - 100, 200, 200, isUpgraded));
 	}
 
+        @Override
 	public void moveX() {
 		x += xMove;
 		if (checkForImpact()) {
@@ -133,6 +136,7 @@ public class OnlineGrenade extends OnlineBullet {
 
 	}
 
+        @Override
 	public void moveY() {
 		y += yMove;
 		if (checkForImpact()) {

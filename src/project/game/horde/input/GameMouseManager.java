@@ -94,7 +94,7 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 			//return;
 		}
 			
-		else if(e.getButton() == MouseEvent.BUTTON3) {
+		if(e.getButton() == MouseEvent.BUTTON3) {
 			rightPressed = true;
 			//return;
 		}
@@ -111,6 +111,10 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 		if(State.getState() == handler.getGame().gameState && e.getButton() == MouseEvent.BUTTON1 && player.getInv().getGun() != null) {
 			player.getInv().getGun().setReadyToFire(false);
 			leftPressed = false;
+		}
+		if(State.getState() == handler.getGame().gameState && e.getButton() == MouseEvent.BUTTON3 && player.getInv().getGun() != null) {
+			player.getInv().getGun().setAltReadyToFire(false);
+			rightPressed = false;
 		}
 	}
 		

@@ -2,6 +2,7 @@ package project.game.horde.states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.HashMap;
 
 import project.game.horde.entities.creatures.Player;
@@ -25,44 +26,46 @@ public class GameState extends State  {
 	private Cheats cheats;
 	private Peer peer;
 	private HashMap<Integer, User> users;
+//	private Handler handler;
 
 	//offline
-	public GameState(Handler handler, User user) {
+	public GameState(Handler handler, String map, User user) throws IOException {
 		super(handler);
 		handler.getGame().resetManagers();	
 		world = new World(handler,
-				"/worlds/test/world1.txt", 
-				"/worlds/test/entities.txt",
-				"/worlds/test/nodes.txt",
-				"/worlds/test/edges.txt",
-				"/worlds/test/lights.txt",
-				"/worlds/test/adjacentRooms.txt",
-				"/worlds/test/spawners.txt",
-				user
+				"/worlds/"+ map + "/world1.txt", 
+				"/worlds/"+ map + "/entities.txt",
+				"/worlds/"+ map + "/nodes.txt",
+				"/worlds/"+ map + "/edges.txt",
+				"/worlds/"+ map + "/lights.txt",
+				"/worlds/"+ map + "/adjacentRooms.txt",
+				"/worlds/"+ map + "/spawners.txt",
+				"/worlds/"+ map + "/floors.txt",
+				user, map
 				);
 		world.getEntityManager().addCurrentPlayer(
 				new Player(handler, 900, 650, 0, user));
 	
-		
 		cheats = new Cheats(handler);
 		Sounds.playClip(Sounds.BACKGROUND_MUSIC_ID, 1, .7f, true);
 
 	}
 	
 	//online constructor
-	public GameState(Handler handler, User localUser, Peer peer,
-			HashMap<Integer, User> users) {
+	public GameState(Handler handler, String map, User localUser, Peer peer,
+			HashMap<Integer, User> users) throws IOException {
 		super(handler);
 		handler.getGame().resetManagers();
 		world = new World(handler,
-				"/worlds/test/world1.txt", 
-				"/worlds/test/entities.txt",
-				"/worlds/test/nodes.txt",
-				"/worlds/test/edges.txt",
-				"/worlds/test/lights.txt",
-				"/worlds/test/adjacentRooms.txt",
-				"/worlds/test/spawners.txt",
-				localUser, peer, users
+				"/worlds/"+ map + "/world1.txt", 
+				"/worlds/"+ map + "/entities.txt",
+				"/worlds/"+ map + "/nodes.txt",
+				"/worlds/"+ map + "/edges.txt",
+				"/worlds/"+ map + "/lights.txt",
+				"/worlds/"+ map + "/adjacentRooms.txt",
+				"/worlds/"+ map + "/spawners.txt",
+				"/worlds/"+ map + "/floors.txt",
+				localUser, peer, users, map
 				);
 		//online stuff
 		this.peer = peer;
@@ -164,6 +167,9 @@ public class GameState extends State  {
 		return world;
 	}
 
+	public Handler getHandler() {
+		return handler;
+	}
 	
 
 }

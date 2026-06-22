@@ -1,9 +1,9 @@
 package project.game.horde.entities.statics;
 
-import project.game.horde.main.Handler;
-
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
+
+import project.game.horde.main.Handler;
 
 public abstract class InteractableStaticEntity extends StaticEntity{
 
@@ -14,8 +14,8 @@ public abstract class InteractableStaticEntity extends StaticEntity{
 	protected boolean usedByOtherPlayer = false;
 	
 	
-	public InteractableStaticEntity(Handler handler, int id, float x, float y, int z, int width, int height) {
-		super(handler, x, y, z, width, height);
+	public InteractableStaticEntity(Handler handler, int id, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
 		trigger = new Rectangle(0,0,0,0);
 		cooldown = 200;
 		triggerText = "";
@@ -41,7 +41,7 @@ public abstract class InteractableStaticEntity extends StaticEntity{
 			}
 		}
 		for (Wall e : handler.getWorld().getEntityManager().getWalls()) {
-			if (line.intersects(e.getCollisionBounds(0, 0))) {
+			if ( line.intersects(e.getCollisionBounds(0, 0))) {
 				handler.getWorld().getEntityManager().getEntities().remove(this);
 				found = true;
 				break;

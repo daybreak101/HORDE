@@ -227,9 +227,14 @@ public class Settings {
 		this.handler = handler;
 	}
 
-	public double getZoomLevel() {
+	public double getZoomLevel(boolean forSettings) {
+		if(forSettings)
+			return zoomLevel;
+		if(handler.getSettings().getDisplayType() != handler.getGame().getDisplay().STANDARD)
+			return zoomLevel + .5;
 		return zoomLevel;
 	}
+	
 
 	public void setZoomLevel(double zoomLevel) {
 		this.zoomLevel = zoomLevel;

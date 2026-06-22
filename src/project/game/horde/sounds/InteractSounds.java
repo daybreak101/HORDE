@@ -9,11 +9,15 @@ import project.game.horde.utils.Utils;
 public class InteractSounds {
 	public static URL purchase, cantAfford,
 	fryerStatic, fryerUpgrading, fryerDone,
-	vendingStatic, vendingActivation, vendingGrab; 
+	vendingStatic, vendingActivation, vendingGrab,
+	mysteryBoxMusic, mysteryBoxOpen, mysteryBoxClose,
+	barrierBreak, barrierDamage, barrierRepair; 
     public static final String PURCHASE_ID = "purchase";
     public static final String CANTAFFORD_ID = "cantAfford";
     public static final String FRYER_UPGRADING = "fryerUpgrading", FRYER_DONE = "fryerDone", FRYER_STATIC = "fryerStatic";
     public static final String VENDING_STATIC = "vendingStatic", VENDING_ACTIVATION = "vendingActivation", VENDING_GRAB = "vendingGrab";
+	public static final String MYSTERYBOX_MUSIC = "mysteryBoxMusic", MYSTERYBOX_OPEN = "mysteryBoxOpen", MYSTERYBOX_CLOSE = "mysteryBoxClose";
+	public static final String BARRIER_BREAK = "barrierBreak", BARRIER_DAMAGE = "barrierDamage", BARRIER_REPAIR = "barrierRepair";
 	
 	public static void init(Handler handler) {
 		purchase = Utils.class.getResource("/sounds/interacts/purchase.wav");
@@ -35,6 +39,21 @@ public class InteractSounds {
 		Sounds.preloadClip(VENDING_STATIC, vendingStatic, 1, 1);
 		Sounds.preloadClip(VENDING_ACTIVATION, vendingActivation, 1, 1);
 		Sounds.preloadClip(VENDING_GRAB, vendingGrab, 1, 1);
+		 
+		mysteryBoxMusic = Utils.class.getResource("/sounds/mysteryBox/mystery_box_music.wav");
+		mysteryBoxClose = Utils.class.getResource("/sounds/mysteryBox/mystery_box_close.wav");
+		mysteryBoxOpen = Utils.class.getResource("/sounds/mysteryBox/mystery_box_open.wav");
+		Sounds.preloadClip(MYSTERYBOX_MUSIC, mysteryBoxMusic, 1, 1);
+		Sounds.preloadClip(MYSTERYBOX_CLOSE, mysteryBoxClose, 1, 1);
+		Sounds.preloadClip(MYSTERYBOX_OPEN, mysteryBoxOpen, 1, 1);
+		
+		barrierBreak = Utils.class.getResource("/sounds/barriers/barrier_break.wav");
+		barrierDamage = Utils.class.getResource("/sounds/barriers/barrier_damage.wav");
+		barrierRepair = Utils.class.getResource("/sounds/barriers/barrier_repair.wav");
+		Sounds.preloadClip(BARRIER_BREAK, barrierBreak, 5, 1);
+		Sounds.preloadClip(BARRIER_DAMAGE, barrierDamage, 20, 1);
+		Sounds.preloadClip(BARRIER_REPAIR, barrierRepair, 5, 1);
+
 	}
 	
 	public static float calculateVolumeBasedOffDistance(Entity a, Entity b) {

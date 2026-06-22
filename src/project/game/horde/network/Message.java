@@ -45,6 +45,12 @@ public class Message implements Serializable {
     public static final int USER_READY = 32;
     public static final int HOST_SEND_LOADING = 33;
     public static final int USER_ACTIVATED_BLESSING = 34;
+    public static final int USER_Z_MOVE = 35;
+    public static final int GAME_ALREADY_STARTED = 36;
+    public static final int ASK_FOR_GAME_STARTED = 37;
+	public static final int HOST_CHANGE_MAP = 38;
+	public static final int USER_CHANGED_SKIN = 39;
+	public static final int USER_CHANGED_HAT = 40;
 
     public int type;
     public int connectionId;
@@ -55,9 +61,15 @@ public class Message implements Serializable {
     public List<ZombiePosition> zombiePositions; // New field for zombie positions
     public int amount, id, round, zombiesLeft, x, y, z;
     public float angle;
-    public boolean isBusy;
+    public boolean isBusy, gameAlreadyStarted;
 
     public Message() {}
+    
+    
+    public Message(int type, int connection, boolean gameAlreadyStarted) {
+    	this.connectionId = connection;
+    	this.gameAlreadyStarted = gameAlreadyStarted;
+    }
 
     public Message(int type, int connectionId, String username, HashMap<Integer, User> userList) {
         this.type = type;

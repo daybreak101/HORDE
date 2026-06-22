@@ -45,7 +45,7 @@ public class CritElement extends HudElement {
 
 	@Override
 	public void render(Graphics g) {
-		double zoomLevel = handler.getSettings().getZoomLevel();
+		double zoomLevel = handler.getSettings().getZoomLevel(false);
 		Graphics2D g2d = (Graphics2D) g;
 		AffineTransform old = g2d.getTransform();
 

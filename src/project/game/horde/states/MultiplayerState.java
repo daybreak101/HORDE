@@ -49,7 +49,10 @@ public class MultiplayerState extends State {
 
 
 		}));
-		uiManager.addObject(new TextButton(handler, 100, 700, 300, 100, "Back to Menu", 30, new ClickListener() {
+		int bottomY = handler.getHeight() - 100;
+		uiManager.addObject(new TextButton(handler, 100,
+				bottomY,
+				300,100, "Back to Menu", 30, new ClickListener() {
 
 			@Override
 			public void onClick(UIObject ui) {

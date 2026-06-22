@@ -16,8 +16,8 @@ public class Explosion extends Blood {
 	float startAngle, arcAngle;
 	boolean isUpgraded;
 
-	public Explosion(Handler handler, float x, float y, int z, int width, int height, boolean isUpgraded) {
-		super(handler, x, y, z, -1);
+	public Explosion(Handler handler, float x, float y, int width, int height, boolean isUpgraded) {
+		super(handler, x, y, -1);
 		this.timer = 20;
 		this.width = width;
 		this.height = height;
@@ -35,8 +35,8 @@ public class Explosion extends Blood {
 //		isArc = false;
 //	}
 
-	public Explosion(Handler handler, Arc2D.Float arc, int z) {
-		super(handler, arc.x, arc.y, z, -1);
+	public Explosion(Handler handler, Arc2D.Float arc) {
+		super(handler, arc.x, arc.y, -1);
 		this.timer = 20;
 		this.width = (int) arc.width;
 		this.height = (int) arc.height;

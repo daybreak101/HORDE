@@ -22,8 +22,8 @@ public class Stoker extends Zombie {
 
 	// make sure zombie cannot burn
 
-	public Stoker(Handler handler, int id, float x, float y, int z, float dspeed, int health) {
-		super(handler, id, x, y, z, dspeed, health);
+	public Stoker(Handler handler, int id, float x, float y, float dspeed, int health) {
+		super(handler, id, x, y, dspeed, health);
 		zombieType = STOKER;
 		speed = 2.0f + dspeed - 1f;
 		this.health = health * 2;
@@ -73,6 +73,7 @@ public class Stoker extends Zombie {
 	}
 
 	// implement where stoker only shoots when near player
+        @Override
 	public void postTick() {
 		if (!freezeStatus.isFrozen()) {
 			if (isAngry == false) {
@@ -92,7 +93,7 @@ public class Stoker extends Zombie {
 	public void pulsateFlame() {
 		pulsateTimer.tick();
 		if (pulsateTimer.isReady()) {
-			new Grenade(handler, x + width / 2, y + height / 2, z, Color.orange).findPlayerInRadius();
+			new Grenade(handler, x + width / 2, y + height / 2, Color.orange).findPlayerInRadius();
 		}
 	}
 
@@ -142,6 +143,6 @@ public class Stoker extends Zombie {
 		}
 		player.getStats().gainKill();
 		// put "flame" effect on death as blood that stays there for 7 seconds
-		handler.getWorld().getEntityManager().addBlood(new Blood(handler, x, y, z, ZombieType.STOKER));
+		handler.getWorld().getEntityManager().addBlood(new Blood(handler, x, y, ZombieType.STOKER));
 	}
 }

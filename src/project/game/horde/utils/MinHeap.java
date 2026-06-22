@@ -93,10 +93,7 @@ public class MinHeap {
 
 	//ensure a vertex is still within the heap, used in dijkstra function
 	public boolean inQueue(int vertex){
-		if(pos[vertex] < size){
-			return true;
-		}
-		return false;
+		return pos[vertex] < size;
 	}
 
 	//update the value of a vertex in the minheap

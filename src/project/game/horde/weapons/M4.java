@@ -2,10 +2,12 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.RandomUtil;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class M4 extends Gun {
 
@@ -22,6 +24,8 @@ public class M4 extends Gun {
 		originalName = name;
 		upgradedName = GunVars.M4_UPGRADEDNAME;
 		reloadSound = GunSounds.M4_RELOAD_ID;
+		top = Assets.m4_top;
+		gunImageDim = new GunImageDim(40, 45, 12, 80);
 	}
 	
 	public void shoot() {		

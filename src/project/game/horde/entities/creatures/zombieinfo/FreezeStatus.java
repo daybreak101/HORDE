@@ -24,7 +24,7 @@ public class FreezeStatus {
 	public void freezeNearbyZombies(Player player) {
 		Ellipse2D freezeRadius = new Ellipse2D.Float(zombie.getCenterX() - 100, zombie.getCenterY() - 100, 200, 200);
 		for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
-			if (zombie.getZ() == e.getZ() && freezeRadius.intersects(e.getHitBox(0, 0)) && e != zombie) {
+			if (freezeRadius.intersects(e.getHitBox(0, 0)) && e != zombie) {
 				e.getFreezeStatus().freeze(player);
 			}
 		}

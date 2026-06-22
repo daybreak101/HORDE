@@ -14,8 +14,8 @@ public class AmmoRefill extends InteractableStaticEntity {
 	private boolean cantAfford = false;
 	private boolean fullAmmo = false;
 
-	public AmmoRefill(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, 75, 75);
+	public AmmoRefill(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, 75, 75);
 		triggerText = "Press F to refill current weapon: 1000";
 	}
 

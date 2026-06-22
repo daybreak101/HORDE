@@ -1,17 +1,7 @@
 package project.game.horde.main;
 
-import javax.tools.Tool;
-
-import project.game.horde.display.Display;
-
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
-import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import java.awt.Toolkit;
 
 public class Launcher {
 	public static void main(String[] args) {
@@ -32,7 +22,7 @@ public class Launcher {
 		System.out.println("new width: " + Math.round(screenWidth * 1000/targetWidth));
 		System.out.println("new height: " + Math.round(screenHeight * 800/targetHeight));
 
-		new Game("HORDE", 
+		Game game = new Game("HORDE", 
 				Math.round(screenWidth/targetWidth * 1000),
 				Math.round(screenHeight/targetHeight * 800));
 

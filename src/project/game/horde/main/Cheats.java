@@ -5,6 +5,7 @@ import project.game.horde.entities.statics.Wall;
 import project.game.horde.perks.DeadShot;
 import project.game.horde.perks.DoubleTap;
 import project.game.horde.perks.Juggernaut;
+import project.game.horde.perks.Luna;
 import project.game.horde.perks.MuleKick;
 import project.game.horde.perks.PhD;
 import project.game.horde.perks.Revive;
@@ -12,9 +13,29 @@ import project.game.horde.perks.SleightOfHand;
 import project.game.horde.perks.StaminUp;
 import project.game.horde.perks.Stronghold;
 import project.game.horde.perks.Vampire;
+import project.game.horde.weapons.AA12;
+import project.game.horde.weapons.AK47;
+import project.game.horde.weapons.AWP;
+import project.game.horde.weapons.Arisaka;
+import project.game.horde.weapons.Bren;
+import project.game.horde.weapons.DoubleBarrel;
+import project.game.horde.weapons.Flamethrower;
+import project.game.horde.weapons.G18;
+import project.game.horde.weapons.GrenadeLauncher;
 import project.game.horde.weapons.Gun;
-import project.game.horde.weapons.IceShotgun;
+import project.game.horde.weapons.M16;
+import project.game.horde.weapons.M1911;
 import project.game.horde.weapons.M4;
+import project.game.horde.weapons.M60;
+import project.game.horde.weapons.Minigun;
+import project.game.horde.weapons.P90;
+import project.game.horde.weapons.Python;
+import project.game.horde.weapons.RPD;
+import project.game.horde.weapons.RPG;
+import project.game.horde.weapons.Thompson;
+import project.game.horde.weapons.Type100;
+import project.game.horde.weapons.Uzi;
+import project.game.horde.weapons.Winchester1901;
 
 public class Cheats {
 
@@ -22,55 +43,69 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		applyCheats();
+		  applyCheats();
 	}
 
 	public void applyCheats() {
 		// perks
-		handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
 		handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Luna(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new MuleKick(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new Revive(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new MuleKick(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new Revive(handler, 3, handler.getCurrentPlayer()));
 		handler.getCurrentPlayer().getInv().givePerk(new SleightOfHand(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new Stronghold(handler, 3, handler.getCurrentPlayer()));
-		handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new Stronghold(handler, 3, handler.getCurrentPlayer()));
+		//handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
 
 		// points
-		int points = 100000;
+		int points = 1000;
 		handler.getCurrentPlayer().getInv().gainPoints(points);
 
 		// set round
-		int round = 10;
-		handler.getRoundLogic().setCurrentRound(round);
+		//int round = 40;
+		//handler.getRoundLogic().setCurrentRound(round);
 
 		// give gun
 		Gun gun =
+				//new Arisaka(handler, handler.getCurrentPlayer());
 				//new AWP(handler, handler.getCurrentPlayer());
-				//new AK47(handler);
-				//new RPD(handler);
+				//new AK47(handler, handler.getCurrentPlayer());
+				//new RPD(handler, handler.getCurrentPlayer());
 				//new GrenadeLauncher(handler, handler.getCurrentPlayer());
 				//new Winchester1901(handler, handler.getCurrentPlayer());
 				//new AA12(handler, handler.getCurrentPlayer());
 				//new RPG(handler, handler.getCurrentPlayer());
-				//new Flamethrower(handler, handler.getCurrentPlayer());
-				//new IceShotgun(handler);
+				new Flamethrower(handler, handler.getCurrentPlayer());
+				//new IceShotgun(handler, handler.getCurrentPlayer());
 				//new P90(handler, handler.getCurrentPlayer());
 				//new Minigun(handler, handler.getCurrentPlayer());
 				//new M4(handler, handler.getCurrentPlayer());
-				new IceShotgun(handler, handler.getCurrentPlayer());
-		gun.upgradeWeapon();
+				//new IceShotgun(handler, handler.getCurrentPlayer());
+				//new Bren(handler, handler.getCurrentPlayer());
+				//new DoubleBarrel(handler, handler.getCurrentPlayer());
+				//new G18(handler, handler.getCurrentPlayer());
+				//new M1911(handler, handler.getCurrentPlayer());
+				//new M60(handler, handler.getCurrentPlayer());
+				//new Python(handler, handler.getCurrentPlayer());
+				//new Thompson(handler, handler.getCurrentPlayer());
+				//new Type100(handler, handler.getCurrentPlayer());
+				//new Uzi(handler, handler.getCurrentPlayer());
+				//new M16(handler, handler.getCurrentPlayer());
+				//gun.upgradeWeapon();
 		handler.getCurrentPlayer().getInv().setGun(gun);
 		
 		//give gas grenades
-		handler.getCurrentPlayer().getInv().setSpecialGrenade(0);
+		//handler.getCurrentPlayer().getInv().setSpecialGrenade(0);
+		
+		//give blessing
+		//handler.getCurrentPlayer().getInv().getBlessings().setBlessing(BlessingInventory.TELEPORT);
 			
-		invisibleWalls();
-		nodesVisible();
-		showPlayerCoords();
+		//invisibleWalls();
+		//nodesVisible();
+		//showPlayerCoords();
 	}
 	
 	public void tick() {

@@ -9,11 +9,12 @@ import project.game.horde.main.Handler;
 
 public class DeathMachine extends PowerUps {
 
-	public DeathMachine(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, false);
+	public DeathMachine(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, false);
 		name = "Death Machine";
 		icon = Assets.deathmachine;
-		floatingAsset = null;
+		floatingAsset = Assets.deathmachine;
+		glow = Assets.blueStar;
 	}
 
 	@Override
@@ -35,12 +36,12 @@ public class DeathMachine extends PowerUps {
 		}
 	}
 
-	@Override
-	public void render(Graphics g) {
-		if(!pickedUp) {
-			g.setColor(Color.pink);
-			g.drawOval((int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height);
-		}
-	}
+//	@Override
+//	public void render(Graphics g) {
+//		if(!pickedUp) {
+//			g.setColor(Color.pink);
+//			g.drawOval((int) (x - handler.getGameCamera().getxOffset()) , (int) (y - handler.getGameCamera().getyOffset()), width, height);
+//		}
+//	}
 
 }

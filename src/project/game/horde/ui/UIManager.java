@@ -38,7 +38,7 @@ public class UIManager {
 	    System.out.println("Mouse release event received.");
 	    for (UIObject o: objects) {
 	        if (o.getIsVisible()) {
-	            System.out.println("Checking UIObject: " + o);
+	            //System.out.println("Checking UIObject: " + o);
 	            o.onMouseRelease(e);
 	        }
 	    }

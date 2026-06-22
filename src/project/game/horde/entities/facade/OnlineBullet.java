@@ -3,12 +3,10 @@ package project.game.horde.entities.facade;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 import project.game.horde.entities.Entity;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
-import project.game.horde.weapons.Gun;
 
 public class OnlineBullet extends Entity {
 	protected float mouseX, mouseY;
@@ -19,8 +17,8 @@ public class OnlineBullet extends Entity {
 	protected boolean isUpgraded;
 
 	//online player bullet, just for visuals
-	public OnlineBullet(Handler handler, float x, float y, int z, int range, float angle, boolean isUpgraded) {
-		super(handler, x, y, z, 5, 5);	
+	public OnlineBullet(Handler handler, float x, float y, int range, float angle, boolean isUpgraded) {
+		super(handler, x, y, 5, 5);	
 		bounds = new Rectangle(0, 0, 0, 0);
 		this.handler = handler;
 		this.range = range;
@@ -36,8 +34,8 @@ public class OnlineBullet extends Entity {
 	}
 	
 	//online player shotgun pellet, just for visuals
-	public OnlineBullet(Handler handler, float x, float y, int z, int range, float angle, float radianOffset, boolean isUpgraded) {
-		super(handler, x, y, z, 5, 5);	
+	public OnlineBullet(Handler handler, float x, float y, int range, float angle, float radianOffset, boolean isUpgraded) {
+		super(handler, x, y, 5, 5);	
 		bounds = new Rectangle(0, 0, 0, 0);
 		this.handler = handler;
 		this.range = range;

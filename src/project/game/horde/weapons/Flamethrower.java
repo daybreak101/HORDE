@@ -8,6 +8,7 @@ import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
+import project.game.horde.weapons.Gun.GunImageDim;
 
 public class Flamethrower extends Gun {
 
@@ -24,7 +25,8 @@ public class Flamethrower extends Gun {
 		originalName = name;
 		upgradedName = GunVars.FLAMETHROWER_UPGRADEDNAME;
 		reloadSound = "";
-		
+		top = Assets.flamethrower_top;
+		gunImageDim = new GunImageDim(40, 50, 10, 100);
 	}
 	
 	public void reload() {

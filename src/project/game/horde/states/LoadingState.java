@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -57,12 +58,19 @@ public class LoadingState extends State {
 	@Override
 	public void tick() {
 		if (!started) {
+			if(peer != null && peer.isServer())
+				peer.gameAlreadyStarted = true;
 			// Initialize assets in a new thread using ExecutorService
 			executor = Executors.newSingleThreadExecutor();
 			executor.submit(() -> {
 				Sounds.init(handler);
 				loadingState++;
-				Assets.init();
+				if(map.equals("test"))
+					Assets.loadFarm();
+				else if(map.equals("seattle"))
+					Assets.loadSeattle();
+				else if(map.equals("iceland"))
+					Assets.loadIceland();
 				loadingState++;
 				BWAssets.init();
 				isReady = true;
@@ -92,7 +100,12 @@ public class LoadingState extends State {
 				currentLoad = "Loading game...";
 				handler.getGlobalStats().addGame();
 				handler.getMouseManager().setUIManager(null);
-				handler.getGame().gameState = new GameState(handler, localUser);
+				try {
+					handler.getGame().gameState = new GameState(handler, map, localUser);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				State.setState(handler.getGame().gameState);
 			} else {
 				currentLoad = "Waiting for other players...";
@@ -105,8 +118,13 @@ public class LoadingState extends State {
 					
 				}
 				
-				if(!onePlayerNotReady && peer.isServer()) {
-					peer.getLobby().startGame();
+				if(peer.getLobby().gameAlreadyStarted || (!onePlayerNotReady && peer.isServer())) {
+					try {
+						peer.getLobby().startGame(map);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -117,7 +135,7 @@ public class LoadingState extends State {
 	public void render(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-		if(map.equals("farmhouse")) {
+		if(map.equals("test")) {
 			g.drawImage(MenuAssets.farmhouseLoading, 0, 50, handler.getWidth(), handler.getHeight() - 100, null);
 		}
 		g.setColor(handler.getSettings().getLaserColor());

@@ -11,8 +11,8 @@ import project.game.horde.main.Handler;
 
 public class ToxenBullet extends Bullet {
 
-	public ToxenBullet(Handler handler, float x, float y, int z, int range, Player player) {
-		super(handler, x, y, z, range, player);
+	public ToxenBullet(Handler handler, float x, float y, int range, Player player) {
+		super(handler, x, y, range, player);
 		this.speed = 10;
 
 		xMove = 0;
@@ -67,11 +67,12 @@ public class ToxenBullet extends Bullet {
 	}
 
 
+        @Override
 	public boolean checkForImpact() {
 		cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
 		boolean impactedPlayer = false;
 		Player p = handler.getCurrentPlayer();
-		if (z == p.getZ() && p.getCollisionBounds(0, 0).intersects(cb)) {
+		if (p.getCollisionBounds(0, 0).intersects(cb)) {
 			p.takeDamage(5);
 			handler.getWorld().getEntityManager().getEntities().remove(this);
 			impactedPlayer = true;
@@ -82,13 +83,13 @@ public class ToxenBullet extends Bullet {
 		}
 
 		for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-			if (z == e.getZ() && e.getCollisionBounds(0, 0).intersects(cb)) {
+			if (e.getCollisionBounds(0, 0).intersects(cb)) {
 				handler.getWorld().getEntityManager().getEntities().remove(this);
 				return true;
 			}
 		}
 		for (Wall e : handler.getWorld().getEntityManager().getWalls()) {
-			if (z == e.getZ() && e.getCollisionBounds(0, 0).intersects(cb)) {
+			if ( e.getCollisionBounds(0, 0).intersects(cb)) {
 				handler.getWorld().getEntityManager().getEntities().remove(this);
 				return true;
 			}

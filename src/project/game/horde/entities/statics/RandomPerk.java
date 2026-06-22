@@ -1,6 +1,7 @@
 package project.game.horde.entities.statics;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.Random;
 
 import project.game.horde.entities.creatures.Player;
@@ -11,7 +12,6 @@ import project.game.horde.main.Handler;
 import project.game.horde.perks.DeadShot;
 import project.game.horde.perks.DoubleTap;
 import project.game.horde.perks.Juggernaut;
-import project.game.horde.perks.Luna;
 import project.game.horde.perks.MuleKick;
 import project.game.horde.perks.Perk;
 import project.game.horde.perks.PhD;
@@ -32,8 +32,8 @@ public class RandomPerk extends InteractableStaticEntity {
 	private boolean cantAfford = false;
 	private boolean fullPerks = false;
 
-	public RandomPerk(Handler handler, int id, float x, float y, int z) {
-		super(handler, id, x, y, z, 75, 150);
+	public RandomPerk(Handler handler, int id, float x, float y) {
+		super(handler, id, x, y, 75, 30);
 		triggerText = "Press F to spin for a random perk: 2000";
 		isSpun = false;
 		isSpunTime = 1000;
@@ -41,6 +41,9 @@ public class RandomPerk extends InteractableStaticEntity {
 
 	@Override
 	public void fulfillInteraction(Player player) {
+		if (!handler.getWorld().isPowerOn()) {
+			return;
+		}
 		// spin for perk
 		if (usedByOtherPlayer) {
 
@@ -68,8 +71,8 @@ public class RandomPerk extends InteractableStaticEntity {
 			}
 		}
 		// grab perk
-		else if (isSpun == true && cooldownTimer >= cooldown && isSpunTimer < isSpunTime &&
-				player.getPlayerInput().canEat()) {
+		else if (isSpun == true && cooldownTimer >= cooldown && isSpunTimer < isSpunTime
+				&& player.getPlayerInput().canEat()) {
 			cooldownTimer = 0;
 			isSpun = false;
 			isSpunTimer = 0;
@@ -85,42 +88,52 @@ public class RandomPerk extends InteractableStaticEntity {
 	public Perk getRandomPerk(Player player) {
 		Random rand = new Random();
 		int rng = rand.nextInt(12);
-		int level = 0;
+		int level;
 		switch (rng) {
-		case 0:
-			level = handler.getUnlocks().getJuggLvl();
-			return new Juggernaut(handler, level, player);
-		case 1:
-			level = handler.getUnlocks().getSpeedLvl();
-			return new SleightOfHand(handler, level, player);
-		case 2:
-			level = handler.getUnlocks().getDoubletapLvl();
-			return new DoubleTap(handler, level, player);
-		case 3:
-			level = handler.getUnlocks().getDeadshotLvl();
-			return new DeadShot(handler, level, player);
-		case 4:
-			level = handler.getUnlocks().getPhdLvl();
-			return new PhD(handler, level, player);
-		case 5:
-			level = handler.getUnlocks().getStaminaLvl();
-			return new StaminUp(handler, level, player);
-		case 6:
-			level = handler.getUnlocks().getVampireLvl();
-			return new Vampire(handler, level, player);
-		case 7:
-			level = handler.getUnlocks().getMuleLvl();
-			return new MuleKick(handler, level, player);
-		case 9:
-			level = handler.getUnlocks().getReviveLvl();
-			return new Revive(handler, level, player);
-		// case 10:
-//			level = handler.getUnlocks().getLunaLvl();
-		// return new Luna(handler,0, player);
-		case 11:
-			level = handler.getUnlocks().getStrongholdLvl();
-			return new Stronghold(handler, level, player);
+		case 0 -> {
+                    level = handler.getUnlocks().getJuggLvl();
+                    return new Juggernaut(handler, level, player);
+                }
+		case 1 -> {
+                    level = handler.getUnlocks().getSpeedLvl();
+                    return new SleightOfHand(handler, level, player);
+                }
+		case 2 -> {
+                    level = handler.getUnlocks().getDoubletapLvl();
+                    return new DoubleTap(handler, level, player);
+                }
+		case 3 -> {
+                    level = handler.getUnlocks().getDeadshotLvl();
+                    return new DeadShot(handler, level, player);
+                }
+		case 4 -> {
+                    level = handler.getUnlocks().getPhdLvl();
+                    return new PhD(handler, level, player);
+                }
+		case 5 -> {
+                    level = handler.getUnlocks().getStaminaLvl();
+                    return new StaminUp(handler, level, player);
+                }
+		case 6 -> {
+                    level = handler.getUnlocks().getVampireLvl();
+                    return new Vampire(handler, level, player);
+                }
+		case 7 -> {
+                    level = handler.getUnlocks().getMuleLvl();
+                    return new MuleKick(handler, level, player);
+                }
+		case 9 -> {
+                    level = handler.getUnlocks().getReviveLvl();
+                    return new Revive(handler, level, player);
+                }
+		case 11 -> {
+                    level = handler.getUnlocks().getStrongholdLvl();
+                    return new Stronghold(handler, level, player);
+                }
 		}
+            // case 10:
+//			level = handler.getUnlocks().getLunaLvl();
+            // return new Luna(handler,0, player);
 		level = handler.getUnlocks().getMuleLvl();
 		return new MuleKick(handler, level, player);
 	}
@@ -184,8 +197,7 @@ public class RandomPerk extends InteractableStaticEntity {
 					lastActivationVolume = newvolume;
 				}
 			}
-		}
-		else {
+		} else {
 			Sounds.stopClip(currentActivationSound);
 			currentActivationSound = "";
 		}
@@ -193,6 +205,10 @@ public class RandomPerk extends InteractableStaticEntity {
 
 	@Override
 	public void postTick() {
+		if (!handler.getWorld().isPowerOn()) {
+			triggerText = "Requires power";
+			return;
+		}
 		updateSound.tick();
 		if (updateSound.isReady()) {
 			staticSounds();
@@ -226,11 +242,52 @@ public class RandomPerk extends InteractableStaticEntity {
 		}
 	}
 
-	@Override
-	public void render(Graphics g) {
-		g.drawImage(Assets.perkvendor, (int) (x - handler.getGameCamera().getxOffset()),
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+//									//item 				player
+//	public Point2D.Float createPoint(Point2D.Float p1, Point2D.Float p2){
+//		float slope = (p2.y - p1.y) / (p2.x - p1.x);
+//		if(p2.x == p1.x) {
+//			slope = Float.MAX_VALUE;
+//		}
+//		
+//		float distance = 20;
+//		double dx, dy;
+//	    if (slope == Float.MAX_VALUE) {
+//	        // For a vertical line, only move along the y-axis
+//	        dx = p1.x;
+//	        dy = p1.y + distance;
+//	    } else {
+//	    	double distanceFactor = 1 / Math.sqrt(Math.pow(slope, 2) + 1);
+//	        dx = p1.x + distance * distanceFactor;
+//	        dy = p1.y + distance * slope * distanceFactor;
+//	    }
+//		
+//		return new Point2D.Float((float) dx, (float) dy);
+//	}
+	public Point2D.Float createPoint(Point2D.Float p1, Point2D.Float p2) {
+	    // Calculate the difference in coordinates
+	    float dx = p2.x - p1.x;
+	    float dy = p2.y - p1.y;
 
+	    // Normalize the vector (dx, dy) to get the direction
+	    float length = (float) Math.sqrt(dx * dx + dy * dy);
+	    float normX = dx / length;
+	    float normY = dy / length;
+
+	    // Move a fixed distance along the normalized direction
+	    float distance = 20;
+	    float newX = p1.x - normX * distance;
+	    float newY = p1.y - normY * distance;
+
+	    // Return the new point
+	    return new Point2D.Float(newX, newY);
+	}
+	
+	@Override
+	public void render(Graphics g) {		
+		g.drawImage(Assets.perkvendor, 
+				(int) (x - handler.getGameCamera().getxOffset() - 24),
+				(int) (y - handler.getGameCamera().getyOffset() - 60), 
+				width + 43, height + 60, null);
 	}
 
 	@Override

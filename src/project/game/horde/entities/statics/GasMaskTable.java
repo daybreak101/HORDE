@@ -18,8 +18,8 @@ public class GasMaskTable extends InteractableStaticEntity {
 	private boolean hasGasMask = false;
 	
 	
-	public GasMaskTable(Handler handler, int id, float x, float y, int z, int width, int height) {
-		super(handler, id, x, y, z, width, height);
+	public GasMaskTable(Handler handler, int id, float x, float y, int width, int height) {
+		super(handler, id, x, y, width, height);
 		triggerText = "Press F to refill gas mask: 1000";
 	}
 	

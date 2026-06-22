@@ -291,7 +291,7 @@ public class SettingsState extends State {
 		zoomLevelOptions.addOption("5");
 		uiManager.addObject(zoomLevelOptions);
 
-		int currentZoom = (int) Math.round((handler.getSettings().getZoomLevel() - 1.25) / .05);
+		int currentZoom = (int) Math.round((handler.getSettings().getZoomLevel(true) - 1.25) / .05);
 		zoomLevelOptions.setCurrentSelection(currentZoom);
 	}
 

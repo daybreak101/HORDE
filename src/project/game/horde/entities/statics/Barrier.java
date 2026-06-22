@@ -2,11 +2,14 @@ package project.game.horde.entities.statics;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
@@ -18,8 +21,8 @@ public class Barrier extends InteractableStaticEntity {
 	private int length, whatWall;
 	private Rectangle playerBarrier;
 
-	public Barrier(Handler handler, int id, float x, float y, int z, int whatWall) {
-		super(handler, id, x, y, z, 100, 100);
+	public Barrier(Handler handler, int id, float x, float y, int whatWall) {
+		super(handler, id, x, y, 100, 100);
 		isBroken = false;
 		cantAfford = false;
 		length = 100;
@@ -57,38 +60,48 @@ public class Barrier extends InteractableStaticEntity {
 
 	public void takeDamage(int damage) {
 		health -= damage;
+		damageSounds();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		if (isBroken) {
-			g.setColor(new Color(153, 102, 51));
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 2 - handler.getGameCamera().getxOffset()),
-					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 4 - handler.getGameCamera().getxOffset()),
-					(int) (y + 5 + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 2 - handler.getGameCamera().getxOffset()),
-					(int) (y + 20 + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-			g.fillRect((int) (x - 30 + bounds.x - handler.getGameCamera().getxOffset()),
-					(int) (y + 20 + bounds.y - handler.getGameCamera().getyOffset()), 2 * playerBarrier.width / 3,
-					playerBarrier.height / 5);
-		} else {
-
-			g.setColor(new Color(153, 102, 51));
-			g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-			//renderPeripherals3(g);
+//		bounds.x = 0;
+//		bounds.y = 0;
+//		bounds.width = length;
+//		bounds.height = 25;
+		Graphics2D g2d = (Graphics2D) g;
+		int offset = 0;
+		AffineTransform originalTransform = g2d.getTransform(); // Save the current transform
+		if (whatWall == 3) {
+			g2d.translate(x - handler.getGameCamera().getxOffset(),
+					y + 25 - handler.getGameCamera().getyOffset()); // Move origin to the center
+			g2d.rotate(Math.toRadians(90)); // Rotate by the specified angle
+			g2d.translate(-(x - handler.getGameCamera().getxOffset()),
+					-(y + 25- handler.getGameCamera().getyOffset())); // Move origin back to the original
+			offset = 25;															// position
 		}
+
+		if (isBroken) {
+			g.drawImage(Assets.brokenBarricade, (int) (x - offset - handler.getGameCamera().getxOffset()),
+					(int) (y - handler.getGameCamera().getyOffset()), 100, 25, null);
+		} else if (health > 0 && health <= 50) {
+
+			g.drawImage(Assets.damagedBarricade, (int) (x - offset - handler.getGameCamera().getxOffset()),
+					(int) (y - handler.getGameCamera().getyOffset()), 100, 25, null);
+			// renderPeripherals3(g);
+		} else {
+			g.drawImage(Assets.barricade, (int) (x - offset  - handler.getGameCamera().getxOffset()),
+					(int) (y - handler.getGameCamera().getyOffset()), 100, 25, null);
+		}
+
+		g2d.setTransform(originalTransform); // Restore the original transform
+
 	}
-	
+
 	@Override
 	public void renderBW(Graphics g) {
 		if (isBroken) {
-			g.setColor(new Color(112,112,112));
+			g.setColor(new Color(112, 112, 112));
 			g.fillRect((int) (x + bounds.x + playerBarrier.width / 2 - handler.getGameCamera().getxOffset()),
 					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
 					playerBarrier.height / 5);
@@ -104,10 +117,12 @@ public class Barrier extends InteractableStaticEntity {
 					playerBarrier.height / 5);
 		} else {
 
-			g.setColor(new Color(112,112,112));
-			g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-			//renderPeripherals3(g);
+//			g.setColor(new Color(112,112,112));
+//			g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+//					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+			g.drawImage(Assets.barricade, (int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height, null);
+			// renderPeripherals3(g);
 		}
 	}
 
@@ -146,7 +161,7 @@ public class Barrier extends InteractableStaticEntity {
 			poly1 = p4;
 			poly2 = p3;
 			tanOfAngle = (poly1.x - playerX) / (playerY - poly1.y);
-			oppositeLength = height* tanOfAngle;
+			oppositeLength = height * tanOfAngle;
 			poly4 = new Point2D.Float(p2.x + oppositeLength, p2.y);
 			tanOfAngle = (playerX - poly2.x) / (playerY - poly2.y);
 			oppositeLength = height * tanOfAngle;
@@ -168,15 +183,30 @@ public class Barrier extends InteractableStaticEntity {
 		g.fillPolygon(trapezoid);
 	}
 
+	public void repairSounds() {
+		float newvolume = InteractSounds.calculateVolumeBasedOffDistance(this, handler.getCurrentPlayer());
+		Sounds.playClip(InteractSounds.BARRIER_REPAIR, 1.0f, newvolume, false);
+	}
+
+	public void damageSounds() {
+		float newvolume = InteractSounds.calculateVolumeBasedOffDistance(this, handler.getCurrentPlayer());
+		Sounds.playClip(InteractSounds.BARRIER_DAMAGE, 1.0f, newvolume, false);
+	}
+
+	public void breakSounds() {
+		float newvolume = InteractSounds.calculateVolumeBasedOffDistance(this, handler.getCurrentPlayer());
+		Sounds.playClip(InteractSounds.BARRIER_BREAK, 1.0f, newvolume, false);
+	}
+
 	public void fulfillInteraction(Player player) {
-		if(usedByOtherPlayer) {
-			
-		}
-		else if (cooldownTimer >= cooldown && (health < 100)) {
+		if (usedByOtherPlayer) {
+
+		} else if (cooldownTimer >= cooldown && (health < 100)) {
 			cooldownTimer = 0;
 			if (player.getInv().purchase(50)) {
 				Sounds.playClip(InteractSounds.PURCHASE_ID, 1, 1, false);
 				sendInteractableBusy();
+				repairSounds();
 				health = 100;
 				handler.getProgression().gainXP(5);
 				cantAfford = false;
@@ -192,18 +222,22 @@ public class Barrier extends InteractableStaticEntity {
 
 	@Override
 	public void postTick() {
-		if(usedByOtherPlayer) {
+		if (usedByOtherPlayer) {
 			health = 100;
 			usedByOtherPlayer = false;
-		}
-		else if (cantAfford && cooldownTimer < cooldown) {
+			repairSounds();
+		} else if (cantAfford && cooldownTimer < cooldown) {
 			triggerText = "Not enough points!";
-		} else if (health == 100 && cooldownTimer < cooldown) {
+		} else if (health == 100) {
 			triggerText = "Already repaired!";
 		} else if (cooldownTimer >= cooldown) {
 			triggerText = "Press F to repair barricade: 50";
 		} else {
 			triggerText = "";
+		}
+
+		if (health <= 0 && !isBroken) {
+			breakSounds();
 		}
 
 		if (health <= 0) {
