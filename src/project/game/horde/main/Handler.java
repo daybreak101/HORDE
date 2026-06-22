@@ -95,8 +95,8 @@ public class Handler {
 		return visibleFound;
 	}
 
-	public Entity getClosestPlayerToZombie(float centerX, float centerY, int z) {
-		int zombieNode = world.getPathingLogic().getClosestNode(centerX, centerY, z);
+	public Entity getClosestPlayerToZombie(float centerX, float centerY) {
+		int zombieNode = world.getPathingLogic().getClosestNode(centerX, centerY);
 		int playerNode;
 		Entity closestPlayer = null;
 		float closestDistance = 2000000, distance;
@@ -114,7 +114,7 @@ public class Handler {
 					}
 				}
 				if (wallFound) {
-					playerNode = world.getPathingLogic().getClosestNode(player.getCenterX(), player.getCenterY(), player.getZ());
+					playerNode = world.getPathingLogic().getClosestNode(player.getCenterX(), player.getCenterY());
 					if (playerNode == zombieNode) {
 						distance = 0;
 					} else {
@@ -144,7 +144,7 @@ public class Handler {
 			}
 
 			if (wallFound) {
-				playerNode = world.getPathingLogic().getClosestNode(currentPlayer.getCenterX(), currentPlayer.getCenterY(), currentPlayer.getZ());
+				playerNode = world.getPathingLogic().getClosestNode(currentPlayer.getCenterX(), currentPlayer.getCenterY());
 				if (playerNode == zombieNode) {
 					distance = 0;
 				} else {

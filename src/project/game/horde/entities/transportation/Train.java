@@ -7,8 +7,8 @@ import project.game.horde.main.Handler;
 
 public class Train extends Entity {
 
-	public Train(Handler handler, float x, float y, int z, int width, int height) {
-		super(handler, x, y, z, width, height);
+	public Train(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -16,8 +16,8 @@ public class MineFieldTrap extends Trap {
 
 	Timer mineInterval = new Timer(18);
 
-	public MineFieldTrap(Handler handler, int id, float x, float y, int z, float switchX, float switchY, int switchZ, int switchRotation) {
-		super(handler, id, x, y, z, 500, 500, switchX, switchY, switchZ, switchRotation, 45 * 60, 1500);
+	public MineFieldTrap(Handler handler, int id, float x, float y, float switchX, float switchY, int switchZ, int switchRotation) {
+		super(handler, id, x, y, 500, 500, switchX, switchY, switchZ, switchRotation, 45 * 60, 1500);
 		cooldown = 15 * 60;
 	}
 
@@ -56,7 +56,7 @@ public class MineFieldTrap extends Trap {
 
 		explosionRadius = new Ellipse2D.Float(x + dx - 100, y + dy - 100, 200, 200);
 		handler.getWorld().getEntityManager()
-				.addExplosion(new Explosion(handler, x + dx - 100, y + dy - 100, z, 200, 200, false));
+				.addExplosion(new Explosion(handler, x + dx - 100, y + dy - 100, 200, 200, false));
 		for (Zombie f : handler.getWorld().getEntityManager().getZombies()) {
 			int damage = 10000;
 			if (explosionRadius.intersects(f.getHitBox(0, 0))) {

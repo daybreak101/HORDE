@@ -13,13 +13,13 @@ public abstract class Trap extends Entity {
 	protected int cooldown, cooldownTimer;
 	protected Player activatedBy;
 
-	public Trap(Handler handler, int id, float x, float y, int z, int width, int height, float switchX, float switchY,
+	public Trap(Handler handler, int id, float x, float y, int width, int height, float switchX, float switchY,
 			int switchZ, int switchRotation, int cooldown, int cost) {
-		super(handler, x, y, z, width, height);
+		super(handler, x, y, width, height);
 		this.cost = cost;
 		activatedBy = null;
 		handler.getWorld().getEntityManager()
-				.addInteractable(new TrapSwitch(handler, id, switchX, switchY, switchZ, switchRotation, this, cooldown));
+				.addInteractable(new TrapSwitch(handler, id, switchX, switchY, switchRotation, this, cooldown));
 	}
 
 	public Rectangle getCollisionBounds(float xOffset, float yOffset) {

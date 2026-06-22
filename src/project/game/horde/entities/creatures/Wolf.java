@@ -2,20 +2,18 @@ package project.game.horde.entities.creatures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Animation;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.CreatureSounds;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
 
@@ -128,7 +126,7 @@ public class Wolf extends Creature {
 
             for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
                 eDist = Utils.getEuclideanDistance(x, y, e.getX(), e.getY());
-                vertex = handler.getWorld().getPathingLogic().getClosestNode((int) (e.getCenterX()), (int) (e.getCenterY()), e.getZ());
+                vertex = handler.getWorld().getPathingLogic().getClosestNode((int) (e.getCenterX()), (int) (e.getCenterY()));
                 line = new Line2D.Float(e.getCenterX(), e.getCenterY(), x, y);
 
                 for (Wall w : handler.getWorld().getEntityManager().getWalls()) {

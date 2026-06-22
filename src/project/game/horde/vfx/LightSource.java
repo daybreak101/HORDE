@@ -1,7 +1,10 @@
 package project.game.horde.vfx;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.image.BufferedImage;
 
 import project.game.horde.main.Handler;
@@ -9,18 +12,16 @@ import project.game.horde.main.Handler;
 public class LightSource {
 
 	private float x, y;
-	private int z;
 	private int radius;
 	private int intensity;
 	private BufferedImage lightImage;
 	private Handler handler;
 
 	// 0.0 - 1.0
-	public LightSource(Handler handler, int x, int y, int z, int radius, int intensity) {
+	public LightSource(Handler handler, int x, int y, int radius, int intensity) {
 		this.handler = handler;
 		this.x = x;
 		this.y = y;
-		this.z = z;
 		this.radius = radius;
 		this.intensity = intensity;
 		//intensity is out of 255, alpha value
@@ -81,9 +82,6 @@ public class LightSource {
 		return y;
 	}
 	
-	public int getZ() {
-		return z;
-	}
 
 	public int getRadius() {
 		return radius;

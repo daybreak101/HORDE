@@ -10,9 +10,9 @@ import project.game.horde.weapons.Minigun;
 public class Turret extends Trap{
 	Minigun gun = new Minigun(handler, true, null);
 	
-	public Turret(Handler handler, int id, float x, float y, int z, float switchX, float switchY,
-			int switchZ, int switchRotation) {
-		super(handler, id, x, y, z, 50, 50, switchX, switchY, switchZ, switchRotation, 40 * 60, 1500);
+	public Turret(Handler handler, int id, float x, float y, float switchX, float switchY,
+			int switchRotation) {
+		super(handler, id, x, y, 50, 50, switchX, switchY, switchRotation, 40 * 60, 1500);
 		cooldown = 30 * 60;
 	}
 	

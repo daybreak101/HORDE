@@ -1,7 +1,6 @@
 package project.game.horde.network;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class Message implements Serializable {
     public String message, powerup, grenade;
     public Entity entity;
     public List<ZombiePosition> zombiePositions; // New field for zombie positions
-    public int amount, id, round, zombiesLeft, x, y, z;
+    public int amount, id, round, zombiesLeft, x, y;
     public float angle;
     public boolean isBusy, gameAlreadyStarted;
 
@@ -111,13 +110,12 @@ public class Message implements Serializable {
     	this.type = type;
     }
     
-    public Message(int type, String powerup, int id,int x, int y, int z) {
+    public Message(int type, String powerup, int id,int x, int y) {
     	this.type = type;
     	this.powerup = powerup;
     	this.id = id;
     	this.x = x;
     	this.y = y;
-    	this.z = z;
     }
     
     public Message(int type, String powerup, int id)
@@ -127,21 +125,19 @@ public class Message implements Serializable {
     	this.id = id;
     }
     
-    public Message(int type, String username, String grenade, int x, int y, int z) {
+    public Message(int type, String username, String grenade, int x, int y) {
     	this.type = type;
     	this.username = username;
     	this.grenade = grenade;
     	this.x = x;
     	this.y = y;
-    	this.z = z;
     }
     
-    public Message(int type, String username, int x, int y, int z, float angle) {
+    public Message(int type, String username, int x, int y, float angle) {
     	this.type = type;
     	this.username = username;
     	this.x = x;
     	this.y = y;
-    	this.z = z;
     	this.angle = angle;
     }
     

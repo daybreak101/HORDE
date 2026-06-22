@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import project.game.horde.entities.EntityManager;
-import project.game.horde.entities.areas.Staircase;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.AmmoRefill;
 import project.game.horde.entities.statics.Barrier;
@@ -68,7 +67,7 @@ public class World {
             String adjacentRooms, String spawnersPath, String floorsPath,
             User user, String map) throws IOException {
         initializeWorld(handler, path, entityPath, nodesPath,
-                edgesPath, lightsPath, adjacentRooms, spawnersPath, floorsPath, map);
+                edgesPath, lightsPath, adjacentRooms, spawnersPath, map);
     }
 
     // online
@@ -82,12 +81,12 @@ public class World {
         this.peer = peer;
         this.users = users;
         initializeWorld(handler, path, entityPath, nodesPath,
-                edgesPath, lightsPath, adjacentRooms, spawnersPath, floorsPath, map);
+                edgesPath, lightsPath, adjacentRooms, spawnersPath, map);
     }
 
     public void initializeWorld(Handler handler, String path, String entityPath,
             String nodesPath, String edgesPath, String lightsPath,
-            String adjacentRooms, String spawnersPath, String floorsPath, String map) throws IOException {
+            String adjacentRooms, String spawnersPath, String map) throws IOException {
         this.map = map;
         this.handler = handler;
         handler.setWorld(this);
@@ -101,7 +100,6 @@ public class World {
         handler.setWorld(this);
         createStaticEntities(entityPath);
         pathing = new PathingLogic(handler, this, nodesPath, edgesPath);
-        FloorLoader.loadFloors(handler, floorsPath);
 
         nodesVisible = false;
         powerOn = false;
@@ -113,104 +111,98 @@ public class World {
         String[] tokens = file.split("\\s+");
         int i = 0;
         int token = 0;
-        int x, y, z;
-        int sx, sy, sz;
+        int x, y;
+        int sx, sy;
         int vertex = 0;
         int rotation = 0;
         int whatWall = 0, wallLength = 0;
         int room1 = 0, room2 = 0;
         int gunId = 0;
         int width = 0, height = 0;
-        int dz = 0, orientation = 0;
+        int orientation = 0;
         int cost = 0;
         while (i < tokens.length) {
             token = Utils.parseInt(tokens[i++]);
             x = Utils.parseInt(tokens[i++]);
             y = Utils.parseInt(tokens[i++]);
-            z = Utils.parseInt(tokens[i++]);
             switch (token) {
                 case 0 ->
-                    entityManager.addInteractable(new MysteryBox(handler, i, x, y, z));
+                    entityManager.addInteractable(new MysteryBox(handler, i, x, y));
                 case 1 ->
-                    entityManager.addInteractable(new AmmoRefill(handler, i, x, y, z));
+                    entityManager.addInteractable(new AmmoRefill(handler, i, x, y));
                 case 2 ->
-                    entityManager.addInteractable(new RandomPerk(handler, i, x, y, z));
+                    entityManager.addInteractable(new RandomPerk(handler, i, x, y));
                 case 3 ->
-                    entityManager.addInteractable(new PackAPunch(handler, i, x, y, z));
+                    entityManager.addInteractable(new PackAPunch(handler, i, x, y));
                 case 4 -> {
                     wallLength = Utils.parseInt(tokens[i++]);
                     whatWall = Utils.parseInt(tokens[i++]);
                     room1 = Utils.parseInt(tokens[i++]);
                     room2 = Utils.parseInt(tokens[i++]);
                     cost = Utils.parseInt(tokens[i++]);
-                    entityManager.addInteractable(new Door(handler, i, x, y, z, wallLength, whatWall, room1, room2, cost));
+                    entityManager.addInteractable(new Door(handler, i, x, y, wallLength, whatWall, room1, room2, cost));
                 }
                 case 5 -> {
                     wallLength = Utils.parseInt(tokens[i++]);
                     whatWall = Utils.parseInt(tokens[i++]);
-                    entityManager.addWall(new Wall(handler, i, x, y, z, wallLength, whatWall));
+                    entityManager.addWall(new Wall(handler, i, x, y, wallLength, whatWall));
                 }
                 case 6 ->
-                    entityManager.setMap(new FarmMap(handler, 0, 0, 0, 3400, 1700));
+                    entityManager.setMap(new FarmMap(handler, 0, 0, 3400, 1700));
                 case 7 -> {
                     sx = Utils.parseInt(tokens[i++]);
                     sy = Utils.parseInt(tokens[i++]);
-                    sz = Utils.parseInt(tokens[i++]);
                     rotation = Utils.parseInt(tokens[i++]);
-                    entityManager.addTrap(new ElectricTrap(handler, i, x, y, z, sx, sy, sz, rotation));
+                    entityManager.addTrap(new ElectricTrap(handler, i, x, y, sx, sy, rotation));
                 }
                 case 8 -> {
                     sx = Utils.parseInt(tokens[i++]);
                     sy = Utils.parseInt(tokens[i++]);
-                    sz = Utils.parseInt(tokens[i++]);
                     rotation = Utils.parseInt(tokens[i++]);
-                    entityManager.addTrap(new MineFieldTrap(handler, i, x, y, z, sx, sy, sz, rotation));
+                    entityManager.addTrap(new MineFieldTrap(handler, i, x, y, sx, sy, rotation));
                 }
                 case 9 -> {
                     sx = Utils.parseInt(tokens[i++]);
                     sy = Utils.parseInt(tokens[i++]);
-                    sz = Utils.parseInt(tokens[i++]);
                     rotation = Utils.parseInt(tokens[i++]);
-                    entityManager.addTrap(new Turret(handler, i, x, y, z, sx, sy, sz, rotation));
+                    entityManager.addTrap(new Turret(handler, i, x, y, sx, sy, rotation));
                 }
                 case 10 -> {
                     sx = Utils.parseInt(tokens[i++]);
                     sy = Utils.parseInt(tokens[i++]);
-                    sz = Utils.parseInt(tokens[i++]);
                     rotation = Utils.parseInt(tokens[i++]);
-                    entityManager.addTrap(new ConveyorBeltTrap(handler, i, x, y, z, sx, sy, sz, rotation));
+                    entityManager.addTrap(new ConveyorBeltTrap(handler, i, x, y, sx, sy, rotation));
                 }
                 case 11 ->
-                    entityManager.addArea(new IcyWater(handler, x, y, z));
+                    entityManager.addArea(new IcyWater(handler, x, y));
                 case 12 -> {
                     whatWall = Utils.parseInt(tokens[i++]);
-                    entityManager.addBarrier(new Barrier(handler, i, x, y, z, whatWall));
+                    entityManager.addBarrier(new Barrier(handler, i, x, y, whatWall));
                 }
                 case 13 ->
-                    entityManager.addInteractable(new RitualCircle(handler, i, x, y, z));
+                    entityManager.addInteractable(new RitualCircle(handler, i, x, y));
                 case 14 -> {
                     gunId = Utils.parseInt(tokens[i++]);
                     whatWall = Utils.parseInt(tokens[i++]);
-                    entityManager.addInteractable(new WallBuy(handler, i, x, y, z, gunId, whatWall));
+                    entityManager.addInteractable(new WallBuy(handler, i, x, y, gunId, whatWall));
                 }
                 case 15 -> {
                     width = Utils.parseInt(tokens[i++]);
                     height = Utils.parseInt(tokens[i++]);
-                    dz = Utils.parseInt(tokens[i++]);
                     orientation = Utils.parseInt(tokens[i++]);
                     //entityManager.addArea(new Staircase(handler, x, y, width, height, dz, orientation));
                 }
                 case 16 ->
-                    entityManager.addInteractable(new PowerSwitch(handler, i, x, y, z));
+                    entityManager.addInteractable(new PowerSwitch(handler, i, x, y));
                 case 17 -> {
                     width = Utils.parseInt(tokens[i++]);
                     height = Utils.parseInt(tokens[i++]);
-                    entityManager.addBoundary(new InvisibleBounds(handler, i, x, y, z, width, height, 0));
+                    entityManager.addBoundary(new InvisibleBounds(handler, i, x, y, width, height, 0));
                 }
                 case 18 ->
-                    entityManager.setMap(new SeattleMap(handler, 0, 0, 0, 3400, 1700));
+                    entityManager.setMap(new SeattleMap(handler, 0, 0, 3400, 1700));
                 case 19 ->
-                    entityManager.setMap(new IcelandMap(handler, 0, 0, 0, 3400, 1700));
+                    entityManager.setMap(new IcelandMap(handler, 0, 0, 3400, 1700));
                 default -> {
                 }
 

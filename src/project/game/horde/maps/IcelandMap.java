@@ -5,15 +5,14 @@ import java.awt.image.BufferedImage;
 
 import project.game.horde.entities.Entity;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 
 public class IcelandMap extends Entity {
 
 	private BufferedImage map;
 
-	public IcelandMap(Handler handler, float x, float y, int z, int width, int height) {
-		super(handler, x, y, z, 0, 0);
+	public IcelandMap(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, 0, 0);
 	}
 
 	public void renderStartArea(Graphics g) {
@@ -31,10 +30,7 @@ public class IcelandMap extends Entity {
 
 	@Override
 	public void render(Graphics g) {
-		int z = handler.getCurrentPlayer().getZ();
-		if(z >= 0) {
 			renderStartArea(g);
-		}
 	}
 
 }

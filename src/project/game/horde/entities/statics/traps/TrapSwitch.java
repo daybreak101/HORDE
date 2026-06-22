@@ -15,8 +15,8 @@ public class TrapSwitch extends InteractableStaticEntity {
 	private boolean cantAfford;
 	boolean isActive;
 
-	public TrapSwitch(Handler handler, int id, float x, float y, int z, int rotation, Trap trap, int cooldown) {
-		super(handler, id, x, y, z, 25, 25);
+	public TrapSwitch(Handler handler, int id, float x, float y, int rotation, Trap trap, int cooldown) {
+		super(handler, id, x, y, 25, 25);
 
 		// 0 is up
 		// 1 is down
