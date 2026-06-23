@@ -1,0 +1,6 @@
+- Downscale assets. No more upscaling 3x. Slow and unnecessary.
+- Learn how to implement Tiled to create maps.
+
+- Add preview info for character hover, such as name and description.
+- Prestige system? Unlock characters, HUD colors, laser colors, hats, etc.
+- Add more weapons?
