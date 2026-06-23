@@ -67,28 +67,39 @@ public class PerkBag extends PowerUps {
 		int rng = rand.nextInt(11);
 
 		switch (rng) {
-		case 0:
-			return new Juggernaut(handler, handler.getUnlocks().getJuggLvl(), player);
-		case 1:
-			return new SleightOfHand(handler, handler.getUnlocks().getSpeedLvl(), player);
-		case 2:
-			return new DoubleTap(handler, handler.getUnlocks().getDoubletapLvl(), player);
-		case 3:
-			return new DeadShot(handler, handler.getUnlocks().getDeadshotLvl(), player);
-		case 4:
-			return new PhD(handler, handler.getUnlocks().getPhdLvl(), player);
-		case 5:
-			return new StaminUp(handler, handler.getUnlocks().getStaminaLvl(), player);
-		case 6:
-			return new Vampire(handler, handler.getUnlocks().getVampireLvl(), player);
-		case 7:
-			return new MuleKick(handler, handler.getUnlocks().getMuleLvl(), player);
-		case 8:
-			return new Revive(handler, handler.getUnlocks().getReviveLvl(), player);
-		case 9:
-			return new Luna(handler, handler.getUnlocks().getLunaLvl(), player);
-		case 10:
-			return new Stronghold(handler, handler.getUnlocks().getStrongholdLvl(), player);
+		case 0 -> {
+                    return new Juggernaut(handler, handler.getUnlocks().getJuggLvl(), player);
+                }
+		case 1 -> {
+                    return new SleightOfHand(handler, handler.getUnlocks().getSpeedLvl(), player);
+                }
+		case 2 -> {
+                    return new DoubleTap(handler, handler.getUnlocks().getDoubletapLvl(), player);
+                }
+		case 3 -> {
+                    return new DeadShot(handler, handler.getUnlocks().getDeadshotLvl(), player);
+                }
+		case 4 -> {
+                    return new PhD(handler, handler.getUnlocks().getPhdLvl(), player);
+                }
+		case 5 -> {
+                    return new StaminUp(handler, handler.getUnlocks().getStaminaLvl(), player);
+                }
+		case 6 -> {
+                    return new Vampire(handler, handler.getUnlocks().getVampireLvl(), player);
+                }
+		case 7 -> {
+                    return new MuleKick(handler, handler.getUnlocks().getMuleLvl(), player);
+                }
+		case 8 -> {
+                    return new Revive(handler, handler.getUnlocks().getReviveLvl(), player);
+                }
+		case 9 -> {
+                    return new Luna(handler, handler.getUnlocks().getLunaLvl(), player);
+                }
+		case 10 -> {
+                    return new Stronghold(handler, handler.getUnlocks().getStrongholdLvl(), player);
+                }
 		}
 		return new MuleKick(handler, handler.getUnlocks().getMuleLvl(), player);
 	}

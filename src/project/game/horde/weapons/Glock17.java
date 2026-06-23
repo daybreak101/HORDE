@@ -6,7 +6,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 
 public class Glock17 extends Gun {
 
@@ -61,7 +60,7 @@ public class Glock17 extends Gun {
 			currentClip--;
 			handler.getWorld().getEntityManager().addEntity(
 					new Bullet(handler, 
-							player.getCenterX(), player.getCenterY(), player.getZ(),
+							player.getCenterX(), player.getCenterY(), 
 							range, this));
 			if(player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());

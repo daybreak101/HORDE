@@ -3,7 +3,6 @@ package project.game.horde.entities.statics.traps;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
-import java.util.Random;
 
 import project.game.horde.entities.bullets.Explosion;
 import project.game.horde.entities.creatures.Player;
@@ -16,11 +15,12 @@ public class MineFieldTrap extends Trap {
 
 	Timer mineInterval = new Timer(18);
 
-	public MineFieldTrap(Handler handler, int id, float x, float y, float switchX, float switchY, int switchZ, int switchRotation) {
-		super(handler, id, x, y, 500, 500, switchX, switchY, switchZ, switchRotation, 45 * 60, 1500);
+	public MineFieldTrap(Handler handler, int id, float x, float y, float switchX, float switchY, int switchRotation) {
+		super(handler, id, x, y, 500, 500, switchX, switchY, switchRotation, 45 * 60, 1500);
 		cooldown = 15 * 60;
 	}
 
+        @Override
 	public void postTick() {
 		if (cooldownTimer > cooldown) {
 			activatedBy = null;
@@ -33,6 +33,7 @@ public class MineFieldTrap extends Trap {
 		}
 	}
 
+        @Override
 	public void render(Graphics g) {
 		g.setColor(Color.gray);
 		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
@@ -40,6 +41,7 @@ public class MineFieldTrap extends Trap {
 
 	}
 	
+        @Override
 	public void renderBW(Graphics g) {
 		g.setColor(Color.gray);
 		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),

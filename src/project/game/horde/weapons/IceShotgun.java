@@ -4,7 +4,6 @@ import project.game.horde.entities.bullets.IceBullet;
 import project.game.horde.entities.bullets.IceStorm;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
-import project.game.horde.sounds.Sounds;
 
 public class IceShotgun extends Gun {
 	public IceShotgun(Handler handler, Player player) {
@@ -52,7 +51,7 @@ public class IceShotgun extends Gun {
 			System.out.println("out here");
 			currentClip = 0;
 			handler.getWorld().getEntityManager().addEntity(new IceStorm(handler,
-					player.getCenterX(), player.getCenterY(), player.getZ(), this));
+					player.getCenterX(), player.getCenterY(), this));
 			timerToFire = 0;
 			readyToFire = false;
 			if(player.getPeer() != null) {
@@ -69,7 +68,7 @@ public class IceShotgun extends Gun {
 
 			currentClip--;
 			handler.getWorld().getEntityManager().addEntity(new IceBullet(handler,
-					player.getCenterX(), player.getCenterY(), player.getZ(), range, this));
+					player.getCenterX(), player.getCenterY(), range, this));
 			if(player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());
 			}

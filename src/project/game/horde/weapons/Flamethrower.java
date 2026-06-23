@@ -5,7 +5,6 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
-import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 import project.game.horde.weapons.Gun.GunImageDim;
@@ -108,7 +107,7 @@ public class Flamethrower extends Gun {
 				currentFrame = 0;
 			}
 			handler.getWorld().getEntityManager().addEntity(
-					new NewFlameBullet(handler, player.getCenterX(), player.getCenterY(), player.getZ(), range, this, currentFrame));
+					new NewFlameBullet(handler, player.getCenterX(), player.getCenterY(), range, this, currentFrame));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());
 			}

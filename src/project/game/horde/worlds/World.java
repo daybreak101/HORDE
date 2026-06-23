@@ -31,8 +31,6 @@ import project.game.horde.entities.statics.traps.Turret;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.maps.FarmMap;
-import project.game.horde.maps.IcelandMap;
-import project.game.horde.maps.SeattleMap;
 import project.game.horde.network.Peer;
 import project.game.horde.network.ZombiePosition;
 import project.game.horde.utils.Timer;
@@ -59,7 +57,7 @@ public class World {
     int ticker = 0, tickerLimit = 600;
 
     boolean nodesVisible;
-    boolean test = true;
+    boolean test = false;
 
     // offline
     public World(Handler handler, String path, String entityPath,
@@ -103,7 +101,7 @@ public class World {
 
         nodesVisible = false;
         powerOn = false;
-        lighting = new LightingLogic(handler, this, lightsPath);
+        //lighting = new LightingLogic(handler, this, lightsPath);
     }
 
     public void createStaticEntities(String entityPath) {
@@ -199,10 +197,13 @@ public class World {
                     height = Utils.parseInt(tokens[i++]);
                     entityManager.addBoundary(new InvisibleBounds(handler, i, x, y, width, height, 0));
                 }
-                case 18 ->
-                    entityManager.setMap(new SeattleMap(handler, 0, 0, 3400, 1700));
-                case 19 ->
-                    entityManager.setMap(new IcelandMap(handler, 0, 0, 3400, 1700));
+                case 18 -> {
+
+                }
+                //entityManager.setMap(new SeattleMap(handler, 0, 0, 3400, 1700));
+                case 19 -> {
+                }
+                //entityManager.setMap(new IcelandMap(handler, 0, 0, 3400, 1700));
                 default -> {
                 }
 
@@ -336,10 +337,10 @@ public class World {
         return height;
     }
 
-    public boolean checkForStaticEntities(int x1, int y1, int z1, int x2, int y2, int z2) {
+    public boolean checkForStaticEntities(int x1, int y1, int x2, int y2) {
         Line2D.Float line = new Line2D.Float(x1, y1, x2, y2);
         for (InteractableStaticEntity e : entityManager.getInteractables()) {
-            if (z1 == z2 && line.intersects(e.getCollisionBounds(0, 0))) {
+            if (line.intersects(e.getCollisionBounds(0, 0))) {
                 if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
                         && !(e instanceof Door)) {
                     return true;
@@ -347,7 +348,7 @@ public class World {
             }
         }
         for (Wall e : handler.getWorld().getEntityManager().getWalls()) {
-            if (z1 == z2 && line.intersects(e.getCollisionBounds(0, 0))) {
+            if (line.intersects(e.getCollisionBounds(0, 0))) {
                 return true;
             }
         }

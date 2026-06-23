@@ -45,8 +45,8 @@ public class Assets {
 	public static BufferedImage[] explosion, upgradedExplosion;	
 	//map assets		
 	public static BufferedImage firstFloorFarm, secondFloorFarm;
-	public static BufferedImage seattle_needle, seattle_transport, seattle_central;
-	public static BufferedImage iceland;
+	//public static BufferedImage seattle_needle, seattle_transport, seattle_central;
+	//public static BufferedImage iceland;
 
 
 	public static void loadFarm() {
@@ -55,17 +55,17 @@ public class Assets {
 		init();
 	}
 	
-	public static void loadSeattle() {
-		seattle_needle = ImageLoader.loadImage(folder + "seattleMap/spaceNeedleArea.png");
-		seattle_transport = ImageLoader.loadImage(folder + "seattleMap/transportArea.png");
-		seattle_central = ImageLoader.loadImage(folder + "seattleMap/centralArea.png");
-		init();
-	}
+	// public static void loadSeattle() {
+	// 	seattle_needle = ImageLoader.loadImage(folder + "seattleMap/spaceNeedleArea.png");
+	// 	seattle_transport = ImageLoader.loadImage(folder + "seattleMap/transportArea.png");
+	// 	seattle_central = ImageLoader.loadImage(folder + "seattleMap/centralArea.png");
+	// 	init();
+	// }
 	
-	public static void loadIceland() {
-		iceland = ImageLoader.loadImage(folder + "icelandMap/iceland.png");
-		init();
-	}
+	// public static void loadIceland() {
+	// 	iceland = ImageLoader.loadImage(folder + "icelandMap/iceland.png");
+	// 	init();
+	// }
 	
 	public static void init() {
 

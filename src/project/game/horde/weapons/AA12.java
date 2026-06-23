@@ -1,14 +1,11 @@
 package project.game.horde.weapons;
 
-import java.awt.Graphics;
-
 import project.game.horde.entities.bullets.ShotgunBullet;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.weapons.Gun.GunImageDim;
 
 public class AA12 extends Gun{
@@ -44,7 +41,7 @@ public class AA12 extends Gun{
 			
 			
 			handler.getWorld().getEntityManager().addEntity(new ShotgunBullet(handler, 
-					player.getCenterX(), player.getCenterY(), player.getZ(),
+					player.getCenterX(), player.getCenterY(),
 					range, GunVars.AA12_PELLET_SPREAD, 
 					GunVars.AA12_PELLET_COUNT, this));
 			if(player.getPeer() != null) {

@@ -37,15 +37,15 @@ public class FragGrenade extends Gun{
 			}
 
 			handler.getWorld().getEntityManager()
-					.addEntity(new Grenade(handler, player.getCenterX(), player.getCenterY(), player.getZ(), isUpgraded,
+					.addEntity(new Grenade(handler, player.getCenterX(), player.getCenterY(), isUpgraded,
 							player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(),
 							player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset(),
 							player, this));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerGrenadeLauncherShot(player.getUsername(),
 						(int) (player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset()),
-						(int) (player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()),
-						player.getZ());
+						(int) (player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset())
+						);
 			}
 			timerToFire = 0;
 		}

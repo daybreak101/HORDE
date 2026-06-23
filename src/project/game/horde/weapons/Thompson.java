@@ -44,7 +44,7 @@ public class Thompson extends Gun {
 			handler.getWorld().getEntityManager().addEntity(new Bullet(handler, 
 					player.getCenterX(),
 					player.getCenterY(),
-					player.getZ(),
+				
 					range, this));
 			if(player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());

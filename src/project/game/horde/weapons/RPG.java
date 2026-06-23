@@ -6,7 +6,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.weapons.Gun.GunImageDim;
 
 public class RPG extends Gun{
@@ -35,7 +34,7 @@ public class RPG extends Gun{
 			handler.getWorld().getEntityManager().addEntity(new Rocket(handler, 
 					player.getCenterX(),
 					player.getCenterY(),
-					player.getZ(),
+				
 					this
 					));
 			Sounds.playClip(GunSounds.RPG_SHOT_ID, 1, -1.0f, false);

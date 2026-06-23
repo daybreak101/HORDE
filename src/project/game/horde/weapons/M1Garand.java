@@ -56,7 +56,7 @@ public class M1Garand extends Gun {
 			currentClip--;
 			handler.getWorld().getEntityManager().addEntity(
 					new Bullet(handler, 
-							player.getCenterX(), player.getCenterY(), player.getZ(),
+							player.getCenterX(), player.getCenterY(),
 							range, this));
 			if(player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());

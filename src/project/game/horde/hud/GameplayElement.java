@@ -79,11 +79,11 @@ public class GameplayElement extends HudElement {
 		if (!skipInteracts) {
 			for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
 				eDist = Utils.getEuclideanDistance(player.getX(), player.getY(), e.getX(), e.getY());
-				if (Math.abs(player.getZ() - e.getZ()) < 75 && closestInteract == null) {
+				if (closestInteract == null) {
 					closestInteract = e;
 					closestDist = eDist;
 				}
-				if (Math.abs(player.getZ() - e.getZ()) < 75 && eDist < closestDist) {
+				if (eDist < closestDist) {
 					closestInteract = e;
 					closestDist = eDist;
 				}

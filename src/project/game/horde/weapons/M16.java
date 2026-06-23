@@ -33,7 +33,7 @@ public class M16 extends Gun {
 					|| (doubletap > -1 && burstTimer >= burstRate * DoubleTap.BASE_FIRERATEBUFF)
 					|| (burstTimer >= burstRate)) {
 				handler.getWorld().getEntityManager().addEntity(
-						new Bullet(handler, player.getCenterX(), player.getCenterY(), player.getZ(), range, this));
+						new Bullet(handler, player.getCenterX(), player.getCenterY(), range, this));
 				burstBullet++;
 				currentClip--;
 				burstTimer = 0;

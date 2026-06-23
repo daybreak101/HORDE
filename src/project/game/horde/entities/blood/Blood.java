@@ -92,6 +92,7 @@ public class Blood extends Entity {
         }
     }
 
+    @Override
     public void tick() {
         rect = new Rectangle((int) x, (int) y, width, height);
         counter++;
@@ -103,12 +104,14 @@ public class Blood extends Entity {
         }
     }
 
+    @Override
     public void render(Graphics g) {
         g.drawImage(bloodImage, (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
     }
 
+    @Override
     public void renderBW(Graphics g) {
         g.drawImage(BWBloodImage, (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);

@@ -4,112 +4,110 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.tools.Tool;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import project.game.horde.graphics.ImageLoader;
 import project.game.horde.main.Game;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
 
 public class Display {
-	private Game game;
-	private JFrame frame;
-	private Canvas canvas;
-	private JFXPanel fxPanel;
 
-	private String title;
-	private int width, height;
-	public static final int STANDARD = 0, FULLSCREEN = 2, WINDOWEDFULLSCREEN = 1;
-	private boolean isChangingDisplay = false;
-	private double standardWidth, standardHeight;
+    private Game game;
+    private JFrame frame;
+    private Canvas canvas;
+    private JFXPanel fxPanel;
 
-	public Display(Game game, String title, int width, int height) {
-		this.game = game;
-		this.title = title;
+    private String title;
+    private int width, height;
+    public static final int STANDARD = 0, FULLSCREEN = 2, WINDOWEDFULLSCREEN = 1;
+    private boolean isChangingDisplay = false;
+    private double standardWidth, standardHeight;
 
-		standardWidth = (width);
-		standardHeight = (height);
-		
-		this.width = (int) standardWidth;
-		this.height = (int) standardHeight;
-		
-		createDisplay(game.getHandler().getSettings().getDisplayType());
+    public Display(Game game, String title, int width, int height) {
+        this.game = game;
+        this.title = title;
 
-	}
-	
-	public void resetDisplay(int displayType) {
-		isChangingDisplay = true;
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.dispose();
-		switch (displayType) {
-		case STANDARD:
-			//1000, 800
-			width = (int) standardWidth;
-			height = (int) standardHeight;
-			game.setWidth(width);
-			game.setHeight(height);
-			frame.setUndecorated(false);
-			frame.setSize(width, height);
-			break;
-		case FULLSCREEN:
-			width = screenSize.width;
-			height = screenSize.height;
-			game.setWidth(screenSize.width);
-			game.setHeight(screenSize.height);
-			frame.setUndecorated(true);
-			frame.setSize(width, height);
-			break;
-		case WINDOWEDFULLSCREEN:
-			frame.setUndecorated(false);
-			frame.setVisible(true);
-			Insets insets = frame.getInsets();
-			width = screenSize.width - insets.left - insets.right;
-			height = screenSize.height - insets.top - insets.bottom;
-			game.setWidth(width);
-			game.setHeight(height);
-			//frame.setSize(width, height);
-		    frame.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom);
+        standardWidth = (width);
+        standardHeight = (height);
 
-			break;
-		default:
-			width = (int) standardWidth;
-			height = (int) standardHeight;
-			game.setWidth(width);
-			game.setHeight(height);
-			frame.setUndecorated(false);
-			frame.setSize(width, height);
-			break;
-		}
-		
-		frame.setLocationRelativeTo(null);
-		canvas.setPreferredSize(new Dimension(width, height));
-		canvas.setMaximumSize(new Dimension(width, height));
-		canvas.setMinimumSize(new Dimension(width, height));
-		canvas.setFocusable(false);
-		canvas.revalidate();
-		
-	    frame.add(canvas);
+        this.width = (int) standardWidth;
+        this.height = (int) standardHeight;
 
-		
-		frame.setVisible(true);
+        createDisplay(game.getHandler().getSettings().getDisplayType());
 
-	    // Ensure the canvas has a valid peer
-	    if (!canvas.isDisplayable()) {
-	        canvas.addNotify();
-	    }
-	    canvas.createBufferStrategy(3);
-	    isChangingDisplay = false;
-	}
+    }
 
-	// use frame. for more suggestions to change properties of the window
-	public void createDisplay(int displayType) {
-		
-		frame = new JFrame(title);
+    public void resetDisplay(int displayType) {
+        isChangingDisplay = true;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.dispose();
+        switch (displayType) {
+            case STANDARD -> {
+                //1000, 800
+                width = (int) standardWidth;
+                height = (int) standardHeight;
+                game.setWidth(width);
+                game.setHeight(height);
+                frame.setUndecorated(false);
+                frame.setSize(width, height);
+            }
+            case FULLSCREEN -> {
+                width = screenSize.width;
+                height = screenSize.height;
+                game.setWidth(screenSize.width);
+                game.setHeight(screenSize.height);
+                frame.setUndecorated(true);
+                frame.setSize(width, height);
+            }
+            case WINDOWEDFULLSCREEN -> {
+                frame.setUndecorated(false);
+                frame.setVisible(true);
+                Insets insets = frame.getInsets();
+                width = screenSize.width - insets.left - insets.right;
+                height = screenSize.height - insets.top - insets.bottom;
+                game.setWidth(width);
+                game.setHeight(height);
+                //frame.setSize(width, height);
+                frame.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom);
+            }
+            default -> {
+                width = (int) standardWidth;
+                height = (int) standardHeight;
+                game.setWidth(width);
+                game.setHeight(height);
+                frame.setUndecorated(false);
+                frame.setSize(width, height);
+            }
+        }
+
+        frame.setLocationRelativeTo(null);
+        canvas.setPreferredSize(new Dimension(width, height));
+        canvas.setMaximumSize(new Dimension(width, height));
+        canvas.setMinimumSize(new Dimension(width, height));
+        canvas.setFocusable(false);
+        canvas.revalidate();
+
+        frame.add(canvas);
+
+        frame.setVisible(true);
+
+        // Ensure the canvas has a valid peer
+        if (!canvas.isDisplayable()) {
+            canvas.addNotify();
+        }
+        canvas.createBufferStrategy(3);
+        isChangingDisplay = false;
+    }
+
+    // use frame. for more suggestions to change properties of the window
+    public void createDisplay(int displayType) {
+
+        frame = new JFrame(title);
 
         GraphicsConfiguration gc = frame.getGraphicsConfiguration();
         AffineTransform tx = gc.getDefaultTransform();
@@ -122,100 +120,99 @@ public class Display {
         game.setWidth(width);
         game.setHeight(height);
 
-		
         System.out.println("display width:" + width);
         System.out.println("display height: " + height);
-        
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println("screen width:" + screenSize.width);
         System.out.println("screen height: " + screenSize.height);
 
-		switch (displayType) {
-		case STANDARD:
-			break;
-		case FULLSCREEN:
-			width = screenSize.width;
-			height = screenSize.height;
-			game.setWidth(screenSize.width);
-			game.setHeight(screenSize.height);
-			frame.setUndecorated(true);
-			break;
-		case WINDOWEDFULLSCREEN:
-			frame.setUndecorated(false);
-			frame.setVisible(true);
-			Insets insets = frame.getInsets();
-			width = screenSize.width - insets.left - insets.right;
-			height = screenSize.height - insets.top - insets.bottom;
-			game.setWidth(width);
-			game.setHeight(height);
-		    frame.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom);
-			break;
-		default:
-			break;
-		}
-		frame.setSize(width, height);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		frame.setIconImage(ImageLoader.loadImage("/textures/normal/zombie.png"));
-		
-		canvas = new Canvas();
+        switch (displayType) {
+            case STANDARD -> {
+            }
+            case FULLSCREEN -> {
+                width = screenSize.width;
+                height = screenSize.height;
+                game.setWidth(screenSize.width);
+                game.setHeight(screenSize.height);
+                frame.setUndecorated(true);
+            }
+            case WINDOWEDFULLSCREEN -> {
+                frame.setUndecorated(false);
+                frame.setVisible(true);
+                Insets insets = frame.getInsets();
+                width = screenSize.width - insets.left - insets.right;
+                height = screenSize.height - insets.top - insets.bottom;
+                game.setWidth(width);
+                game.setHeight(height);
+                frame.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom);
+            }
+            default -> {
+            }
+        }
+        frame.setSize(width, height);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setIconImage(ImageLoader.loadImage("/textures/normal/zombie.png"));
 
-		canvas.setPreferredSize(new Dimension(width, height));
-		canvas.setMaximumSize(new Dimension(width, height));
-		canvas.setMinimumSize(new Dimension(width, height));
-		canvas.setFocusable(false);
-		canvas.setIgnoreRepaint(true);
+        canvas = new Canvas();
 
-		// Adding panel to the JFrame
-		fxPanel = new JFXPanel();
-		fxPanel.setSize(0, 0);
+        canvas.setPreferredSize(new Dimension(width, height));
+        canvas.setMaximumSize(new Dimension(width, height));
+        canvas.setMinimumSize(new Dimension(width, height));
+        canvas.setFocusable(false);
+        canvas.setIgnoreRepaint(true);
 
-		frame.add(fxPanel);
-		frame.add(canvas);
-		frame.pack();
-	}
-	
-	public void setIsChangingDisplay(boolean isChanging) {
-		this.isChangingDisplay = isChanging;
-	}
-	
-	public boolean isChangingDisplay() {
-		return isChangingDisplay;
-	}
+        // Adding panel to the JFrame
+        fxPanel = new JFXPanel();
+        fxPanel.setSize(0, 0);
 
-	public Canvas getCanvas() {
-		return canvas;
-	}
+        frame.add(fxPanel);
+        frame.add(canvas);
+        frame.pack();
+    }
 
-	public JFrame getFrame() {
-		return frame;
-	}
+    public void setIsChangingDisplay(boolean isChanging) {
+        this.isChangingDisplay = isChanging;
+    }
 
-	public JFXPanel getFXPanel() {
-		return fxPanel;
-	}
+    public boolean isChangingDisplay() {
+        return isChangingDisplay;
+    }
 
-	public void showFXPanel(Scene scene) {
-		SwingUtilities.invokeLater(() -> {
-			fxPanel.setScene(scene);
-			fxPanel.setSize((int) scene.getWidth(), (int) scene.getHeight());
-			fxPanel.setVisible(true);
-			fxPanel.revalidate();
-			fxPanel.repaint();
-		});
-	}
+    public Canvas getCanvas() {
+        return canvas;
+    }
 
-	public void hideFXPanel() {
-		SwingUtilities.invokeLater(() -> {
-			fxPanel.setScene(null);
-			fxPanel.setSize(0, 0);
-			fxPanel.setVisible(false);
-			fxPanel.revalidate();
-			fxPanel.repaint();
-		});
-	}
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public JFXPanel getFXPanel() {
+        return fxPanel;
+    }
+
+    public void showFXPanel(Scene scene) {
+        SwingUtilities.invokeLater(() -> {
+            fxPanel.setScene(scene);
+            fxPanel.setSize((int) scene.getWidth(), (int) scene.getHeight());
+            fxPanel.setVisible(true);
+            fxPanel.revalidate();
+            fxPanel.repaint();
+        });
+    }
+
+    public void hideFXPanel() {
+        SwingUtilities.invokeLater(() -> {
+            fxPanel.setScene(null);
+            fxPanel.setSize(0, 0);
+            fxPanel.setVisible(false);
+            fxPanel.revalidate();
+            fxPanel.repaint();
+        });
+    }
 
 //	public void add(JPanel swingPanel) {
 //		frame.add(swingPanel);
@@ -227,5 +224,4 @@ public class Display {
 //		frame.remove(swingPanel);
 //
 //	}
-
 }

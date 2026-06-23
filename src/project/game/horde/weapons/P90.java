@@ -6,7 +6,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.weapons.Gun.GunImageDim;
 
 public class P90 extends Gun {
@@ -49,7 +48,7 @@ public class P90 extends Gun {
 			handler.getWorld().getEntityManager().addEntity(new Bullet(handler, 
 					player.getCenterX(),
 					player.getCenterY(),
-					player.getZ(),
+				
 					range, this));
 			if(player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());

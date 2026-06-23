@@ -14,7 +14,7 @@ public abstract class Trap extends Entity {
 	protected Player activatedBy;
 
 	public Trap(Handler handler, int id, float x, float y, int width, int height, float switchX, float switchY,
-			int switchZ, int switchRotation, int cooldown, int cost) {
+			 int switchRotation, int cooldown, int cost) {
 		super(handler, x, y, width, height);
 		this.cost = cost;
 		activatedBy = null;

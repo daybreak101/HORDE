@@ -4,11 +4,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import project.game.horde.entities.areas.Areas;
-import project.game.horde.entities.areas.Floor;
 import project.game.horde.entities.blood.Blood;
 import project.game.horde.entities.bullets.Explosion;
 import project.game.horde.entities.creatures.Player;
@@ -33,10 +31,7 @@ import project.game.horde.network.Message;
 
 public class EntityManager {
 
-    int currentRound;
     public long zombieHealth;
-
-    Random rand = new Random();
 
 //	private Wolf luna;
     private Entity map;
@@ -57,6 +52,7 @@ public class EntityManager {
 
     private ArrayList<Wall> walls;
     private Comparator<Entity> renderSorter = new Comparator<Entity>() {
+        @Override
         public int compare(Entity a, Entity b) {
             if (a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
                 return -1;
@@ -88,7 +84,6 @@ public class EntityManager {
         return currentPlayer;
     }
 
-    private Rectangle renderArea;
 
     public EntityManager(Handler handler) {
         this.handler = handler;
@@ -191,7 +186,7 @@ public class EntityManager {
                     e.setRenderThis(false);
                 }
             }
-            if (!e.isActive()) {
+            if (e != null && !e.isActive()) {
                 powerups.remove(e);
             }
         }
@@ -228,7 +223,7 @@ public class EntityManager {
                     e.setRenderThis(false);
                 }
             }
-            if (!e.isActive()) {
+            if (e != null && !e.isActive()) {
                 explosions.remove(e);
             }
         }
@@ -259,13 +254,13 @@ public class EntityManager {
         map = e;
     }
 
-    private boolean isEntityVisible(Entity e) {
-        // Check if the entity is within the visible area of the screen
-        return e.getX() >= handler.getGameCamera().getxOffset()
-                && e.getX() <= handler.getGameCamera().getxOffset() + handler.getWidth()
-                && e.getY() >= handler.getGameCamera().getyOffset()
-                && e.getY() <= handler.getGameCamera().getyOffset() + handler.getHeight();
-    }
+    // private boolean isEntityVisible(Entity e) {
+    //     // Check if the entity is within the visible area of the screen
+    //     return e.getX() >= handler.getGameCamera().getxOffset()
+    //             && e.getX() <= handler.getGameCamera().getxOffset() + handler.getWidth()
+    //             && e.getY() >= handler.getGameCamera().getyOffset()
+    //             && e.getY() <= handler.getGameCamera().getyOffset() + handler.getHeight();
+    // }
 
     public void captureImage(Graphics g) {
         if (currentPlayer.getHealth() <= 0) {
@@ -276,7 +271,6 @@ public class EntityManager {
                     e.render(g);
                 }
             }
-            int limit = 75;
             for (Barrier e : barriers) {
                 e.render(g);
             }
@@ -304,7 +298,6 @@ public class EntityManager {
                     e.render(g);
                 }
             }
-            int limit = 75;
             for (Trap e : traps) {
                 if (e.getRenderThis()) {
                     e.render(g);
@@ -414,7 +407,7 @@ public class EntityManager {
 
     public void addZombieForClient(String[] info) {
         zombies.add(new Zombie(handler, Integer.parseInt(info[0]), Float.parseFloat(info[1]), Float.parseFloat(info[2]),
-                Integer.parseInt(info[3]), Float.parseFloat(info[4]), Integer.parseInt(info[5])));
+               Float.parseFloat(info[3]), Integer.parseInt(info[4])));
         handler.getWorld().getRoundLogic().manuallyDecrementZombiesLeft();
     }
 

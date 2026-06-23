@@ -15,8 +15,8 @@ public class ConveyorBeltTrap extends Trap {
 
     private Rectangle furnace, conveyor;
 
-    public ConveyorBeltTrap(Handler handler, int id, float x, float y, float switchX, float switchY, int switchZ, int switchRotation) {
-        super(handler, id, x, y, 200, 200, switchX, switchY, switchZ, switchRotation, 5 * 60, 2000);
+    public ConveyorBeltTrap(Handler handler, int id, float x, float y, float switchX, float switchY,  int switchRotation) {
+        super(handler, id, x, y, 200, 200, switchX, switchY, switchRotation, 5 * 60, 2000);
         cooldown = 30 * 60;
         furnace = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1,
                 bounds.height + 1);

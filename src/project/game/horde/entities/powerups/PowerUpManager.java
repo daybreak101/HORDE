@@ -3,7 +3,6 @@ package project.game.horde.entities.powerups;
 import java.util.Random;
 
 import project.game.horde.entities.EntityManager;
-import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.RandomUtil;
 

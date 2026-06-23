@@ -1,7 +1,6 @@
 package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
-import project.game.horde.entities.bullets.ShotgunBullet;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
@@ -113,7 +112,7 @@ public class Python extends Gun{
 			}
 
 			handler.getWorld().getEntityManager()
-					.addEntity(new Bullet(handler, player.getCenterX(), player.getCenterY(), player.getZ(),
+					.addEntity(new Bullet(handler, player.getCenterX(), player.getCenterY(),
 							range, this));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());

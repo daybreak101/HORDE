@@ -12,8 +12,8 @@ public class ElectricTrap extends Trap {
 
     private Rectangle cb;
 
-    public ElectricTrap(Handler handler, int id, float x, float y, float switchX, float switchY, int switchZ, int switchRotation) {
-        super(handler, id, x, y, 25, 100, switchX, switchY, switchZ, switchRotation, 30 * 60, 1000);
+    public ElectricTrap(Handler handler, int id, float x, float y, float switchX, float switchY,  int switchRotation) {
+        super(handler, id, x, y, 25, 100, switchX, switchY, switchRotation, 30 * 60, 1000);
         cooldown = 30 * 60;
         cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
 

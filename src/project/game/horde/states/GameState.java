@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.facade.PlayerMP;
-import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Cheats;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
@@ -16,7 +14,6 @@ import project.game.horde.network.Peer;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Music;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.weapons.GunVars;
 import project.game.horde.worlds.World;
 
 public class GameState extends State  {
@@ -44,7 +41,7 @@ public class GameState extends State  {
 				user, map
 				);
 		world.getEntityManager().addCurrentPlayer(
-				new Player(handler, 900, 650, 0, user));
+				new Player(handler, 900, 650, user));
 	
 		cheats = new Cheats(handler);
 		Sounds.playClip(Sounds.BACKGROUND_MUSIC_ID, 1, .7f, true);
@@ -88,14 +85,14 @@ public class GameState extends State  {
 
 			if(!user.getUsername().equals(localUser.getUsername())) {
 			world.getEntityManager().addOtherPlayer(
-					new PlayerMP(handler, x + number * 100, y + number * 100, 0, user));
+					new PlayerMP(handler, x + number * 100, y + number * 100, user));
 			System.out.println("current: " + user.getUsername()
 			+ " local: " + localUser.getUsername() + 
 			" / added as otherPlayer");
 			}
 			else {
 				world.getEntityManager().addCurrentPlayer(
-						new Player(handler, x + number * 100, y + number * 100, 0, peer));
+						new Player(handler, x + number * 100, y + number * 100, peer));
 				System.out.println("current: " + user.getUsername()
 				+ " local: " + localUser.getUsername() + 
 						" / added as currentPlayer");

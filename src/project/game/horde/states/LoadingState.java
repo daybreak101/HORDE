@@ -67,10 +67,10 @@ public class LoadingState extends State {
 				loadingState++;
 				if(map.equals("test"))
 					Assets.loadFarm();
-				else if(map.equals("seattle"))
-					Assets.loadSeattle();
-				else if(map.equals("iceland"))
-					Assets.loadIceland();
+				// else if(map.equals("seattle"))
+				// 	Assets.loadSeattle();
+				// else if(map.equals("iceland"))
+				// 	Assets.loadIceland();
 				loadingState++;
 				BWAssets.init();
 				isReady = true;

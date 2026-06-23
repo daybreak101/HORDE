@@ -1,11 +1,12 @@
 package project.game.horde.perks;
 
+import java.awt.Graphics;
+
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Wolf;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Timer;
-import java.awt.Graphics;
 
 public class Luna extends Perk {
 
@@ -48,7 +49,7 @@ public class Luna extends Perk {
 		if(activated == false && ready) {
 			activated = true;
 			ready = false;
-			luna = new Wolf(handler, player.getX(), player.getY(), player.getZ(), player);
+			luna = new Wolf(handler, player.getX(), player.getY(), player);
 			luna.playEnterSound();
 			if(player.getPeer() != null)
 				player.getPeer().sendNewLuna(player.getUsername());

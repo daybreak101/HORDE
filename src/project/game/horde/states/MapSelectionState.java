@@ -59,38 +59,40 @@ public class MapSelectionState extends State {
 
 			}
 		}));
-		uiManager.addObject(new TextButton(handler, 100, 120, 300, 70, "Seattle", 30, new ClickListener() {
+		// uiManager.addObject(new TextButton(handler, 100, 120, 300, 70, "Seattle", 30, new ClickListener() {
 
-			@Override
-			public void onClick(UIObject ui) {
-				lastState.selectedMap("seattle");
-				handler.getMouseManager().setUIManager(null);
-				State.setState(lastState);
+		// 	@Override
+		// 	public void onClick(UIObject ui) {
+		// 		lastState.selectedMap("seattle");
+		// 		handler.getMouseManager().setUIManager(null);
+		// 		State.setState(lastState);
 
-			}
+		// 	}
 
-			@Override
-			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
+		// 	@Override
+		// 	public void onMouseRelease(MouseEvent e) {
+		// 		// TODO Auto-generated method stub
 
-			}
-		}));
-		uiManager.addObject(new TextButton(handler, 100, 190, 300, 70, "Iceland", 30, new ClickListener() {
+		// 	}
+		// }));
+		// uiManager.addObject(new TextButton(handler, 100, 190, 300, 70, "Iceland", 30, new ClickListener() {
 
-			@Override
-			public void onClick(UIObject ui) {
-				lastState.selectedMap("iceland");
-				handler.getMouseManager().setUIManager(null);
-				State.setState(lastState);
+		// 	@Override
+		// 	public void onClick(UIObject ui) {
+		// 		lastState.selectedMap("iceland");
+		// 		handler.getMouseManager().setUIManager(null);
+		// 		State.setState(lastState);
 
-			}
+		// 	}
 
-			@Override
-			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
+		// 	@Override
+		// 	public void onMouseRelease(MouseEvent e) {
+		// 		// TODO Auto-generated method stub
 
-			}
-		}));
+		// 	}
+		// }));
+	
+	
 	}
 
 	int i = 0;

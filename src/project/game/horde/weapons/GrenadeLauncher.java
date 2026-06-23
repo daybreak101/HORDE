@@ -6,7 +6,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
 import project.game.horde.weapons.Gun.GunImageDim;
 
@@ -178,14 +177,14 @@ public class GrenadeLauncher extends Gun {
 			}
 
 			handler.getWorld().getEntityManager()
-					.addEntity(new Grenade(handler, player.getCenterX(), player.getCenterY(), player.getZ(), isUpgraded,
+					.addEntity(new Grenade(handler, player.getCenterX(), player.getCenterY(), isUpgraded,
 							player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(),
 							player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset(), player, this));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerGrenadeLauncherShot(player.getUsername(),
 						(int) (player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset()),
-						(int) (player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()),
-						player.getZ());
+						(int) (player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset())
+						);
 			}
 			timerToFire = 0;
 		}

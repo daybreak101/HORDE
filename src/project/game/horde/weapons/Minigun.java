@@ -10,7 +10,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Utils;
 import project.game.horde.weapons.Gun.GunImageDim;
 
@@ -76,7 +75,7 @@ public class Minigun extends Gun {
 			//Sounds.playClip(GunSounds.minigun_shot, 1, "minigun_shot" + RandomUtil.nextInt(0, 10000), -1.0f, false);
 
 			handler.getWorld().getEntityManager()
-					.addEntity(new Bullet(handler, player.getCenterX(), player.getCenterY(), player.getZ(), range, this));
+					.addEntity(new Bullet(handler, player.getCenterX(), player.getCenterY(),  range, this));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());
 			}
@@ -190,7 +189,7 @@ public class Minigun extends Gun {
 				//Sounds.playClip(GunSounds.minigun_shot, 1, "minigun_shot" + RandomUtil.nextInt(0, 10000), volume, false);
 
 				handler.getWorld().getEntityManager()
-						.addEntity(new Bullet(handler, this, x, y, player.getZ(), closestEntity.getX() + closestEntity.getWidth() / 2,
+						.addEntity(new Bullet(handler, this, x, y, closestEntity.getX() + closestEntity.getWidth() / 2,
 								closestEntity.getY() + closestEntity.getHeight() / 2, range));
 
 				timerToFire = 0;

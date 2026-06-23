@@ -2,40 +2,10 @@ package project.game.horde.main;
 
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
-import project.game.horde.perks.DeadShot;
-import project.game.horde.perks.DoubleTap;
 import project.game.horde.perks.Juggernaut;
-import project.game.horde.perks.Luna;
-import project.game.horde.perks.MuleKick;
-import project.game.horde.perks.PhD;
-import project.game.horde.perks.Revive;
 import project.game.horde.perks.SleightOfHand;
-import project.game.horde.perks.StaminUp;
-import project.game.horde.perks.Stronghold;
-import project.game.horde.perks.Vampire;
-import project.game.horde.weapons.AA12;
-import project.game.horde.weapons.AK47;
-import project.game.horde.weapons.AWP;
-import project.game.horde.weapons.Arisaka;
-import project.game.horde.weapons.Bren;
-import project.game.horde.weapons.DoubleBarrel;
 import project.game.horde.weapons.Flamethrower;
-import project.game.horde.weapons.G18;
-import project.game.horde.weapons.GrenadeLauncher;
 import project.game.horde.weapons.Gun;
-import project.game.horde.weapons.M16;
-import project.game.horde.weapons.M1911;
-import project.game.horde.weapons.M4;
-import project.game.horde.weapons.M60;
-import project.game.horde.weapons.Minigun;
-import project.game.horde.weapons.P90;
-import project.game.horde.weapons.Python;
-import project.game.horde.weapons.RPD;
-import project.game.horde.weapons.RPG;
-import project.game.horde.weapons.Thompson;
-import project.game.horde.weapons.Type100;
-import project.game.horde.weapons.Uzi;
-import project.game.horde.weapons.Winchester1901;
 
 public class Cheats {
 
@@ -43,7 +13,7 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		  applyCheats();
+		  //applyCheats();
 	}
 
 	public void applyCheats() {

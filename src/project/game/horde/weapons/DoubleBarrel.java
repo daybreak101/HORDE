@@ -1,6 +1,5 @@
 package project.game.horde.weapons;
 
-import project.game.horde.entities.bullets.Grenade;
 import project.game.horde.entities.bullets.ShotgunBullet;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
@@ -113,7 +112,7 @@ public class DoubleBarrel extends Gun {
 			}
 
 			handler.getWorld().getEntityManager()
-					.addEntity(new ShotgunBullet(handler, player.getCenterX(), player.getCenterY(), player.getZ(),
+					.addEntity(new ShotgunBullet(handler, player.getCenterX(), player.getCenterY(),
 							range, GunVars.DB_PELLET_SPREAD, GunVars.DB_PELLET_COUNT, this));
 			if (player.getPeer() != null) {
 				player.getPeer().sendPlayerShot(player.getUsername());
