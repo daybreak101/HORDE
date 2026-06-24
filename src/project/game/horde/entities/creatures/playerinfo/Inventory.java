@@ -27,7 +27,6 @@ import project.game.horde.sounds.MiscWeaponSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 import project.game.horde.weapons.FragGrenade;
-import project.game.horde.weapons.Glock17;
 import project.game.horde.weapons.Gun;
 import project.game.horde.weapons.GunVars;
 import project.game.horde.weapons.Knife;
@@ -36,9 +35,9 @@ import project.game.horde.weapons.Minigun;
 
 public class Inventory {
 
-    private Handler handler;
-    private Player player;
-    private Blessings blessings;
+    private final Handler handler;
+    private final Player player;
+    private final Blessings blessings;
 
     private int currentGun;
     private Gun[] arsenal;
@@ -50,8 +49,8 @@ public class Inventory {
     private int specialGrenadeAmt;
     private int specialGrenadeType;
 
-    private Timer switchWeaponTimer;
-    private Timer grenadeReadyTimer;
+    private final Timer switchWeaponTimer;
+    private final Timer grenadeReadyTimer;
 
     // perk variables
     // -1 means not equipped, 0-3 represents perk levels with 0 being base level
@@ -353,7 +352,7 @@ public class Inventory {
     }
 
     public void gainPoints(int add) {
-        if (blessings.isRunning() && blessings.getBlessing() == "Extra Change") {
+        if (blessings.isRunning() && "Extra Change".equals(blessings.getBlessing())) {
             add = add + add / 2;
         }
         if (handler.getRoundLogic().getPowerups().isDoublePointsActive()) {
@@ -401,7 +400,7 @@ public class Inventory {
     public boolean checkArsenal(Gun gun) {
         for (int i = 0; i < 3; i++) {
             if (arsenal[i] != null) {
-                if (arsenal[i].getOriginalName() == gun.getName()) {
+                if (arsenal[i].getOriginalName() == null ? gun.getName() == null : arsenal[i].getOriginalName().equals(gun.getName())) {
                     return true;
                 }
             }
@@ -411,7 +410,7 @@ public class Inventory {
     }
 
     public void giveAllPerks() {
-        ArrayList<Perk> all = new ArrayList<Perk>();
+        ArrayList<Perk> all = new ArrayList<>();
         all.add(new Juggernaut(handler, handler.getUnlocks().getJuggLvl(), player));
         all.add(new SleightOfHand(handler, handler.getUnlocks().getSpeedLvl(), player));
         all.add(new DoubleTap(handler, handler.getUnlocks().getDoubletapLvl(), player));
@@ -434,7 +433,7 @@ public class Inventory {
     public boolean checkPerks(Perk perk) {
         for (int i = 0; i < 8; i++) {
             if (perks[i] != null) {
-                if (perks[i].getName() == perk.getName()) {
+                if (perks[i].getName() == null ? perk.getName() == null : perks[i].getName().equals(perk.getName())) {
                     return true;
                 }
             }

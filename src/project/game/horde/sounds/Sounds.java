@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -119,12 +117,7 @@ public class Sounds {
                     44100.0f,    // frame rate
                     false        // little-endian
             );
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (UnsupportedAudioFileException | IOException e) {
 		}
 
 	}
@@ -159,7 +152,6 @@ public class Sounds {
 	                clip.open(spedUpStream);
 	                clipList.add(clip);
 	            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-	                e.printStackTrace();
 	            }
 	        }
 	        clipPools.put(clipId, clipList);
@@ -213,7 +205,6 @@ public class Sounds {
 	        try {
 	            Thread.sleep(100);
 	        } catch (InterruptedException e) {
-	            e.printStackTrace();
 	        }
 	        resumeAllClips();
 	        resetting = false;
@@ -266,7 +257,6 @@ public class Sounds {
 					returnClipToPool(clipId, clip); // Return the clip to the pool
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		});
 	}
@@ -326,7 +316,6 @@ public class Sounds {
 					returnClipToPool(clipId, clip); // Return the clip to the pool
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		});
 	}

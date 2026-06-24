@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import project.game.horde.main.Handler;
 import java.awt.geom.Point2D;
+
+import project.game.horde.main.Handler;
 
 public class CurvedWall extends Wall {
 
@@ -86,9 +87,6 @@ public class CurvedWall extends Wall {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-    }
 
     // Getter for the collision polygon
     public Polygon getArcPolygon() {

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import project.game.horde.display.Display;
 import project.game.horde.ui.ColorIndex;
 import project.game.horde.utils.Utils;
 import project.game.horde.utils.saved.SaveFileReader;
@@ -215,7 +214,6 @@ public class Settings {
 
 			writer.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

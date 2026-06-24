@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.graphics.MenuAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
@@ -72,7 +71,6 @@ public class LoadingState extends State {
 				// else if(map.equals("iceland"))
 				// 	Assets.loadIceland();
 				loadingState++;
-				BWAssets.init();
 				isReady = true;
 				peer.sendReady(localUser.getUsername());
 			});
@@ -103,8 +101,6 @@ public class LoadingState extends State {
 				try {
 					handler.getGame().gameState = new GameState(handler, map, localUser);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				State.setState(handler.getGame().gameState);
 			} else {
@@ -122,8 +118,6 @@ public class LoadingState extends State {
 					try {
 						peer.getLobby().startGame(map);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
 				}
 			}

@@ -40,11 +40,6 @@ public abstract class PowerUps extends StaticEntity {
     }
 
     @Override
-    public void renderBW(Graphics g) {
-        render(g);
-    }
-
-    @Override
     public void render(Graphics g) {
         int offset = 25;
         if (!pickedUp) {

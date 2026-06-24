@@ -22,10 +22,12 @@ public abstract class Trap extends Entity {
 				.addInteractable(new TrapSwitch(handler, id, switchX, switchY, switchRotation, this, cooldown));
 	}
 
+        @Override
 	public Rectangle getCollisionBounds(float xOffset, float yOffset) {
 		return new Rectangle(0, 0, 0, 0);
 	}
 
+        @Override
 	public void fulfillInteraction(Player player) {
 		activated = true;
 		activatedBy = player;
@@ -41,17 +43,17 @@ public abstract class Trap extends Entity {
 		}
 	}
 
+        @Override
 	public void tick() {
 		cooldownTimer++;
 		postTick();
 	}
 
+        @Override
 	public abstract void render(Graphics g);
 
-	public abstract void renderBW(Graphics g);
 
 	public void postTick() {
-		// TODO Auto-generated method stub
 
 	}
 

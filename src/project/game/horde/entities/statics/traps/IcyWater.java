@@ -35,13 +35,7 @@ public class IcyWater extends Areas {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        g.setColor(new Color(35, 35, 35, 100));
-        g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
 
-    }
 
     public boolean checkIfEntityIsContained(Rectangle hitbox) {
         return bounds.intersects(hitbox);

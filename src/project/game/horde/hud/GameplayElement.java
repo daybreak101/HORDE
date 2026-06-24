@@ -6,22 +6,18 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import project.game.horde.entities.creatures.Player;
-import project.game.horde.entities.creatures.playerinfo.PlayerActionState;
 import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.powerups.PowerUps;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.MenuAssets;
 import project.game.horde.main.BlessingInventory;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.Perk;
@@ -193,18 +189,13 @@ public class GameplayElement extends HudElement {
 		// render health
 
 		g.setColor(new Color(128, 0, 0));
-		if (player.getInv().getJugg() == 0) {
-			g.fillRect((int) 100, (int) handler.getHeight() - 100, 110, 50);
-
-		} else if (player.getInv().getJugg() == 1) {
-			g.fillRect((int) 100, (int) handler.getHeight() - 100, 125, 50);
-		} else if (player.getInv().getJugg() == 2) {
-			g.fillRect((int) 100, (int) handler.getHeight() - 100, 150, 50);
-		} else if (player.getInv().getJugg() == 3) {
-			g.fillRect((int) 100, (int) handler.getHeight() - 100, 200, 50);
-		} else {
-			g.fillRect((int) 100, (int) handler.getHeight() - 100, 100, 50);
-		}
+            switch (player.getInv().getJugg()) {
+                case 0 -> g.fillRect((int) 100, (int) handler.getHeight() - 100, 110, 50);
+                case 1 -> g.fillRect((int) 100, (int) handler.getHeight() - 100, 125, 50);
+                case 2 -> g.fillRect((int) 100, (int) handler.getHeight() - 100, 150, 50);
+                case 3 -> g.fillRect((int) 100, (int) handler.getHeight() - 100, 200, 50);
+                default -> g.fillRect((int) 100, (int) handler.getHeight() - 100, 100, 50);
+            }
 		g.setColor(hudColor);
 		g.fillRect((int) 100, (int) handler.getHeight() - 100, health, 50);
 
@@ -278,7 +269,7 @@ public class GameplayElement extends HudElement {
 		Utils.drawLeftAlignedString(g, string, rect, new Font(Font.DIALOG, Font.PLAIN, 30));
 	}
 
-	ArrayList<PowerUps> powerups = new ArrayList<PowerUps>(4);
+	ArrayList<PowerUps> powerups = new ArrayList<>(4);
 	int oneX = handler.getWidth() / 2 - 25, twoX = handler.getWidth() / 2 - 25, threeX = handler.getWidth() / 2 - 25,
 			fourX = handler.getWidth() / 2 - 25;
 
@@ -306,61 +297,67 @@ public class GameplayElement extends HudElement {
 		int powerupY = (int) handler.getHeight() - 100;
 		int square = 50;
 
-		// change powerups .size() to an array that only contains powerups picked up
-		if (powerups.size() == 1) {
-			if (oneX < handler.getWidth() / 2 - 25) {
-				oneX++;
-			}
-		} else if (powerups.size() == 2) {
-			if (oneX > handler.getWidth() / 2 - 55) {
-				oneX--;
-			} else if (oneX < handler.getWidth() / 2 - 55) {
-				oneX++;
-			}
-
-			if (twoX > handler.getWidth() / 2 + 5) {
-				twoX--;
-			} else if (twoX < handler.getWidth() / 2 + 5) {
-				twoX++;
-			}
-		} else if (powerups.size() == 3) {
-			if (oneX > handler.getWidth() / 2 - 85) {
-				oneX--;
-			} else if (oneX < handler.getWidth() / 2 - 85) {
-				oneX++;
-			}
-			if (twoX > handler.getWidth() / 2 - 25) {
-				twoX--;
-			} else if (twoX < handler.getWidth() / 2 - 25) {
-				twoX++;
-			}
-			if (threeX > handler.getWidth() / 2 + 35) {
-				threeX--;
-			} else if (threeX < handler.getWidth() / 2 + 35) {
-				threeX++;
-			}
-		} else if (powerups.size() == 4) {
-			if (oneX > handler.getWidth() / 2 - 115) {
-				oneX--;
-			} else if (oneX < handler.getWidth() / 2 - 115) {
-				oneX++;
-			}
-			if (twoX > handler.getWidth() / 2 - 55) {
-				twoX--;
-			} else if (twoX < handler.getWidth() / 2 - 55) {
-				twoX++;
-			}
-			if (threeX > handler.getWidth() / 2 + 5) {
-				threeX--;
-			} else if (threeX < handler.getWidth() / 2 + 5) {
-				threeX++;
-			}
-			if (fourX > handler.getWidth() / 2 + 65) {
-				fourX--;
-			} else if (fourX < handler.getWidth() / 2 + 65) {
-				fourX++;
-			}
-		}
+            // change powerups .size() to an array that only contains powerups picked up
+            switch (powerups.size()) {
+                case 1 -> {
+                    if (oneX < handler.getWidth() / 2 - 25) {
+                        oneX++;
+                    }
+                }
+                case 2 -> {
+                    if (oneX > handler.getWidth() / 2 - 55) {
+                        oneX--;
+                    } else if (oneX < handler.getWidth() / 2 - 55) {
+                        oneX++;
+                    }
+                    if (twoX > handler.getWidth() / 2 + 5) {
+                        twoX--;
+                    } else if (twoX < handler.getWidth() / 2 + 5) {
+                        twoX++;
+                    }
+                }
+                case 3 -> {
+                    if (oneX > handler.getWidth() / 2 - 85) {
+                        oneX--;
+                    } else if (oneX < handler.getWidth() / 2 - 85) {
+                        oneX++;
+                    }
+                    if (twoX > handler.getWidth() / 2 - 25) {
+                        twoX--;
+                    } else if (twoX < handler.getWidth() / 2 - 25) {
+                        twoX++;
+                    }
+                    if (threeX > handler.getWidth() / 2 + 35) {
+                        threeX--;
+                    } else if (threeX < handler.getWidth() / 2 + 35) {
+                        threeX++;
+                    }
+                }
+                case 4 -> {
+                    if (oneX > handler.getWidth() / 2 - 115) {
+                        oneX--;
+                    } else if (oneX < handler.getWidth() / 2 - 115) {
+                        oneX++;
+                    }
+                    if (twoX > handler.getWidth() / 2 - 55) {
+                        twoX--;
+                    } else if (twoX < handler.getWidth() / 2 - 55) {
+                        twoX++;
+                    }
+                    if (threeX > handler.getWidth() / 2 + 5) {
+                        threeX--;
+                    } else if (threeX < handler.getWidth() / 2 + 5) {
+                        threeX++;
+                    }
+                    if (fourX > handler.getWidth() / 2 + 65) {
+                        fourX--;
+                    } else if (fourX < handler.getWidth() / 2 + 65) {
+                        fourX++;
+                    }
+                }
+                default -> {
+                }
+            }
 
 		int[] xs = { oneX, twoX, threeX, fourX };
 		int j = 0;

@@ -98,33 +98,6 @@ public class Barrier extends InteractableStaticEntity {
 
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		if (isBroken) {
-			g.setColor(new Color(112, 112, 112));
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 2 - handler.getGameCamera().getxOffset()),
-					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 4 - handler.getGameCamera().getxOffset()),
-					(int) (y + 5 + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-
-			g.fillRect((int) (x + bounds.x + playerBarrier.width / 2 - handler.getGameCamera().getxOffset()),
-					(int) (y + 20 + bounds.y - handler.getGameCamera().getyOffset()), playerBarrier.width / 3,
-					playerBarrier.height / 5);
-			g.fillRect((int) (x - 30 + bounds.x - handler.getGameCamera().getxOffset()),
-					(int) (y + 20 + bounds.y - handler.getGameCamera().getyOffset()), 2 * playerBarrier.width / 3,
-					playerBarrier.height / 5);
-		} else {
-
-//			g.setColor(new Color(112,112,112));
-//			g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-//					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-			g.drawImage(Assets.barricade, (int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-					(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height, null);
-			// renderPeripherals3(g);
-		}
-	}
 
 	public void renderPeripherals3(Graphics g, Player player) {
 		g.setColor(new Color(30, 50, 40, 255));
@@ -198,6 +171,7 @@ public class Barrier extends InteractableStaticEntity {
 		Sounds.playClip(InteractSounds.BARRIER_BREAK, 1.0f, newvolume, false);
 	}
 
+        @Override
 	public void fulfillInteraction(Player player) {
 		if (usedByOtherPlayer) {
 

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
@@ -26,13 +25,7 @@ public class AmmoRefill extends InteractableStaticEntity {
 
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		g.drawImage(BWAssets.ammoBox, (int) (x - handler.getGameCamera().getxOffset()),
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
-	}
-
+        @Override
 	public void fulfillInteraction(Player player) {
 		if (usedByOtherPlayer) {
 
@@ -50,8 +43,8 @@ public class AmmoRefill extends InteractableStaticEntity {
 
 		}
 		if (cooldownTimer >= cooldown
-				&& (player.getInv().getGun().getName() == "Flamethrower"
-						|| player.getInv().getGun().getName() == "HotBox")
+				&& ("Flamethrower".equals(player.getInv().getGun().getName())
+						|| "HotBox".equals(player.getInv().getGun().getName()))
 				&& !(player.getInv().getGun().getCurrentClip() == player.getInv().getGun().getClip())) {
 			cooldownTimer = 0;
 			if (player.getInv().purchase(1000)) {

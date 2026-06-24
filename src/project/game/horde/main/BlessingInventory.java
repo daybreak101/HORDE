@@ -1,6 +1,5 @@
 package project.game.horde.main;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Map.Entry;
 
 import project.game.horde.graphics.MenuAssets;
@@ -19,7 +17,7 @@ import project.game.horde.utils.saved.SaveFileWriter;
 
 public class BlessingInventory {
 	public Handler handler;
-	public static HashMap<String, Integer> inventory = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> inventory = new HashMap<>();
 	
 	public static final int COMMON = 0, RARE = 1, EPIC = 2, LEGENDARY = 3;
 	
@@ -96,8 +94,8 @@ public class BlessingInventory {
 	
 	public BlessingInventory(Handler handler) {
 		this.handler = handler;
-		inventory = new HashMap<String, Integer>();
-		equipped = new ArrayList<String>(limit);
+		inventory = new HashMap<>();
+		equipped = new ArrayList<>(limit);
 		String blessingData;
 		String blessingDataPath = Handler.SAVE_FOLDER + File.separator + Handler.BLESSINGS_FILE;
 
@@ -154,7 +152,6 @@ public class BlessingInventory {
 				writer.newLine();
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

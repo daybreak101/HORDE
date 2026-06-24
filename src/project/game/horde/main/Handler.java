@@ -16,11 +16,7 @@ import project.game.horde.graphics.GameCamera;
 import project.game.horde.hud.HudManager;
 import project.game.horde.input.KeyManager;
 import project.game.horde.input.MouseManager;
-import project.game.horde.utils.Node;
 import project.game.horde.utils.Utils;
-import project.game.horde.utils.saved.SaveFileReader;
-import project.game.horde.utils.saved.SaveFileUtils;
-import project.game.horde.utils.saved.SaveFileWriter;
 import project.game.horde.worlds.World;
 import project.game.horde.zombieLogic.RoundLogic;
 
@@ -69,20 +65,20 @@ public class Handler {
 
 	public boolean noVisibleOrAlivePlayers() {
 		boolean visibleFound = false;
-		ArrayList<Entity> players = new ArrayList<Entity>();
+		ArrayList<Entity> players = new ArrayList<>();
 
 		players.addAll(world.getEntityManager().getOtherPlayers());
 		players.add(currentPlayer);
 		for (Entity player : players) {
 			if (player.getHealth() > 0) {
-				if (player instanceof Player) {
-					if (((Player) player).getInv().getBlessings().getBlessing().equals("In Plain Sight")
-							&& ((Player) player).getInv().getBlessings().isRunning()) {
+				if (player instanceof Player player1) {
+					if (player1.getInv().getBlessings().getBlessing().equals("In Plain Sight")
+							&& player1.getInv().getBlessings().isRunning()) {
 					} else {
 						visibleFound = true;
 					}
-				} else if (player instanceof PlayerMP) {
-					if (((PlayerMP) player).getBlessing().equals("In Plain Sight")) {
+				} else if (player instanceof PlayerMP playerMP) {
+					if (playerMP.getBlessing().equals("In Plain Sight")) {
 
 					} else {
 						visibleFound = true;
@@ -169,7 +165,7 @@ public class Handler {
 		Line2D.Float line;
 		boolean wallFound;
 
-		ArrayList<Entity> players = new ArrayList<Entity>();
+		ArrayList<Entity> players = new ArrayList<>();
 		players.addAll(world.getEntityManager().getOtherPlayers());
 		players.add(currentPlayer);
 		for (Entity player : players) {

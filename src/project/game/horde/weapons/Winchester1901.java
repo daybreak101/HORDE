@@ -7,7 +7,6 @@ import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
-import project.game.horde.weapons.Gun.GunImageDim;
 
 public class Winchester1901 extends Gun {
 

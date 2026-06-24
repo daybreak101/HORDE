@@ -87,9 +87,4 @@ public class InvisibleBounds extends InteractableStaticEntity {
 	}
 	
 
-	@Override
-	public void renderBW(Graphics g) {
-	}
-
-
 }

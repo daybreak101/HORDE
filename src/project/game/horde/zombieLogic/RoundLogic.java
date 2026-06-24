@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.powerups.PowerUpManager;
@@ -48,7 +47,7 @@ public class RoundLogic {
 		
 		powerups = new PowerUpManager(handler);
 		this.spawners = spawners;
-		queue = new ArrayList<Spawner>();
+		queue = new ArrayList<>();
 		this.map = map;
 		
 		test = false;

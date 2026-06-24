@@ -15,7 +15,7 @@ public class HudManager {
 	private GameplayElement gameplayHUD;
 	private Scoreboard scoreboard;
 	private Player player;
-	private Queue<HudElement> notifQueue = new LinkedList<HudElement>();; 
+	private Queue<HudElement> notifQueue = new LinkedList<>();; 
 	private HudElement currentNotif;
 
 	public HudManager(Handler handler, Player player) {
@@ -25,7 +25,7 @@ public class HudManager {
 		scoreboard.isVisible = false;
 		gameplayHUD = new GameplayElement(handler, player);
 		gameplayHUD.isVisible = true;
-		elements = new ArrayList<HudElement>();
+		elements = new ArrayList<>();
 	}
 
 	public void tick() {

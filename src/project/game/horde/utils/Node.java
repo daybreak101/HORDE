@@ -18,7 +18,7 @@ public class Node {
         this.y = y;
         this.room = room;
         this.vertex = vertex;
-        nextNodes = new ArrayList<Node>();
+        nextNodes = new ArrayList<>();
         radius = new Ellipse2D.Float(x - 5, y - 5, 10, 10);
         this.withinPlayable = withinPlayable == 1;
         //radius = new Ellipse2D.Float(x - 50, y - 50, 100, 100);

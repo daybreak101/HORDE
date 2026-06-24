@@ -56,20 +56,21 @@ public class WallBuy extends InteractableStaticEntity {
 
     }
 
+    @Override
     public void postTick() {
         switch (this.gunId) {
-            case 1:
+            case 1 -> {
                 gun4Sale = new Glock17(handler, handler.getCurrentPlayer());
                 cost = 500;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 gun4Sale = new Arisaka(handler, handler.getCurrentPlayer());
                 cost = 500;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 gun4Sale = new M1Garand(handler, handler.getCurrentPlayer());
                 cost = 750;
-                break;
+            }
         }
         // don't give a weapon player already has
         Player player = handler.getCurrentPlayer();
@@ -93,6 +94,7 @@ public class WallBuy extends InteractableStaticEntity {
         }
     }
 
+    @Override
     public void fulfillInteraction(Player player) {
         if (cooldownTimer >= cooldown) {
             if (!gunOwned && player.getInv().purchase(cost)) {
@@ -121,20 +123,12 @@ public class WallBuy extends InteractableStaticEntity {
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
         g.setColor(new Color(255, 255, 255));
         g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height);
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        // TODO Auto-generated method stub
-        g.setColor(new Color(42, 42, 42));
-        g.fillRect((int) (x + width - handler.getGameCamera().getxOffset()),
-                (int) (y + height - handler.getGameCamera().getyOffset()), width, height);
-
-    }
+ 
 
 }

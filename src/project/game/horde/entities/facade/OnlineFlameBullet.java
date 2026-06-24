@@ -9,10 +9,10 @@ import java.awt.geom.Path2D;
 
 import project.game.horde.entities.Entity;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
@@ -136,30 +136,6 @@ public class OnlineFlameBullet extends Entity {
 		}
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		if (waitToRender.checkIsReady()) {
-			Graphics2D g2d = (Graphics2D) g;
-			AffineTransform old = g2d.getTransform();
-			int dy = -50;
-			int dx = 40;
-			g2d.rotate(angle, x - handler.getGameCamera().getxOffset(), y - handler.getGameCamera().getyOffset());
-			if (isUpgraded) {
-				g2d.drawImage(BWAssets.upgraded_flamethrower_bullet[frame][currentAlpha],
-						Math.round(x - handler.getGameCamera().getxOffset()) + dx,
-						Math.round(y - handler.getGameCamera().getyOffset()) + dy, width, 100, null);
-			} else {
-				g2d.drawImage(BWAssets.flamethrower_bullet[frame][currentAlpha],
-						Math.round(x - handler.getGameCamera().getxOffset()) + dx,
-						Math.round(y - handler.getGameCamera().getyOffset()) + dy, width, 100, null);
-			}
-
-			g2d.setTransform(old);
-
-		} else {
-			waitToRender.tick();
-		}
-	}
 
 	public boolean checkForImpact() {
 		cb = getRotatedRectangle(x, y - height / 2, width, height, angle);
@@ -170,7 +146,9 @@ public class OnlineFlameBullet extends Entity {
 	public boolean checkForWallImpact() {
 		cb = getRotatedRectangle(x, y - height / 2, width, height, angle);
 		for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-			if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+			if (
+				!(e instanceof Barrier)
+				//!handler.getWorld().getEntityManager().getBarriers().contains(e)
 					&& cb.intersects(e.getCollisionBounds(0, 0))) {
 				return true;
 			}

@@ -1,6 +1,7 @@
 package project.game.horde.states;
 
 import java.awt.Graphics;
+
 import project.game.horde.main.Handler;
 
 public abstract class State {
@@ -25,8 +26,8 @@ public abstract class State {
 	public static State getState() {
 		return currentState;
 	}
+
 	public void selectedMap(String string) {
-		// TODO Auto-generated method stub
 		
 	}
 	

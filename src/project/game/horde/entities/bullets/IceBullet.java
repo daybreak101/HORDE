@@ -13,7 +13,7 @@ public class IceBullet extends Bullet {
     public IceBullet(Handler handler, float x, float y, int range, Gun gun) {
         super(handler, x, y, range, gun);
 
-        pellets = new ArrayList<Bullet>(9);
+        pellets = new ArrayList<>(9);
         pellets.add(new IcePellet(handler, x, y, range, 0, gun));
         pellets.add(new IcePellet(handler, x, y, range, (float) -Math.PI / 4, gun));
         pellets.add(new IcePellet(handler, x, y, range, (float) Math.PI / 4, gun));
@@ -50,12 +50,4 @@ public class IceBullet extends Bullet {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        for (int i = 0; i < pellets.size(); i++) {
-            pellets.get(i).renderBW(g);
-
-        }
-
-    }
 }

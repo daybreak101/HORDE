@@ -45,11 +45,6 @@ public class OnlineLuna extends Entity {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        render(g);
-    }
-
     public void setAngle(float angle) {
         this.angle = angle;
     }

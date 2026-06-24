@@ -20,7 +20,6 @@ public class SaveFileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(content);
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

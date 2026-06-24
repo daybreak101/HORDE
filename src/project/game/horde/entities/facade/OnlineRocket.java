@@ -1,6 +1,5 @@
 package project.game.horde.entities.facade;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -10,6 +9,7 @@ import project.game.horde.entities.Entity;
 import project.game.horde.entities.bullets.Explosion;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Assets;
@@ -103,16 +103,6 @@ public class OnlineRocket extends Entity {
 //		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
 //				width, height);
 	}
-	
-	@Override
-	public void renderBW(Graphics g) {
-		if (isUpgraded)
-			g.setColor(new Color(198,198,198));
-		else
-			g.setColor(new Color(225,225,225));
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-	}
 
 	public boolean checkForImpact() {
 		//BSystem.out.println("checking for impact");
@@ -125,7 +115,8 @@ public class OnlineRocket extends Entity {
 			}
 		}
 		for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-			if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+			if (!(e instanceof Barrier)
+				//!handler.getWorld().getEntityManager().getBarriers().contains(e)
 					&& e.getCollisionBounds(0, 0).intersects(cb)) {
 				handler.getWorld().getEntityManager().getEntities().remove(this);
 				return true;

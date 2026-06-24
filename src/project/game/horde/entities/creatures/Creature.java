@@ -75,7 +75,6 @@ public abstract class Creature extends Entity {
 
     @Override
     public void die(Player player) {
-        // TODO Auto-generated method stub
 
     }
 

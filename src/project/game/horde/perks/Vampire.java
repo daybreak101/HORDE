@@ -26,6 +26,7 @@ public class Vampire extends Perk {
 	}
 	
 	Timer tempHealthLossTimer = new Timer(Vampire.TEMPHEALTH_LOSS_TIMER);
+        @Override
 	public void tick() {
 		if (player.getInv().getVamp() != 3 && player.getTempHealth() > 0) {
 			tempHealthLossTimer.tick();

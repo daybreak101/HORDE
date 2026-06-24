@@ -17,12 +17,12 @@ import project.game.horde.main.Game;
 
 public class Display {
 
-    private Game game;
+    private final Game game;
     private JFrame frame;
     private Canvas canvas;
     private JFXPanel fxPanel;
 
-    private String title;
+    private final String title;
     private int width, height;
     public static final int STANDARD = 0, FULLSCREEN = 2, WINDOWEDFULLSCREEN = 1;
     private boolean isChangingDisplay = false;
@@ -105,7 +105,7 @@ public class Display {
     }
 
     // use frame. for more suggestions to change properties of the window
-    public void createDisplay(int displayType) {
+    private void createDisplay(int displayType) {
 
         frame = new JFrame(title);
 

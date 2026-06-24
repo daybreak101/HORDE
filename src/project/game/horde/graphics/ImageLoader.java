@@ -12,7 +12,6 @@ public class ImageLoader {
 			BufferedImage image = ImageIO.read(ImageLoader.class.getResource(path));
 			return ImageUtils.upscaleImage(image, image.getWidth() * upscaleFactor, image.getHeight() * upscaleFactor);
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.exit(1);
 		}
 		return null;

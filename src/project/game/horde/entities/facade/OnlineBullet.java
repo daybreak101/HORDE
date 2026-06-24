@@ -99,16 +99,6 @@ public class OnlineBullet extends Entity {
 		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
 				width, height);
 	}
-	
-	@Override
-	public void renderBW(Graphics g) {
-		if (isUpgraded)
-			g.setColor(new Color(198,198,198));
-		else
-			g.setColor(new Color(225,225,225));
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-	}
 
 	public boolean checkForImpact() {
 		//BSystem.out.println("checking for impact");

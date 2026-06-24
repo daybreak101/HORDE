@@ -42,19 +42,6 @@ public class ElectricTrap extends Trap {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        if (!activated) {
-            g.setColor(Color.black);
-            g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()), width, height);
-        } else {
-            g.setColor(new Color(29, 29, 29));
-            g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()), width, height);
-        }
-
-    }
 
     public void killInArea() {
         Player player = handler.getCurrentPlayer();

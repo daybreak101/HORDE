@@ -8,7 +8,6 @@ import java.awt.geom.AffineTransform;
 import project.game.horde.entities.blood.Blood;
 import project.game.horde.entities.bullets.Grenade;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.Stronghold;
 import project.game.horde.perks.Vampire;
@@ -52,25 +51,6 @@ public class Stoker extends Zombie {
 
 	}
 	
-	@Override
-	public void renderBW(Graphics g) {
-		g.drawImage(Assets.shadow, (int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
-		float moveToX = closestPlayer.getCenterX() - handler.getGameCamera().getxOffset();
-		float moveToY = closestPlayer.getCenterY() - handler.getGameCamera().getyOffset();
-		float angle = (float) Math
-				.toDegrees(Math.atan2(-(x - handler.getGameCamera().getxOffset() - moveToX + width / 2),
-						y - handler.getGameCamera().getyOffset() - moveToY + height / 2));
-		Graphics2D g2d = (Graphics2D) g;
-		AffineTransform old = g2d.getTransform();
-		g2d.rotate(Math.toRadians(angle), x - handler.getGameCamera().getxOffset() + width / 2,
-				y - handler.getGameCamera().getyOffset() + height / 2);
-		g2d.drawImage(BWAssets.toxen, (int) (x - handler.getGameCamera().getxOffset()),
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-		g2d.setTransform(old);
-
-	}
 
 	// implement where stoker only shoots when near player
         @Override

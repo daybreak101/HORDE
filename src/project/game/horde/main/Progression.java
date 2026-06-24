@@ -89,7 +89,6 @@ public class Progression {
 			writer.write(Integer.toString(coins));
 			writer.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

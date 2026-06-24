@@ -22,13 +22,6 @@ public class FarmMap extends Entity {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        //map = BWAssets.factoryMap;
-        g.drawImage(map, (int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
-    }
 
     @Override
     public void render(Graphics g) {

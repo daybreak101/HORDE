@@ -3,9 +3,7 @@ package project.game.horde.states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
 
-import project.game.horde.display.Display;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.ui.ClickListener;
@@ -41,7 +39,6 @@ public class MenuState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -63,7 +60,6 @@ public class MenuState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		
@@ -78,7 +74,6 @@ public class MenuState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		
@@ -94,7 +89,6 @@ public class MenuState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		
@@ -110,7 +104,6 @@ public class MenuState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		
@@ -118,13 +111,11 @@ public class MenuState extends State{
 	
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		uiManager.tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor(Color.black);
 		g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
 		uiManager.render(g);

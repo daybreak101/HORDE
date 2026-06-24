@@ -109,10 +109,4 @@ public class Rocket extends Bullet {
                 width, height);
         g2d.setTransform(old);
     }
-
-    @Override
-    public void renderBW(Graphics g) {
-        g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-    }
 }

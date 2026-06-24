@@ -15,7 +15,7 @@ import project.game.horde.utils.saved.SaveFileWriter;
 
 public class CustomHatInventory {
 	public Handler handler;
-	public static HashMap<String, Integer> inventory = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> inventory = new HashMap<>();
 	
 	public static final int COMMON = 0, RARE = 1, EPIC = 2, LEGENDARY = 3;
 	
@@ -123,7 +123,6 @@ public class CustomHatInventory {
 			writer.write(Integer.toString(bunny));
 			writer.newLine();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

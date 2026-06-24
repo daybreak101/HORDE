@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Graphics2D;
-import java.awt.AlphaComposite;
 
 import project.game.horde.graphics.MenuAssets;
 import project.game.horde.main.Handler;
@@ -54,7 +52,6 @@ public class GoldenCoinNotification extends HudElement {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		Color color = handler.getSettings().getHudColor();
 		int r = color.getRed();
 		int gr = color.getGreen();

@@ -1,16 +1,11 @@
 package project.game.horde.main;
 
-import java.util.HashMap;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.Map.Entry;
 
 import project.game.horde.graphics.CharAssets;
 import project.game.horde.utils.Utils;
@@ -20,7 +15,7 @@ import project.game.horde.utils.saved.SaveFileWriter;
 
 public class CustomSkinInventory {
 	public Handler handler;
-	public static HashMap<String, Integer> inventory = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> inventory = new HashMap<>();
 	
 	public static final int COMMON = 0, RARE = 1, EPIC = 2, LEGENDARY = 3;
 	
@@ -113,7 +108,6 @@ public class CustomSkinInventory {
 			writer.write(Integer.toString(blueAlien));
 			writer.newLine();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -27,16 +27,16 @@ public class RoomLogic {
 		this.handler = handler;
 		this.world = world;
 		currentRoom = 1;
-		activeRooms = new HashSet<Integer>();
-		openedRooms = new HashSet<Integer>();
+		activeRooms = new HashSet<>();
+		openedRooms = new HashSet<>();
 		openedRooms.add(1);
-		spawners = new ArrayList<Spawner>();
+		spawners = new ArrayList<>();
 		createAdjacentRooms(adjacentRoomsPath);
 		createSpawners(spawnersPath);
 	}
 	
 	public void createAdjacentRooms(String adjacentRoomsPath) {
-		this.adjacentRooms = new HashMap<Integer, Set<Integer>>();
+		this.adjacentRooms = new HashMap<>();
 
 		// read file
 		String file = Utils.loadFileAsString(adjacentRoomsPath);
@@ -49,7 +49,7 @@ public class RoomLogic {
 		int current, room;
 		Set<Integer> actives;
 		while (i < tokens.length) {
-			actives = new HashSet<Integer>();
+			actives = new HashSet<>();
 			current = Utils.parseInt(tokens[i++]);
 			actives.add(current);
 			
@@ -83,7 +83,7 @@ public class RoomLogic {
 		int n = handler.getCurrentPlayer().getClosestNode();
 		Node node = world.getPathingLogic().getNodes().get(n);
 		
-		activeRooms = new HashSet<Integer>();
+		activeRooms = new HashSet<>();
 		activeRooms.addAll(adjacentRooms.get(node.getRoom()));
 		
 		
@@ -99,7 +99,7 @@ public class RoomLogic {
 			}
 		}
 		
-		ArrayList<Integer> active = new ArrayList<Integer>(activeRooms);
+		ArrayList<Integer> active = new ArrayList<>(activeRooms);
 		for(int i = 0; i < active.size(); i++) {
 			if(!openedRooms.contains(active.get(i))) {
 				activeRooms.remove(active.get(i));

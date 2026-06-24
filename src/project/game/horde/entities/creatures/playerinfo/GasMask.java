@@ -5,9 +5,10 @@ import project.game.horde.utils.Timer;
 
 public class GasMask {
 
-	private Handler handler;
-	private int currentDurability, maxDurability;
-	private Timer tickDamage;
+	private final Handler handler;
+	private int currentDurability;
+	private final int maxDurability;
+	private final Timer tickDamage;
 
 	public GasMask(Handler handler) {
 		this.handler = handler;

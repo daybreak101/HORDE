@@ -27,15 +27,6 @@ public class IcePellet extends Bullet{
 				width, height);
 	}
 	
-	@Override
-	public void renderBW(Graphics g) {
-		if (gunFiredFrom.isUpgraded())
-			g.setColor(new Color(29,29,29));
-		else
-			g.setColor(new Color(179,179,179));
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-	}
 	
 	@Override
 	public boolean checkForImpact() {

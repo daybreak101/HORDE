@@ -18,7 +18,7 @@ public class LightingLogic {
 	public LightingLogic(Handler handler, World world, String lightsPath) {
 		this.handler = handler;
 		this.world = world;
-		lightPositions = new ArrayList<LightSource>();
+		lightPositions = new ArrayList<>();
 		shadowMap = new BufferedImage(handler.getWidth(), handler.getHeight(),
 				BufferedImage.TYPE_INT_ARGB);
 //		shadowMap = new BufferedImage(handler.getGame().getWidth(), handler.getGame().getHeight(),
@@ -26,7 +26,7 @@ public class LightingLogic {
 		createLightSources(lightsPath);
 	}
 
-	public void createLightSources(String lightsPath) {
+	private void createLightSources(String lightsPath) {
 		// read file
 		String file = Utils.loadFileAsString(lightsPath);
 		String[] tokens = file.split("\\s+");

@@ -1,7 +1,5 @@
 package project.game.horde.perks;
 
-import java.awt.Graphics;
-
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;

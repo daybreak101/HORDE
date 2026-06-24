@@ -262,9 +262,4 @@ public class Wolf extends Creature {
         return justAttacked;
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        render(g);
-
-    }
 }

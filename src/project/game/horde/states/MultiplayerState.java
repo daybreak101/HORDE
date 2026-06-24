@@ -5,11 +5,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import com.esotericsoftware.kryonet.Connection;
-
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
-import project.game.horde.network.Peer;
 import project.game.horde.ui.ClickListener;
 import project.game.horde.ui.TextButton;
 import project.game.horde.ui.UIManager;
@@ -36,14 +33,12 @@ public class MultiplayerState extends State {
 				try {
 					lobbyState.startServer();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 				State.setState(lobbyState);
 			}
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -71,13 +66,13 @@ public class MultiplayerState extends State {
 		}));
 		uiManager.addObject(new TextButton(handler, 550, 300, 300, 100, "Join Lobby", 30, new ClickListener() {
 
+            @Override
             public void onClick(UIObject ui) {
                 handler.getMouseManager().setUIManager(null);
                 MultiLobbyState lobbyState = new MultiLobbyState(handler, user, false);
                 try {
                     lobbyState.joinServer("localhost"); // Replace "localhost" with the actual server IP
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
                 State.setState(lobbyState);
             }

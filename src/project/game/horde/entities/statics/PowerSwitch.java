@@ -12,7 +12,6 @@ public class PowerSwitch extends InteractableStaticEntity {
 	
 	public PowerSwitch(Handler handler, int id, float x, float y) {
 		super(handler, id, x, y, 50, 50);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -45,16 +44,10 @@ public class PowerSwitch extends InteractableStaticEntity {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor(new Color(100, 100, 255));
 		g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
 				(int) (y - handler.getGameCamera().getyOffset()), width, height);
 
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
 }

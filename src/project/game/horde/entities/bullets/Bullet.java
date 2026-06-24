@@ -9,11 +9,11 @@ import java.util.Random;
 import project.game.horde.entities.Entity;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.DoubleTap;
-import project.game.horde.weapons.Arisaka;
 import project.game.horde.weapons.Gun;
 import project.game.horde.weapons.GunVars;
 
@@ -47,7 +47,7 @@ public class Bullet extends Entity {
         angle = (float) Math.atan2(-(mouseY), -(mouseX));
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
-        zombiesHit = new ArrayList<Zombie>();
+        zombiesHit = new ArrayList<>();
 
         if (gun.getName().equals(GunVars.AWP_UPGRADEDNAME)) {
             Random rand = new Random();
@@ -73,7 +73,7 @@ public class Bullet extends Entity {
         angle = (float) Math.atan2(-(mouseY), -(mouseX));
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
-        zombiesHit = new ArrayList<Zombie>();
+        zombiesHit = new ArrayList<>();
     }
 
     public Bullet(Handler handler, float x, float y, int range, Color color) {
@@ -91,7 +91,7 @@ public class Bullet extends Entity {
         angle = (float) Math.atan2(-(mouseY), -(mouseX));
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
-        zombiesHit = new ArrayList<Zombie>();
+        zombiesHit = new ArrayList<>();
     }
 
     // turret bullet
@@ -109,7 +109,7 @@ public class Bullet extends Entity {
         angle = (float) Math.atan2(-mouseY, -mouseX);
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
-        zombiesHit = new ArrayList<Zombie>();
+        zombiesHit = new ArrayList<>();
     }
 
     // shotgun pellet
@@ -131,7 +131,7 @@ public class Bullet extends Entity {
         // yMove = (float) (speed * Math.sin(angle + radianOffset));
         xMove = (float) Math.cos(angle + radianOffset);
         yMove = (float) Math.sin(angle + radianOffset);
-        zombiesHit = new ArrayList<Zombie>();
+        zombiesHit = new ArrayList<>();
     }
 
     public float getAngle() {
@@ -151,20 +151,6 @@ public class Bullet extends Entity {
             moveX();
             moveY();
             travelTicker++;
-            // TODO: Remove this
-            if (!fromTrap) {
-                if (checkForImpact()
-                        && (zombiesHit.size() >= 6 && player.getInv().getDoubletap() >= 1 || zombiesHit.size() >= 4)) {
-                    //System.out.println("impacted");
-                    break;
-                }
-            } else {
-                if (checkForImpactfromTrap() && zombiesHit.size() >= 4) {
-                    //System.out.println("impacted");
-                    break;
-                }
-            }
-
         }
         travelTicker = 0;
 
@@ -190,18 +176,6 @@ public class Bullet extends Entity {
             g.setColor(new Color(255, 160, 240));
         } else {
             g.setColor(Color.yellow);
-        }
-        g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-
-        if (gunFiredFrom.isUpgraded()) {
-            g.setColor(new Color(198, 198, 198));
-        } else {
-            g.setColor(new Color(226, 226, 226, 100));
         }
         g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
                 width, height);
@@ -243,8 +217,8 @@ public class Bullet extends Entity {
             }
         }
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-            if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
-                    && e.getCollisionBounds(0, 0).intersects(cb)) {
+            //if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+            if (!(e instanceof Barrier) && e.getCollisionBounds(0, 0).intersects(cb)) {
                 handler.getWorld().getEntityManager().getEntities().remove(this);
                 return true;
             }
@@ -281,7 +255,8 @@ public class Bullet extends Entity {
         }
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
 
-            if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+            if ( //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                    e instanceof Barrier
                     && e.getCollisionBounds(0, 0).intersects(cb)) {
                 handler.getWorld().getEntityManager().getEntities().remove(this);
                 return true;

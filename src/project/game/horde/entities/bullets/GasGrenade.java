@@ -7,10 +7,10 @@ import java.awt.geom.Ellipse2D;
 
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.PhD;
 import project.game.horde.sounds.InteractSounds;
@@ -144,7 +144,9 @@ public class GasGrenade extends Bullet {
         }
 
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-            if ( !handler.getWorld().getEntityManager().getBarriers().contains(e)
+            if ( 
+                !(e instanceof Barrier)
+                //!handler.getWorld().getEntityManager().getBarriers().contains(e)
                     && e.getCollisionBounds(0, 0).intersects(cb)) {
                 return true;
             }
@@ -230,30 +232,4 @@ public class GasGrenade extends Bullet {
             // (int) gasRadius.getWidth(), (int) gasRadius.getHeight());
         }
     }
-
-    @Override
-    public void renderBW(Graphics g) {
-        g.setColor(new Color(150, 200, 100));
-        g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-
-        if (gasRadius != null) {
-            if (gasTimer.counter >= 580) {
-                //i++;
-                g.drawImage(BWAssets.gas_cloud[i], (int) (gasRadius.getX() - handler.getGameCamera().getxOffset()),
-                        (int) (gasRadius.getY() - handler.getGameCamera().getyOffset()), (int) gasRadius.getWidth(),
-                        (int) gasRadius.getHeight(), null);
-            } else {
-                g.drawImage(BWAssets.gas_cloud[0], (int) (gasRadius.getX() - handler.getGameCamera().getxOffset()),
-                        (int) (gasRadius.getY() - handler.getGameCamera().getyOffset()), (int) gasRadius.getWidth(),
-                        (int) gasRadius.getHeight(), null);
-            }
-
-            // g.setColor(new Color(150, 200, 100, 150));
-            // g.fillOval((int) (gasRadius.getX() - handler.getGameCamera().getxOffset()),
-            // (int) (gasRadius.getY() - handler.getGameCamera().getyOffset()),
-            // (int) gasRadius.getWidth(), (int) gasRadius.getHeight());
-        }
-    }
-
 }

@@ -1,21 +1,17 @@
 package project.game.horde.entities.creatures.playerinfo;
 
-import java.awt.geom.Ellipse2D;
-
 import project.game.horde.entities.areas.Areas;
 import project.game.horde.entities.creatures.Player;
-import project.game.horde.entities.creatures.Zombie;
-import project.game.horde.entities.creatures.ZombieType;
 import project.game.horde.entities.statics.traps.IcyWater;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Timer;
 
 public class FreezeStatusForPlayer {
-	private Handler handler;
+	private final Handler handler;
 	protected boolean isFrozen = false;
 	private boolean inWater = false;
 
-	private Player player;
+	private final Player player;
 	
 	public FreezeStatusForPlayer(Handler handler, Player player) {
 		this.player = player;
@@ -48,7 +44,8 @@ public class FreezeStatusForPlayer {
 		return inWater;
 	}
 	
-	private int iceCounter = 0, iceMax = 300;
+	private int iceCounter = 0;
+	private final int iceMax = 300;
 	public void freezing() {
 		if (inWater) {
 			iceCounter++;
@@ -60,7 +57,7 @@ public class FreezeStatusForPlayer {
 		}
 	}
 	
-	private Timer breakCooldown = new Timer(60);
+	private final Timer breakCooldown = new Timer(60);
 	private int breakCounter = 0;
 
 	public void breakFreeFromIce() {

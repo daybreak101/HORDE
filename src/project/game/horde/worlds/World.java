@@ -295,22 +295,6 @@ public class World {
         entityManager.getCurrentPlayer().renderLaser(g2d);
 
         g2d.setTransform(originalTransform);
-
-        /////////////////////////////////////////////////////////////
-		if (!handler.getGame().captureImage) {
-            if (!entityManager.getOtherPlayers().isEmpty()) {
-                if (entityManager.getCurrentPlayer().getHealth() > 0 || entityManager.oneAlive()) {
-                    entityManager.getCurrentPlayer().renderHUD(g);
-                }
-                if (!entityManager.oneAlive()) {
-                    entityManager.getCurrentPlayer().renderHUD(g);
-                }
-            } else {
-                if (entityManager.getCurrentPlayer().getHealth() > 0 || !entityManager.oneAlive()) {
-                    entityManager.getCurrentPlayer().renderHUD(g);
-                }
-            }
-        }
         rooms.render(g2d);
 
     }
@@ -341,7 +325,9 @@ public class World {
         Line2D.Float line = new Line2D.Float(x1, y1, x2, y2);
         for (InteractableStaticEntity e : entityManager.getInteractables()) {
             if (line.intersects(e.getCollisionBounds(0, 0))) {
-                if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                if (
+                    !(e instanceof Barrier)
+                    //!handler.getWorld().getEntityManager().getBarriers().contains(e)
                         && !(e instanceof Door)) {
                     return true;
                 }
@@ -360,7 +346,10 @@ public class World {
         Ellipse2D.Float point = new Ellipse2D.Float(x, y, 20, 20);
         for (InteractableStaticEntity e : entityManager.getInteractables()) {
             if (point.intersects(e.getCollisionBounds(0, 0))) {
-                if (!handler.getWorld().getEntityManager().getBarriers().contains(e)) {
+                if (
+                    !(e instanceof Barrier)
+                    //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                ) {
                     return true;
                 }
             }

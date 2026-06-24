@@ -53,11 +53,6 @@ public class Player extends Creature {
     Inventory inv;
     Stats stats;
 
-    int closestNode;
-
-    Rectangle cb;
-    int timer = 0;
-
     // hud
     private HudManager hud;
     private RevivingElement reviveHud = null;
@@ -73,7 +68,6 @@ public class Player extends Creature {
     PlayerSprint playerSprint;
     BurnStatusForPlayer burnStatus;
     FreezeStatusForPlayer freezeStatus;
-    int strongholdArmor = 0;
     float strongholdDamageMultiplier = 0.0f;
     private int tempHealth = 0;
     private int armor;
@@ -110,7 +104,7 @@ public class Player extends Creature {
         initPlayer();
     }
 
-    public void initPlayer() {
+    private void initPlayer() {
         hud = new HudManager(handler, this);
         hud.addObject(new GameplayElement(handler, this));
         gameCamera = new GameCamera(handler, 0, 0);
@@ -240,7 +234,7 @@ public class Player extends Creature {
     }
 
     private int reviveProgress = 0;
-    private int reviveMax = 300;
+    private final int reviveMax = 300;
 
     public void reviving() {
         isReviving = true;
@@ -328,7 +322,7 @@ public class Player extends Creature {
 
     public boolean moved = false;
 
-    private Timer sendMoveUpdate = new Timer(2);
+    private final Timer sendMoveUpdate = new Timer(2);
 
     @Override
     public void move() {
@@ -368,11 +362,10 @@ public class Player extends Creature {
         }
     }
 
-
     @Override
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
         for (PlayerMP e : handler.getWorld().getEntityManager().getOtherPlayers()) {
-            if ( e.getCollisionBounds(1f, 1f).intersects(getCollisionBounds(xOffset, yOffset))) {
+            if (e.getCollisionBounds(1f, 1f).intersects(getCollisionBounds(xOffset, yOffset))) {
                 return true;
             }
         }
@@ -493,7 +486,7 @@ public class Player extends Creature {
     }
 
     float angle, lastAngle;
-    private Timer sendRotateUpdate = new Timer(3);
+    private final Timer sendRotateUpdate = new Timer(3);
 
     public void renderStronghold(Graphics g) {
         if (getInv().strongholdActivation) {
@@ -582,17 +575,18 @@ public class Player extends Creature {
             g2d.drawImage(skin[1], (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-            if (hat == CustomHatInventory.CHRISTMAS) {
-                g2d.drawImage(CharAssets.christmasHat, (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
-            } else if (hat == CustomHatInventory.REINDEER) {
-                g2d.drawImage(CharAssets.reindeer, (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
-            } else if (hat == CustomHatInventory.BUNNY) {
-                g2d.drawImage(CharAssets.bunny, (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
-            } else {
-
+            switch (hat) {
+                case CustomHatInventory.CHRISTMAS ->
+                    g2d.drawImage(CharAssets.christmasHat, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.REINDEER ->
+                    g2d.drawImage(CharAssets.reindeer, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.BUNNY ->
+                    g2d.drawImage(CharAssets.bunny, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                default -> {
+                }
             }
             g2d.setTransform(old);
         }
@@ -864,12 +858,6 @@ public class Player extends Creature {
 
     public void setPlayerReviving(PlayerMP player) {
         this.playerReviving = player;
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-        render(g);
-
     }
 
     public User getUser() {

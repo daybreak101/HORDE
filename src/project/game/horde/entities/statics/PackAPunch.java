@@ -1,6 +1,5 @@
 package project.game.horde.entities.statics;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import project.game.horde.entities.creatures.Player;
@@ -267,15 +266,6 @@ public class PackAPunch extends InteractableStaticEntity {
 
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-		g.setColor(new Color(105, 105, 105));
-		g.fillRect((int) (x + 10 - handler.getGameCamera().getxOffset()),
-				(int) (y + 10 - handler.getGameCamera().getyOffset()), width - 40, height - 40);
 
-	}
 
 }

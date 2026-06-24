@@ -3,10 +3,8 @@ package project.game.horde.hud;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-
 import java.awt.Rectangle;
+
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Utils;
 

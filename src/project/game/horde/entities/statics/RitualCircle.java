@@ -129,12 +129,5 @@ public class RitualCircle extends InteractableStaticEntity {
 
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		g.setColor(new Color(105, 105, 105, 100));
-		g.fillOval((int) (x - 100 - handler.getGameCamera().getxOffset()),
-				(int) (y - 100 - handler.getGameCamera().getyOffset()), 200, 200);
-
-	}
 
 }

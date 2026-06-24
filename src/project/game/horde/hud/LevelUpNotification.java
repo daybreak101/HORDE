@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import project.game.horde.main.Handler;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
 
@@ -50,7 +49,6 @@ public class LevelUpNotification extends HudElement {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		Color color = handler.getSettings().getHudColor();
 		int r = color.getRed();
 		int gr = color.getGreen();

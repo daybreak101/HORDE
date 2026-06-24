@@ -103,7 +103,6 @@ public class GlobalStats {
 
 			writer.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

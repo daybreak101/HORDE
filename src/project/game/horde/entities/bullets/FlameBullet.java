@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-import java.util.Random;
 
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.main.Handler;
@@ -15,8 +15,6 @@ import project.game.horde.utils.RandomUtil;
 import project.game.horde.weapons.Gun;
 
 public class FlameBullet extends Bullet {
-
-	ArrayList<Zombie> zombiesHit;
 	Ellipse2D.Float staticCollision;
 	
 	public FlameBullet(Handler handler, float x, float y, int range, Gun gun) {
@@ -29,9 +27,10 @@ public class FlameBullet extends Bullet {
 		xMove = (float) ( Math.cos(angle));
 		yMove = (float) ( Math.sin(angle));
 
-		zombiesHit = new ArrayList<Zombie>();
+		zombiesHit = new ArrayList<>();
 	}
 
+        @Override
 	public void postTick() {
 		angle = (float) Math.atan2(-(mouseY + height/2), -(mouseX + width/2));
 		xMove = (float) ( Math.cos(angle));
@@ -40,6 +39,7 @@ public class FlameBullet extends Bullet {
 		height++;
 	}
 
+        @Override
 	public boolean checkForImpact() {
 		cb = new Rectangle((int) (x + bounds.x), (int) (y + bounds.y), width, height);
 		staticCollision = new Ellipse2D.Float((x + bounds.x + width/3), (y + bounds.y + height/3), width/3, height/3);
@@ -59,7 +59,10 @@ public class FlameBullet extends Bullet {
 		}
 
 		for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-			if (!handler.getWorld().getEntityManager().getBarriers().contains(e) && staticCollision.intersects(e.getCollisionBounds(0, 0))) {
+			if (
+				//!handler.getWorld().getEntityManager().getBarriers().contains(e) 
+				!(e instanceof Barrier)
+				&& staticCollision.intersects(e.getCollisionBounds(0, 0))) {
 				handler.getWorld().getEntityManager().getEntities().remove(this);
 				return true;
 			}
@@ -75,7 +78,6 @@ public class FlameBullet extends Bullet {
 
 	int color = 0;
 	int alpha = 200;
-	Random rand = new Random();
 
 	@Override
 	public void render(Graphics g) {

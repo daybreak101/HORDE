@@ -112,39 +112,6 @@ public class TrapSwitch extends InteractableStaticEntity {
 
 	}
 	
-	@Override
-	public void renderBW(Graphics g) {
-		g.setColor(new Color(76,76,76));
-
-		// 0 is up
-		// 1 is down
-		// 2 is left
-		// 3 is right
-
-		switch (rotation) {
-		case 0:
-			g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - height/2 - handler.getGameCamera().getyOffset()), width, height);
-			break;
-		case 1:
-			g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y + height/2 - handler.getGameCamera().getyOffset()), width, height);
-			break;
-		case 2:
-			g.fillRect((int) (x - width/2 - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height);
-			break;
-		case 3:
-			g.fillRect((int) (x + width/2 - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height);
-			break;
-		default:
-			g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-					(int) (y - handler.getGameCamera().getyOffset()), width, height);
-			break;
-		}
-
-	}
 
 
 }

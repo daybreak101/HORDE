@@ -7,6 +7,12 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import javafx.application.Platform;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
+import javafx.scene.transform.Rotate;
 import project.game.horde.graphics.MenuAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
@@ -18,27 +24,14 @@ import project.game.horde.ui.TextButton;
 import project.game.horde.ui.UIManager;
 import project.game.horde.ui.UIObject;
 import project.game.horde.utils.Utils;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
-import javafx.scene.transform.Rotate;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class PerkState extends State {
 
-	private UIManager uiManager;
-	private BufferedImage chipBag;
+	private final UIManager uiManager;
+	private final BufferedImage chipBag;
 	private Perk perk;
 	private int level;
-	private String perkName, jokeDesc, basedesc, lvl1desc, lvl2desc, lvl3desc;
+	private final String perkName, jokeDesc, basedesc, lvl1desc, lvl2desc, lvl3desc;
 
 	public PerkState(Handler handler, Perk perk, BufferedImage perkBag, User user, State lastState) {
 		super(handler);

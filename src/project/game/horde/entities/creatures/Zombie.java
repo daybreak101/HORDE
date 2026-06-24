@@ -20,7 +20,6 @@ import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Animation;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.hud.CritElement;
 import project.game.horde.hud.DamageElement;
 import project.game.horde.hud.ZombieHealthElement;
@@ -41,8 +40,6 @@ public class Zombie extends Creature {
     protected int id;
     protected Animation zombieAnim, zombieAttackAnim, crawlerAnim, crawlerAttackAnim, enhancedZombieAnim,
             enhancedZombieAttackAnim;
-    protected Animation BWzombieAnim, BWzombieAttackAnim, BWcrawlerAnim, BWcrawlerAttackAnim, BWenhancedZombieAnim,
-            BWenhancedZombieAttackAnim;
     protected boolean justAttacked = false;
     private int attackDamage;
     protected Random rand = new Random();
@@ -73,9 +70,6 @@ public class Zombie extends Creature {
         zombieAnim = new Animation(150, Assets.zombieAnim);
         zombieAttackAnim = new Animation(100, Assets.zombieAttackAnim, true);
         crawlerAnim = new Animation(100, Assets.crawlerAnim);
-        BWzombieAnim = new Animation(150, BWAssets.zombieAnim);
-        BWzombieAttackAnim = new Animation(100, BWAssets.zombieAttackAnim, true);
-        BWcrawlerAnim = new Animation(100, BWAssets.crawlerAnim);
         this.speed = speed;
         attackDamage = 10;
         this.health = health;
@@ -133,7 +127,6 @@ public class Zombie extends Creature {
                 attackCooldown.tick();
                 if (attackCooldown.isReady()) {
                     zombieAttackAnim.resetAnim();
-                    BWzombieAttackAnim.resetAnim();
                     justAttacked = false;
                     attackCooldown.resetTimer();
                 }
@@ -475,7 +468,6 @@ public class Zombie extends Creature {
     }
 
     Line2D[] z2p = new Line2D[5];
-    boolean intersection = false;
 
     public boolean checkForObstacles() {
         // if not working, check for all players
@@ -484,7 +476,10 @@ public class Zombie extends Creature {
                 closestPlayer.getCenterY());
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
             if (z2p[0].intersects(e.getCollisionBounds(0, 0))) {
-                if (!handler.getWorld().getEntityManager().getBarriers().contains(e)) {
+                if (
+                    !(e instanceof Barrier)
+                    //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                ) {
                     return true;
                 }
             }
@@ -507,7 +502,10 @@ public class Zombie extends Creature {
         for (int i = 1; i < 5; i++) {
             for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
                 if (z2p[i].intersects(e.getCollisionBounds(0, 0))) {
-                    if (!handler.getWorld().getEntityManager().getBarriers().contains(e)) {
+                    if (
+                        !(e instanceof Barrier)
+                        //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                    ) {
                         return true;
                     }
                 }
@@ -570,52 +568,7 @@ public class Zombie extends Creature {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        float moveToX, moveToY;
-        if (xMove == 0 && yMove == 0) {
-        } else if (!freezeStatus.isFrozen()) {
-            moveToX = x - (x + xMove);
-            moveToY = y - (y + yMove);
-            rotationAngle = (float) Math.toDegrees(Math.atan2(-moveToX, moveToY));
-        }
-        if (!isCrawler) {
-            g.drawImage(Assets.shadow, (int) (getRenderX()), (int) (getRenderY()), width, height, null);
-        }
 
-        if (burnStatus.isBurning()) {
-            g.setColor(new Color(179, 179, 179));
-            g.fillOval((int) (getRenderX()), (int) (getRenderY()), width, height);
-        }
-
-        Graphics2D g2d = (Graphics2D) g;
-        AffineTransform old = g2d.getTransform();
-        g2d.rotate(Math.toRadians(rotationAngle), getRenderX() + width / 2, getRenderY() + height / 2);
-
-        BufferedImage currentImage = BWAssets.crawler;
-        if (freezeStatus.isFrozen()) {
-            currentImage = BWAssets.frozenZombie;
-        } else if (isCrawler) {
-            g2d.drawImage(BWAssets.crawler, (int) (x - (height * 1.25 / 2) - handler.getGameCamera().getxOffset()),
-                    (int) (y - (width * 1.25 / 2) - handler.getGameCamera().getyOffset()), (int) (width * 1.25),
-                    (int) (height * 1.25), null);
-
-        } else if (justAttacked) {
-            currentImage = BWzombieAttackAnim.getCurrentFrame(); 
-        }else {
-            currentImage = BWzombieAnim.getCurrentFrame();
-        }
-
-        if (!isCrawler) {
-            g2d.drawImage(currentImage, (int) (getRenderX()), (int) (getRenderY()), width, height, null);
-        }
-        g2d.setTransform(old);
-
-        if (handler.getSettings().isHealthBar()) {
-            healthBar.render(g);
-        }
-
-    }
 
     public float getRotationAngle() {
         return rotationAngle;

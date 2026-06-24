@@ -9,19 +9,18 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.creatures.ZombieType;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Timer;
 
 public class Blood extends Entity {
 
     protected int timer, counter;
-    protected float x, y;
-    protected int width, height;
-    protected Handler handler;
+    // protected float x, y;
+    // protected int width, height;
+    // protected Handler handler;
     protected int bloodType;
     Rectangle rect;
-    BufferedImage bloodImage, BWBloodImage;
+    BufferedImage bloodImage;
     protected int damageToPlayer;
     protected int damageToZombie;
     Timer damageTimer;
@@ -44,19 +43,16 @@ public class Blood extends Entity {
         switch (bloodType) {
             case ZombieType.ZOMBIE -> {
                 bloodImage = Assets.zombieBlood;
-                BWBloodImage = BWAssets.zombieBlood;
             }
-            case ZombieType.LICKER ->
-                BWBloodImage = BWAssets.lickerBlood;
+            case ZombieType.LICKER -> {
+            }
             case ZombieType.TOXEN -> {
-                BWBloodImage = BWAssets.toxenBlood;
                 timer = 900;
                 damageTimer = new Timer(30);
                 damageToPlayer = 5;
                 damageToZombie = 500;
             }
             case ZombieType.STOKER -> {
-                BWBloodImage = BWAssets.toxenBlood;
                 timer = 600;
                 damageTimer = new Timer(30);
                 damageToPlayer = 5;
@@ -109,12 +105,6 @@ public class Blood extends Entity {
         g.drawImage(bloodImage, (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-        g.drawImage(BWBloodImage, (int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
     }
 
     public int getCounter() {

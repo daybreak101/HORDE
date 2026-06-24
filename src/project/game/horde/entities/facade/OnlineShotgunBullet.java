@@ -4,17 +4,15 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import project.game.horde.main.Handler;
-import project.game.horde.weapons.Gun;
 
 public class OnlineShotgunBullet extends OnlineBullet {
 
     ArrayList<OnlineBullet> pellets;
-    Handler handler;
 
     public OnlineShotgunBullet(Handler handler, float x, float y, int range, float angle, double spread, int pelletNum, boolean isUpgraded) {
         super(handler, x, y, range, (float) angle, isUpgraded);
 
-        pellets = new ArrayList<OnlineBullet>(pelletNum);
+        pellets = new ArrayList<>(pelletNum);
         for (int i = 0; i < pelletNum; i++) {
             if (i == 0) {
                 pellets.add(new OnlineBullet(handler, x, y, range, (float) angle, isUpgraded)); 
@@ -48,15 +46,6 @@ public class OnlineShotgunBullet extends OnlineBullet {
     public void render(Graphics g) {
         for (int i = 0; i < pellets.size(); i++) {
             pellets.get(i).render(g);
-
-        }
-
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-        for (int i = 0; i < pellets.size(); i++) {
-            pellets.get(i).renderBW(g);
 
         }
 

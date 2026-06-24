@@ -49,25 +49,6 @@ public class StokerFireball extends Bullet {
         }
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        if (color < 10) {
-            g.setColor(new Color(183, 183, 183)); 
-        }else if (color < 20) {
-            g.setColor(new Color(24, 24, 24)); 
-        }else if (color < 30) {
-            g.setColor(new Color(44, 44, 44)); 
-        }else if (color < 40) {
-            g.setColor(new Color(76, 76, 76));
-        }
-
-        g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-        color += 1;
-        if (color >= 40) {
-            color = 0;
-        }
-    }
 
     @Override
     public boolean checkForImpact() {

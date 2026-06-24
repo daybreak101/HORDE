@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import project.game.horde.main.Handler;
-import project.game.horde.weapons.Gun;
 import project.game.horde.weapons.Minigun;
 
 public class Turret extends Trap{
@@ -16,6 +15,7 @@ public class Turret extends Trap{
 		cooldown = 30 * 60;
 	}
 	
+        @Override
 	public void postTick() {
 		if(cooldownTimer > cooldown) {
 			activated = false;
@@ -26,6 +26,7 @@ public class Turret extends Trap{
 		}
 	}
 	
+        @Override
 	public void render(Graphics g) {
 			g.setColor(Color.gray);
 			g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
@@ -33,12 +34,6 @@ public class Turret extends Trap{
 
 	}
 	
-	public void renderBW(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-			width, height);
-
-}
 
 	public void killInArea() {
 		gun.shootAsTurret(x, y);

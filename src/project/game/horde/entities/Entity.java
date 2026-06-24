@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.InvisibleBounds;
 import project.game.horde.entities.statics.Wall;
@@ -37,9 +38,7 @@ public abstract class Entity {
             if (e.equals(this)) {
                 continue;
             }
-            if (handler.getWorld().getEntityManager().getBarriers().contains(e)) {
-                continue;
-            } else if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
+            if (!(e instanceof Barrier) && e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
                 return true;
             }
         }
@@ -150,8 +149,6 @@ public abstract class Entity {
     }
 
     public abstract void render(Graphics g);
-
-    public abstract void renderBW(Graphics g);
 
     public void die(Player player) {
     }

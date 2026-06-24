@@ -37,7 +37,7 @@ public class Spawner {
         counter++;
         if (counter >= cooldown && isActive) {
             collided = false;
-            ArrayList<Entity> entities = new ArrayList<Entity>();
+            ArrayList<Entity> entities = new ArrayList<>();
             //entities.addAll(handler.getWorld().getEntityManager().getZombies());
             entities.addAll(handler.getWorld().getEntityManager().getEntities());
 

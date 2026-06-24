@@ -7,7 +7,6 @@ import java.util.Random;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.playerinfo.PlayerActionState;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.DeadShot;
 import project.game.horde.perks.DoubleTap;
@@ -290,10 +289,5 @@ public class RandomPerk extends InteractableStaticEntity {
 				width + 43, height + 60, null);
 	}
 
-	@Override
-	public void renderBW(Graphics g) {
-		g.drawImage(BWAssets.perkvendor, (int) (x - handler.getGameCamera().getxOffset()),
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-	}
 }

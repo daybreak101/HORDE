@@ -1,7 +1,6 @@
 package project.game.horde.sounds;
 import java.net.URL;
 
-import project.game.horde.entities.Entity;
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Utils;
 

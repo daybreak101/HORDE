@@ -7,7 +7,6 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.weapons.Gun.GunImageDim;
 
 public class M1911 extends Gun {
 	public M1911(Handler handler, Player player) {

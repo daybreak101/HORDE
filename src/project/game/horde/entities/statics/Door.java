@@ -33,14 +33,6 @@ public class Door extends Wall{
 	}
 	
 
-	@Override
-	public void renderBW(Graphics g) {
-	    Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(new Color(42,42,42));
-		g2d.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-				(int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-
-	}
 	
 	@Override
 	public void postTick() {
@@ -62,6 +54,7 @@ public class Door extends Wall{
 	}
 	
 
+        @Override
 	public void fulfillInteraction(Player player) {
 		if(usedByOtherPlayer) {
 			

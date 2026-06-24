@@ -1,7 +1,7 @@
 package project.game.horde.weapons;
 
 import java.awt.image.BufferedImage;
-import java.awt.Graphics;
+
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.DoubleTap;

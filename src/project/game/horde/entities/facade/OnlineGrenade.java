@@ -8,6 +8,7 @@ import java.awt.geom.Ellipse2D;
 import project.game.horde.entities.bullets.Explosion;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.main.Handler;
@@ -87,7 +88,8 @@ public class OnlineGrenade extends OnlineBullet {
 		}
 
 		for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-			if (!handler.getWorld().getEntityManager().getBarriers().contains(e)
+			if (!(e instanceof Barrier)
+				//!handler.getWorld().getEntityManager().getBarriers().contains(e)
 					&& e.getCollisionBounds(0, 0).intersects(cb)) {
 				return true;
 			}
@@ -159,13 +161,4 @@ public class OnlineGrenade extends OnlineBullet {
 				width, height);
 	}
 	
-
-	@Override
-	public void renderBW(Graphics g) {
-
-		g.setColor(new Color(173,173,173));
-
-		g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
-	}
 }

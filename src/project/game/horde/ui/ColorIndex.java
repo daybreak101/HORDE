@@ -2,12 +2,11 @@ package project.game.horde.ui;
 
 import java.awt.Color;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
 public class ColorIndex {
-	public static HashMap<Integer, Color> colorIndex = new HashMap<Integer, Color>();
+	public static HashMap<Integer, Color> colorIndex = new HashMap<>();
 	public static final int green = 0, yellow = 1, red = 2, blue = 3, 
 							magenta = 4, cyan = 5, orange = 6, white = 7;
 	public static void init() {

@@ -1,15 +1,11 @@
 package project.game.horde.ui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import project.game.horde.main.Handler;
-import project.game.horde.ui.GridElementImageAndText.BlessingDisplayInfo;
-import project.game.horde.utils.Utils;
+
 
 public class GridElementImage extends UIObject {
 	private BufferedImage image;

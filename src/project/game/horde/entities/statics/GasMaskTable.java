@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.playerinfo.GasMask;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
@@ -30,13 +29,9 @@ public class GasMaskTable extends InteractableStaticEntity {
 		
 	}
 	
-	@Override
-	public void renderBW(Graphics g) {
-		//change asset
-		g.drawImage(BWAssets.ammoBox, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-		
-	}
 
+
+        @Override
 	public void fulfillInteraction(Player player) {
 		// && gas mask is not full
 		GasMask gasMask = player.getInv().getGasMask();

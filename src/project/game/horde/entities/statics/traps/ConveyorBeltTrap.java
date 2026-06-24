@@ -56,28 +56,6 @@ public class ConveyorBeltTrap extends Trap {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        // draw conveyor
-        g.setColor(Color.gray);
-        g.fillRect((int) (conveyor.x - handler.getGameCamera().getxOffset()),
-                (int) (conveyor.y - handler.getGameCamera().getyOffset()), conveyor.width, conveyor.height);
-
-        // draw furnace
-        g.setColor(Color.black);
-        g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-        if (!activated) {
-            g.setColor(Color.gray);
-            g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y + 20 - handler.getGameCamera().getyOffset()), width / 2, height - 40);
-        } else {
-            g.setColor(new Color(179, 179, 179));
-            g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y + 20 - handler.getGameCamera().getyOffset()), width / 2, height - 40);
-        }
-
-    }
 
     public void killInArea() {
         Player player = handler.getCurrentPlayer();

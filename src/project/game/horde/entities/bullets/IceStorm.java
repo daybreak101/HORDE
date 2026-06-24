@@ -122,25 +122,6 @@ public class IceStorm extends Bullet {
 
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        g.setColor(new Color(121, 121, 121, 20));
-        g.fillOval((int) (stormRadius.x - handler.getGameCamera().getxOffset()),
-                (int) (stormRadius.y - handler.getGameCamera().getyOffset()), (int) stormRadius.width,
-                (int) stormRadius.height);
-        if (rangeCounter < range) {
-            g.setColor(Color.BLUE);
-            g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()), width * 2, height * 2);
-        }
-
-        g.setColor(new Color(255, 255, 255, 100));
-        for (Rectangle r : particles) {
-            g.fillRect(r.x - (int) handler.getGameCamera().getxOffset(),
-                    r.y - (int) handler.getGameCamera().getyOffset(), r.width, r.height);
-        }
-
-    }
 
     @Override
     public void moveX() {

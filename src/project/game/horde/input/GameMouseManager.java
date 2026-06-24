@@ -63,16 +63,12 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 		mouseX = e.getX();
-		mouseY = e.getY();
-		//System.out.println(mouseX);
-		
+		mouseY = e.getY();		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 		mouseX = e.getX();
 		mouseY = e.getY();
 		
@@ -82,13 +78,11 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getButton() == MouseEvent.BUTTON1) {
 			leftPressed = true;
 			//return;
@@ -104,7 +98,6 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub	
 		if(uiManager != null)
 			uiManager.onMouseRelease(e);
 		
@@ -122,13 +115,11 @@ public class GameMouseManager implements MouseListener, MouseMotionListener, Mou
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

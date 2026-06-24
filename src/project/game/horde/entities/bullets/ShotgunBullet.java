@@ -2,6 +2,7 @@ package project.game.horde.entities.bullets;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
 import project.game.horde.main.Handler;
 import project.game.horde.weapons.Gun;
 
@@ -12,7 +13,7 @@ public class ShotgunBullet extends Bullet {
     public ShotgunBullet(Handler handler, float x, float y, int range, double spread, int pelletNum, Gun gun) {
         super(handler, x, y, range, gun);
 
-        pellets = new ArrayList<Bullet>(pelletNum);
+        pellets = new ArrayList<>(pelletNum);
         for (int i = 0; i < pelletNum; i++) {
             if (i == 0) {
                 pellets.add(new Bullet(handler, x, y, range, gun)); 
@@ -58,14 +59,6 @@ public class ShotgunBullet extends Bullet {
 
         }
 
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-        for (int i = 0; i < pellets.size(); i++) {
-            pellets.get(i).renderBW(g);
-
-        }
     }
 
 }

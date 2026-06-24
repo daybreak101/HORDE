@@ -11,7 +11,6 @@ import project.game.horde.entities.Entity;
 import project.game.horde.entities.creatures.Creature;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.graphics.Assets;
-import project.game.horde.graphics.BWAssets;
 import project.game.horde.main.BlessingInventory;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
@@ -220,45 +219,6 @@ public class PlayerMP extends Entity {
                 new Rectangle((int) (x - handler.getGameCamera().getxOffset()),
                         (int) (y + height - handler.getGameCamera().getyOffset()), width, 12),
                 new Font(Font.DIALOG, Font.PLAIN, 15));
-    }
-
-    @Override
-    public void renderBW(Graphics g) {
-        if (luna != null) {
-            luna.renderBW(g);
-        }
-        g.drawImage(BWAssets.shadow, (int) (x - 10 - handler.getGameCamera().getxOffset()),
-                (int) (y - 10 - handler.getGameCamera().getyOffset()), width, height, null);
-
-        Graphics2D g2d = (Graphics2D) g;
-        AffineTransform old = g2d.getTransform();
-
-        if (health <= 0) {
-            g2d.drawImage(BWAssets.player[3], (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            g2d.setTransform(old);
-        } else {
-            g2d.rotate(Math.toRadians(angle), x - handler.getGameCamera().getxOffset() + width / 2,
-                    y - handler.getGameCamera().getyOffset() + height / 2);
-
-            if (justTookDamage == true) {
-                g2d.drawImage(BWAssets.player[1], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            } else if (health <= 50) {
-                g2d.drawImage(BWAssets.player[2], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            } else {
-                g2d.drawImage(BWAssets.player[0], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            }
-
-            g2d.setTransform(old);
-        }
-
-        if (user.getUsername() != null) {
-            Utils.drawCenteredString(g, user.getUsername(), new Rectangle((int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()), width, 12), new Font(Font.DIALOG, Font.PLAIN, 12));
-        }
     }
 
     public int getReviveProgress() {

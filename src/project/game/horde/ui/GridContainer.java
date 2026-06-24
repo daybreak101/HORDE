@@ -1,15 +1,12 @@
 package project.game.horde.ui;
 
-import java.util.ArrayList;
-
+import java.awt.BasicStroke;
 import java.awt.Color;
-
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Line2D;
-import java.awt.BasicStroke;
-import java.awt.Font;
+import java.util.ArrayList;
 
 import project.game.horde.main.BlessingInventory;
 import project.game.horde.main.Handler;
@@ -33,7 +30,7 @@ public class GridContainer {
 		this.height = height;
 		this.columns = columns;
 		this.rows = rows;
-		uiElements = new ArrayList<UIObject>();
+		uiElements = new ArrayList<>();
 		tileWidth = width / columns;
 		tileHeight = height / rows;
 		this.displaysInfo = displaysInfo;

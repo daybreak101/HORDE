@@ -34,7 +34,6 @@ public class MapSelectionState extends State {
 
 					@Override
 					public void onMouseRelease(MouseEvent e) {
-						// TODO Auto-generated method stub
 
 					}
 				}));
@@ -55,7 +54,6 @@ public class MapSelectionState extends State {
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		}));
@@ -71,7 +69,6 @@ public class MapSelectionState extends State {
 
 		// 	@Override
 		// 	public void onMouseRelease(MouseEvent e) {
-		// 		// TODO Auto-generated method stub
 
 		// 	}
 		// }));
@@ -87,7 +84,6 @@ public class MapSelectionState extends State {
 
 		// 	@Override
 		// 	public void onMouseRelease(MouseEvent e) {
-		// 		// TODO Auto-generated method stub
 
 		// 	}
 		// }));

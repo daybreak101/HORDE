@@ -255,11 +255,6 @@ public class Grenade extends Bullet {
                 width, height);
     }
 
-    @Override
-    public void renderBW(Graphics g) {
-        g.setColor(new Color(174, 174, 174));
-        g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
-    }
+
 
 }

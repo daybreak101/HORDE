@@ -3,7 +3,6 @@ package project.game.horde.hud;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.Random;
 
 import project.game.horde.main.Handler;
 import project.game.horde.utils.RandomUtil;
@@ -45,7 +44,6 @@ public class PointGainElement extends HudElement {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		if (isGain) {
 			g.setColor(new Color(255, 255, 0, alpha));
 			g.setFont(new Font(Font.DIALOG, Font.PLAIN, fontSize));

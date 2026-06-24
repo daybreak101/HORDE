@@ -51,12 +51,14 @@ public class Peer {
             Kryo kryo = server.getKryo();
             initKryo(kryo);
             server.addListener(new Listener() {
+                @Override
                 public void received(Connection connection, Object object) {
-                    if (object instanceof Message) {
-                        handleReceivedMessage(connection, (Message) object);
+                    if (object instanceof Message message) {
+                        handleReceivedMessage(connection, message);
                     }
                 }
 
+                @Override
                 public void connected(Connection connection) {
                     handleNewConnection(connection);
                     if (gameState != null) {
@@ -65,6 +67,7 @@ public class Peer {
                     }
                 }
 
+                @Override
                 public void disconnected(Connection connection) {
                     handleDisconnectedConnection(connection);
                     if (gameState != null) {
@@ -79,19 +82,22 @@ public class Peer {
             initKryo(kryo);
             client.addListener(new Listener() {
 
+                @Override
                 public void received(Connection connection, Object object) {
-                    if (object instanceof Message) {
+                    if (object instanceof Message message) {
                         // System.out.println("client listener received");
-                        handleReceivedMessage(connection, (Message) object);
+                        handleReceivedMessage(connection, message);
                     }
                 }
 
+                @Override
                 public void connected(Connection connection) {
                     System.out.println("client listener connected");
                     localUser.setConnection(connection);
                     connection.sendTCP(new Message(Message.USER_JOIN, connection.getID(), localUser.getUsername(), null));
                 }
 
+                @Override
                 public void disconnected(Connection connection) {
                     System.out.println("client listener disconnected");
                     users.remove(connection.getID());
@@ -504,8 +510,6 @@ public class Peer {
                 try {
                     multiLobbyState.startGame(selectedMap);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
             }
             case Message.USER_CHANGED_SKIN -> {

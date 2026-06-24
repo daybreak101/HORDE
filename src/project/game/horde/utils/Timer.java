@@ -26,10 +26,7 @@ public class Timer {
 	}
 	
 	public boolean checkIsReady() {
-		if(counter >= limit) {
-			return true;
-		}
-		return false;
+		return counter >= limit;
 	}
 	
 	public float getProgress() {

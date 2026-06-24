@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import project.game.horde.graphics.MenuAssets;
 import project.game.horde.main.Handler;
@@ -43,8 +42,6 @@ public class MultiLobbyState extends State {
 			try {
 				startServer();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			// startLoading();
 		}
@@ -282,6 +279,7 @@ public class MultiLobbyState extends State {
 
 	}
 	
+        @Override
 	public void selectedMap(String s) {
 		if(!selectedMap.equals(s)) {
 			this.selectedMap = s;

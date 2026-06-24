@@ -84,21 +84,20 @@ public class EntityManager {
         return currentPlayer;
     }
 
-
     public EntityManager(Handler handler) {
         this.handler = handler;
-        otherPlayers = new CopyOnWriteArrayList<PlayerMP>();
-        areas = new ArrayList<Areas>();
-        barriers = new ArrayList<Barrier>();
-        blood = new CopyOnWriteArrayList<Blood>();
-        entities = new CopyOnWriteArrayList<Entity>();
-        interactables = new ArrayList<InteractableStaticEntity>();
-        powerups = new CopyOnWriteArrayList<PowerUps>();
-        traps = new ArrayList<Trap>();
-        zombies = new CopyOnWriteArrayList<Zombie>();
-        walls = new ArrayList<Wall>();
-        explosions = new CopyOnWriteArrayList<Explosion>();
-        boundaries = new ArrayList<InvisibleBounds>();
+        otherPlayers = new CopyOnWriteArrayList<>();
+        areas = new ArrayList<>();
+        barriers = new ArrayList<>();
+        blood = new CopyOnWriteArrayList<>();
+        entities = new CopyOnWriteArrayList<>();
+        interactables = new ArrayList<>();
+        powerups = new CopyOnWriteArrayList<>();
+        traps = new ArrayList<>();
+        zombies = new CopyOnWriteArrayList<>();
+        walls = new ArrayList<>();
+        explosions = new CopyOnWriteArrayList<>();
+        boundaries = new ArrayList<>();
     }
 
     public void tick() {
@@ -165,7 +164,7 @@ public class EntityManager {
 //		}
 
         for (int i = 0; i < interactables.size(); i++) {
-            Entity e = interactables.get(i);
+            InteractableStaticEntity e = interactables.get(i);
             e.tick();
             if (renderArea.intersects(e.getRenderBounds())) {
                 e.setRenderThis(true);
@@ -254,160 +253,77 @@ public class EntityManager {
         map = e;
     }
 
-    // private boolean isEntityVisible(Entity e) {
-    //     // Check if the entity is within the visible area of the screen
-    //     return e.getX() >= handler.getGameCamera().getxOffset()
-    //             && e.getX() <= handler.getGameCamera().getxOffset() + handler.getWidth()
-    //             && e.getY() >= handler.getGameCamera().getyOffset()
-    //             && e.getY() <= handler.getGameCamera().getyOffset() + handler.getHeight();
-    // }
-
-    public void captureImage(Graphics g) {
-        if (currentPlayer.getHealth() <= 0) {
-            renderBW(g);
-        } else {
-            for (Areas e : areas) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Barrier e : barriers) {
-                e.render(g);
-            }
-            for (Entity e : entities) {
-                e.render(g);
-            }
-            for (Wall e : walls) {
-                e.render(g);
-            }
-        }
-    }
-
     public void render(Graphics g) {
-        if (handler.getGame().captureImage) {
-            captureImage(g);
-        } else if (currentPlayer.getHealth() <= 0) {
-            renderBW(g);
-        } else {
 
-            if (map != null) {
-                map.render(g);
-            }
-            for (Areas e : areas) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Trap e : traps) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Blood e : blood) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-
-            for (Barrier e : barriers) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (InteractableStaticEntity e : interactables) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-
-            for (PowerUps e : powerups) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Entity e : entities) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Zombie e : zombies) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (PlayerMP e : otherPlayers) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-            for (Explosion e : explosions) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-
-            currentPlayer.render(g);
-
-            for (Wall e : walls) {
-                if (e.getRenderThis()) {
-                    e.render(g);
-                }
-            }
-        }
-    }
-
-    public void renderBW(Graphics g) {
         if (map != null) {
-            map.renderBW(g);
+            map.render(g);
         }
         for (Areas e : areas) {
-            e.renderBW(g);
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (Trap e : traps) {
-            e.renderBW(g);
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (Blood e : blood) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
-        for (Entity e : entities) {
-            e.renderBW(g);
 
-        }
         for (Barrier e : barriers) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (InteractableStaticEntity e : interactables) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
-        for (PowerUps e : powerups) {
-            e.renderBW(g);
 
+        for (PowerUps e : powerups) {
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
+        }
+        for (Entity e : entities) {
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (Zombie e : zombies) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (PlayerMP e : otherPlayers) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
         for (Explosion e : explosions) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
-        currentPlayer.renderBW(g);
+
+        currentPlayer.render(g);
+
         for (Wall e : walls) {
-            e.renderBW(g);
-
+            if (e.getRenderThis()) {
+                e.render(g);
+            }
         }
+
     }
 
     public void addZombieForClient(String[] info) {
         zombies.add(new Zombie(handler, Integer.parseInt(info[0]), Float.parseFloat(info[1]), Float.parseFloat(info[2]),
-               Float.parseFloat(info[3]), Integer.parseInt(info[4])));
+                Float.parseFloat(info[3]), Integer.parseInt(info[4])));
         handler.getWorld().getRoundLogic().manuallyDecrementZombiesLeft();
     }
 
@@ -422,14 +338,22 @@ public class EntityManager {
 
     public void addPowerUpForClient(Message message) {
         switch (message.powerup) {
-            case "maxAmmo" -> addPowerUp(new MaxAmmo(handler, message.id, message.x, message.y));
-            case "nuke" -> addPowerUp(new Nuke(handler, message.id, message.x, message.y));
-            case "doublePoints" -> addPowerUp(new DoublePoints(handler, message.id, message.x, message.y));
-            case "instakill" -> addPowerUp(new InstaKill(handler, message.id, message.x, message.y));
-            case "infiniteAmmo" -> addPowerUp(new InfiniteAmmo(handler, message.id, message.x, message.y));
-            case "deathMachine" -> addPowerUp(new DeathMachine(handler, message.id, message.x, message.y));
-            case "healthUp" -> addPowerUp(new HealthUp(handler, message.id, message.x, message.y));
-            case "perkBag" -> addPowerUp(new PerkBag(handler, message.id, message.x, message.y));
+            case "maxAmmo" ->
+                addPowerUp(new MaxAmmo(handler, message.id, message.x, message.y));
+            case "nuke" ->
+                addPowerUp(new Nuke(handler, message.id, message.x, message.y));
+            case "doublePoints" ->
+                addPowerUp(new DoublePoints(handler, message.id, message.x, message.y));
+            case "instakill" ->
+                addPowerUp(new InstaKill(handler, message.id, message.x, message.y));
+            case "infiniteAmmo" ->
+                addPowerUp(new InfiniteAmmo(handler, message.id, message.x, message.y));
+            case "deathMachine" ->
+                addPowerUp(new DeathMachine(handler, message.id, message.x, message.y));
+            case "healthUp" ->
+                addPowerUp(new HealthUp(handler, message.id, message.x, message.y));
+            case "perkBag" ->
+                addPowerUp(new PerkBag(handler, message.id, message.x, message.y));
         }
     }
 

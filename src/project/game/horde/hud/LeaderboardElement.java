@@ -16,7 +16,6 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.sounds.Sounds;
-import project.game.horde.states.GameState;
 import project.game.horde.states.LobbyState;
 import project.game.horde.states.State;
 import project.game.horde.utils.Utils;
@@ -37,7 +36,7 @@ public class LeaderboardElement extends HudElement {
 		Sounds.stopClip("backgroundMusic");
 		this.user = user;
 		this.player = player;
-		spots = new ArrayList<LeaderboardSpot>();
+		spots = new ArrayList<>();
 		handler.getGlobalStats().writeToFile();
 		readFromFile();
 		// check if top 10 then do...
@@ -45,7 +44,7 @@ public class LeaderboardElement extends HudElement {
 		//writeToFile();
 	}
 
-	public void readFromFile() {
+	private void readFromFile() {
 		try {
 			//FileReader reader = new FileReader("res/info/leaderboard.txt");
 			
@@ -68,15 +67,14 @@ public class LeaderboardElement extends HudElement {
 			sr.close();
 
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
-	public void checkIfTop10() {
+	private void checkIfTop10() {
 		int round = handler.getRoundLogic().getCurrentRound();
 		LeaderboardSpot newSpot = new LeaderboardSpot("", round);
 		if (spots.size() < 10) {
-			ArrayList<LeaderboardSpot> temp = new ArrayList<LeaderboardSpot>();
+			ArrayList<LeaderboardSpot> temp = new ArrayList<>();
 			temp = spots;
 			temp.add(newSpot);
 			spots = temp;
@@ -124,7 +122,6 @@ public class LeaderboardElement extends HudElement {
 			}
 			buffer.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

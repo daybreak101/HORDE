@@ -1,22 +1,12 @@
 package project.game.horde.entities.creatures.playerinfo;
 
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Ellipse2D.Float;
 import java.util.Random;
 
 import project.game.horde.entities.EntityManager;
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.facade.PlayerMP;
-import project.game.horde.entities.powerups.DeathMachine;
-import project.game.horde.entities.powerups.DoublePoints;
-import project.game.horde.entities.powerups.HealthUp;
-import project.game.horde.entities.powerups.InfiniteAmmo;
-import project.game.horde.entities.powerups.InstaKill;
-import project.game.horde.entities.powerups.MaxAmmo;
-import project.game.horde.entities.powerups.Nuke;
-import project.game.horde.entities.powerups.PerkBag;
 import project.game.horde.entities.powerups.PowerUpManager;
 import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
@@ -29,8 +19,8 @@ import project.game.horde.utils.Timer;
 public class Blessings {
 
     private String blessing;
-    private Handler handler;
-    private Player player;
+    private final Handler handler;
+    private final Player player;
     private Inventory inv;
     private EntityManager em;
 
@@ -75,12 +65,12 @@ public class Blessings {
     }
 
     public void activateBlessing() {
-        if (ignoreRestriction && currentPoints >= maxMeterPoints && blessing != "" && running == false) {
+        if (ignoreRestriction && !running) {
             currentPoints = 0;
             activations++;
             maxMeterPoints = 200;
             doBlessing();
-        } else if (currentPoints >= maxMeterPoints && blessing != "" && running == false) {
+        } else if (currentPoints >= maxMeterPoints && !"".equals(blessing) && !running) {
             if (handler.getBlessings().consumeBlessing(blessing)) {
                 currentPoints = 0;
                 activations++;
@@ -253,7 +243,7 @@ public class Blessings {
     }
 
     public void addPoints(int dPoints) {
-        if (running == false && blessing != "") {
+        if (running == false && !"".equals(blessing)) {
             currentPoints += dPoints;
 
             if (currentPoints > maxMeterPoints) {

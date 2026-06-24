@@ -42,6 +42,7 @@ public class Luna extends Perk {
 	}
 	
 
+        @Override
 	public void tick() {
 		if (luna != null) {
 			luna.tick();
@@ -77,6 +78,7 @@ public class Luna extends Perk {
 		
 	}
 	
+        @Override
 	public void render(Graphics g) {
 		if (luna != null) {
 			luna.render(g);

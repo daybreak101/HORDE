@@ -96,7 +96,6 @@ public class Unlocks {
 			writer.write(Integer.toString(vampireLvl));
 			writer.newLine();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -47,7 +47,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 
@@ -66,7 +65,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,50,300,70, "Change Map", 30, new ClickListener() {
@@ -82,7 +80,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,120,300,70, "Ward", 30, new ClickListener() {
@@ -96,7 +93,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,190,300,70, "Upgrades", 30, new ClickListener() {
@@ -110,7 +106,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,260,300,70, "Blessings", 30, new ClickListener() {
@@ -124,7 +119,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,330,300,70, "Change Character", 30, new ClickListener() {
@@ -138,9 +132,7 @@ public class LobbyState extends State{
 
 
 			@Override
-			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+			public void onMouseRelease(MouseEvent e) {				
 			}}));
 		
 		uiManager.addObject(new TextButton(handler, 100,400,300,70, "Change Hat", 30, new ClickListener() {
@@ -155,7 +147,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 		uiManager.addObject(new TextButton(handler, 100,470,300,70, "Leaderboard", 30, new ClickListener() {
@@ -170,7 +161,6 @@ public class LobbyState extends State{
 
 			@Override
 			public void onMouseRelease(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}}));
 	}
@@ -203,6 +193,7 @@ public class LobbyState extends State{
 		
 	}
 	
+        @Override
 	public void selectedMap(String s) {
 		this.selectedMap = s;
 	}

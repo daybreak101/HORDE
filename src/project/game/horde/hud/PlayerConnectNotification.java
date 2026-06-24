@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import project.game.horde.main.Handler;
-import project.game.horde.utils.RandomUtil;
 import project.game.horde.utils.Timer;
 
 public class PlayerConnectNotification extends HudElement {

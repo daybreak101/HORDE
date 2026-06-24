@@ -29,12 +29,11 @@ public class WardState extends State {
 	private BlessingInventory inventory;
 	private State lastState;
 	private boolean isPopup = false;
-	private RewardPopup popup = new RewardPopup(handler, new ArrayList<String>(), new Font(Font.DIALOG, Font.PLAIN, 30),
+	private RewardPopup popup = new RewardPopup(handler, new ArrayList<>(), new Font(Font.DIALOG, Font.PLAIN, 30),
 			new ClickListener() {
 
 				@Override
 				public void onClick(UIObject ui) {
-					// TODO Auto-generated method stub
 					System.out.println("Popup removed");
 					isPopup = false;
 					popup.clearRewards();
@@ -164,19 +163,24 @@ public class WardState extends State {
 	}
 
 	public ArrayList<String> buyBlessings(int level) {
-		ArrayList<String> rewards = new ArrayList<String>();
-		if (level == 1) {
-			rewards.add(generateRandomCommon(1));
-			System.out.println(rewards);
-		} else if (level == 2) {
-			rewards.add(generateRandomRare(1));
-			rewards.add(generateRandomCommon(2));
-
-		} else if (level == 3) {
-			rewards.add(generateRandomEpic(3));
-			rewards.add(generateRandomCommon(3));
-			rewards.add(generateRandomCommon(3));
-		}
+		ArrayList<String> rewards = new ArrayList<>();
+            switch (level) {
+                case 1 -> {
+                    rewards.add(generateRandomCommon(1));
+                    System.out.println(rewards);
+                }
+                case 2 -> {
+                    rewards.add(generateRandomRare(1));
+                    rewards.add(generateRandomCommon(2));
+                }
+                case 3 -> {
+                    rewards.add(generateRandomEpic(3));
+                    rewards.add(generateRandomCommon(3));
+                    rewards.add(generateRandomCommon(3));
+                }
+                default -> {
+                }
+            }
 		handler.getBlessings().addBlessings(rewards);
 		return rewards;
 	}

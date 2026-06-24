@@ -5,12 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
 
 import project.game.horde.display.Display;
 import project.game.horde.main.Handler;

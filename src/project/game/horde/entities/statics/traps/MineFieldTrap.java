@@ -41,13 +41,7 @@ public class MineFieldTrap extends Trap {
 
 	}
 	
-        @Override
-	public void renderBW(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-				width, height);
 
-	}
 
 
 	Ellipse2D explosionRadius;

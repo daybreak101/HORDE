@@ -29,7 +29,6 @@ public class Utils {
 			sr.close();
 		}
 		catch(IOException e) {
-			e.printStackTrace();
 		}
 		
 		return builder.toString();
@@ -40,7 +39,6 @@ public class Utils {
 			return Integer.parseInt(number);
 		}
 		catch(NumberFormatException e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -50,7 +48,6 @@ public class Utils {
 			return Double.parseDouble(number);
 		}
 		catch(NumberFormatException e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}
