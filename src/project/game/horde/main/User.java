@@ -5,12 +5,7 @@ import java.io.Serializable;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import project.game.horde.entities.creatures.Player;
-import project.game.horde.entities.creatures.playerinfo.Stats;
-
 public class User implements Serializable {
-	private Stats stats;
-	private Player player;
     private String username;
     private transient Connection connection;
     public boolean isReady = false;

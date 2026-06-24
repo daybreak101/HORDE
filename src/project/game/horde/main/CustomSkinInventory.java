@@ -29,35 +29,25 @@ public class CustomSkinInventory {
 			blueAlien = 0;
 	
 	public static BufferedImage[] getSkinImage(int skin) {
-		switch(skin) {
-		case ROBOT:
-			return CharAssets.robot;
-		case BLUE_ALIEN:
-			return CharAssets.blueAlien;
-		default:
-			return CharAssets.harry;
-		}
+            return switch (skin) {
+                case ROBOT -> CharAssets.robot;
+                case BLUE_ALIEN -> CharAssets.blueAlien;
+                default -> CharAssets.harry;
+            };
 	}
 	
 	public BufferedImage[] getSkin(int skin) {
-		switch(skin) {
-		case ROBOT:
-			return CharAssets.robot;
-		case BLUE_ALIEN:
-			return CharAssets.blueAlien;
-		default:
-			return CharAssets.harry;
-		}
+            return switch (skin) {
+                case ROBOT -> CharAssets.robot;
+                case BLUE_ALIEN -> CharAssets.blueAlien;
+                default -> CharAssets.harry;
+            };
 	}
 	
 	public void unlockSkin(int skin) {
 		switch(skin) {
-		case ROBOT:
-			robot = 1;
-			break;
-		case BLUE_ALIEN:
-			blueAlien = 1;
-			break;
+		case ROBOT -> robot = 1;
+		case BLUE_ALIEN -> blueAlien = 1;
 		}
 	}
 	
