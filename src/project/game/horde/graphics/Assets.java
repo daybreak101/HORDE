@@ -51,11 +51,8 @@ public class Assets {
 
 	public static void loadFarm() {
 		firstFloorFarm = ImageLoader.loadImage(folder + "farmMap/firstFloorFarm.png");
-<<<<<<< HEAD
 		//secondFloorFarm = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
-=======
 		// = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
->>>>>>> f32c24cd165a6e1f934c17c9e05df57bb2104935
 		init();
 	}
 	
