@@ -44,14 +44,18 @@ public class Assets {
 	public static BufferedImage rpg_rocket;
 	public static BufferedImage[] explosion, upgradedExplosion;	
 	//map assets		
-	public static BufferedImage firstFloorFarm, secondFloorFarm;
+	public static BufferedImage firstFloorFarm;//, secondFloorFarm;
 	//public static BufferedImage seattle_needle, seattle_transport, seattle_central;
 	//public static BufferedImage iceland;
 
 
 	public static void loadFarm() {
 		firstFloorFarm = ImageLoader.loadImage(folder + "farmMap/firstFloorFarm.png");
+<<<<<<< HEAD
 		//secondFloorFarm = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
+=======
+		// = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
+>>>>>>> f32c24cd165a6e1f934c17c9e05df57bb2104935
 		init();
 	}
 	
