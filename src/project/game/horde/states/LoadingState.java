@@ -19,120 +19,136 @@ import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Utils;
 
 public class LoadingState extends State {
-	public String map = "";
-	public boolean isReady = false;
-	public final int loadingSounds = 0, loadingAssets = 1, loadingAlternateAssets = 2;
-	public int loadingState;
-	public String currentLoad;
-	public User localUser;
-	public boolean started = false;
-	ExecutorService executor;
-	public Peer peer;
-	public HashMap<Integer, User> users;
 
-	// offline
-	public LoadingState(Handler handler, User localUser, String map) {
-		super(handler);
-		this.localUser = localUser;
-		handler.getGame().resetManagers();
-		loadingState = 0;
-		currentLoad = "";
-		// Additional initialization code...
-		this.map = map;
-	}
+    public String map = "";
+    public boolean soundsReady = false, assetsReady = false;
+    public final int loadingSounds = 0, loadingAssets = 1, loadingAlternateAssets = 2;
+    public int loadingState;
+    public String currentLoad;
+    public User localUser;
+    public boolean started = false;
+    ExecutorService executorSounds, executorAssets, executorReady;
+    public Peer peer;
+    public HashMap<Integer, User> users;
 
-	// online constructor
-	public LoadingState(Handler handler, User localUser, Peer peer, HashMap<Integer, User> users, String map) {
-		super(handler);
-		this.localUser = localUser;
-		this.users = users;
-		this.peer = peer;
-		handler.getGame().resetManagers();
-		loadingState = 0;
-		currentLoad = "";
-		// Additional initialization code...
-		this.map = map;
-	}
+    // offline
+    public LoadingState(Handler handler, User localUser, String map) {
+        super(handler);
+        this.localUser = localUser;
+        handler.getGame().resetManagers();
+        loadingState = 0;
+        currentLoad = "";
+        // Additional initialization code...
+        this.map = map;
+    }
 
-	@Override
-	public void tick() {
-		if (!started) {
-			if(peer != null && peer.isServer())
-				peer.gameAlreadyStarted = true;
-			// Initialize assets in a new thread using ExecutorService
-			executor = Executors.newSingleThreadExecutor();
-			executor.submit(() -> {
-				Sounds.init(handler);
-				loadingState++;
-				if(map.equals("test"))
-					Assets.loadFarm();
-				// else if(map.equals("seattle"))
-				// 	Assets.loadSeattle();
-				// else if(map.equals("iceland"))
-				// 	Assets.loadIceland();
-				loadingState++;
-				isReady = true;
-				peer.sendReady(localUser.getUsername());
-			});
-			started = true;
+    // online constructor
+    public LoadingState(Handler handler, User localUser, Peer peer, HashMap<Integer, User> users, String map) {
+        super(handler);
+        this.localUser = localUser;
+        this.users = users;
+        this.peer = peer;
+        handler.getGame().resetManagers();
+        loadingState = 0;
+        currentLoad = "";
+        // Additional initialization code...
+        this.map = map;
+    }
 
-		}
-
-		switch (loadingState) {
-		case loadingSounds -> currentLoad = "Loading sounds...";
-		case loadingAssets -> currentLoad = "Loading assets...";
-		case loadingAlternateAssets -> currentLoad = "Loading alternate assets...";
-		default -> {
+    @Override
+    public void tick() {
+        if (!started) {
+            if (peer != null && peer.isServer()) {
+                peer.gameAlreadyStarted = true;
+            }
+            // Initialize assets in a new thread using ExecutorService
+            executorSounds = Executors.newSingleThreadExecutor();
+            executorSounds.submit(() -> {
+                Sounds.init(handler);
+                loadingState++;
+                soundsReady = true;
+            });
+            executorAssets = Executors.newSingleThreadExecutor();
+            executorAssets.submit(() -> {
+                if (map.equals("test")) {
+                    Assets.loadFarm();
                 }
-		}
+                loadingState++;
+                assetsReady = true;
+            });
+            executorReady = Executors.newSingleThreadExecutor();
+            executorReady.submit(() -> {
+                while(!assetsReady || !soundsReady) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                peer.sendReady(localUser.getUsername());
+            });
+            started = true;
 
-		if (isReady) {
-			executor.shutdown(); // Shutdown the executor after tasks are completed
-			if (peer == null) {
-				currentLoad = "Loading game...";
-				handler.getGlobalStats().addGame();
-				handler.getMouseManager().setUIManager(null);
-				try {
-					handler.getGame().gameState = new GameState(handler, map, localUser);
-				} catch (IOException e) {
-				}
-				State.setState(handler.getGame().gameState);
-			} else {
-				currentLoad = "Waiting for other players...";
-				boolean onePlayerNotReady = false;
-				for (Map.Entry<Integer, User> entry : users.entrySet()) {
-					if (!entry.getValue().getReady() && !entry.getValue().getUsername().equals(localUser.getUsername())) {
-						onePlayerNotReady = true;
-						break;
-					}
-					
-				}
-				
-				if(peer.getLobby().gameAlreadyStarted || (!onePlayerNotReady && peer.isServer())) {
-					try {
-						peer.getLobby().startGame(map);
-					} catch (IOException e) {
-					}
-				}
-			}
-		}
+        }
 
-	}
+        switch (loadingState) {
+            case loadingSounds ->
+                currentLoad = "Loading sounds...";
+            case loadingAssets ->
+                currentLoad = "Loading assets...";
+            case loadingAlternateAssets ->
+                currentLoad = "Loading alternate assets...";
+            default -> {
+            }
+        }
 
-	@Override
-	public void render(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-		if(map.equals("test")) {
-			g.drawImage(MenuAssets.farmhouseLoading, 0, 50, handler.getWidth(), handler.getHeight() - 100, null);
-		}
-		g.setColor(handler.getSettings().getLaserColor());
-		Utils.drawCenteredString(g, currentLoad, new Rectangle(handler.getWidth()/2 - 200, handler.getHeight() - 200, 400, 100), new Font(Font.DIALOG, Font.PLAIN, 30));
-		//g.drawString(currentLoad, handler.getWidth() / 2, handler.getHeight() / 2);
+        if (assetsReady && soundsReady) {
+            executorReady.shutdown(); // Shutdown the executor after tasks are completed
+            executorAssets.shutdown(); // Shutdown the executor after tasks are completed
+            executorSounds.shutdown(); // Shutdown the executor after tasks are completed
+            if (peer == null) {
+                currentLoad = "Loading game...";
+                handler.getGlobalStats().addGame();
+                handler.getMouseManager().setUIManager(null);
+                try {
+                    handler.getGame().gameState = new GameState(handler, map, localUser);
+                } catch (IOException e) {
+                }
+                State.setState(handler.getGame().gameState);
+            } else {
+                currentLoad = "Waiting for other players...";
+                boolean onePlayerNotReady = false;
+                for (Map.Entry<Integer, User> entry : users.entrySet()) {
+                    if (!entry.getValue().getReady() && !entry.getValue().getUsername().equals(localUser.getUsername())) {
+                        onePlayerNotReady = true;
+                        break;
+                    }
 
+                }
 
-		//g.setColor(handler.getSettings().getLaserColor());
-		//g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 8, 8);
+                if (peer.getLobby().gameAlreadyStarted || (!onePlayerNotReady && peer.isServer())) {
+                    try {
+                        peer.getLobby().startGame(map);
+                    } catch (IOException e) {
+                    }
+                }
+            }
+        }
 
-	}
+    }
+
+    @Override
+    public void render(Graphics g) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
+        if (map.equals("test")) {
+            g.drawImage(MenuAssets.farmhouseLoading, 0, 50, handler.getWidth(), handler.getHeight() - 100, null);
+        }
+        g.setColor(handler.getSettings().getLaserColor());
+        Utils.drawCenteredString(g, currentLoad, new Rectangle(handler.getWidth() / 2 - 200, handler.getHeight() - 200, 400, 100), new Font(Font.DIALOG, Font.PLAIN, 30));
+        //g.drawString(currentLoad, handler.getWidth() / 2, handler.getHeight() / 2);
+
+        //g.setColor(handler.getSettings().getLaserColor());
+        //g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 8, 8);
+    }
 }
