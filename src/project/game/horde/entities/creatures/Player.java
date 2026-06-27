@@ -595,7 +595,7 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         inv.render(g);
-        // hud.render(g);
+       // hud.render(g);
 //		float mouseX = playerInput.getMouseManager().getMouseX();
 //		float mouseY = playerInput.getMouseManager().getMouseY();
 //		angle = (float) Math.toDegrees(Math.atan2(-(x - handler.getGameCamera().getxOffset() - mouseX + width / 2),
@@ -611,6 +611,7 @@ public class Player extends Creature {
         renderCharacterCustoms(g);
         renderUsername(g);
         renderCoords(g);
+        //renderHUD(g);
     }
 
     public void drawCoords() {

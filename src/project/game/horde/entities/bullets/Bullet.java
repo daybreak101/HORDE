@@ -151,10 +151,25 @@ public class Bullet extends Entity {
             moveX();
             moveY();
             travelTicker++;
+            if (!fromTrap) {
+                if (checkForImpact()
+                        && (zombiesHit.size() >= 6 && player.getInv().getDoubletap() >= 1 || zombiesHit.size() >= 4)) {
+                    System.out.println("impacted");
+                    break;
+                }
+            } else {
+                if (checkForImpactfromTrap() && zombiesHit.size() >= 4) {
+                    System.out.println("impacted");
+                    break;
+                }
+            }
+
         }
+
         travelTicker = 0;
 
         die(player);
+
         postTick();
     }
 

@@ -79,17 +79,11 @@ public class LoadingState extends State {
 		}
 
 		switch (loadingState) {
-		case loadingSounds:
-			currentLoad = "Loading sounds...";
-			break;
-		case loadingAssets:
-			currentLoad = "Loading assets...";
-			break;
-		case loadingAlternateAssets:
-			currentLoad = "Loading alternate assets...";
-			break;
-		default:
-			break;
+		case loadingSounds -> currentLoad = "Loading sounds...";
+		case loadingAssets -> currentLoad = "Loading assets...";
+		case loadingAlternateAssets -> currentLoad = "Loading alternate assets...";
+		default -> {
+                }
 		}
 
 		if (isReady) {

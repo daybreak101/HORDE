@@ -3,10 +3,10 @@ package project.game.horde.graphics;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-	private static int upscaleFactor = 3;
+	//private static int upscaleFactor = 1;
 
 	private static final String folder = "/textures/normal/";
-	private static final int width = 100 * upscaleFactor, height = 100 * upscaleFactor;
+	private static final int width = 100, height = 100;
 	
 	//friendly assets
 	public static BufferedImage player[], aurora[];
@@ -51,7 +51,7 @@ public class Assets {
 
 	public static void loadFarm() {
 		firstFloorFarm = ImageLoader.loadImage(folder + "farmMap/firstFloorFarm.png");
-		secondFloorFarm = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
+		//secondFloorFarm = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
 		init();
 	}
 	
@@ -177,7 +177,7 @@ public class Assets {
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 4; j++)
 				explosion[4 * i + j] 
-				= explosionSheet.crop(j * 64* upscaleFactor, i * 64* upscaleFactor, 64* upscaleFactor, 64* upscaleFactor);
+				= explosionSheet.crop(j * 64, i * 64, 64, 64);
 		}
 		
 		SpriteSheet upgradedExplosionSheet = new SpriteSheet(ImageLoader.loadImage(folder + "exp2_0_upgraded.png"));
@@ -185,7 +185,7 @@ public class Assets {
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 4; j++)
 				upgradedExplosion[4 * i + j] 
-				= upgradedExplosionSheet.crop(j * 64 * upscaleFactor, i * 64 * upscaleFactor, 64 * upscaleFactor, 64 * upscaleFactor);
+				= upgradedExplosionSheet.crop(j * 64, i * 64, 64, 64);
 		}
 		
 		crawler = sheet.crop(3 * width, height, width, height);

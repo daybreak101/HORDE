@@ -318,6 +318,7 @@ public class EntityManager {
                 e.render(g);
             }
         }
+       // currentPlayer.renderHUD(g);
 
     }
 

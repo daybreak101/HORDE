@@ -13,7 +13,6 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.GameCamera;
-import project.game.horde.hud.HudManager;
 import project.game.horde.input.KeyManager;
 import project.game.horde.input.MouseManager;
 import project.game.horde.utils.Utils;
@@ -34,7 +33,6 @@ public class Handler {
 	private Game game;
 	private World world;
 	private RoundLogic rounds;
-	private HudManager hud;
 	private Settings settings;
 	private GlobalStats globalStats;
 	private Progression progression;

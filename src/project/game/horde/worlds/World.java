@@ -293,9 +293,11 @@ public class World {
 
         //lighting.renderLighting(g);
         entityManager.getCurrentPlayer().renderLaser(g2d);
+       
 
         g2d.setTransform(originalTransform);
         rooms.render(g2d);
+        entityManager.getCurrentPlayer().renderHUD(g2d);
 
     }
 

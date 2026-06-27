@@ -19,7 +19,6 @@ import project.game.horde.worlds.World;
 public class GameState extends State  {
 
 	private World world;
-//	private HudManager hud;
 	private Cheats cheats;
 	private Peer peer;
 	private HashMap<Integer, User> users;

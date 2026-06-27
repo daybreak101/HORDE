@@ -3,7 +3,7 @@ package project.game.horde.graphics;
 import java.awt.image.BufferedImage;
 
 public class MenuAssets {
-	private static int upscaleFactor = 3;
+	private static int upscaleFactor = 1;
 	private static final String folder = "/textures/menu/";
 	private static final int width = 100 * upscaleFactor, height = 100 * upscaleFactor;
 

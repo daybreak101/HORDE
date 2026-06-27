@@ -220,7 +220,7 @@ public class PlayerInput {
 		meleeInput();
 		prayInput();
 		otherInputs();
-		System.out.println(player.getActionState());
+		//System.out.println(player.getActionState());
 		interactInput();
 	}
 
