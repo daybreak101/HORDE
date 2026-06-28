@@ -568,8 +568,6 @@ public class Player extends Creature {
             g2d.drawImage(skin[0], (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-//			g2d.drawImage(CharAssets.robot[0], (int) (x - handler.getGameCamera().getxOffset()),
-//					(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
             renderGun(g2d);
 
             g2d.drawImage(skin[1], (int) (x - handler.getGameCamera().getxOffset()),
@@ -588,6 +586,12 @@ public class Player extends Creature {
                 default -> {
                 }
             }
+
+            int px = (int) (x - handler.getGameCamera().getxOffset() + width / 2.0f);
+            int py = (int) (y - handler.getGameCamera().getyOffset() + height / 2.0f);
+
+            g.setColor(Color.GREEN);
+            g.fillOval(px - 3, py - 3, 6, 6);
             g2d.setTransform(old);
         }
     }
@@ -595,7 +599,7 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         inv.render(g);
-       // hud.render(g);
+        // hud.render(g);
 //		float mouseX = playerInput.getMouseManager().getMouseX();
 //		float mouseY = playerInput.getMouseManager().getMouseY();
 //		angle = (float) Math.toDegrees(Math.atan2(-(x - handler.getGameCamera().getxOffset() - mouseX + width / 2),

@@ -1,5 +1,6 @@
 package project.game.horde.worlds;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -281,6 +282,12 @@ public class World {
 
         g2d.setTransform(precomputedTransform);
         entityManager.render(g);
+
+        g.setColor(Color.RED);
+g.drawLine(handler.getWidth() / 2 - 10, handler.getHeight() / 2,
+           handler.getWidth() / 2 + 10, handler.getHeight() / 2);
+g.drawLine(handler.getWidth() / 2, handler.getHeight() / 2 - 10,
+           handler.getWidth() / 2, handler.getHeight() / 2 + 10);
 
         if (nodesVisible) {
             pathing.renderNodes(g2d);
