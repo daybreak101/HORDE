@@ -65,7 +65,7 @@ public class HudManager {
         if (scoreboard.isVisible) {
             scoreboard.render(g);
         }
-        System.out.println("Tick: " + gameplayHUD.isVisible);
+        //System.out.println("Tick: " + gameplayHUD.isVisible);
 
         if (gameplayHUD.isVisible) {
             gameplayHUD.render(g);

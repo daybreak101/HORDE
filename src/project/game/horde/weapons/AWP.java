@@ -17,7 +17,7 @@ public class AWP extends Gun{
 				GunVars.AWP_GUNCLIP, 
 				GunVars.AWP_MAXRESERVE, 
 				GunVars.AWP_WEIGHT, 
-				GunVars.AWP_RANGE);
+				GunVars.AWP_RANGE, 100);
 		this.name = GunVars.AWP_NAME;
 		originalName = name;
 		upgradedName = GunVars.AWP_UPGRADEDNAME;

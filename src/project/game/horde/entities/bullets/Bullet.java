@@ -45,6 +45,16 @@ public class Bullet extends Entity {
         this.mouseX = x - player.getGameCamera().getxOffset() - (int) player.getMouseManager().getMouseX();
         this.mouseY = y - player.getGameCamera().getyOffset() - (int) player.getMouseManager().getMouseY();
         angle = (float) Math.atan2(-(mouseY), -(mouseX));
+
+        //add recoil by modifying angle
+        Random random = new Random();
+        float accuracy = gun.getAccuracy(); // 0–100
+        float maxSpreadDeg = 30f; // <-- THIS is the important tuning value
+        float spread = (1f - accuracy / 100f) * maxSpreadDeg;
+        float randomFloat = random.nextFloat() * 2f - 1f;
+        float addAngle = randomFloat * spread * ((float) Math.PI / 180f);
+        angle += addAngle;
+
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
         zombiesHit = new ArrayList<>();

@@ -17,7 +17,7 @@ public class Arisaka extends Gun{
 				GunVars.ARISAKA_GUNCLIP, 
 				GunVars.ARISAKA_MAXRESERVE, 
 				GunVars.ARISAKA_WEIGHT, 
-				GunVars.ARISAKA_RANGE);
+				GunVars.ARISAKA_RANGE, 100);
 		this.name = GunVars.ARISAKA_NAME;
 		originalName = name;
 		upgradedName = GunVars.ARISAKA_UPGRADEDNAME;

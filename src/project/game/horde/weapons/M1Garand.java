@@ -17,7 +17,7 @@ public class M1Garand extends Gun {
 				GunVars.M1GARAND_GUNCLIP, 
 				GunVars.M1GARAND_MAXRESERVE, 
 				GunVars.M1GARAND_WEIGHT, 
-				GunVars.M1GARAND_RANGE);
+				GunVars.M1GARAND_RANGE, 100);
 		this.name = GunVars.M1GARAND_NAME;
 		originalName = name;
 		upgradedName = GunVars.M1GARAND_UPGRADEDNAME;

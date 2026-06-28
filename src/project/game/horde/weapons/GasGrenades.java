@@ -7,7 +7,7 @@ public class GasGrenades extends Gun{
 
 	//created so it can be in the box...
 	public GasGrenades(Handler handler, Player player) {
-		super(handler, player, 0, 0, 0, 0, 0, 0, 0);
+		super(handler, player, 0, 0, 0, 0, 0, 0, 0, 100);
 		name = "Gas Grenades";
 		originalName = name;
 	}

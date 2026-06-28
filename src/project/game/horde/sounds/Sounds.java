@@ -243,7 +243,7 @@ public class Sounds {
 				clip.addLineListener(listener);
 				ClipWrapper clipWrapper = new ClipWrapper(clipId, clip, volume, persist);
 				playingClips.add(clipWrapper); // Add to playing clips
-				System.out.println("Playing clip: " + clipId);
+				//System.out.println("Playing clip: " + clipId);
 
 				if (persist) {
 					clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -302,7 +302,7 @@ public class Sounds {
 				clip.addLineListener(listener);
 				ClipWrapper clipWrapper = new ClipWrapper(clipId, clip, volume, persist);
 				playingClips.add(clipWrapper); // Add to playing clips
-				System.out.println("Playing clip: " + clipId);
+				//System.out.println("Playing clip: " + clipId);
 
 				if (persist) {
 					clip.loop(Clip.LOOP_CONTINUOUSLY);

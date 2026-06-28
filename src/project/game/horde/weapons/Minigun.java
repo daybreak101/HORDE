@@ -19,7 +19,7 @@ public class Minigun extends Gun {
 
 	public Minigun(Handler handler, Player player) {
 		super(handler, player, GunVars.MINIGUN_DAMAGE, GunVars.MINIGUN_FIRERATE, GunVars.MINIGUN_RELOADSPEED,
-				GunVars.MINIGUN_GUNCLIP, GunVars.MINIGUN_MAXRESERVE, GunVars.MINIGUN_WEIGHT, GunVars.MINIGUN_RANGE);
+				GunVars.MINIGUN_GUNCLIP, GunVars.MINIGUN_MAXRESERVE, GunVars.MINIGUN_WEIGHT, GunVars.MINIGUN_RANGE, 100);
 		this.name = GunVars.MINIGUN_NAME;
 		originalName = name;
 		upgradedName = GunVars.MINIGUN_UPGRADEDNAME;
@@ -29,7 +29,7 @@ public class Minigun extends Gun {
 	}
 
 	public Minigun(Handler handler, boolean isTurret, Player player) {
-		super(handler, player, 2000, 2, 0, 0, 0, 1.5f, 50);
+		super(handler, player, 2000, 2, 0, 0, 0, 1.5f, 50, 100);
 		name = "Minigun";
 	}
 

@@ -46,7 +46,7 @@ public class GameplayElement extends HudElement {
 
     @Override
     public void tick() {
-        System.out.println("Ticking HUD");
+        //System.out.println("Ticking HUD");
 
         hudColor = handler.getSettings().getHudColor();
 
@@ -137,7 +137,7 @@ public class GameplayElement extends HudElement {
     }
 
     public void renderGun(Graphics g) {
-		System.out.println("Rendering GUN" + gun);
+		//System.out.println("Rendering GUN" + gun);
         if (gun != null) {
             g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
             FontMetrics fm = g.getFontMetrics();
@@ -481,7 +481,7 @@ public class GameplayElement extends HudElement {
 
     @Override
     public void render(Graphics g) {
-        System.out.println("Rendering HUD");
+        //System.out.println("Rendering HUD");
         renderGrenades(g);
         renderGun(g);
         renderHealthAndArmor(g);

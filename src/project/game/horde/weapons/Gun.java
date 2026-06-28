@@ -18,6 +18,7 @@ public abstract class Gun {
 	protected float weight;
 	protected int range;
 	protected boolean isDual = false;
+	protected float accuracy;
 
 	protected boolean readyToFire = true;
 	protected boolean altReadyToFire = true;
@@ -39,7 +40,7 @@ public abstract class Gun {
 
 	// add weight that would be subtracted from player speed
 	public Gun(Handler handler, Player owner, int damage, int fireRate, int reloadSpeed, int clip, int maxReserve, float weight,
-			int range) {
+			int range, float accuracy) {
 		this.handler = handler;
 		this.player = owner;
 		this.damage = damage;
@@ -62,6 +63,7 @@ public abstract class Gun {
 		this.currentReserve = maxReserve;
 		this.weight = weight;
 		this.range = range;
+		this.accuracy = accuracy;
 	}
 	
 	public BufferedImage getGunImage() {
@@ -390,4 +392,7 @@ public abstract class Gun {
 		currentAltClip = clip2;
 	}
 	
+	public float getAccuracy() {
+		return accuracy;
+	}
 }

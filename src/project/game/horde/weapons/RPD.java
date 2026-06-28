@@ -17,7 +17,7 @@ public class RPD extends Gun{
 				GunVars.RPD_GUNCLIP, 
 				GunVars.RPD_MAXRESERVE, 
 				GunVars.RPD_WEIGHT, 
-				GunVars.RPD_RANGE);
+				GunVars.RPD_RANGE, 100);
 		this.name = GunVars.RPD_NAME;
 		originalName = name;
 		upgradedName = GunVars.RPD_UPGRADEDNAME;

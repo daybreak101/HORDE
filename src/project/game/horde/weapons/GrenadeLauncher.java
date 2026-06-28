@@ -13,7 +13,7 @@ public class GrenadeLauncher extends Gun {
 	public GrenadeLauncher(Handler handler, Player player) {
 		super(handler, player, GunVars.GRENADELAUNCHER_DAMAGE, GunVars.GRENADELAUNCHER_FIRERATE,
 				GunVars.GRENADELAUNCHER_RELOADSPEED, GunVars.GRENADELAUNCHER_GUNCLIP,
-				GunVars.GRENADELAUNCHER_MAXRESERVE, GunVars.GRENADELAUNCHER_WEIGHT, GunVars.GRENADELAUNCHER_RANGE);
+				GunVars.GRENADELAUNCHER_MAXRESERVE, GunVars.GRENADELAUNCHER_WEIGHT, GunVars.GRENADELAUNCHER_RANGE, 100);
 		this.name = GunVars.GRENADELAUNCHER_NAME;
 		originalName = name;
 		upgradedName = GunVars.GRENADELAUNCHER_UPGRADEDNAME;

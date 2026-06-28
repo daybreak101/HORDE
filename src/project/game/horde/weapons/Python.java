@@ -12,7 +12,7 @@ public class Python extends Gun{
 
 	public Python(Handler handler, Player player) {
 		super(handler, player, GunVars.PYTHON_DAMAGE, GunVars.PYTHON_FIRERATE, GunVars.PYTHON_RELOADSPEED, GunVars.PYTHON_GUNCLIP,
-				GunVars.PYTHON_MAXRESERVE, GunVars.PYTHON_WEIGHT, GunVars.PYTHON_RANGE);
+				GunVars.PYTHON_MAXRESERVE, GunVars.PYTHON_WEIGHT, GunVars.PYTHON_RANGE, 100);
 		this.name = GunVars.PYTHON_NAME;
 		originalName = name;
 		upgradedName = GunVars.PYTHON_UPGRADEDNAME;

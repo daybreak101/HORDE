@@ -14,7 +14,7 @@ public class FragGrenade extends Gun{
 				0,
 				4, 
 				0, 
-				GunVars.GRENADELAUNCHER_RANGE);
+				GunVars.GRENADELAUNCHER_RANGE, 100);
 		this.name = GunVars.GRENADE_NAME;
 		originalName = name;
 		upgradedName = "HUH";

@@ -11,7 +11,7 @@ import project.game.horde.sounds.Sounds;
 public class M16 extends Gun {
 	public M16(Handler handler, Player player) {
 		super(handler, player, GunVars.M16_DAMAGE, GunVars.M16_FIRERATE, GunVars.M16_RELOADSPEED, GunVars.M16_GUNCLIP,
-				GunVars.M16_MAXRESERVE, GunVars.M16_WEIGHT, GunVars.M16_RANGE);
+				GunVars.M16_MAXRESERVE, GunVars.M16_WEIGHT, GunVars.M16_RANGE, 100);
 		this.name = GunVars.M16_NAME;
 		originalName = name;
 		upgradedName = GunVars.M16_UPGRADEDNAME;

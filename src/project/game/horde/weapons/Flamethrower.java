@@ -18,7 +18,7 @@ public class Flamethrower extends Gun {
 	public Flamethrower(Handler handler, Player player) {
 		super(handler, player, 50, 5,// GunVars.FLAMETHROWER_DAMAGE, 5,//GunVars.FLAMETHROWER_FIRERATE,
 				GunVars.FLAMETHROWER_RELOADSPEED, GunVars.FLAMETHROWER_GUNCLIP, GunVars.FLAMETHROWER_MAXRESERVE,
-				GunVars.FLAMETHROWER_WEIGHT, GunVars.FLAMETHROWER_RANGE);
+				GunVars.FLAMETHROWER_WEIGHT, GunVars.FLAMETHROWER_RANGE, 100);
 		this.name = GunVars.FLAMETHROWER_NAME;
 		originalName = name;
 		upgradedName = GunVars.FLAMETHROWER_UPGRADEDNAME;

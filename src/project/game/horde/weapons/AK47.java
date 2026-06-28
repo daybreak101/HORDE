@@ -17,7 +17,7 @@ public class AK47 extends Gun {
 				GunVars.AK47_GUNCLIP, 
 				GunVars.AK47_MAXRESERVE, 
 				GunVars.AK47_WEIGHT, 
-				GunVars.AK47_RANGE);
+				GunVars.AK47_RANGE, 60);
 		this.name = GunVars.AK47_NAME;
 		originalName = name;
 		upgradedName = GunVars.AK47_UPGRADEDNAME;

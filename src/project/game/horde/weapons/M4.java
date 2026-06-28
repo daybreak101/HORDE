@@ -17,7 +17,7 @@ public class M4 extends Gun {
 				GunVars.M4_GUNCLIP, 
 				GunVars.M4_MAXRESERVE, 
 				GunVars.M4_WEIGHT, 
-				GunVars.M4_RANGE);
+				GunVars.M4_RANGE, 100);
 		this.name = GunVars.M4_NAME;
 		originalName = name;
 		upgradedName = GunVars.M4_UPGRADEDNAME;

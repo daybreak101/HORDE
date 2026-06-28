@@ -12,7 +12,7 @@ public class DoubleBarrel extends Gun {
 
 	public DoubleBarrel(Handler handler, Player player) {
 		super(handler, player, GunVars.DB_DAMAGE, GunVars.DB_FIRERATE, GunVars.DB_RELOADSPEED, GunVars.DB_GUNCLIP,
-				GunVars.DB_MAXRESERVE, GunVars.DB_WEIGHT, GunVars.DB_RANGE);
+				GunVars.DB_MAXRESERVE, GunVars.DB_WEIGHT, GunVars.DB_RANGE, 100);
 		this.name = GunVars.DB_NAME;
 		originalName = name;
 		upgradedName = GunVars.DB_UPGRADEDNAME;

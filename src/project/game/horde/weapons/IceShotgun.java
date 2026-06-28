@@ -15,7 +15,7 @@ public class IceShotgun extends Gun {
 				GunVars.ICESHOTGUN_GUNCLIP, 
 				GunVars.ICESHOTGUN_MAXRESERVE, 
 				GunVars.ICESHOTGUN_WEIGHT, 
-				GunVars.ICESHOTGUN_RANGE);
+				GunVars.ICESHOTGUN_RANGE, 100);
 		this.name = GunVars.ICESHOTGUN_NAME;
 		originalName = name;
 		upgradedName = GunVars.ICESHOTGUN_UPGRADEDNAME;
