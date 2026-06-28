@@ -297,6 +297,7 @@ public class World {
 
         g2d.setTransform(originalTransform);
         rooms.render(g2d);
+        entityManager.getCurrentPlayer().renderDamage(g2d);
         entityManager.getCurrentPlayer().renderHUD(g2d);
 
     }

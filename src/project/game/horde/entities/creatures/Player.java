@@ -2,6 +2,7 @@ package project.game.horde.entities.creatures;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -276,6 +277,7 @@ public class Player extends Creature {
         if (justTookDamage) {
             return;
         }
+        resetDamageRender = true;
         if (playerReviving != null && inv.getRevive() >= 2) {
             damage /= 2;
         }
@@ -488,6 +490,57 @@ public class Player extends Creature {
     float angle, lastAngle;
     private final Timer sendRotateUpdate = new Timer(3);
 
+    boolean resetDamageRender = false;
+    int alpha = 0;
+    public void renderDamage(Graphics g) {
+        if (resetDamageRender) {
+            alpha = 255;
+            resetDamageRender = false;
+        }
+        if (justTookDamage) {
+            if(alpha > 0) {
+                alpha -= 5;
+                if (alpha < 0) {
+                    alpha = 0;
+                }
+            }
+
+            Graphics2D g2d = (Graphics2D) g;
+
+            int w = handler.getWidth();
+            int h = handler.getHeight();
+            int border = 100; // Thickness of the effect
+
+            // Top
+            g2d.setPaint(new GradientPaint(0, 0,
+                    new Color(255, 0, 0, alpha),
+                    0, border,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, 0, w, border);
+
+            // Bottom
+            g2d.setPaint(new GradientPaint(0, h,
+                    new Color(255, 0, 0, alpha),
+                    0, h - border,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, h - border, w, border);
+
+            // Left
+            g2d.setPaint(new GradientPaint(0, 0,
+                    new Color(255, 0, 0, alpha),
+                    border, 0,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, 0, border, h);
+
+            // Right
+            g2d.setPaint(new GradientPaint(w, 0,
+                    new Color(255, 0, 0, alpha),
+                    w - border, 0,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(w - border, 0, border, h);
+        }
+    }
+
     public void renderStronghold(Graphics g) {
         if (getInv().strongholdActivation) {
             g.setColor(new Color(0, 0, 200, 50));
@@ -587,12 +640,8 @@ public class Player extends Creature {
                 }
             }
 
-            int px = (int) (x - handler.getGameCamera().getxOffset() + width / 2.0f);
-            int py = (int) (y - handler.getGameCamera().getyOffset() + height / 2.0f);
-
-            g.setColor(Color.GREEN);
-            g.fillOval(px - 3, py - 3, 6, 6);
             g2d.setTransform(old);
+            //renderDamage(g);
         }
     }
 

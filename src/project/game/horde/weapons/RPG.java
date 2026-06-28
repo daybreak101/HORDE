@@ -17,7 +17,7 @@ public class RPG extends Gun{
 				GunVars.RPG_GUNCLIP, 
 				GunVars.RPG_MAXRESERVE, 
 				GunVars.RPG_WEIGHT, 
-				GunVars.RPG_RANGE, 100);
+				GunVars.RPG_RANGE, 80);
 		this.name = GunVars.RPG_NAME;
 		originalName = name;
 		upgradedName = GunVars.RPG_UPGRADEDNAME;

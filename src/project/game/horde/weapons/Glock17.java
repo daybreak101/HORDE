@@ -19,7 +19,7 @@ public class Glock17 extends Gun {
 				GunVars.GLOCK17_GUNCLIP, 
 				GunVars.GLOCK17_MAXRESERVE, 
 				GunVars.GLOCK17_WEIGHT, 
-				GunVars.GLOCK17_RANGE, 100);
+				GunVars.GLOCK17_RANGE, 80);
 		this.name = GunVars.GLOCK17_NAME;
 		originalName = name;
 		upgradedName = GunVars.GLOCK17_UPGRADEDNAME;

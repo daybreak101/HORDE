@@ -16,7 +16,7 @@ public class Thompson extends Gun {
 				GunVars.THOMPSON_GUNCLIP, 
 				GunVars.THOMPSON_MAXRESERVE, 
 				GunVars.THOMPSON_WEIGHT, 
-				GunVars.THOMPSON_RANGE, 100);
+				GunVars.THOMPSON_RANGE, 65);
 		this.name = GunVars.THOMPSON_NAME;
 		originalName = name;
 		upgradedName = GunVars.THOMPSON_UPGRADEDNAME;

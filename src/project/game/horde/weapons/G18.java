@@ -17,7 +17,7 @@ public class G18 extends Gun {
                 GunVars.G18_GUNCLIP,
                 GunVars.G18_MAXRESERVE,
                 GunVars.G18_WEIGHT,
-                GunVars.G18_RANGE, 100);
+                GunVars.G18_RANGE, 30);
         this.name = GunVars.G18_NAME;
         originalName = name;
         upgradedName = GunVars.G18_UPGRADEDNAME;

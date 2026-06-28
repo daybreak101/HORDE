@@ -2,8 +2,10 @@ package project.game.horde.main;
 
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
-import project.game.horde.weapons.AK47;
+import project.game.horde.perks.Juggernaut;
+import project.game.horde.perks.PhD;
 import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.Winchester1901;
 
 public class Cheats {
 
@@ -11,17 +13,17 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		  applyCheats();
+		  //applyCheats();
 	}
 
 	public void applyCheats() {
 		// perks
 		//handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Luna(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new MuleKick(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Revive(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new SleightOfHand(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
@@ -40,10 +42,10 @@ public class Cheats {
 		Gun gun =
 				//new Arisaka(handler, handler.getCurrentPlayer());
 				//new AWP(handler, handler.getCurrentPlayer());
-				new AK47(handler, handler.getCurrentPlayer());
+				//new AK47(handler, handler.getCurrentPlayer());
 				//new RPD(handler, handler.getCurrentPlayer());
 				//new GrenadeLauncher(handler, handler.getCurrentPlayer());
-				//new Winchester1901(handler, handler.getCurrentPlayer());
+				new Winchester1901(handler, handler.getCurrentPlayer());
 				//new AA12(handler, handler.getCurrentPlayer());
 				//new RPG(handler, handler.getCurrentPlayer());
 				//new Flamethrower(handler, handler.getCurrentPlayer());

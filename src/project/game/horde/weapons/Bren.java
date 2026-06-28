@@ -17,7 +17,7 @@ public class Bren extends Gun{
 				GunVars.BREN_GUNCLIP, 
 				GunVars.BREN_MAXRESERVE, 
 				GunVars.BREN_WEIGHT, 
-				GunVars.BREN_RANGE, 100);
+				GunVars.BREN_RANGE, 85);
 		this.name = GunVars.BREN_NAME;
 		originalName = name;
 		upgradedName = GunVars.BREN_UPGRADEDNAME;

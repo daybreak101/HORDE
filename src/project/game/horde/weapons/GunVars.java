@@ -66,17 +66,17 @@ public class GunVars {
 	public static final int M4_DAMAGE = 250;
 	public static final int MINIGUN_DAMAGE = 3000;
 	public static final int P90_DAMAGE = 90;
-	public static final int RPD_DAMAGE = 180;
+	public static final int RPD_DAMAGE = 225;
 	public static final int RPG_DAMAGE = 2000;
 	public static final int WINCHESTER1901_DAMAGE = 200;
 	public static final int M1GARAND_DAMAGE = 150;
 	public static final int ARISAKA_DAMAGE = 250;	
-	public static final int BREN_DAMAGE = 220;
+	public static final int BREN_DAMAGE = 260;
 	public static final int DB_DAMAGE = 180;
 	public static final int G18_DAMAGE = 110;
 	public static final int M16_DAMAGE = 220;
 	public static final int M1911_DAMAGE = 25;
-	public static final int M60_DAMAGE = 190;
+	public static final int M60_DAMAGE = 350;
 	public static final int PYTHON_DAMAGE = 400;
 	public static final int THOMPSON_DAMAGE = 150;
 	public static final int TYPE100_DAMAGE = 140;
@@ -107,7 +107,7 @@ public class GunVars {
 	public static final int PYTHON_FIRERATE = 10;
 	public static final int THOMPSON_FIRERATE = 4;
 	public static final int TYPE100_FIRERATE = 5;
-	public static final int UZI_FIRERATE = 6;
+	public static final int UZI_FIRERATE = 4;
 	
 	//gun reload speed
 	public static final int AA12_RELOADSPEED = 140;
@@ -241,8 +241,8 @@ public class GunVars {
 	public static final int M60_RANGE = 20;
 	public static final int PYTHON_RANGE = 15;
 	public static final int THOMPSON_RANGE = 10;
-	public static final int TYPE100_RANGE = 11;
-	public static final int UZI_RANGE = 14;
+	public static final int TYPE100_RANGE = 14;
+	public static final int UZI_RANGE = 12;
 	
 	//other gun vars
 	public static final int AA12_PELLET_COUNT = 6;

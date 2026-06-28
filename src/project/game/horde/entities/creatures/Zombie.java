@@ -333,7 +333,7 @@ public class Zombie extends Creature {
 
     @Override
     public void takeDamage(int amount, Player player) {
-        System.out.println("take damage: " + amount);
+        //System.out.println("take damage: " + amount);
         float volume = ZombieSounds.calculateVolumeBasedOffDistance(this, handler.getCurrentPlayer());
         Sounds.playClip(ZombieSounds.ZOMBIE_IMPACT, 1.0f, volume, false);
         boolean crit = false;

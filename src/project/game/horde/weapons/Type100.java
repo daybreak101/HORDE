@@ -16,7 +16,7 @@ public class Type100 extends Gun{
 				GunVars.TYPE100_GUNCLIP, 
 				GunVars.TYPE100_MAXRESERVE, 
 				GunVars.TYPE100_WEIGHT, 
-				GunVars.TYPE100_RANGE, 100);
+				GunVars.TYPE100_RANGE, 80);
 		this.name = GunVars.TYPE100_NAME;
 		originalName = name;
 		upgradedName = GunVars.TYPE100_UPGRADEDNAME;

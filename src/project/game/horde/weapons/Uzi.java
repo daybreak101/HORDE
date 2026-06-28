@@ -16,7 +16,7 @@ public class Uzi extends Gun{
 				GunVars.UZI_GUNCLIP, 
 				GunVars.UZI_MAXRESERVE, 
 				GunVars.UZI_WEIGHT, 
-				GunVars.UZI_RANGE, 100);
+				GunVars.UZI_RANGE, 70);
 		this.name = GunVars.UZI_NAME;
 		originalName = name;
 		upgradedName = GunVars.UZI_UPGRADEDNAME;

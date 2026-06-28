@@ -17,7 +17,7 @@ public class M1911 extends Gun {
 		upgradedName = GunVars.M1911_UPGRADEDNAME;
 		reloadSound = GunSounds.M1911_RELOAD_ID;
 		top = Assets.m1911_top;
-		gunImageDim = new GunImageDim(40, 50, 20, 100);
+		gunImageDim = new GunImageDim(40, 50, 20, 80);
 	}
 
 	public void shoot() {

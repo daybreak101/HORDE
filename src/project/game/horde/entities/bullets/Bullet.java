@@ -116,6 +116,7 @@ public class Bullet extends Entity {
         this.speed = 30;
         this.mouseX = x - (int) targetX;
         this.mouseY = y - (int) targetY;
+
         angle = (float) Math.atan2(-mouseY, -mouseX);
         xMove = (float) Math.cos(angle);
         yMove = (float) Math.sin(angle);
@@ -136,6 +137,16 @@ public class Bullet extends Entity {
         this.speed = 30;
         this.mouseX = x - player.getGameCamera().getxOffset() - (int) player.getMouseManager().getMouseX();
         this.mouseY = y - player.getGameCamera().getyOffset() - (int) player.getMouseManager().getMouseY();
+
+        //add recoil by modifying angle
+        Random random = new Random();
+        float accuracy = gun.getAccuracy(); // 0–100
+        float maxSpreadDeg = 30f; // <-- THIS is the important tuning value
+        float spread = (1f - accuracy / 100f) * maxSpreadDeg;
+        float randomFloat = random.nextFloat() * 2f - 1f;
+        float addAngle = randomFloat * spread * ((float) Math.PI / 180f);
+        angle += addAngle;
+
         angle = (float) Math.atan2(-mouseY, -mouseX);
         // xMove = (float) (speed * Math.cos(angle + radianOffset));
         // yMove = (float) (speed * Math.sin(angle + radianOffset));
@@ -219,7 +230,7 @@ public class Bullet extends Entity {
 
         for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
             if (e.getHitBox(0, 0).intersects(cb) && !zombiesHit.contains(e)) {
-                System.out.println("found a zombie");
+                //System.out.println("found a zombie");
                 if (fromTrap) {
                     e.damageByTrap(gunFiredFrom.getDamage());
                 } else {
@@ -262,7 +273,7 @@ public class Bullet extends Entity {
 
         for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
             if (e.getHitBox(0, 0).intersects(cb) && !zombiesHit.contains(e)) {
-                System.out.println("found a zombie");
+                //System.out.println("found a zombie");
                 if (fromTrap) {
                     e.damageByTrap(gunFiredFrom.getDamage());
                 } else {

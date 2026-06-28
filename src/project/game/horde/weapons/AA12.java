@@ -10,7 +10,7 @@ import project.game.horde.sounds.Sounds;
 public class AA12 extends Gun{
 
 	public AA12(Handler handler, Player player) {
-		super(handler, player, 120, 7, 140, 12, 120, 0.4f, 5, 100);
+		super(handler, player, 120, 7, 140, 12, 120, 0.4f, 5, 20);
 		name = "AA12";
 		originalName = name;
 		upgradedName = "AnarchAnonymous24";

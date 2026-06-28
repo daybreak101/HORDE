@@ -17,7 +17,7 @@ public class P90 extends Gun {
 				GunVars.P90_GUNCLIP, 
 				GunVars.P90_MAXRESERVE, 
 				GunVars.P90_WEIGHT, 
-				GunVars.P90_RANGE, 100);
+				GunVars.P90_RANGE, 65);
 		this.name = GunVars.P90_NAME;
 		originalName = name;
 		upgradedName = GunVars.P90_UPGRADEDNAME;

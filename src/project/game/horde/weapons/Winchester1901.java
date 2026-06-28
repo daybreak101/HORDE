@@ -18,7 +18,7 @@ public class Winchester1901 extends Gun {
                 GunVars.WINCHESTER1901_GUNCLIP,
                 GunVars.WINCHESTER1901_MAXRESERVE,
                 GunVars.WINCHESTER1901_WEIGHT,
-                GunVars.WINCHESTER1901_RANGE, 100);
+                GunVars.WINCHESTER1901_RANGE, 60);
         this.name = GunVars.WINCHESTER1901_NAME;
         originalName = name;
         upgradedName = GunVars.WINCHESTER1901_UPGRADEDNAME;
