@@ -14,7 +14,7 @@ import project.game.horde.weapons.M1Garand;
 
 public class WallBuy extends InteractableStaticEntity {
 
-    private int gunId;
+    private String gunId;
     private int whatWall;
     private Gun gun4Sale;
     private int cost;
@@ -24,7 +24,7 @@ public class WallBuy extends InteractableStaticEntity {
     private Gun gunOwnedRef = null;
 
     //top, bottom, right, left
-    public WallBuy(Handler handler, int id, float x, float y, int gunId, int whatWall) {
+    public WallBuy(Handler handler, int id, float x, float y, String gunId, int whatWall) {
         super(handler, id, x, y, 1, 1);
         this.whatWall = whatWall;
         this.gunId = gunId;
@@ -59,15 +59,15 @@ public class WallBuy extends InteractableStaticEntity {
     @Override
     public void postTick() {
         switch (this.gunId) {
-            case 1 -> {
+            case "Glock17" -> {
                 gun4Sale = new Glock17(handler, handler.getCurrentPlayer());
                 cost = 500;
             }
-            case 2 -> {
+            case "Arisaka" -> {
                 gun4Sale = new Arisaka(handler, handler.getCurrentPlayer());
                 cost = 500;
             }
-            case 3 -> {
+            case "M1Garand" -> {
                 gun4Sale = new M1Garand(handler, handler.getCurrentPlayer());
                 cost = 750;
             }

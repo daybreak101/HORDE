@@ -82,6 +82,10 @@ public class Sounds {
 		thehandler = handler;
 		masterVolume = thehandler.getSettings().getMasterVolume();
 
+		if(backgroundMusic != null) {
+			return;
+		}
+
 		backgroundMusic = Utils.class.getResource("/music/NightOfShadows.wav");
 		shootBeta = Utils.class.getResource("/sounds/gunSounds/shootBeta.wav");
 		swoosh = Utils.class.getResource("/sounds/gunSounds/swoosh.wav");
