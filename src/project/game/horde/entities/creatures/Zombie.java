@@ -331,6 +331,46 @@ public class Zombie extends Creature {
         }
     }
 
+    public void takeMeleeDamage(int amount, Player player) {
+        //System.out.println("take damage: " + amount);
+        float volume = ZombieSounds.calculateVolumeBasedOffDistance(this, handler.getCurrentPlayer());
+        Sounds.playClip(ZombieSounds.ZOMBIE_IMPACT, 1.0f, volume, false);
+        if (handler.getRoundLogic().getPowerups().isInstakillActive()) {
+            if (handler.getSettings().isToggleDamage()) {
+                player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, health));
+            }
+            if (handler.getCurrentPlayer().getPeer() != null) {
+                handler.getCurrentPlayer().getPeer().playerDamagedZombie(handler.getCurrentPlayer().getUsername(), id,
+                        health);
+            }
+            health = 0;
+
+        } else {
+            if (handler.getSettings().isToggleDamage()) {
+                player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, amount));
+            }
+            health -= amount;
+            if (handler.getCurrentPlayer().getPeer() != null) {
+                handler.getCurrentPlayer().getPeer().playerDamagedZombie(handler.getCurrentPlayer().getUsername(), id,
+                        amount);
+            }
+        }
+
+        if (freezeStatus.isFrozen()) {
+            freezeStatus.freezeNearbyZombies(player);
+            active = false;
+            die(player);
+        } else if (health <= 0 && freezeStatus.inWater()) {
+            freezeStatus.freeze(player);
+        } else if (health <= 0 && active == true) {
+            player.getInv().gainPoints(100);
+            active = false;
+            die(player);
+        } else {
+            player.getInv().gainPoints(10);
+        }
+    }
+
     @Override
     public void takeDamage(int amount, Player player) {
         //System.out.println("take damage: " + amount);
@@ -354,8 +394,8 @@ public class Zombie extends Creature {
             }
 
             if (crit && player.getInv().getDeadshot() == 3) {
-                amount = Math.round(amount * DeadShot.LVL3_HEADSHOTDAMAGEBUFF); 
-            }else if (crit) {
+                amount = Math.round(amount * DeadShot.LVL3_HEADSHOTDAMAGEBUFF);
+            } else if (crit) {
                 amount = (amount * 2);
             }
             if (handler.getSettings().isToggleCrits() && crit) {
@@ -380,8 +420,8 @@ public class Zombie extends Creature {
         } else if (health <= 0 && active == true) {
             if (crit) {
                 if (player.getInv().getDeadshot() >= 1) {
-                    player.getInv().gainPoints(DeadShot.LVL1_HEADSHOTPOINTBUFF); 
-                }else {
+                    player.getInv().gainPoints(DeadShot.LVL1_HEADSHOTPOINTBUFF);
+                } else {
                     player.getInv().gainPoints(60);
                 }
                 player.getStats().addHeadshot();
@@ -398,8 +438,8 @@ public class Zombie extends Creature {
 
     public void postTick() {
         if (!justAttacked && !freezeStatus.isFrozen()) {
-            zombieAnim.tick(); 
-        }else if (justAttacked && !freezeStatus.isFrozen()) {
+            zombieAnim.tick();
+        } else if (justAttacked && !freezeStatus.isFrozen()) {
             zombieAttackAnim.tick();
         }
 
@@ -476,10 +516,8 @@ public class Zombie extends Creature {
                 closestPlayer.getCenterY());
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
             if (z2p[0].intersects(e.getCollisionBounds(0, 0))) {
-                if (
-                    !(e instanceof Barrier)
-                    //!handler.getWorld().getEntityManager().getBarriers().contains(e)
-                ) {
+                if (!(e instanceof Barrier) //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                        ) {
                     return true;
                 }
             }
@@ -502,10 +540,8 @@ public class Zombie extends Creature {
         for (int i = 1; i < 5; i++) {
             for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
                 if (z2p[i].intersects(e.getCollisionBounds(0, 0))) {
-                    if (
-                        !(e instanceof Barrier)
-                        //!handler.getWorld().getEntityManager().getBarriers().contains(e)
-                    ) {
+                    if (!(e instanceof Barrier) //!handler.getWorld().getEntityManager().getBarriers().contains(e)
+                            ) {
                         return true;
                     }
                 }
@@ -567,8 +603,6 @@ public class Zombie extends Creature {
         }
 
     }
-
-
 
     public float getRotationAngle() {
         return rotationAngle;

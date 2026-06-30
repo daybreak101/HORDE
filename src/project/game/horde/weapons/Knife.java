@@ -126,7 +126,7 @@ public class Knife {
                 }
             }
             if (closestZombie != null) {
-                closestZombie.takeDamage(damage, player);
+                closestZombie.takeMeleeDamage(damage, player);
                 //System.out.println("HERE");
             }
 
