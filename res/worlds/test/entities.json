@@ -4,7 +4,7 @@
  "layers":[
         {
          "id":2,
-         "image":"..\/..\/..\/..\/..\/new assets\/farmMap\/firstFloorFarm.png",
+         "image":"..\/..\/textures\/normal\/farmMap\/firstFloorFarm.png",
          "imageheight":1750,
          "imagewidth":3000,
          "name":"Background",
@@ -498,6 +498,17 @@
                  "width":130,
                  "x":1920,
                  "y":455
+                }, 
+                {
+                 "height":1700,
+                 "id":35,
+                 "name":"FarmMap",
+                 "rotation":0,
+                 "type":"FarmMap",
+                 "visible":true,
+                 "width":3400,
+                 "x":0,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -506,7 +517,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":35,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
