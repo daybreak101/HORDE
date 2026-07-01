@@ -90,7 +90,7 @@ public class World {
         handler.setWorld(this);
         entityManager = new EntityManager(handler);
 
-        rooms = new RoomLogic(handler, this, adjacentRooms, spawnersPath);
+        rooms = new RoomLogic(handler, this, adjacentRooms, entityPath);
         rounds = new RoundLogic(handler, rooms.getSpawners(), 0);
 
         handler.setRoundLogic(rounds);
@@ -178,13 +178,10 @@ public class World {
                         case "PackAPunch" ->
                             entityManager.addInteractable(new PackAPunch(handler, i, x, y));
                         case "Door" -> {
-
-                            int wallLength = width > height ? width : height;
-                            int whatWall = getInt(obj, "wall", 0);
                             int room1 = getInt(obj, "room1", 0);
                             int room2 = getInt(obj, "room2", 0);
                             int cost = getInt(obj, "cost", 0);
-                            entityManager.addInteractable(new Door(handler, i, x, y, wallLength, whatWall, room1, room2, cost));
+                            entityManager.addInteractable(new Door(handler, i, x, y, width, height, room1, room2, cost));
                         }
                         case "Wall" -> {
                             int wallLength = width > height ? width : height;
