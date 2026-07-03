@@ -1,23 +1,27 @@
 package project.game.horde.entities.facade;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 import project.game.horde.entities.Entity;
 import project.game.horde.entities.creatures.Creature;
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.graphics.Assets;
+import project.game.horde.graphics.CharAssets;
 import project.game.horde.main.BlessingInventory;
+import project.game.horde.main.CustomHatInventory;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
+import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.Gun.GunImageDim;
 import project.game.horde.weapons.GunVars;
 
 public class PlayerMP extends Entity {
@@ -35,6 +39,7 @@ public class PlayerMP extends Entity {
     private int reviveProgress = 0;
     private int reviveMax = 300;
     private boolean isBeingRevived = false;
+    private BufferedImage[] skin = null;
 
     public PlayerMP(Handler handler, float x, float y, User user) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH,
@@ -45,6 +50,7 @@ public class PlayerMP extends Entity {
         health = 100;
         activatedBlessing = "";
         justTookDamage = false;
+        skin = handler.getSkinInv().getSkin(user.getSkin());
     }
 
     @Override
@@ -68,8 +74,8 @@ public class PlayerMP extends Entity {
             reviveProgress = 0;
             //send online data that they have been revived
             if (handler.getCurrentPlayer().getInv().getRevive() == 3) {
-                handler.getCurrentPlayer().getPeer().sendRevived(handler.getCurrentPlayer().getUsername(), username, 100); 
-            }else {
+                handler.getCurrentPlayer().getPeer().sendRevived(handler.getCurrentPlayer().getUsername(), username, 100);
+            } else {
                 handler.getCurrentPlayer().getPeer().sendRevived(handler.getCurrentPlayer().getUsername(), username, 50);
             }
             return true;
@@ -177,6 +183,27 @@ public class PlayerMP extends Entity {
         return gun;
     }
 
+    public void renderGun(Graphics2D g2d) {
+        GunImageDim dim = gun.getGunRef().getGunImageDim();
+        Gun gunRef = gun.getGunRef();
+        if (dim == null) {
+            return;
+        }
+
+        if (gunRef.isDual()) {
+            g2d.drawImage(gunRef.getGunImage(),
+                    (int) (x - 10 + dim.startX - handler.getGameCamera().getxOffset()),
+                    (int) (y - dim.startY - handler.getGameCamera().getyOffset()), dim.width, dim.height, null);
+            g2d.drawImage(gunRef.getGunImage(), (int) (x + 8 + dim.startX - handler.getGameCamera().getxOffset()),
+                    (int) (y - dim.startY - handler.getGameCamera().getyOffset()), dim.width, dim.height, null);
+
+        } else {
+            g2d.drawImage(gunRef.getGunImage(), (int) (x + dim.startX - handler.getGameCamera().getxOffset()),
+                    (int) (y - dim.startY - handler.getGameCamera().getyOffset()), dim.width, dim.height, null);
+
+        }
+    }
+
     @Override
     public void render(Graphics g) {
         if (luna != null) {
@@ -188,37 +215,49 @@ public class PlayerMP extends Entity {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform old = g2d.getTransform();
 
+        ///////////////////////////////////////
+
         if (health <= 0) {
             g2d.drawImage(Assets.player[3], (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            g2d.setTransform(old);
         } else {
             g2d.rotate(Math.toRadians(angle), x - handler.getGameCamera().getxOffset() + width / 2,
                     y - handler.getGameCamera().getyOffset() + height / 2);
+            g2d.drawImage(skin[0], (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-            if (justTookDamage == true) {
-                g2d.drawImage(Assets.player[1], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            } else if (health <= 50) {
-                g2d.drawImage(Assets.player[2], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-            } else {
-                g2d.drawImage(Assets.player[0], (int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+            renderGun(g2d);
+
+            g2d.drawImage(skin[1], (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+
+            switch (user.getHat()) {
+                case CustomHatInventory.CHRISTMAS ->
+                    g2d.drawImage(CharAssets.christmasHat, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.REINDEER ->
+                    g2d.drawImage(CharAssets.reindeer, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.BUNNY ->
+                    g2d.drawImage(CharAssets.bunny, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                default -> {
+                }
             }
 
-            g2d.setTransform(old);
+            // g2d.drawImage(Assets.player[0], (int) (x - handler.getGameCamera().getxOffset()),
+            //         (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
         }
-
+        g2d.setTransform(old);
         if (user.getUsername() != null) {
             Utils.drawCenteredString(g, user.getUsername(), new Rectangle((int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, 12), new Font(Font.DIALOG, Font.PLAIN, 12));
         }
-        g2d.setColor(Color.black);
-        Utils.drawCenteredString(g, getCenterX() + ", " + getCenterY(),
-                new Rectangle((int) (x - handler.getGameCamera().getxOffset()),
-                        (int) (y + height - handler.getGameCamera().getyOffset()), width, 12),
-                new Font(Font.DIALOG, Font.PLAIN, 15));
+        //g2d.setColor(Color.black);
+        // Utils.drawCenteredString(g, getCenterX() + ", " + getCenterY(),
+        //         new Rectangle((int) (x - handler.getGameCamera().getxOffset()),
+        //                 (int) (y + height - handler.getGameCamera().getyOffset()), width, 12),
+        //         new Font(Font.DIALOG, Font.PLAIN, 15));
     }
 
     public int getReviveProgress() {

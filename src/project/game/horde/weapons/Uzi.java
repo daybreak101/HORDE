@@ -2,6 +2,7 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.facade.OnlineBullet;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
@@ -24,6 +25,17 @@ public class Uzi extends Gun{
 		top = Assets.uzi_top;
 		gunImageDim = new GunImageDim(40, 35, 12, 80);
 	}
+
+	    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+        handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
+                x, range, angle, isUpgraded));
+
+        if (isUpgraded) {
+            Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
+        }
+        Sounds.playClip(GunSounds.UZI_SHOT_ID, 1, volume, false);
+    }
 	
 	public void shoot() {		
 		if(readyToFire == true && currentClip > 0 && isReloading == false) {

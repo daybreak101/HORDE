@@ -11,7 +11,7 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		applyCheats();
+		//applyCheats();
 	}
 
 	public void applyCheats() {
@@ -29,8 +29,8 @@ public class Cheats {
 		//handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
 
 		// points
-		//int points = 1000;
-		//handler.getCurrentPlayer().getInv().gainPoints(points);
+		int points = 10000;
+		handler.getCurrentPlayer().getInv().gainPoints(points);
 
 		// set round
 		int round = 10;
@@ -63,7 +63,7 @@ public class Cheats {
 				//new Uzi(handler, handler.getCurrentPlayer());
 				//new M16(handler, handler.getCurrentPlayer());
 				//gun.upgradeWeapon();
-		handler.getCurrentPlayer().getInv().setGun(gun);
+		//handler.getCurrentPlayer().getInv().setGun(gun);
 		
 		//give gas grenades
 		//handler.getCurrentPlayer().getInv().setSpecialGrenade(0);

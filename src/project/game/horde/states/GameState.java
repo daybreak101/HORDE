@@ -30,14 +30,9 @@ public class GameState extends State  {
 		handler.getGame().resetManagers();	
 		world = new World(handler,
 				"/worlds/"+ map + "/world1.txt", 
-				//"/worlds/"+ map + "/entities.txt",
 				"/worlds/"+ map + "/entities.json",
-				"/worlds/"+ map + "/nodes.txt",
 				"/worlds/"+ map + "/edges.txt",
-				"/worlds/"+ map + "/lights.txt",
 				"/worlds/"+ map + "/adjacentRooms.txt",
-				"/worlds/"+ map + "/spawners.txt",
-				"/worlds/"+ map + "/floors.txt",
 				user, map
 				);
 		world.getEntityManager().addCurrentPlayer(
@@ -55,13 +50,9 @@ public class GameState extends State  {
 		handler.getGame().resetManagers();
 		world = new World(handler,
 				"/worlds/"+ map + "/world1.txt", 
-				"/worlds/"+ map + "/entities.txt",
-				"/worlds/"+ map + "/nodes.txt",
+				"/worlds/"+ map + "/entities.json",
 				"/worlds/"+ map + "/edges.txt",
-				"/worlds/"+ map + "/lights.txt",
 				"/worlds/"+ map + "/adjacentRooms.txt",
-				"/worlds/"+ map + "/spawners.txt",
-				"/worlds/"+ map + "/floors.txt",
 				localUser, peer, users, map
 				);
 		//online stuff

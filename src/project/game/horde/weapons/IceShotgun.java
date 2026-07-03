@@ -6,75 +6,84 @@ import project.game.horde.entities.creatures.Player;
 import project.game.horde.main.Handler;
 
 public class IceShotgun extends Gun {
-	public IceShotgun(Handler handler, Player player) {
-		// change values
-		super(handler, player, 
-				GunVars.ICESHOTGUN_DAMAGE, 
-				GunVars.ICESHOTGUN_FIRERATE,
-				GunVars.ICESHOTGUN_RELOADSPEED,
-				GunVars.ICESHOTGUN_GUNCLIP, 
-				GunVars.ICESHOTGUN_MAXRESERVE, 
-				GunVars.ICESHOTGUN_WEIGHT, 
-				GunVars.ICESHOTGUN_RANGE, 100);
-		this.name = GunVars.ICESHOTGUN_NAME;
-		originalName = name;
-		upgradedName = GunVars.ICESHOTGUN_UPGRADEDNAME;
-	}
 
-	int heldShot = 0;
-	int heldShotMax = 180;
-	boolean heldPrev = false;
+    public IceShotgun(Handler handler, Player player) {
+        // change values
+        super(handler, player,
+                GunVars.ICESHOTGUN_DAMAGE,
+                GunVars.ICESHOTGUN_FIRERATE,
+                GunVars.ICESHOTGUN_RELOADSPEED,
+                GunVars.ICESHOTGUN_GUNCLIP,
+                GunVars.ICESHOTGUN_MAXRESERVE,
+                GunVars.ICESHOTGUN_WEIGHT,
+                GunVars.ICESHOTGUN_RANGE, 100);
+        this.name = GunVars.ICESHOTGUN_NAME;
+        originalName = name;
+        upgradedName = GunVars.ICESHOTGUN_UPGRADEDNAME;
+    }
 
-	//guess i figured out how to work semi-auto guns
-	public void postTick() {
-		//System.out.println("HeldShot:" + heldShot);
-		if (player.getMouseManager().isLeftPressed() && !isReloading) {
-			System.out.println("charge: " + heldShot);
-			heldShot++;
-		}
-		else if (heldPrev && !player.getMouseManager().isLeftPressed() && heldShot >= heldShotMax && !isReloading && isUpgraded) {
-			heldShot = 0;
-			System.out.println("shot charged shot");
-			shootChargedShot();
-		}
-		else if(!player.getMouseManager().isLeftPressed() && heldShot < heldShotMax && heldShot > 0 && !isReloading) {
-			shootSingleShot();
-			System.out.println("shot single shot");
-			heldShot = 0;
-		}
-		heldPrev = player.getMouseManager().isLeftPressed();
+    int heldShot = 0;
+    int heldShotMax = 180;
+    boolean heldPrev = false;
 
-	}
+    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+        // handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
+        //         x, range, angle, isUpgraded));
 
-	public void shootChargedShot() {
-		if (isUpgraded && currentClip == clip && !isReloading) {
-			System.out.println("out here");
-			currentClip = 0;
-			handler.getWorld().getEntityManager().addEntity(new IceStorm(handler,
-					player.getCenterX(), player.getCenterY(), this));
-			timerToFire = 0;
-			readyToFire = false;
-			if(player.getPeer() != null) {
-				player.getPeer().sendPlayerShot(player.getUsername());
-			}
-		}
-	}
+        // if (isUpgraded) {
+        //     Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
+        // }
+        // Sounds.playClip(GunSounds.AK47_SHOT_ID, 1, volume, false);
+    }
 
-	public void shootSingleShot() {
-		if ( currentClip > 0 && !isReloading) {
-			readyToFire = false;
+    //guess i figured out how to work semi-auto guns
+    public void postTick() {
+        //System.out.println("HeldShot:" + heldShot);
+        if (player.getMouseManager().isLeftPressed() && !isReloading) {
+            System.out.println("charge: " + heldShot);
+            heldShot++;
+        } else if (heldPrev && !player.getMouseManager().isLeftPressed() && heldShot >= heldShotMax && !isReloading && isUpgraded) {
+            heldShot = 0;
+            System.out.println("shot charged shot");
+            shootChargedShot();
+        } else if (!player.getMouseManager().isLeftPressed() && heldShot < heldShotMax && heldShot > 0 && !isReloading) {
+            shootSingleShot();
+            System.out.println("shot single shot");
+            heldShot = 0;
+        }
+        heldPrev = player.getMouseManager().isLeftPressed();
 
-			// Sounds.SHOOT.play();
+    }
 
-			currentClip--;
-			handler.getWorld().getEntityManager().addEntity(new IceBullet(handler,
-					player.getCenterX(), player.getCenterY(), range, this));
-			if(player.getPeer() != null) {
-				player.getPeer().sendPlayerShot(player.getUsername());
-			}
-			timerToFire = 0;
-		}
+    public void shootChargedShot() {
+        if (isUpgraded && currentClip == clip && !isReloading) {
+            System.out.println("out here");
+            currentClip = 0;
+            handler.getWorld().getEntityManager().addEntity(new IceStorm(handler,
+                    player.getCenterX(), player.getCenterY(), this));
+            timerToFire = 0;
+            readyToFire = false;
+            if (player.getPeer() != null) {
+                player.getPeer().sendPlayerShot(player.getUsername());
+            }
+        }
+    }
 
-	}
-	
+    public void shootSingleShot() {
+        if (currentClip > 0 && !isReloading) {
+            readyToFire = false;
+
+            // Sounds.SHOOT.play();
+            currentClip--;
+            handler.getWorld().getEntityManager().addEntity(new IceBullet(handler,
+                    player.getCenterX(), player.getCenterY(), range, this));
+            if (player.getPeer() != null) {
+                player.getPeer().sendPlayerShot(player.getUsername());
+            }
+            timerToFire = 0;
+        }
+
+    }
+
 }

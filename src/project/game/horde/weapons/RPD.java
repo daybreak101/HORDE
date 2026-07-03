@@ -2,56 +2,65 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.facade.OnlineBullet;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 
-public class RPD extends Gun{
+public class RPD extends Gun {
 
-	public RPD(Handler handler, Player player) {
-		super(handler, player, 
-				GunVars.RPD_DAMAGE, 
-				GunVars.RPD_FIRERATE,
-				GunVars.RPD_RELOADSPEED,
-				GunVars.RPD_GUNCLIP, 
-				GunVars.RPD_MAXRESERVE, 
-				GunVars.RPD_WEIGHT, 
-				GunVars.RPD_RANGE, 60);
-		this.name = GunVars.RPD_NAME;
-		originalName = name;
-		upgradedName = GunVars.RPD_UPGRADEDNAME;
-		reloadSound = GunSounds.RPD_RELOAD_ID;
-		top = Assets.rpd_top;
-		gunImageDim = new GunImageDim(30, 50, 40, 110);
-	}
-	
-	public void shoot() {		
-		if(readyToFire == true && currentClip > 0 && isReloading == false) {
-			readyToFire = false;
-			currentClip--;
-			
-			Sounds.playClip(GunSounds.RPD_SHOT_ID, 1, -1.0f, false);
+    public RPD(Handler handler, Player player) {
+        super(handler, player,
+                GunVars.RPD_DAMAGE,
+                GunVars.RPD_FIRERATE,
+                GunVars.RPD_RELOADSPEED,
+                GunVars.RPD_GUNCLIP,
+                GunVars.RPD_MAXRESERVE,
+                GunVars.RPD_WEIGHT,
+                GunVars.RPD_RANGE, 60);
+        this.name = GunVars.RPD_NAME;
+        originalName = name;
+        upgradedName = GunVars.RPD_UPGRADEDNAME;
+        reloadSound = GunSounds.RPD_RELOAD_ID;
+        top = Assets.rpd_top;
+        gunImageDim = new GunImageDim(30, 50, 40, 110);
+    }
 
-			//Sounds.playClip(GunSounds.rpd_shot, 1, "rpd_shot" + RandomUtil.nextInt(0, 10000), -1.0f, false);
-			
-			if(isUpgraded) {
-				Sounds.playClip(GunSounds.UPGRADED_ID, 1, -1.0f, false);
+    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+        handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
+                x, range, angle, isUpgraded));
 
-				//Sounds.playClip(GunSounds.upgraded, 1, "upgraded" + RandomUtil.nextInt(0, 10000), -1.0f, false);
-			}
-			
-			handler.getWorld().getEntityManager().addEntity(new Bullet(handler, 
-					player.getCenterX(),
-					player.getCenterY(),
-			
-					range, this));
-			if(player.getPeer() != null) {
-				player.getPeer().sendPlayerShot(player.getUsername());
-			}
-			timerToFire = 0;
-		}
-	}
-	
+        if (isUpgraded) {
+            Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
+        }
+        Sounds.playClip(GunSounds.RPD_SHOT_ID, 1, volume, false);
+    }
+
+    public void shoot() {
+        if (readyToFire == true && currentClip > 0 && isReloading == false) {
+            readyToFire = false;
+            currentClip--;
+
+            Sounds.playClip(GunSounds.RPD_SHOT_ID, 1, -1.0f, false);
+
+            //Sounds.playClip(GunSounds.rpd_shot, 1, "rpd_shot" + RandomUtil.nextInt(0, 10000), -1.0f, false);
+            if (isUpgraded) {
+                Sounds.playClip(GunSounds.UPGRADED_ID, 1, -1.0f, false);
+
+                //Sounds.playClip(GunSounds.upgraded, 1, "upgraded" + RandomUtil.nextInt(0, 10000), -1.0f, false);
+            }
+
+            handler.getWorld().getEntityManager().addEntity(new Bullet(handler,
+                    player.getCenterX(),
+                    player.getCenterY(),
+                    range, this));
+            if (player.getPeer() != null) {
+                player.getPeer().sendPlayerShot(player.getUsername());
+            }
+            timerToFire = 0;
+        }
+    }
 
 }

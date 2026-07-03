@@ -2,6 +2,7 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.Bullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.facade.OnlineBullet;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
@@ -24,6 +25,17 @@ public class G18 extends Gun {
         reloadSound = GunSounds.GLOCK17_RELOAD_ID;
         top = Assets.g18_top;
         gunImageDim = new GunImageDim(40, 50, 20, 100);
+    }
+
+    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+        handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
+                x, range, angle, isUpgraded));
+
+        if (isUpgraded) {
+            Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
+        }
+        Sounds.playClip(GunSounds.GLOCK17_SHOT_ID, 1, volume, false);
     }
 
     public void uniqueUpgrades() {

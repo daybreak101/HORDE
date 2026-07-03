@@ -208,6 +208,13 @@ public class MultiLobbyState extends State {
 
 	}
 
+	public void endGame() {
+		if(isServer) {
+			peer.endGame();
+		}
+		gameAlreadyStarted = false;
+	}
+
 	public void startServer() throws IOException {
 		peer.startLobby();
 		// peer.joinLobby("localhost");

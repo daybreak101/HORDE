@@ -61,30 +61,31 @@ public class World {
 
     // offline
     public World(Handler handler, String path, String entityPath,
-            String nodesPath, String edgesPath, String lightsPath,
-            String adjacentRooms, String spawnersPath, String floorsPath,
+            String edgesPath,
+            String adjacentRooms,
             User user, String map) throws IOException {
-        initializeWorld(handler, path, entityPath, nodesPath,
-                edgesPath, lightsPath, adjacentRooms, spawnersPath, map);
+        initializeWorld(handler, path, entityPath,
+                edgesPath, adjacentRooms, map);
     }
 
     // online
     HashMap<Integer, User> users;
     Peer peer;
 
-    public World(Handler handler, String path, String entityPath,
-            String nodesPath, String edgesPath, String lightsPath,
-            String adjacentRooms, String spawnersPath, String floorsPath,
+    public World(Handler handler, String path,
+            String entityPath,
+            String edgesPath,
+            String adjacentRooms,
             User user, Peer peer, HashMap<Integer, User> users, String map) throws IOException {
         this.peer = peer;
         this.users = users;
-        initializeWorld(handler, path, entityPath, nodesPath,
-                edgesPath, lightsPath, adjacentRooms, spawnersPath, map);
+        initializeWorld(handler, path, entityPath,
+                edgesPath, adjacentRooms, map);
     }
 
     public void initializeWorld(Handler handler, String path, String entityPath,
-            String nodesPath, String edgesPath, String lightsPath,
-            String adjacentRooms, String spawnersPath, String map) throws IOException {
+            String edgesPath,
+            String adjacentRooms, String map) throws IOException {
         this.map = map;
         this.handler = handler;
         handler.setWorld(this);
@@ -97,11 +98,10 @@ public class World {
         loadWorld(path);
         handler.setWorld(this);
         createStaticEntities(entityPath);
-        pathing = new PathingLogic(handler, this, nodesPath, edgesPath);
+        pathing = new PathingLogic(handler, this, entityPath, edgesPath);
 
         nodesVisible = false;
         powerOn = false;
-        //lighting = new LightingLogic(handler, this, lightsPath);
     }
 
     private String getString(JsonNode obj, String key, String def) {

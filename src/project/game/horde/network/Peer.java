@@ -24,6 +24,7 @@ import project.game.horde.sounds.Sounds;
 import project.game.horde.states.GameState;
 import project.game.horde.states.LoadingState;
 import project.game.horde.states.MultiLobbyState;
+import project.game.horde.states.State;
 
 public class Peer {
 
@@ -253,7 +254,7 @@ public class Peer {
                     multiLobbyState.gameAlreadyStarted = true;
                 }
                 if (gameState != null && gameState.getWorld().getEntityManager().getZombieById(message.id) != null) {
-                    gameState.getWorld().getEntityManager().getZombieById(Integer.parseInt(message.message)).dontMove();
+                    gameState.getWorld().getEntityManager().getZombieById(message.id).dontMove();
                 }
             }
             case Message.USER_DAMAGED_ZOMBIE -> {
@@ -512,6 +513,10 @@ public class Peer {
                 } catch (IOException e) {
                 }
             }
+            case Message.HOST_END_GAME -> {
+                State.setState(multiLobbyState);
+                multiLobbyState.endGame();
+            }
             case Message.USER_CHANGED_SKIN -> {
                 // if (isServer || !localUser.getUsername().equals(message.powerup)) {
                 for (Map.Entry<Integer, User> entry : users.entrySet()) {
@@ -643,6 +648,12 @@ public class Peer {
     public void startGame() {
         if (isServer) {
             server.sendToAllTCP(new Message(Message.HOST_START_GAME, 0, null, null));
+        }
+    }
+
+    public void endGame() {
+        if (isServer) {
+            server.sendToAllTCP(new Message(Message.HOST_END_GAME, 0, null, null));
         }
     }
 

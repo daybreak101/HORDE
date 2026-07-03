@@ -27,7 +27,7 @@ public class LeaderboardElement extends HudElement {
 	String newName = "";
 	
 	int typeTicker = 10, typeCooldown = 10;
-	int newGameTicker = 0, newGameCountdown = 1600;
+	int newGameTicker = 0, newGameCountdown = 600;
 	private Player player;
 	private User user;
 
@@ -88,7 +88,6 @@ public class LeaderboardElement extends HudElement {
 
 	}
 
-	// implement your own sorting algorithm
 	public void organize() {
 		spots.sort(new Comparator<LeaderboardSpot>() {
 
@@ -175,6 +174,7 @@ public class LeaderboardElement extends HudElement {
 				//handler.getGame().gameState = new GameState(handler, user);
 				if(handler.getCurrentPlayer().getPeer() != null) {
 					State.setState(handler.getCurrentPlayer().getPeer().getLobby());
+					handler.getCurrentPlayer().getPeer().getLobby().endGame();
 				}
 				else {
 					State.setState(new LobbyState(handler, user));

@@ -2,6 +2,7 @@ package project.game.horde.weapons;
 
 import project.game.horde.entities.bullets.ShotgunBullet;
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.entities.facade.OnlineShotgunBullet;
 import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.GunSounds;
@@ -25,6 +26,18 @@ public class Winchester1901 extends Gun {
         reloadSound = GunSounds.WINCHESTER1901_SHELL_RELOAD_ID;
         top = Assets.winchester1901_top;
         gunImageDim = new GunImageDim(30, 45, 20, 100);
+    }
+
+    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+        handler.getWorld().getEntityManager()
+                .addEntity(new OnlineShotgunBullet(handler, x, y, range,
+                        angle, GunVars.WINCHESTER1901_PELLET_SPREAD, GunVars.WINCHESTER1901_PELLET_COUNT, isUpgraded));
+
+        if (isUpgraded) {
+            Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
+        }
+        Sounds.playClip(GunSounds.WINCHESTER1901_SHOT_ID, 1, volume, false);
     }
 
     private Timer cockTimerlmao;

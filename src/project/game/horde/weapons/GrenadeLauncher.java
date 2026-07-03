@@ -23,6 +23,10 @@ public class GrenadeLauncher extends Gun {
         gunImageDim = new GunImageDim(30, 45, 40, 100);
     }
 
+    @Override
+    public void shootOnline(int x, int y, float angle, float volume) {
+    }
+
     private Timer cockTimerlmao;
     private float speedMod = 1;
     private float doubleMod = 1;
@@ -141,11 +145,16 @@ public class GrenadeLauncher extends Gun {
     public void reloadFinish() {
         cockTimerlmao.resetTimer();
         switch (speedcola) {
-            case 0 -> Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 10 / 9, -1.0f, false);
-            case 1 -> Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 4 / 3, -1.0f, false);
-            case 2 -> Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 2, -1.0f, false);
-            case 3 -> Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 10 / 3, -1.0f, false);
-            default -> Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 1, -1.0f, false);
+            case 0 ->
+                Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 10 / 9, -1.0f, false);
+            case 1 ->
+                Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 4 / 3, -1.0f, false);
+            case 2 ->
+                Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 2, -1.0f, false);
+            case 3 ->
+                Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 10 / 3, -1.0f, false);
+            default ->
+                Sounds.playClip(GunSounds.GRENADE_LAUNCHER_RELOAD_CLOSE, 1, -1.0f, false);
         }
     }
 

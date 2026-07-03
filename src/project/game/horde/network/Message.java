@@ -50,6 +50,7 @@ public class Message implements Serializable {
 	public static final int HOST_CHANGE_MAP = 38;
 	public static final int USER_CHANGED_SKIN = 39;
 	public static final int USER_CHANGED_HAT = 40;
+    public static final int HOST_END_GAME = 41;
 
     public int type;
     public int connectionId;

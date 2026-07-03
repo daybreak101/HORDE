@@ -5,8 +5,12 @@ import java.awt.Graphics;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Graph;
@@ -68,8 +72,8 @@ public class PathingLogic {
             if (i == src) {
                 nodes.get(src).setNextNodes(null);
             } else if (path[i] == -1) {
-                nodes.get(src).setNextNodes(null); 
-            }else {
+                nodes.get(src).setNextNodes(null);
+            } else {
                 nodes.get(src).setNextNodes(nodes.get(path[i]));
             }
         }
@@ -97,26 +101,74 @@ public class PathingLogic {
         }
     }
 
-    public final void createNodes(String nodesPath) {
-        // read file
-        String file = Utils.loadFileAsString(nodesPath);
-        String[] tokens = file.split("\\s+");
+    public void createNodes(String entityPath) {
+        ObjectMapper mapper = new ObjectMapper();
 
-        // get number of nodes
-        int i = 0;
+        try (InputStream is = World.class.getResourceAsStream(entityPath)) {
 
-        // process nodes
-        int vertex, x, y, room, withinPlayable;
-        while (i < tokens.length) {
-            vertex = Utils.parseInt(tokens[i++]);
-            x = Utils.parseInt(tokens[i++]);
-            y = Utils.parseInt(tokens[i++]);
-            room = Utils.parseInt(tokens[i++]);
-            withinPlayable = Utils.parseInt(tokens[i++]);
-            nodes.add(new Node(vertex, x, y, room, withinPlayable));
+            if (is == null) {
+                throw new RuntimeException("Could not find map: " + entityPath);
+            }
+
+            JsonNode root = mapper.readTree(is);
+            JsonNode layers = root.get("layers");
+            for (JsonNode layer : layers) {
+                if (!"Nodes".equals(layer.get("name").asText())) {
+                    continue;
+                }
+
+                JsonNode objects = layer.get("objects");
+                for (JsonNode obj : objects) {
+                    int vertex = obj.get("name").asInt();
+                    int x = obj.get("x").asInt();
+                    int y = obj.get("y").asInt();
+                    int room = getInt(obj, "room", 0);
+                    int withinPlayable = getInt(obj, "withinPlayable", 0);
+                    nodes.add(new Node(vertex, x, y, room, withinPlayable));
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+    private int getInt(JsonNode obj, String key, int def) {
+
+        JsonNode props = obj.get("properties");
+        if (props != null) {
+            for (JsonNode p : props) {
+                if (key.equals(p.get("name").asText())) {
+                    return p.get("value").asInt();
+                }
+            }
+        }
+
+        JsonNode direct = obj.get(key);
+        if (direct != null && direct.isNumber()) {
+            return direct.asInt();
+        }
+
+        return def;
+    }
+
+    // public final void createNodes(String nodesPath) {
+    //     // read file
+    //     String file = Utils.loadFileAsString(nodesPath);
+    //     String[] tokens = file.split("\\s+");
+    //     // get number of nodes
+    //     int i = 0;
+    //     // process nodes
+    //     int vertex, x, y, room, withinPlayable;
+    //     while (i < tokens.length) {
+    //         vertex = Utils.parseInt(tokens[i++]);
+    //         x = Utils.parseInt(tokens[i++]);
+    //         y = Utils.parseInt(tokens[i++]);
+    //         room = Utils.parseInt(tokens[i++]);
+    //         withinPlayable = Utils.parseInt(tokens[i++]);
+    //         nodes.add(new Node(vertex, x, y, room, withinPlayable));
+    //     }
+    // }
     public Graph getGraph() {
         return graph;
     }
