@@ -292,8 +292,8 @@ public class GameplayElement extends HudElement {
 
                 powerups.add(e);
 
-                if (e.getName().equals("Death Machine")
-                        && !e.getPlayerPicked().equals(handler.getCurrentPlayer().getUsername())) {
+                if (e.getName().equals("Death Machine") &&
+                       e.getPlayerPicked() != null && !e.getPlayerPicked().equals(handler.getCurrentPlayer().getUsername())) {
                     powerups.remove(e);
                 }
             }
