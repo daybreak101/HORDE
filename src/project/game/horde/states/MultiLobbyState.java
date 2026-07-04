@@ -294,4 +294,8 @@ public class MultiLobbyState extends State {
 		}
 	}
 
+	public Peer getPeer() {
+		return peer;
+	}
+
 }

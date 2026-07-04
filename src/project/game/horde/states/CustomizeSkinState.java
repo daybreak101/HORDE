@@ -62,6 +62,10 @@ public class CustomizeSkinState extends State {
                     }
                     isSelected = inventory.setSkin(CustomSkinInventory.HARRY);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserSkinChange(user.getUsername(), CustomSkinInventory.HARRY);
+                    }
                 }
             }
 
@@ -84,6 +88,10 @@ public class CustomizeSkinState extends State {
                     }
                     isSelected = inventory.setSkin(CustomSkinInventory.BLUE_ALIEN);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserSkinChange(user.getUsername(), CustomSkinInventory.BLUE_ALIEN);
+                    }
                 }
             }
 
@@ -106,6 +114,10 @@ public class CustomizeSkinState extends State {
                     }
                     isSelected = inventory.setSkin(CustomSkinInventory.ROBOT);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserSkinChange(user.getUsername(), CustomSkinInventory.ROBOT);
+                    }
                 }
             }
 

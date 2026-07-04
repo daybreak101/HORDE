@@ -63,6 +63,10 @@ public class CustomizeHatState extends State {
                     }
                     isSelected = inventory.setHat(CustomHatInventory.NONE);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserHatChange(user.getUsername(), CustomHatInventory.NONE);
+                    }
                 }
             }
 
@@ -85,6 +89,10 @@ public class CustomizeHatState extends State {
                     }
                     isSelected = inventory.setHat(CustomHatInventory.CHRISTMAS);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserHatChange(user.getUsername(), CustomHatInventory.CHRISTMAS);
+                    }
                 }
             }
 
@@ -107,6 +115,10 @@ public class CustomizeHatState extends State {
                     }
                     isSelected = inventory.setHat(CustomHatInventory.REINDEER);
                     handler.getMouseManager().reset();
+
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserHatChange(user.getUsername(), CustomHatInventory.REINDEER);
+                    }
                 }
             }
 
@@ -129,6 +141,9 @@ public class CustomizeHatState extends State {
                     }
                     isSelected = inventory.setHat(CustomHatInventory.BUNNY);
                     handler.getMouseManager().reset();
+                    if (lastState instanceof MultiLobbyState multiLobbyState) {
+                        multiLobbyState.getPeer().sendUserHatChange(user.getUsername(), CustomHatInventory.BUNNY);
+                    }
                 }
             }
 

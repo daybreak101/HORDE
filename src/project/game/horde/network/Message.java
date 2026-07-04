@@ -119,6 +119,7 @@ public class Message implements Serializable {
     	this.y = y;
     }
     
+    //powerup, hat, skin
     public Message(int type, String powerup, int id)
     {
     	this.type = type;
