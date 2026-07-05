@@ -10,11 +10,11 @@ public class Stronghold extends Perk{
 	public static final int TIME_TO_ACTIVATE = 300;
 	public static final int TICKS_PER_BUFF = 60;
 	public static final float DAMAGE_BUFF_INCREMENTS = .05f;
-	public static final int ARMOR_GAIN_INCREMENTS = 5;
+	public static final int ARMOR_GAIN_INCREMENTS = 2;
 	public static final float LVL1_DAMAGEBUFFCAP = .25f;
 	public static final float LVL2_DAMAGEBUFFCAP = .50f;
-	public static final int BASE_MAXARMOR = 25;
-	public static final int LVL2_MAXARMOR = 50;
+	public static final int BASE_MAXARMOR = 10;
+	public static final int LVL2_MAXARMOR = 30;
 	
 	public Stronghold(Handler handler, int level, Player player) {
 		super(handler, level, player);

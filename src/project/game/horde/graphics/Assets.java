@@ -39,7 +39,7 @@ public class Assets {
             m4_top, p90_top, rpd_top, rpg_top, winchester1901_top, minigun_top,
             arisaka_top, bren_top, doubleBarrel_top, g18_top, m1Garand_top, m16_top, m1911_top,
             m60_top, python_top, thompson_top, type100_top, uzi_top;
-    public static BufferedImage[][] flamethrower_bullet, upgraded_flamethrower_bullet;
+    public static BufferedImage[] flamethrower_bullet, upgraded_flamethrower_bullet;
     public static BufferedImage[] gas_cloud;
     public static BufferedImage rpg_rocket;
     public static BufferedImage[] explosion, upgradedExplosion;
@@ -150,21 +150,20 @@ public class Assets {
             crawlerAttackAnim[i] = crawlerAttackAnim[10 - i];
         }
 
-        flamethrower_bullet = new BufferedImage[15][20];
+        flamethrower_bullet = new BufferedImage[15];
         for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 13; j++) {
-                flamethrower_bullet[i][j]
-                        = ImageLoader.loadImage(
-                                folder + "flamethrower_bullet/" + (i + 5) + "_" + (j * 2) + ".png");
-            }
+            flamethrower_bullet[i]
+                    = ImageLoader.loadImage(
+                            folder + "flamethrower_bullet/" + (i + 5) + "_0"+ ".png");
+
         }
-        upgraded_flamethrower_bullet = new BufferedImage[15][20];
+        upgraded_flamethrower_bullet = new BufferedImage[15];
         for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 13; j++) {
-                upgraded_flamethrower_bullet[i][j]
-                        = ImageLoader.loadImage(
-                                folder + "upgraded_flamethrower_bullet/" + (i + 5) + "_" + (j * 2) + ".png");
-            }
+
+            upgraded_flamethrower_bullet[i]
+                    = ImageLoader.loadImage(
+                            folder + "upgraded_flamethrower_bullet/" + (i + 5) + "_0" + ".png");
+
         }
 
         rpg_rocket = ImageLoader.loadImage(folder + "rpg_rocket.png");

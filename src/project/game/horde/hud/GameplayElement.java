@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -21,6 +20,7 @@ import project.game.horde.graphics.Assets;
 import project.game.horde.main.BlessingInventory;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.Perk;
+import project.game.horde.perks.Stronghold;
 import project.game.horde.utils.Utils;
 import project.game.horde.weapons.Gun;
 
@@ -55,19 +55,18 @@ public class GameplayElement extends HudElement {
 
         interactText = "";
 
-        Ellipse2D.Float radius = new Ellipse2D.Float(player.getX() - 50, player.getY() - 50, player.getWidth() + 50,
-                player.getHeight() + 50);
+        //Ellipse2D.Float radius = new Ellipse2D.Float(player.getCenterX() - 50, player.getCenterY() - 50, 100, 100);
         InteractableStaticEntity closestInteract = null;
         float closestDist = 2000000;
         float eDist;
 
         // first get if player is downed and can be revived near you
-        Ellipse2D.Float radius2 = new Ellipse2D.Float(player.getX() - 100, player.getY() - 100, 200, 200);
+        //Ellipse2D.Float radius2 = new Ellipse2D.Float(player.getCenterX() - , player.getCenterY() - 25, 50, 50);
         boolean skipInteracts = false;
         String userRevive = "";
 
         for (PlayerMP others : handler.getWorld().getEntityManager().getOtherPlayers()) {
-            if (radius2.intersects(others.getCollisionBounds(0, 0)) && others.getHealth() <= 0) {
+            if (player.getInteractRadius().intersects(others.getCollisionBounds(0, 0)) && others.getHealth() <= 0) {
                 skipInteracts = true;
                 userRevive = others.getUsername();
             }
@@ -76,7 +75,7 @@ public class GameplayElement extends HudElement {
 
         if (!skipInteracts) {
             for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-                eDist = Utils.getEuclideanDistance(player.getX(), player.getY(), e.getX(), e.getY());
+                eDist = Utils.getEuclideanDistance(player.getCenterX(), player.getCenterY(), e.getCenterX(), e.getCenterY());
                 if (closestInteract == null) {
                     closestInteract = e;
                     closestDist = eDist;
@@ -88,7 +87,7 @@ public class GameplayElement extends HudElement {
             }
 
             if (closestInteract != null) {
-                if (radius.intersects(closestInteract.getTriggerRange())) {
+                if (player.getInteractRadius().intersects(closestInteract.getTriggerRange())) {
                     interactText = closestInteract.getTriggerText();
 
                 }
@@ -214,7 +213,7 @@ public class GameplayElement extends HudElement {
         // g.drawString(Integer.toString(health + player.getTempHealth()), 100, (int)
         // handler.getHeight() - 100);
         g.setColor(Color.BLUE);
-        g.fillRect((int) 100, (int) handler.getHeight() - 60, armor, 10);
+        g.fillRect((int) 100, (int) handler.getHeight() - 60, (int)((float)armor/(float)Stronghold.LVL2_MAXARMOR * 100.f), 10);
 
         g.setColor(new Color(128, 0, 0));
         g.fillOval(49, (int) handler.getHeight() - 105, 60, 60);

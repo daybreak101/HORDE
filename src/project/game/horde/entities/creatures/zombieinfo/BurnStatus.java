@@ -12,7 +12,7 @@ public class BurnStatus {
 	private int burnDamage = 0;
 	
 	private Timer burnDuration = new Timer(300);
-	private Timer eachBurn = new Timer(20);
+	private Timer eachBurn = new Timer(60);
 
 	public BurnStatus(Handler handler, Zombie entity) {
 		this.handler = handler;

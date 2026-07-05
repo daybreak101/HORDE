@@ -11,6 +11,7 @@ import project.game.horde.main.Handler;
 import project.game.horde.perks.DeadShot;
 import project.game.horde.perks.DoubleTap;
 import project.game.horde.perks.Juggernaut;
+import project.game.horde.perks.Luna;
 import project.game.horde.perks.MuleKick;
 import project.game.horde.perks.Perk;
 import project.game.horde.perks.PhD;
@@ -128,6 +129,10 @@ public class RandomPerk extends InteractableStaticEntity {
 		case 11 -> {
                     level = handler.getUnlocks().getStrongholdLvl();
                     return new Stronghold(handler, level, player);
+                }
+		case 12 -> {
+                    level = handler.getUnlocks().getLunaLvl();
+                    return new Luna(handler, level, player);
                 }
 		}
             // case 10:

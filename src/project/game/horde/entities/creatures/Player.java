@@ -75,6 +75,7 @@ public class Player extends Creature {
 
     // input
     private PlayerInput playerInput;
+    private Ellipse2D.Float interactRadius = new Ellipse2D.Float();
 
     // camera
     private GameCamera gameCamera;
@@ -153,7 +154,6 @@ public class Player extends Creature {
                 }
             }
         } else if (health <= 0) {
-
             if (!isOnline) {
                 die();
             } else {
@@ -178,6 +178,8 @@ public class Player extends Creature {
             }
 
         } else {
+            interactRadius.setFrame(getCenterX() - 50, getCenterY() - 50, 100, 100);
+
             setClosestNode();
             freezeStatus.checkIfInIcyWater();
             freezeStatus.freezing();
@@ -411,13 +413,12 @@ public class Player extends Creature {
 
     public void interact() {
 
-        Ellipse2D.Float radius = new Ellipse2D.Float(x - 100, y - 100, 200, 200);
-
+        // Ellipse2D.Float radius = new Ellipse2D.Float(getCenterX() - 50, getCenterY() - 50, 100, 100);
         InteractableStaticEntity closestInteract = null;
         float closestDist = 2000000;
         float eDist;
         for (PlayerMP others : handler.getWorld().getEntityManager().getOtherPlayers()) {
-            if (radius.intersects(others.getCollisionBounds(0, 0))
+            if (interactRadius.intersects(others.getCollisionBounds(0, 0))
                     && others.getHealth() <= 0) {
                 if (others.progressRevive()) {
                     isReviving = false;
@@ -450,7 +451,7 @@ public class Player extends Creature {
         }
 
         if (closestInteract != null) {
-            if (radius.intersects(closestInteract.getTriggerRange())) {
+            if (interactRadius.intersects(closestInteract.getTriggerRange())) {
                 closestInteract.fulfillInteraction(this);
             }
         }
@@ -492,13 +493,14 @@ public class Player extends Creature {
 
     boolean resetDamageRender = false;
     int alpha = 0;
+
     public void renderDamage(Graphics g) {
         if (resetDamageRender) {
             alpha = 255;
             resetDamageRender = false;
         }
         if (justTookDamage) {
-            if(alpha > 0) {
+            if (alpha > 0) {
                 alpha -= 5;
                 if (alpha < 0) {
                     alpha = 0;
@@ -645,6 +647,13 @@ public class Player extends Creature {
         }
     }
 
+    public void renderInteractRadius(Graphics g) {
+        g.setColor(Color.red);
+        g.fillOval((int) (interactRadius.getX() - handler.getGameCamera().getxOffset()),
+                (int) (interactRadius.getY() - handler.getGameCamera().getyOffset()), 
+                (int) interactRadius.getWidth(), (int) interactRadius.getHeight());
+    }
+
     @Override
     public void render(Graphics g) {
         inv.render(g);
@@ -659,6 +668,7 @@ public class Player extends Creature {
 //		}
 //		lastAngle = angle;
         renderStronghold(g);
+        //renderInteractRadius(g);
         renderShadow(g);
         renderBurn(g);
         renderCharacterCustoms(g);
@@ -944,5 +954,9 @@ public class Player extends Creature {
 
     public void removeReviveHud() {
         hud.removeObject(reviveHud);
+    }
+
+    public Ellipse2D.Float getInteractRadius() {
+        return interactRadius;
     }
 }

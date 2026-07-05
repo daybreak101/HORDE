@@ -1,6 +1,86 @@
-- Downscale assets. No more upscaling 3x. Slow and unnecessary.
-- Learn how to implement Tiled to create maps.
+- Render WallBuy with correct weapon asset
+- Power switch needs to work in multiplayer
+- Damage numbers positioning is incorrect.
+- PlayerMP bullet origination doesn't seem to be correct, angle is correct.
+- "Unable to shoot" identifier:
+    Turn laser off (change to black) when reloading, or doing action that disables shooting
+    Have character hold gun sideways
+- Create assets for vending machine
+    Floating chip bag with glow background when vending machine is ready
+- Create asset for PAP:
+    Frying animation when weapon is upgrading
+    Floating weapon with glow background when weapon is ready
+- Create asset for "Player consuming perk":
+    Player holds chip bag in hand
+    Turn laser off (change to black)
+- Create asset for Power Switch
+- Create asset for "Ritual Circle"
+    Replace old idea with "3 Headed Dragon statue, with middle dragon holding glowing scroll in its mouth"
+    Two side dragons shoot fire when Blessing is ready
+    Player holds glowing scroll in hand, then opens it when accepting
+- Low Health indicator:
+    Heartbeat sounds, faster when lower on health
+
 
 - Add preview info for character hover, such as name and description.
 - Prestige system? Unlock characters, HUD colors, laser colors, hats, etc.
 - Add more weapons?
+    + (AR) Ruger 10/22 (Semi-auto, fire as fast as you press)
+    + (AR) AR-15 (semi-auto, slower than ruger)
+    + (Sniper) Tikka T3x (bolt-action, way faster but weaker than AWP)
+    + (Shotgun) KSG (slugs, far range)
+    + (Shotgun) Mossberg 590 (traditional pump shotgun)
+    + (Shotgun) Benelli SBE3 (semi-auto, fire as fast as you press) 
+    + (Special Grenade) Sparkler (firecracker, for distraction)
+
+- Add more characters?
+- Add more hats?
+- OFC add more maps.
+
+- Seattle Map
+    Start off at the bottom of Space Needle. 
+    You see to the north a disabled elevator to go up to Space Needle.
+    You see to the south a staircase to go to Subway Station, but it is locked with a powered gate.
+    Go west to find a Power Station. 
+    Turn on power.
+    Then Gather parts to restore its teleportation network.
+    Turning on teleportation will show you that you can teleport to the Subway Station.
+    From there, you can press a button from the inside of the station to open the powered door, making it permanently opened.
+    The Subway is constantly moving, so you can either wait for it to stop, or teleport to the next station.
+    Teleporting to areas where you need to find switches to activate Space Needle Elevator.
+    Other areas include:
+        - Space Needle
+            - Starting area, already defined.
+            - Ray Gun part on top of Space Needle. (Blueprints)
+            - PAP on top of Space Needle.
+            - Staying at the top of Space Needle will trigger alarm. You can only stay for 30 seconds before turret kills you.
+        - Aquarium
+            - One of the raygun parts requires you to teleport to the inside of the actual "shark tank".
+              It is at the end of the tank, but you will start drowning and being attacked by sharks.
+              Grabbing it will teleport you back  (Plasma tube) 
+        - Fremont Troll
+            - Feed souls to the troll to get a Ray Gun part (Gun)
+        - Amazon Spheres
+            - Use actual layout to map out the areas.
+            - Space Needle switch is somewhere inside.
+        - King Street Station
+            - Gorgeous Train station. Rooms: Entrance -> Lobby -> Platform Area w/ Subway
+            - Space Needle switch is somewhere inside lobby
+        - "Beneath the Streets"/"Seattle Underground"\
+            - Labyrinth of an underground city that was burned in a fire
+            - Evidence of alien life.
+            - Space Needle switch inside the maze.
+    Activating all switches will allow you to take a long elevator ride to the top of Space Needle.
+    At the top, you will see a locked alien door.
+    Build Ray Gun
+        - Two fire modes
+        - First shoots green beams, unlimited penetration
+        - Second emits radial signal, that slows zombies.
+    Then Ray Gun can be used to enter Boss Fight Arena by activating Ray Gun signal near door.
+    In the boss fight arena, you will shoot 3 human photos, then it will activate the boss fight, locking door behind you.
+    
+    Boss fight is against an alien with a force field. 
+    You will need to shoot the UFOs to bring down the shield.
+    It can be damaged when all UFOs are destroyed.
+    It will redeploy UFOs after 10 seconds.
+    When it is low on healthm,

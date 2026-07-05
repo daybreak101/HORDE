@@ -1,5 +1,6 @@
 package project.game.horde.entities.bullets;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -9,6 +10,7 @@ import java.awt.geom.Path2D;
 import java.util.ArrayList;
 
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Assets;
@@ -115,7 +117,7 @@ public class NewFlameBullet extends Bullet {
     public boolean checkForWallImpact() {
         cb = getRotatedRectangle(x, y - height / 2, width, height, angle);
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-            if (cb.intersects(e.getCollisionBounds(0, 0))) {
+            if (!(e instanceof Barrier) && cb.intersects(e.getCollisionBounds(0, 0))) {
                 return true;
             }
         }
@@ -132,28 +134,30 @@ public class NewFlameBullet extends Bullet {
     @Override
     public void render(Graphics g) {
 
-        if (waitToRender.checkIsReady()) {
+       // if (waitToRender.checkIsReady()) {
             Graphics2D g2d = (Graphics2D) g;
             AffineTransform old = g2d.getTransform();
             int dy = -50;
             int dx = 40;
+            g2d.setComposite(AlphaComposite.getInstance(
+                    AlphaComposite.SRC_OVER, 1.0f - currentAlpha/24.0f)); // 50% opacity
+
             g2d.rotate(angle, x - handler.getGameCamera().getxOffset(), y - handler.getGameCamera().getyOffset());
             if (gunFiredFrom.isUpgraded()) {
-                g2d.drawImage(Assets.upgraded_flamethrower_bullet[frame][currentAlpha],
+                g2d.drawImage(Assets.upgraded_flamethrower_bullet[frame],
                         Math.round(x - handler.getGameCamera().getxOffset()) + dx,
                         Math.round(y - handler.getGameCamera().getyOffset()) + dy, width, 100, null);
             } else {
-                g2d.drawImage(Assets.flamethrower_bullet[frame][currentAlpha],
+                g2d.drawImage(Assets.flamethrower_bullet[frame],
                         Math.round(x - handler.getGameCamera().getxOffset()) + dx,
                         Math.round(y - handler.getGameCamera().getyOffset()) + dy, width, 100, null);
             }
-
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
             g2d.setTransform(old);
-        } else {
-            waitToRender.tick();
-        }
+        //} else {
+        //    waitToRender.tick();
+        //}
 
     }
 
-  
 }

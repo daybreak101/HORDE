@@ -59,7 +59,7 @@ public class GunVars {
 	public static final int AA12_DAMAGE = 120;
 	public static final int AK47_DAMAGE = 300;
 	public static final int AWP_DAMAGE = 2500;
-	public static final int FLAMETHROWER_DAMAGE = 150;
+	public static final int FLAMETHROWER_DAMAGE = 200;
 	public static final int GLOCK17_DAMAGE = 140;
 	public static final int GRENADELAUNCHER_DAMAGE = 1000;
 	public static final int ICESHOTGUN_DAMAGE = 0;
@@ -86,7 +86,7 @@ public class GunVars {
 	public static final int AA12_FIRERATE = 7;
 	public static final int AK47_FIRERATE = 5;
 	public static final int AWP_FIRERATE = 100;
-	public static final int FLAMETHROWER_FIRERATE = 3;
+	public static final int FLAMETHROWER_FIRERATE = 6;
 	public static final int GLOCK17_FIRERATE = 20;
 	public static final int GRENADELAUNCHER_FIRERATE = 50;
 	public static final int ICESHOTGUN_FIRERATE = 100;
