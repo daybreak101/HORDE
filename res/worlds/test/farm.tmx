@@ -137,31 +137,31 @@
   <object id="34" name="InvisibleBounds" type="InvisibleBounds" x="1920" y="455" width="130" height="435"/>
   <object id="35" name="FarmMap" type="FarmMap" x="0" y="0" width="3400" height="1700"/>
   <object id="95" name="PackAPunch" type="PackAPunch" x="657" y="965" width="75" height="30"/>
-  <object id="102" name="WallBuy" type="WallBuy" x="672" y="498" width="50" height="25">
+  <object id="102" name="WallBuy" type="WallBuy" x="649" y="506" width="75" height="30">
    <properties>
     <property name="gun" value="M16"/>
     <property name="wall" value="1"/>
    </properties>
   </object>
-  <object id="103" name="WallBuy" type="WallBuy" x="1044" y="666" width="50" height="25">
+  <object id="103" name="WallBuy" type="WallBuy" x="1045" y="676" width="75" height="30">
    <properties>
     <property name="gun" value="Arisaka"/>
     <property name="wall" value="1"/>
    </properties>
   </object>
-  <object id="104" name="WallBuy" type="WallBuy" x="1348" y="982" width="50" height="25">
+  <object id="104" name="WallBuy" type="WallBuy" x="1347" y="969" width="75" height="30">
    <properties>
     <property name="gun" value="Thompson"/>
     <property name="wall" value="0"/>
    </properties>
   </object>
-  <object id="105" name="WallBuy" type="WallBuy" x="1582" y="547" width="25" height="50">
+  <object id="105" name="WallBuy" type="WallBuy" x="1569" y="543" width="30" height="75">
    <properties>
     <property name="gun" value="M1Garand"/>
     <property name="wall" value="3"/>
    </properties>
   </object>
-  <object id="106" name="WallBuy" type="WallBuy" x="1901" y="656" width="25" height="50">
+  <object id="106" name="WallBuy" type="WallBuy" x="1911" y="649" width="30" height="75">
    <properties>
     <property name="gun" value="DoubleBarrel"/>
     <property name="wall" value="3"/>

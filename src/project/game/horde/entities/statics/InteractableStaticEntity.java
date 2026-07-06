@@ -47,7 +47,7 @@ public abstract class InteractableStaticEntity extends StaticEntity {
             }
         }
         if (!found) {
-            trigger = new Rectangle((int) (x - 10), (int) (y - 10), bounds.width + 20, bounds.height + 20); 
+            trigger = new Rectangle((int) (x - 10), (int) (y - 10), width + 20, height + 20); 
         }else {
             trigger = new Rectangle(0, 0, 0, 0);
         }

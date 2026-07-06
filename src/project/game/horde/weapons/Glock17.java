@@ -9,8 +9,6 @@ import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Sounds;
 
 public class Glock17 extends Gun {
-
-    // File file = new File("res/shootBeta.wav");
     public Glock17(Handler handler, Player player) {
         super(handler, player,
                 GunVars.GLOCK17_DAMAGE,

@@ -22,7 +22,7 @@ public class LoadingState extends State {
 
     public String map = "";
     public boolean soundsReady = false, assetsReady = false;
-    public final int loadingSounds = 0, loadingAssets = 1, loadingAlternateAssets = 2;
+    public final int loadingSounds = 0, loadingAssets = 1;
     public int loadingState;
     public String currentLoad;
     public User localUser;
@@ -55,6 +55,8 @@ public class LoadingState extends State {
         this.map = map;
     }
 
+    boolean printAssetsReady = false;
+    boolean printSoundsReady = false;
     @Override
     public void tick() {
         if (!started) {
@@ -67,6 +69,7 @@ public class LoadingState extends State {
                 Sounds.init(handler);
                 loadingState++;
                 soundsReady = true;
+              
             });
             executorAssets = Executors.newSingleThreadExecutor();
             executorAssets.submit(() -> {
@@ -96,22 +99,24 @@ public class LoadingState extends State {
                 currentLoad = "Loading sounds...";
             case loadingAssets ->
                 currentLoad = "Loading assets...";
-            case loadingAlternateAssets ->
-                currentLoad = "Loading alternate assets...";
             default -> {
             }
         }
 
         if (assetsReady && soundsReady) {
+            System.out.println("Shutting down executors...");
             executorReady.shutdown(); // Shutdown the executor after tasks are completed
             executorAssets.shutdown(); // Shutdown the executor after tasks are completed
             executorSounds.shutdown(); // Shutdown the executor after tasks are completed
+            System.out.println("Executors shut down");
             if (peer == null) {
                 currentLoad = "Loading game...";
                 handler.getGlobalStats().addGame();
                 handler.getMouseManager().setUIManager(null);
                 try {
+                    System.out.println("Loading game...");
                     handler.getGame().gameState = new GameState(handler, map, localUser);
+                    System.out.println("Loaded game...");
                 } catch (IOException e) {
                 }
                 State.setState(handler.getGame().gameState);

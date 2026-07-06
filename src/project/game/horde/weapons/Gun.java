@@ -383,7 +383,6 @@ public abstract class Gun {
     }
 
     public boolean isDual() {
-        // TODO Auto-generated method stub
         return isDual;
     }
 
@@ -400,5 +399,9 @@ public abstract class Gun {
 
     public float getAccuracy() {
         return accuracy;
+    }
+
+    public void setPlayer(Player currentPlayer) {
+        player = currentPlayer;
     }
 }

@@ -14,7 +14,7 @@ public class Assets {
     public static BufferedImage shadow, dirt, grass, stone, tree;
     //interactable assets
     public static BufferedImage mysteryBox, ammoBox, toxen, perkvendor, fryer,
-            barricade, damagedBarricade, brokenBarricade;
+            barricade, damagedBarricade, brokenBarricade, wallBuy;
     //blood assets
     public static BufferedImage zombieBlood, lickerBlood, toxenBlood, stokerBlood;
     //perk assets
@@ -39,6 +39,9 @@ public class Assets {
             m4_top, p90_top, rpd_top, rpg_top, winchester1901_top, minigun_top,
             arisaka_top, bren_top, doubleBarrel_top, g18_top, m1Garand_top, m16_top, m1911_top,
             m60_top, python_top, thompson_top, type100_top, uzi_top;
+    public static BufferedImage aa12_buy, ak47_buy, arisaka_buy, awp_buy, bren_buy, glock17_buy,
+            m4_buy, p90_buy, rpd_buy, winchester1901_buy, doubleBarrel_buy, g18_buy,
+            m1Garand_buy, m16_buy, m1911_buy, m60_buy, python_buy, thompson_buy, type100_buy, uzi_buy;
     public static BufferedImage[] flamethrower_bullet, upgraded_flamethrower_bullet;
     public static BufferedImage[] gas_cloud;
     public static BufferedImage rpg_rocket;
@@ -218,6 +221,7 @@ public class Assets {
         barricade = ImageLoader.loadImage(folder + "interactables/barricade.png");
         damagedBarricade = ImageLoader.loadImage(folder + "interactables/damaged_barricade.png");
         brokenBarricade = ImageLoader.loadImage(folder + "interactables/broken_barricade.png");
+        wallBuy = ImageLoader.loadImage(folder + "interactables/wallbuy.png");
 
         zombieBlood = sheet.crop(2 * width, height, width, height);
 //		lickerBlood = sheet.crop(2 * width, 2 * height, width, height);
@@ -269,7 +273,6 @@ public class Assets {
         rpg_top = ImageLoader.loadImage(folder + "gunTop/rpg_top.png");
         winchester1901_top = ImageLoader.loadImage(folder + "gunTop/winchester1901_top.png");
         minigun_top = ImageLoader.loadImage(folder + "gunTop/minigun_top.png");
-
         arisaka_top = ImageLoader.loadImage(folder + "gunTop/arisaka_top.png");
         bren_top = ImageLoader.loadImage(folder + "gunTop/bren_top.png");
         doubleBarrel_top = ImageLoader.loadImage(folder + "gunTop/double_barrel_top.png");
@@ -283,6 +286,28 @@ public class Assets {
         type100_top = ImageLoader.loadImage(folder + "gunTop/type100_top.png");
         uzi_top = ImageLoader.loadImage(folder + "gunTop/uzi_top.png");
 
+        aa12_buy = ImageLoader.loadImage(folder + "wallbuys/aa12-wallbuy.png");
+        ak47_buy = ImageLoader.loadImage(folder + "wallbuys/ak47-wallbuy.png");
+        arisaka_buy = ImageLoader.loadImage(folder + "wallbuys/arisaka-wallbuy.png");
+        awp_buy = ImageLoader.loadImage(folder + "wallbuys/awp-wallbuy.png");
+        bren_buy = ImageLoader.loadImage(folder + "wallbuys/bren-wallbuy.png");
+        doubleBarrel_buy = ImageLoader.loadImage(folder + "wallbuys/db-wallbuy.png");
+        g18_buy = ImageLoader.loadImage(folder + "wallbuys/g18-wallbuy.png");
+        glock17_buy = ImageLoader.loadImage(folder + "wallbuys/glock17-wallbuy.png");
+        m1Garand_buy = ImageLoader.loadImage(folder + "wallbuys/m1garand-wallbuy.png");
+        m4_buy = ImageLoader.loadImage(folder + "wallbuys/m4-wallbuy.png");
+        m16_buy = ImageLoader.loadImage(folder + "wallbuys/m16-wallbuy.png");
+        m60_buy = ImageLoader.loadImage(folder + "wallbuys/m60-wallbuy.png");
+        p90_buy = ImageLoader.loadImage(folder + "wallbuys/p90-wallbuy.png");
+        python_buy = ImageLoader.loadImage(folder + "wallbuys/python-wallbuy.png");
+        rpd_buy = ImageLoader.loadImage(folder + "wallbuys/rpd-wallbuy.png");
+        thompson_buy = ImageLoader.loadImage(folder + "wallbuys/thompson-wallbuy.png");
+        type100_buy = ImageLoader.loadImage(folder + "wallbuys/type100-wallbuy.png");
+        uzi_buy = ImageLoader.loadImage(folder + "wallbuys/uzi-wallbuy.png");
+        winchester1901_buy = ImageLoader.loadImage(folder + "wallbuys/winchester-wallbuy.png");
+
+
+
         blueStar = ImageLoader.loadImage(folder + "glow/blue-star.png");
         greenStar = ImageLoader.loadImage(folder + "glow/green-star.png");
         pinkStar = ImageLoader.loadImage(folder + "glow/pink-star.png");
@@ -290,6 +315,8 @@ public class Assets {
         redStar = ImageLoader.loadImage(folder + "glow/red-star.png");
         whiteStar = ImageLoader.loadImage(folder + "glow/white-star.png");
         yellowStar = ImageLoader.loadImage(folder + "glow/yellow-star.png");
+
+
 
     }
 }

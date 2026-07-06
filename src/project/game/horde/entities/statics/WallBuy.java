@@ -1,9 +1,11 @@
 package project.game.horde.entities.statics;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import project.game.horde.entities.creatures.Player;
+import project.game.horde.graphics.Assets;
+import project.game.horde.graphics.ImageUtils;
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.InteractSounds;
 import project.game.horde.sounds.Sounds;
@@ -13,10 +15,8 @@ import project.game.horde.weapons.AWP;
 import project.game.horde.weapons.Arisaka;
 import project.game.horde.weapons.Bren;
 import project.game.horde.weapons.DoubleBarrel;
-import project.game.horde.weapons.Flamethrower;
 import project.game.horde.weapons.G18;
 import project.game.horde.weapons.Glock17;
-import project.game.horde.weapons.GrenadeLauncher;
 import project.game.horde.weapons.Gun;
 import project.game.horde.weapons.M16;
 import project.game.horde.weapons.M1Garand;
@@ -25,7 +25,6 @@ import project.game.horde.weapons.M60;
 import project.game.horde.weapons.P90;
 import project.game.horde.weapons.Python;
 import project.game.horde.weapons.RPD;
-import project.game.horde.weapons.RPG;
 import project.game.horde.weapons.Thompson;
 import project.game.horde.weapons.Type100;
 import project.game.horde.weapons.Uzi;
@@ -41,33 +40,143 @@ public class WallBuy extends InteractableStaticEntity {
     private boolean gunOwned = false;
     private boolean gunOwnedUpgraded = false;
     private Gun gunOwnedRef = null;
+    private BufferedImage board;
 
     //top, bottom, right, left
     public WallBuy(Handler handler, int id, float x, float y, String gunId, int whatWall) {
         super(handler, id, x, y, 0, 0);
         this.whatWall = whatWall;
         this.gunId = gunId;
-        // bounds = new Rectangle((int)x, (int)y, 1, 1);
+        // find a way to rotate and store the image based on whatWall
+        board = Assets.wallBuy;
+        int LONGER = 75;
+        int SHORTER = 30;
+
+        // store gun so object doesn't have to be created every tick
+        switch (this.gunId) {
+            case "Glock17" -> {
+                gun4Sale = new Glock17(handler, handler.getCurrentPlayer());
+                cost = 500;
+                board = Assets.glock17_buy;
+            }
+            case "Arisaka" -> {
+                gun4Sale = new Arisaka(handler, handler.getCurrentPlayer());
+                cost = 500;
+                board = Assets.arisaka_buy;
+            }
+            case "M1Garand" -> {
+                gun4Sale = new M1Garand(handler, handler.getCurrentPlayer());
+                cost = 750;
+                board = Assets.m1Garand_buy;
+            }
+            case "AWP" -> {
+                gun4Sale = new AWP(handler, handler.getCurrentPlayer());
+                cost = 3000;
+                board = Assets.awp_buy;
+            }
+            case "Bren" -> {
+                gun4Sale = new Bren(handler, handler.getCurrentPlayer());
+                cost = 2500;
+                board = Assets.bren_buy;
+            }
+            case "AK47" -> {
+                gun4Sale = new AK47(handler, handler.getCurrentPlayer());
+                cost = 2250;
+                board = Assets.ak47_buy;
+            }
+            case "AA12" -> {
+                gun4Sale = new AA12(handler, handler.getCurrentPlayer());
+                cost = 2750;
+                board = Assets.aa12_buy;
+            }
+            case "DoubleBarrel" -> {
+                gun4Sale = new DoubleBarrel(handler, handler.getCurrentPlayer());
+                cost = 1500;
+                board = Assets.doubleBarrel_buy;
+            }
+            case "G18" -> {
+                gun4Sale = new G18(handler, handler.getCurrentPlayer());
+                cost = 1200;
+                board = Assets.g18_buy;
+            }
+            case "M4" -> {
+                gun4Sale = new M4(handler, handler.getCurrentPlayer());
+                cost = 2000;
+                board = Assets.m4_buy;
+            }
+            case "M16" -> {
+                gun4Sale = new M16(handler, handler.getCurrentPlayer());
+                cost = 1750;
+                board = Assets.m16_buy;
+            }
+            case "M60" -> {
+                gun4Sale = new M60(handler, handler.getCurrentPlayer());
+                cost = 3500;
+                board = Assets.m60_buy;
+            }
+            case "P90" -> {
+                gun4Sale = new P90(handler, handler.getCurrentPlayer());
+                cost = 1600;
+                board = Assets.p90_buy;
+            }
+            case "Python" -> {
+                gun4Sale = new Python(handler, handler.getCurrentPlayer());
+                cost = 1800;
+                board = Assets.python_buy;
+            }
+            case "RPD" -> {
+                gun4Sale = new RPD(handler, handler.getCurrentPlayer());
+                cost = 2800;
+                board = Assets.rpd_buy;
+            }
+            case "Thompson" -> {
+                gun4Sale = new Thompson(handler, handler.getCurrentPlayer());
+                cost = 1200;
+                board = Assets.thompson_buy;
+            }
+            case "Type100" -> {
+                gun4Sale = new Type100(handler, handler.getCurrentPlayer());
+                cost = 1100;
+                board = Assets.type100_buy;
+            }
+            case "Uzi" -> {
+                gun4Sale = new Uzi(handler, handler.getCurrentPlayer());
+                cost = 1300;
+                board = Assets.uzi_buy;
+            }
+            case "Winchester1901" -> {
+                gun4Sale = new Winchester1901(handler, handler.getCurrentPlayer());
+                cost = 1500;
+                board = Assets.winchester1901_buy;
+            }
+
+        }
+
         switch (whatWall) {
             case 0 -> { //South
                 //this.y -= 10;
-                width = 50;
-                height = 25;
+                width = LONGER;
+                height = SHORTER;
+                board = ImageUtils.rotate(board, 180);
             }
             case 1 -> { // North
                 //this.y += 10;
-                width = 50;
-                height = 25;
+                width = LONGER;
+                height = SHORTER;
+
             }
             case 2 -> { // West
                 //this.x += 10;
-                width = 25;
-                height = 50;
+                width = SHORTER;
+                height = LONGER;
+                board = ImageUtils.rotate(board, 270);
             }
             case 3 -> { // East
                 //`this.x -= 10;
-                width = 25;
-                height = 50;
+                width = SHORTER;
+                height = LONGER;
+                board = ImageUtils.rotate(board, 90);
+
             }
             default -> {
             }
@@ -77,99 +186,12 @@ public class WallBuy extends InteractableStaticEntity {
 
     @Override
     public void postTick() {
-        switch (this.gunId) {
-            case "Glock17" -> {
-                gun4Sale = new Glock17(handler, handler.getCurrentPlayer());
-                cost = 500;
-            }
-            case "Arisaka" -> {
-                gun4Sale = new Arisaka(handler, handler.getCurrentPlayer());
-                cost = 500;
-            }
-            case "M1Garand" -> {
-                gun4Sale = new M1Garand(handler, handler.getCurrentPlayer());
-                cost = 750;
-            }
-            case "AWP" -> {
-                gun4Sale = new AWP(handler, handler.getCurrentPlayer());
-                cost = 3000;
-            }
-            case "Bren" -> {
-                gun4Sale = new Bren(handler, handler.getCurrentPlayer());
-                cost = 2500;
-            }
-            case "AK47" -> {
-                gun4Sale = new AK47(handler, handler.getCurrentPlayer());
-                cost = 2250;
-            }
-            case "AA12" -> {
-                gun4Sale = new AA12(handler, handler.getCurrentPlayer());
-                cost = 2750;
-            }
-            case "DoubleBarrel" -> {
-                gun4Sale = new DoubleBarrel(handler, handler.getCurrentPlayer());
-                cost = 1500;
-            }
-            case "Flamethrower" -> {
-                gun4Sale = new Flamethrower(handler, handler.getCurrentPlayer());
-                cost = 3000;
-            }
-            case "G18" -> {
-                gun4Sale = new G18(handler, handler.getCurrentPlayer());
-                cost = 1200;
-            }
-            case "GrenadeLauncher" -> {
-                gun4Sale = new GrenadeLauncher(handler, handler.getCurrentPlayer());
-                cost = 5000;
-            }
-            case "M4" -> {
-                gun4Sale = new M4(handler, handler.getCurrentPlayer());
-                cost = 2000;
-            }
-            case "M16" -> {
-                gun4Sale = new M16(handler, handler.getCurrentPlayer());
-                cost = 1750;
-            }
-            case "M60" -> {
-                gun4Sale = new M60(handler, handler.getCurrentPlayer());
-                cost = 3500;
-            }
-            case "P90" -> {
-                gun4Sale = new P90(handler, handler.getCurrentPlayer());
-                cost = 1600;
-            }
-            case "Python" -> {
-                gun4Sale = new Python(handler, handler.getCurrentPlayer());
-                cost = 1800;
-            }
-            case "RPD" -> {
-                gun4Sale = new RPD(handler, handler.getCurrentPlayer());
-                cost = 2800;
-            }
-            case "RPG" -> {
-                gun4Sale = new RPG(handler, handler.getCurrentPlayer());
-                cost = 5000;
-            }
-            case "Thompson" -> {
-                gun4Sale = new Thompson(handler, handler.getCurrentPlayer());
-                cost = 1200;
-            }
-            case "Type100" -> {
-                gun4Sale = new Type100(handler, handler.getCurrentPlayer());
-                cost = 1100;
-            }
-            case "Uzi" -> {
-                gun4Sale = new Uzi(handler, handler.getCurrentPlayer());
-                cost = 1300;
-            }
-            case "Winchester1901" -> {
-                gun4Sale = new Winchester1901(handler, handler.getCurrentPlayer());
-                cost = 1500;
-            }
-
-        }
-        // don't give a weapon player already has
+        // prevent null pointer exception
+        // interactables are created before player is created
         Player player = handler.getCurrentPlayer();
+        gun4Sale.setPlayer(player);
+
+        // don't give a weapon player already has
         for (Gun gun : player.getInv().getArsenal()) {
             if (gun != null && gun.getOriginalName().equals(gun4Sale.getOriginalName())) {
                 gunOwnedRef = gun;
@@ -177,6 +199,8 @@ public class WallBuy extends InteractableStaticEntity {
                 gunOwnedUpgraded = gunOwnedRef.isUpgraded();
             }
         }
+
+        // render correct "interaction" text
         if (cantAfford == true && cooldownTimer < cooldown) {
             triggerText = "Not enough points!";
         } else if (!gunOwned && cooldownTimer >= cooldown) {
@@ -219,9 +243,11 @@ public class WallBuy extends InteractableStaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(new Color(255, 255, 255));
-        g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width, height);
+        //g.setColor(new Color(255, 255, 255));
+        //g.fillRect((int) (x - handler.getGameCamera().getxOffset()),
+        //        (int) (y - handler.getGameCamera().getyOffset()), width, height);
+        g.drawImage(board, (int) (x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
     }
 

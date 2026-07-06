@@ -522,7 +522,7 @@
                  "y":965
                 }, 
                 {
-                 "height":25,
+                 "height":30,
                  "id":102,
                  "name":"WallBuy",
                  "properties":[
@@ -539,12 +539,12 @@
                  "rotation":0,
                  "type":"WallBuy",
                  "visible":true,
-                 "width":50,
-                 "x":672,
-                 "y":498
+                 "width":75,
+                 "x":649,
+                 "y":506
                 }, 
                 {
-                 "height":25,
+                 "height":30,
                  "id":103,
                  "name":"WallBuy",
                  "properties":[
@@ -561,12 +561,12 @@
                  "rotation":0,
                  "type":"WallBuy",
                  "visible":true,
-                 "width":50,
-                 "x":1044,
-                 "y":666
+                 "width":75,
+                 "x":1045,
+                 "y":676
                 }, 
                 {
-                 "height":25,
+                 "height":30,
                  "id":104,
                  "name":"WallBuy",
                  "properties":[
@@ -583,12 +583,12 @@
                  "rotation":0,
                  "type":"WallBuy",
                  "visible":true,
-                 "width":50,
-                 "x":1348,
-                 "y":982
+                 "width":75,
+                 "x":1347,
+                 "y":969
                 }, 
                 {
-                 "height":50,
+                 "height":75,
                  "id":105,
                  "name":"WallBuy",
                  "properties":[
@@ -605,12 +605,12 @@
                  "rotation":0,
                  "type":"WallBuy",
                  "visible":true,
-                 "width":25,
-                 "x":1582,
-                 "y":547
+                 "width":30,
+                 "x":1569,
+                 "y":543
                 }, 
                 {
-                 "height":50,
+                 "height":75,
                  "id":106,
                  "name":"WallBuy",
                  "properties":[
@@ -627,9 +627,9 @@
                  "rotation":0,
                  "type":"WallBuy",
                  "visible":true,
-                 "width":25,
-                 "x":1901,
-                 "y":656
+                 "width":30,
+                 "x":1911,
+                 "y":649
                 }],
          "opacity":1,
          "type":"objectgroup",

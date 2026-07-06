@@ -65,14 +65,9 @@ public class Sounds {
 	private static ConcurrentHashMap<ClipWrapper, Long> pausedPositions = new ConcurrentHashMap<>();
 
 	public static final String BACKGROUND_MUSIC_ID = "backgroundMusic";
-	public static final String SHOOT_BETA_ID = "shootBeta";
-	public static final String SWOOSH_ID = "swoosh";
-	public static final String YUM_ID = "yum";
 
 	public static URL backgroundMusic;
-	public static URL shootBeta;
 	public static URL swoosh;
-	public static URL yum;
 
 	public static void initHandler(Handler handler) {
 		thehandler = handler;
@@ -87,14 +82,9 @@ public class Sounds {
 		}
 
 		backgroundMusic = Utils.class.getResource("/music/NightOfShadows.wav");
-		shootBeta = Utils.class.getResource("/sounds/gunSounds/shootBeta.wav");
 		swoosh = Utils.class.getResource("/sounds/gunSounds/swoosh.wav");
-		yum = Utils.class.getResource("/sounds/gunSounds/yum.wav");
 
 		preloadClip(BACKGROUND_MUSIC_ID, backgroundMusic, 1, 1); // Preload 10 instances
-		preloadClip(SHOOT_BETA_ID, shootBeta, 10, 1);
-		preloadClip(SWOOSH_ID, swoosh, 10, 1);
-		preloadClip(YUM_ID, yum, 10, 1);
 
 		GunSounds.init(handler);
 		PowerupSounds.init(handler);

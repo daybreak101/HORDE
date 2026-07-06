@@ -51,7 +51,7 @@ public class InteractSounds {
 		barrierDamage = Utils.class.getResource("/sounds/barriers/barrier_damage.wav");
 		barrierRepair = Utils.class.getResource("/sounds/barriers/barrier_repair.wav");
 		Sounds.preloadClip(BARRIER_BREAK, barrierBreak, 5, 1);
-		Sounds.preloadClip(BARRIER_DAMAGE, barrierDamage, 20, 1);
+		Sounds.preloadClip(BARRIER_DAMAGE, barrierDamage, 10, 1);
 		Sounds.preloadClip(BARRIER_REPAIR, barrierRepair, 5, 1);
 
 	}

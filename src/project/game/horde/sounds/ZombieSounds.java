@@ -96,7 +96,7 @@ public class ZombieSounds {
 		Sounds.preloadClip(ZOMBIE_GROWL17_ID, growl17, 2, 1);
 		Sounds.preloadClip(ZOMBIE_GROWL18_ID, growl18, 2, 1);
 		Sounds.preloadClip(ZOMBIE_IMPACT, impact, 60, 1);
-		Sounds.preloadClip(ZOMBIE_HEADSHOT, headshot, 60, 1);
+		Sounds.preloadClip(ZOMBIE_HEADSHOT, headshot, 30, 1);
 	}
 	
 	public static float calculateVolumeBasedOffDistance(Entity a, Entity b) {
