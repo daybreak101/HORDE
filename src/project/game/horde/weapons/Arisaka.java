@@ -30,7 +30,7 @@ public class Arisaka extends Gun {
     @Override
     public void shootOnline(int x, int y, float angle, float volume) {
         handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
-                x, range, angle, isUpgraded));
+                y, range, angle, isUpgraded));
 
         if (isUpgraded) {
             Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);

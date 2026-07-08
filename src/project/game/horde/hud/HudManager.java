@@ -16,7 +16,7 @@ public class HudManager {
     private Scoreboard scoreboard;
     private Player player;
     private Queue<HudElement> notifQueue = new LinkedList<>();
-    ; 
+    private ArrayList<HudElement> inWorldElements = new ArrayList<>();
 	private HudElement currentNotif;
 
     public HudManager(Handler handler, Player player) {
@@ -54,6 +54,13 @@ public class HudManager {
                 currentNotif = null;
             }
         }
+        for (int i = 0; i < inWorldElements.size(); i++) {
+            HudElement e = inWorldElements.get(i);
+            e.tick();
+            if (!e.isActive) {
+                inWorldElements.remove(e);
+            }
+        }
     }
 
     public void render(Graphics g) {
@@ -72,6 +79,14 @@ public class HudManager {
         }
         if (currentNotif != null) {
             currentNotif.render(g);
+        }
+    }
+
+    public void renderInWorldHud(Graphics g) {
+        for (HudElement o : inWorldElements) {
+            if (o.isVisible) {
+                o.render(g);
+            }
         }
     }
 
@@ -127,4 +142,7 @@ public class HudManager {
         this.scoreboard = scoreboard;
     }
 
+    public void addInWorldElement(HudElement e) {
+        inWorldElements.add(e);
+    }
 }

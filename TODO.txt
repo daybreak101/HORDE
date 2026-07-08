@@ -1,9 +1,4 @@
-- Render WallBuy with correct weapon asset
-- Power switch needs to work in multiplayer
-- Damage numbers positioning is incorrect.
-- PlayerMP bullet origination doesn't seem to be correct, angle is correct.
 - "Unable to shoot" identifier:
-    Turn laser off (change to black) when reloading, or doing action that disables shooting
     Have character hold gun sideways
 - Create assets for vending machine
     Floating chip bag with glow background when vending machine is ready

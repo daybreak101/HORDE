@@ -37,7 +37,7 @@ public class Cheats {
 		handler.getCurrentPlayer().getInv().gainPoints(points);
 
 		// set round
-		int round = 40;
+		int round = 10;
 		handler.getRoundLogic().setCurrentRound(round);
 
 		// give gun

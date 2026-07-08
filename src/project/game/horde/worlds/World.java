@@ -218,110 +218,7 @@ public class World {
             e.printStackTrace();
         }
     }
-    // public void createStaticEntities(String entityPath) {
-    //     String file = Utils.loadFileAsString(entityPath);
-    //     String[] tokens = file.split("\\s+");
-    //     int i = 0;
-    //     int token = 0;
-    //     int x, y;
-    //     int sx, sy;
-    //     int vertex = 0;
-    //     int rotation = 0;
-    //     int whatWall = 0, wallLength = 0;
-    //     int room1 = 0, room2 = 0;
-    //     int gunId = 0;
-    //     int width = 0, height = 0;
-    //     int orientation = 0;
-    //     int cost = 0;
-    //     while (i < tokens.length) {
-    //         token = Utils.parseInt(tokens[i++]);
-    //         x = Utils.parseInt(tokens[i++]);
-    //         y = Utils.parseInt(tokens[i++]);
-    //         switch (token) {
-    //             case 0 ->
-    //                 entityManager.addInteractable(new MysteryBox(handler, i, x, y));
-    //             case 1 ->
-    //                 entityManager.addInteractable(new AmmoRefill(handler, i, x, y));
-    //             case 2 ->
-    //                 entityManager.addInteractable(new RandomPerk(handler, i, x, y));
-    //             case 3 ->
-    //                 entityManager.addInteractable(new PackAPunch(handler, i, x, y));
-    //             case 4 -> {
-    //                 wallLength = Utils.parseInt(tokens[i++]);
-    //                 whatWall = Utils.parseInt(tokens[i++]);
-    //                 room1 = Utils.parseInt(tokens[i++]);
-    //                 room2 = Utils.parseInt(tokens[i++]);
-    //                 cost = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addInteractable(new Door(handler, i, x, y, wallLength, whatWall, room1, room2, cost));
-    //             }
-    //             case 5 -> {
-    //                 wallLength = Utils.parseInt(tokens[i++]);
-    //                 whatWall = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addWall(new Wall(handler, i, x, y, wallLength, whatWall));
-    //             }
-    //             case 6 ->
-    //                 entityManager.setMap(new FarmMap(handler, 0, 0, 3400, 1700));
-    //             case 7 -> {
-    //                 sx = Utils.parseInt(tokens[i++]);
-    //                 sy = Utils.parseInt(tokens[i++]);
-    //                 rotation = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addTrap(new ElectricTrap(handler, i, x, y, sx, sy, rotation));
-    //             }
-    //             case 8 -> {
-    //                 sx = Utils.parseInt(tokens[i++]);
-    //                 sy = Utils.parseInt(tokens[i++]);
-    //                 rotation = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addTrap(new MineFieldTrap(handler, i, x, y, sx, sy, rotation));
-    //             }
-    //             case 9 -> {
-    //                 sx = Utils.parseInt(tokens[i++]);
-    //                 sy = Utils.parseInt(tokens[i++]);
-    //                 rotation = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addTrap(new Turret(handler, i, x, y, sx, sy, rotation));
-    //             }
-    //             case 10 -> {
-    //                 sx = Utils.parseInt(tokens[i++]);
-    //                 sy = Utils.parseInt(tokens[i++]);
-    //                 rotation = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addTrap(new ConveyorBeltTrap(handler, i, x, y, sx, sy, rotation));
-    //             }
-    //             case 11 ->
-    //                 entityManager.addArea(new IcyWater(handler, x, y));
-    //             case 12 -> {
-    //                 whatWall = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addBarrier(new Barrier(handler, i, x, y, whatWall));
-    //             }
-    //             case 13 ->
-    //                 entityManager.addInteractable(new RitualCircle(handler, i, x, y));
-    //             case 14 -> {
-    //                 gunId = Utils.parseInt(tokens[i++]);
-    //                 whatWall = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addInteractable(new WallBuy(handler, i, x, y, gunId, whatWall));
-    //             }
-    //             case 15 -> {
-    //                 width = Utils.parseInt(tokens[i++]);
-    //                 height = Utils.parseInt(tokens[i++]);
-    //                 orientation = Utils.parseInt(tokens[i++]);
-    //                 //entityManager.addArea(new Staircase(handler, x, y, width, height, dz, orientation));
-    //             }
-    //             case 16 ->
-    //                 entityManager.addInteractable(new PowerSwitch(handler, i, x, y));
-    //             case 17 -> {
-    //                 width = Utils.parseInt(tokens[i++]);
-    //                 height = Utils.parseInt(tokens[i++]);
-    //                 entityManager.addBoundary(new InvisibleBounds(handler, i, x, y, width, height, 0));
-    //             }
-    //             case 18 -> {
-    //             }
-    //             //entityManager.setMap(new SeattleMap(handler, 0, 0, 3400, 1700));
-    //             case 19 -> {
-    //             }
-    //             //entityManager.setMap(new IcelandMap(handler, 0, 0, 3400, 1700));
-    //             default -> {
-    //             }
-    //         }
-    //     }
-    // }
+
     private Timer sendPositions = new Timer(3);
     private Timer delayRespawns = new Timer(20);
 
@@ -403,10 +300,11 @@ public class World {
 
         //lighting.renderLighting(g);
         entityManager.getCurrentPlayer().renderLaser(g2d);
-
+        entityManager.getCurrentPlayer().renderDamage(g2d);
+        entityManager.getCurrentPlayer().getHud().renderInWorldHud(g2d);
         g2d.setTransform(originalTransform);
         rooms.render(g2d);
-        entityManager.getCurrentPlayer().renderDamage(g2d);
+
         entityManager.getCurrentPlayer().renderHUD(g2d);
 
     }

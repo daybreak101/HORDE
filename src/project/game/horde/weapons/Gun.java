@@ -164,6 +164,7 @@ public abstract class Gun {
         // autoreload when clip is empty
         if (!isReloading && currentClip == 0 && readyToFire && player.getPlayerInput().canReload()) {
             reload();
+            //player.getActionState()
         }
         timerToFire++;
 

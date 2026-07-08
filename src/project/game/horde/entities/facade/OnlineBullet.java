@@ -18,7 +18,7 @@ public class OnlineBullet extends Entity {
 
 	//online player bullet, just for visuals
 	public OnlineBullet(Handler handler, float x, float y, int range, float angle, boolean isUpgraded) {
-		super(handler, x, y, 5, 5);	
+		super(handler, x, y, 3, 3);	
 		bounds = new Rectangle(0, 0, 0, 0);
 		this.handler = handler;
 		this.range = range;
@@ -35,7 +35,7 @@ public class OnlineBullet extends Entity {
 	
 	//online player shotgun pellet, just for visuals
 	public OnlineBullet(Handler handler, float x, float y, int range, float angle, float radianOffset, boolean isUpgraded) {
-		super(handler, x, y, 5, 5);	
+		super(handler, x, y, 3, 3);	
 		bounds = new Rectangle(0, 0, 0, 0);
 		this.handler = handler;
 		this.range = range;

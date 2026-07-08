@@ -3,8 +3,6 @@ package project.game.horde.hud;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Timer;
@@ -45,22 +43,9 @@ public class DamageElement extends HudElement{
 
 	@Override
 	public void render(Graphics g) {
-		//g.setColor(new Color(r, gr, b, alpha));
-		
-		double zoomLevel = handler.getSettings().getZoomLevel(false);
-		Graphics2D g2d = (Graphics2D) g;
-		AffineTransform old = g2d.getTransform();
-		
-		old.scale(zoomLevel, zoomLevel);
-		g2d.setTransform(old);
-		
 		g.setColor(Color.white);
 		g.setFont(new Font(Font.DIALOG, Font.BOLD, fontSize));
-		g.drawString(Integer.toString(damage), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
-	
-		old.scale(1/zoomLevel, 1/zoomLevel);
-		g2d.setTransform(old);
-		
+		g.drawString(Integer.toString(damage), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));		
 		
 	}
 

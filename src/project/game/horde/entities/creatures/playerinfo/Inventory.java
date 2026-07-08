@@ -1,5 +1,6 @@
 package project.game.horde.entities.creatures.playerinfo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -129,7 +130,12 @@ public class Inventory {
     public void drawLaser(Graphics g) {
         GameMouseManager mouse = player.getMouseManager();
         int size = 7;
-        g.setColor(handler.getSettings().getLaserColor());
+        if(player.getActionState() == PlayerActionState.RELOADING) {
+            g.setColor(Color.black);
+        }
+        else {
+            g.setColor(handler.getSettings().getLaserColor());
+        }
         g.fillOval(mouse.getMouseX() - size / 2, mouse.getMouseY() - size / 2, size, size);
     }
 
