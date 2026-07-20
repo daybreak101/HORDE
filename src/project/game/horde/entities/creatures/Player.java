@@ -41,6 +41,8 @@ import project.game.horde.perks.Juggernaut;
 import project.game.horde.perks.PhD;
 import project.game.horde.perks.Stronghold;
 import project.game.horde.perks.Vampire;
+import project.game.horde.sounds.CreatureSounds;
+import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
 import project.game.horde.weapons.Gun.GunImageDim;
@@ -179,7 +181,7 @@ public class Player extends Creature {
 
         } else {
             interactRadius.setFrame(getCenterX() - 50, getCenterY() - 50, 100, 100);
-
+            playHeartbeat();
             setClosestNode();
             freezeStatus.checkIfInIcyWater();
             freezeStatus.freezing();
@@ -226,6 +228,20 @@ public class Player extends Creature {
             peer.sendNewAngle(username, angle);
         }
         lastAngle = angle;
+    }
+
+    public void playHeartbeat() {
+        if(health <= 20 && health > 0) {
+            Sounds.stopClip(CreatureSounds.SLOW_HEARTBEAT);
+            Sounds.playClip(CreatureSounds.FAST_HEARTBEAT, 1, 1, false);
+        } else if(health <= 40 && health > 20) {
+            Sounds.stopClip(CreatureSounds.FAST_HEARTBEAT);
+            Sounds.playClip(CreatureSounds.SLOW_HEARTBEAT, 1, 1, false);
+        }
+        else {
+            Sounds.stopClip(CreatureSounds.SLOW_HEARTBEAT);
+            Sounds.stopClip(CreatureSounds.FAST_HEARTBEAT);
+        }
     }
 
     public void cancelRevive() {
