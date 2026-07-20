@@ -40,7 +40,7 @@ public class PlayerInput {
         keyManager.tick();
         PlayerActionState action = player.getActionState();
 
-        if (action == PlayerActionState.RECOVER) {
+        if (action == PlayerActionState.RECOVER || action == PlayerActionState.RECOVER_EATING) {
             recoverTimer.tick();
             if (recoverTimer.isReady()) {
                 player.setActionState(PlayerActionState.IDLE);
@@ -116,7 +116,7 @@ public class PlayerInput {
             player.setActionState(PlayerActionState.RECOVER);
             recoverTimer = new Timer(100);
         } else if (action == PlayerActionState.EATING) {
-            player.setActionState(PlayerActionState.RECOVER);
+            player.setActionState(PlayerActionState.RECOVER_EATING);
             recoverTimer = new Timer(150);
         } else if (action == PlayerActionState.INTERACT) {
             player.setActionState(PlayerActionState.RECOVER);

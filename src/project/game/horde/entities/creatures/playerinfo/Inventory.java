@@ -130,7 +130,10 @@ public class Inventory {
     public void drawLaser(Graphics g) {
         GameMouseManager mouse = player.getMouseManager();
         int size = 7;
-        if(player.getActionState() == PlayerActionState.RELOADING) {
+        PlayerActionState state = player.getActionState();
+        if(state == PlayerActionState.RELOADING ||
+            !player.getPlayerInput().canShoot()
+        ) {
             g.setColor(Color.black);
         }
         else {

@@ -73,6 +73,8 @@ public class RandomPerk extends InteractableStaticEntity {
 		// grab perk
 		else if (isSpun == true && cooldownTimer >= cooldown && isSpunTimer < isSpunTime
 				&& player.getPlayerInput().canEat()) {
+			//bug fix for skipping eating animation when reloading
+			player.getInv().cancelReload();
 			cooldownTimer = 0;
 			isSpun = false;
 			isSpunTimer = 0;

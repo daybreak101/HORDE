@@ -11,6 +11,7 @@ public enum PlayerActionState {
     PRAYING,
     REVIVING,
     EATING,
+    RECOVER_EATING,
     DOWNED,
     DEAD,
     INTERACT,
