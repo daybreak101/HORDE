@@ -5,15 +5,11 @@
 - Create asset for PAP:
     Frying animation when weapon is upgrading
     Floating weapon with glow background when weapon is ready
-- "Player consuming perk":
-    Turn laser off (change to black)
 - Create asset for Power Switch
 - Create asset for "Ritual Circle"
     Replace old idea with "3 Headed Dragon statue, with middle dragon holding glowing scroll in its mouth"
     Two side dragons shoot fire when Blessing is ready
     Player holds glowing scroll in hand, then opens it when accepting
-- Create asset for Grenades
-    Render in hand when cooking
 
 - Add preview info for character hover, such as name and description.
 - Prestige system? Unlock characters, HUD colors, laser colors, hats, etc.

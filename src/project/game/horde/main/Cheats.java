@@ -2,8 +2,8 @@ package project.game.horde.main;
 
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
-import project.game.horde.weapons.DoubleBarrel;
 import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.M1911;
 
 public class Cheats {
 
@@ -53,9 +53,9 @@ public class Cheats {
 				//new M4(handler, handler.getCurrentPlayer());
 				//new IceShotgun(handler, handler.getCurrentPlayer());
 				//new Bren(handler, handler.getCurrentPlayer());
-				new DoubleBarrel(handler, handler.getCurrentPlayer());
+				//new DoubleBarrel(handler, handler.getCurrentPlayer());
 				//new G18(handler, handler.getCurrentPlayer());
-				//new M1911(handler, handler.getCurrentPlayer());
+				new M1911(handler, handler.getCurrentPlayer());
 				//new M60(handler, handler.getCurrentPlayer());
 				//new Python(handler, handler.getCurrentPlayer());
 				//new Thompson(handler, handler.getCurrentPlayer());

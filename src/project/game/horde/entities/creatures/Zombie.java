@@ -337,7 +337,8 @@ public class Zombie extends Creature {
         Sounds.playClip(ZombieSounds.ZOMBIE_IMPACT, 1.0f, volume, false);
         if (handler.getRoundLogic().getPowerups().isInstakillActive()) {
             if (handler.getSettings().isToggleDamage()) {
-                player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, health));
+                //player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, health));
+                player.getHud().addInWorldElement(new DamageElement(handler, getCenterX(), getCenterY(), health));
             }
             if (handler.getCurrentPlayer().getPeer() != null) {
                 handler.getCurrentPlayer().getPeer().playerDamagedZombie(handler.getCurrentPlayer().getUsername(), id,
@@ -347,7 +348,8 @@ public class Zombie extends Creature {
 
         } else {
             if (handler.getSettings().isToggleDamage()) {
-                player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, amount));
+                player.getHud().addInWorldElement(new DamageElement(handler, getCenterX(), getCenterY(), amount));
+                //player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, amount));
             }
             health -= amount;
             if (handler.getCurrentPlayer().getPeer() != null) {
@@ -379,8 +381,8 @@ public class Zombie extends Creature {
         boolean crit = false;
         if (handler.getRoundLogic().getPowerups().isInstakillActive()) {
             if (handler.getSettings().isToggleDamage()) {
-               // player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, health));
-              player.getHud().addInWorldElement(new DamageElement(handler, getCenterX(), getCenterY(), health));
+                // player.getHud().addObject(new DamageElement(handler, x + width / 2 + 10, y + height / 2 + 10, health));
+                player.getHud().addInWorldElement(new DamageElement(handler, getCenterX(), getCenterY(), health));
             }
             if (handler.getCurrentPlayer().getPeer() != null) {
                 handler.getCurrentPlayer().getPeer().playerDamagedZombie(handler.getCurrentPlayer().getUsername(), id,
@@ -403,8 +405,8 @@ public class Zombie extends Creature {
                 player.getHud().addInWorldElement(new CritElement(handler, getCenterX(), getCenterY()));
             }
             if (handler.getSettings().isToggleDamage()) {
-                    //  g.fillOval((int) (x - 10 - handler.getGameCamera().getxOffset()),
-                    // (int) (y - 10 - handler.getGameCamera().getyOffset()), width + 25, height + 25);
+                //  g.fillOval((int) (x - 10 - handler.getGameCamera().getxOffset()),
+                // (int) (y - 10 - handler.getGameCamera().getyOffset()), width + 25, height + 25);
                 player.getHud().addInWorldElement(new DamageElement(handler, getCenterX(), getCenterY(), amount));
             }
             health -= amount;
