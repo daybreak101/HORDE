@@ -2,6 +2,13 @@ package project.game.horde.main;
 
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
+import project.game.horde.perks.DeadShot;
+import project.game.horde.perks.DoubleTap;
+import project.game.horde.perks.Juggernaut;
+import project.game.horde.perks.PhD;
+import project.game.horde.perks.SleightOfHand;
+import project.game.horde.perks.StaminUp;
+import project.game.horde.perks.Vampire;
 import project.game.horde.weapons.Gun;
 import project.game.horde.weapons.M1911;
 
@@ -16,24 +23,24 @@ public class Cheats {
 
 	public void applyCheats() {
 		// perks
-		//handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
+	    handler.getCurrentPlayer().getInv().givePerk(new DeadShot(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new DoubleTap(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Juggernaut(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Luna(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new MuleKick(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new PhD(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Revive(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new SleightOfHand(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new SleightOfHand(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new StaminUp(handler, 3, handler.getCurrentPlayer()));
 		//handler.getCurrentPlayer().getInv().givePerk(new Stronghold(handler, 3, handler.getCurrentPlayer()));
-		//handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
+		handler.getCurrentPlayer().getInv().givePerk(new Vampire(handler, 3, handler.getCurrentPlayer()));
 
 		// points
 		int points = 10000;
 		handler.getCurrentPlayer().getInv().gainPoints(points);
 
 		// set round
-		int round = 10;
+		int round = 55;
 		handler.getRoundLogic().setCurrentRound(round);
 
 		// give gun
@@ -71,7 +78,7 @@ public class Cheats {
 		//give blessing
 		//handler.getCurrentPlayer().getInv().getBlessings().setBlessing(BlessingInventory.TELEPORT);
 			
-		invisibleWalls();
+		//invisibleWalls();
 		//nodesVisible();
 		//showPlayerCoords();
 	}

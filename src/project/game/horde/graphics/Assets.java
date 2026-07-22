@@ -14,7 +14,8 @@ public class Assets {
     public static BufferedImage shadow, dirt, grass, stone, tree;
     //interactable assets
     public static BufferedImage mysteryBox, ammoBox, toxen, perkvendor, fryer,
-            barricade, damagedBarricade, brokenBarricade, wallBuy, chipBag;
+            barricade, damagedBarricade, brokenBarricade, wallBuy, chipBag,
+            powerOn, powerOff;
     //blood assets
     public static BufferedImage zombieBlood, lickerBlood, toxenBlood, stokerBlood;
     //perk assets
@@ -224,6 +225,8 @@ public class Assets {
         brokenBarricade = ImageLoader.loadImage(folder + "interactables/broken_barricade.png");
         wallBuy = ImageLoader.loadImage(folder + "interactables/wallbuy.png");
         chipBag = ImageLoader.loadImage(folder + "interactables/chipbag.png");
+        powerOn = ImageLoader.loadImage(folder + "interactables/power_on.png");
+        powerOff = ImageLoader.loadImage(folder + "interactables/power_off.png");
 
         zombieBlood = sheet.crop(2 * width, height, width, height);
 //		lickerBlood = sheet.crop(2 * width, 2 * height, width, height);

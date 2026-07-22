@@ -608,7 +608,9 @@ public class Player extends Creature {
             return;
         }
 
-        if (actionState == PlayerActionState.COOKING_GRENADE) {
+        if (actionState == PlayerActionState.SWITCHING_WEAPON || actionState == PlayerActionState.SWITCHING_WEAPON_RECOVER) {
+        }
+        else if (actionState == PlayerActionState.COOKING_GRENADE) {
             g2d.drawImage(Assets.frag, (int) (x + 40 - handler.getGameCamera().getxOffset()),
                     (int) (y - 10 - handler.getGameCamera().getyOffset()), 30, 30, null);
 

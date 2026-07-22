@@ -203,8 +203,10 @@ public class World {
                             int whatWall = getInt(obj, "wall", 0);
                             entityManager.addInteractable(new WallBuy(handler, i, x, y, gun, whatWall));
                         }
-                        case "PowerSwitch" ->
-                            entityManager.addInteractable(new PowerSwitch(handler, i, x, y));
+                        case "PowerSwitch" -> {
+                            int orientation = getInt(obj, "orientation", 0);
+                            entityManager.addInteractable(new PowerSwitch(handler, i, x, y, orientation));
+                        }
                         case "InvisibleBounds" -> {
                             entityManager.addBoundary(new InvisibleBounds(handler, i, x, y, width, height, 0));
                         }

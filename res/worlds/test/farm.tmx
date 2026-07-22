@@ -9,7 +9,11 @@
  <objectgroup id="3" name="Entities">
   <object id="1" name="MysteryBox" type="MysteryBox" x="1700" y="455" width="150" height="75"/>
   <object id="4" name="RandomPerk" type="RandomPerk" x="1225" y="720" width="75" height="30"/>
-  <object id="6" name="PowerSwitch" type="PowerSwitch" x="1625" y="550" width="50" height="50"/>
+  <object id="6" name="PowerSwitch" type="PowerSwitch" x="1625" y="550" width="50" height="50">
+   <properties>
+    <property name="orientation" value="3"/>
+   </properties>
+  </object>
   <object id="7" name="Door" type="Door" x="775" y="500" width="25" height="150">
    <properties>
     <property name="cost" value="1500"/>
@@ -135,7 +139,7 @@
    </properties>
   </object>
   <object id="34" name="InvisibleBounds" type="InvisibleBounds" x="1920" y="455" width="130" height="435"/>
-  <object id="35" name="FarmMap" type="FarmMap" x="0" y="0" width="3400" height="1700"/>
+  <object id="35" name="FarmMap" type="FarmMap" x="45" y="1" width="3400" height="1700"/>
   <object id="95" name="PackAPunch" type="PackAPunch" x="657" y="965" width="75" height="30"/>
   <object id="102" name="WallBuy" type="WallBuy" x="649" y="506" width="75" height="30">
    <properties>

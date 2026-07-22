@@ -40,7 +40,7 @@ public class PlayerInput {
         keyManager.tick();
         PlayerActionState action = player.getActionState();
 
-        if (action == PlayerActionState.RECOVER || action == PlayerActionState.RECOVER_EATING) {
+        if (action == PlayerActionState.RECOVER || action == PlayerActionState.RECOVER_EATING || action == PlayerActionState.SWITCHING_WEAPON_RECOVER) {
             recoverTimer.tick();
             if (recoverTimer.isReady()) {
                 player.setActionState(PlayerActionState.IDLE);
@@ -105,9 +105,10 @@ public class PlayerInput {
                 grenadeSoundPlayed = false;
             }
         } else if (action == PlayerActionState.SWITCHING_WEAPON) {
-            player.setActionState(PlayerActionState.RECOVER);
-            int time = Math.round(30 * (1.0f + inv.getGun().getWeight()));
-            //System.out.println(inv.getGun().getName() + ": " + time);
+            player.setActionState(PlayerActionState.SWITCHING_WEAPON_RECOVER);
+            //int time = Math.round(20 * (1.0f + inv.getGun().getWeight()));
+            int time = Math.round(50.0f * (float) inv.getGun().getWeight());
+            System.out.println(inv.getGun().getName() + ": " + time);
             recoverTimer = new Timer(time);
         } else if (action == PlayerActionState.MELEEING) {
             player.setActionState(PlayerActionState.RECOVER);
