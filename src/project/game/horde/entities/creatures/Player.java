@@ -41,6 +41,8 @@ import project.game.horde.perks.Juggernaut;
 import project.game.horde.perks.PhD;
 import project.game.horde.perks.Stronghold;
 import project.game.horde.perks.Vampire;
+import project.game.horde.sounds.CreatureSounds;
+import project.game.horde.sounds.Sounds;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
 import project.game.horde.weapons.Gun.GunImageDim;
@@ -179,7 +181,7 @@ public class Player extends Creature {
 
         } else {
             interactRadius.setFrame(getCenterX() - 50, getCenterY() - 50, 100, 100);
-
+            playHeartbeat();
             setClosestNode();
             freezeStatus.checkIfInIcyWater();
             freezeStatus.freezing();
@@ -226,6 +228,19 @@ public class Player extends Creature {
             peer.sendNewAngle(username, angle);
         }
         lastAngle = angle;
+    }
+
+    public void playHeartbeat() {
+        if (health <= 20 && health > 0) {
+            Sounds.stopClip(CreatureSounds.SLOW_HEARTBEAT);
+            Sounds.playClip(CreatureSounds.FAST_HEARTBEAT, 1, 1, false);
+        } else if (health <= 40 && health > 20) {
+            Sounds.stopClip(CreatureSounds.FAST_HEARTBEAT);
+            Sounds.playClip(CreatureSounds.SLOW_HEARTBEAT, 1, 1, false);
+        } else {
+            Sounds.stopClip(CreatureSounds.SLOW_HEARTBEAT);
+            Sounds.stopClip(CreatureSounds.FAST_HEARTBEAT);
+        }
     }
 
     public void cancelRevive() {
@@ -593,7 +608,17 @@ public class Player extends Creature {
             return;
         }
 
-        if (inv.getGun().isDual()) {
+        if (actionState == PlayerActionState.SWITCHING_WEAPON || actionState == PlayerActionState.SWITCHING_WEAPON_RECOVER) {
+        }
+        else if (actionState == PlayerActionState.COOKING_GRENADE) {
+            g2d.drawImage(Assets.frag, (int) (x + 40 - handler.getGameCamera().getxOffset()),
+                    (int) (y - 10 - handler.getGameCamera().getyOffset()), 30, 30, null);
+
+        } else if (actionState == PlayerActionState.EATING || actionState == PlayerActionState.RECOVER_EATING) {
+            g2d.drawImage(Assets.chipBag, (int) (x + 40 - handler.getGameCamera().getxOffset()),
+                    (int) (y + 0 - handler.getGameCamera().getyOffset()), 30, 30, null);
+
+        } else if (inv.getGun().isDual()) {
             g2d.drawImage(inv.getGun().getGunImage(),
                     (int) (x - 10 + dim.startX - handler.getGameCamera().getxOffset()),
                     (int) (y - dim.startY - handler.getGameCamera().getyOffset()), dim.width, dim.height, null);
@@ -650,7 +675,7 @@ public class Player extends Creature {
     public void renderInteractRadius(Graphics g) {
         g.setColor(Color.red);
         g.fillOval((int) (interactRadius.getX() - handler.getGameCamera().getxOffset()),
-                (int) (interactRadius.getY() - handler.getGameCamera().getyOffset()), 
+                (int) (interactRadius.getY() - handler.getGameCamera().getyOffset()),
                 (int) interactRadius.getWidth(), (int) interactRadius.getHeight());
     }
 

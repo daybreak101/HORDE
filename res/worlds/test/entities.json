@@ -45,6 +45,12 @@
                  "height":50,
                  "id":6,
                  "name":"PowerSwitch",
+                 "properties":[
+                        {
+                         "name":"orientation",
+                         "type":"string",
+                         "value":"3"
+                        }],
                  "rotation":0,
                  "type":"PowerSwitch",
                  "visible":true,
@@ -507,8 +513,8 @@
                  "type":"FarmMap",
                  "visible":true,
                  "width":3400,
-                 "x":0,
-                 "y":0
+                 "x":45,
+                 "y":1
                 }, 
                 {
                  "height":30,

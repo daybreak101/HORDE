@@ -1,21 +1,12 @@
-- "Unable to shoot" identifier:
-    Have character hold gun sideways
 - Create assets for vending machine
     Floating chip bag with glow background when vending machine is ready
 - Create asset for PAP:
     Frying animation when weapon is upgrading
     Floating weapon with glow background when weapon is ready
-- Create asset for "Player consuming perk":
-    Player holds chip bag in hand
-    Turn laser off (change to black)
-- Create asset for Power Switch
 - Create asset for "Ritual Circle"
     Replace old idea with "3 Headed Dragon statue, with middle dragon holding glowing scroll in its mouth"
     Two side dragons shoot fire when Blessing is ready
     Player holds glowing scroll in hand, then opens it when accepting
-- Low Health indicator:
-    Heartbeat sounds, faster when lower on health
-
 
 - Add preview info for character hover, such as name and description.
 - Prestige system? Unlock characters, HUD colors, laser colors, hats, etc.

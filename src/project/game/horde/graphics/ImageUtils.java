@@ -53,6 +53,29 @@ public class ImageUtils {
         return result;
     }
 
+    public static BufferedImage makeWhite(BufferedImage src) {
+    BufferedImage dst = new BufferedImage(
+        src.getWidth(),
+        src.getHeight(),
+        BufferedImage.TYPE_INT_ARGB
+    );
+
+    for (int y = 0; y < src.getHeight(); y++) {
+        for (int x = 0; x < src.getWidth(); x++) {
+            int argb = src.getRGB(x, y);
+
+            int alpha = (argb >>> 24) & 0xFF;
+
+            if (alpha == 0)
+                continue;
+
+            dst.setRGB(x, y, (alpha << 24) | 0xFFFFFF);
+        }
+    }
+
+    return dst;
+}
+
     public static BufferedImage fadeImageAlpha(BufferedImage image, float alphaDecrement) {
         int width = image.getWidth();
         int height = image.getHeight();

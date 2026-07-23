@@ -146,9 +146,11 @@ public class Sounds {
 	                clip.open(spedUpStream);
 	                clipList.add(clip);
 	            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+					System.out.println("Error loading clip: " + clipId);
 	            }
 	        }
 	        clipPools.put(clipId, clipList);
+			System.out.println("Clip pool for " + clipId + " loaded.");
 	    
 	}
 	

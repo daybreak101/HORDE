@@ -7,8 +7,10 @@ import java.awt.geom.Ellipse2D;
 
 import project.game.horde.entities.creatures.Player;
 import project.game.horde.entities.creatures.Zombie;
+import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.Wall;
+import project.game.horde.graphics.Assets;
 import project.game.horde.main.Handler;
 import project.game.horde.perks.PhD;
 import project.game.horde.sounds.GunSounds;
@@ -26,14 +28,15 @@ public class Grenade extends Bullet {
     private float destX, destY;
     private boolean isUpgraded;
     int fuseStart = 0;
+    boolean useAsset;
 
     //new normal grenades
     public Grenade(Handler handler, float x, float y, boolean isImpact, float destX, float destY, double radianOffset, Player player, int fuseStart) {
         super(handler, x, y, 10000, player);
         x = (int) x;
         y = (int) y;
-        width = 10;
-        height = 10;
+        width = 20;
+        height = 20;
         this.fuseStart = fuseStart;
         counter = fuseStart;
         timer = 60;
@@ -46,6 +49,7 @@ public class Grenade extends Bullet {
         this.destX = destX;
         this.destY = destY;
         isUpgraded = false;
+        useAsset = true;
     }
 
     // normal grenades
@@ -53,8 +57,9 @@ public class Grenade extends Bullet {
         super(handler, x, y, 10000, player);
         x = (int) x;
         y = (int) y;
-        width = 10;
-        height = 10;
+        fuseStart = 0;
+        width = 20;
+        height = 20;
         counter = 0;
         timer = 60;
         explosionTimer = 65;
@@ -66,12 +71,14 @@ public class Grenade extends Bullet {
         this.destX = destX;
         this.destY = destY;
         isUpgraded = false;
+        useAsset = true;
     }
 
     public Grenade(Handler handler, float x, float y, boolean isImpact, float destX, float destY, Player player, Gun gun) {
         super(handler, x, y, 10000, player);
         x = (int) x;
         y = (int) y;
+        fuseStart = 0;
         width = 10;
         height = 10;
         counter = 0;
@@ -86,11 +93,13 @@ public class Grenade extends Bullet {
         this.destY = destY;
         gunFiredFrom = gun;
         isUpgraded = gunFiredFrom.isUpgraded();
+        useAsset = false;
     }
 
 //	// idk
     public Grenade(Handler handler, float x, float y, Color color) {
         super(handler, x, y, 10000, color);
+        fuseStart = 0;
         width = 10;
         height = 10;
         counter = 0;
@@ -101,13 +110,14 @@ public class Grenade extends Bullet {
         isImpact = false;
         xMove = (float) (speed * Math.cos(angle));
         yMove = (float) (speed * Math.sin(angle));
+        useAsset = false;
     }
 
     @Override
     public void tick() {
         counter++;
-        if (counter >= timer && !isImpact) {
-            if (counter + fuseStart >= explosionTimer) {
+        if (counter >= timer + fuseStart && !isImpact) {
+            if (counter + fuseStart >= explosionTimer && !isImpact) {
                 findEntitiesInRadius();
                 handler.getWorld().getEntityManager().getEntities().remove(this);
                 return;
@@ -156,7 +166,7 @@ public class Grenade extends Bullet {
         }
 
         for (InteractableStaticEntity e : handler.getWorld().getEntityManager().getInteractables()) {
-            if (e.getCollisionBounds(0, 0).intersects(cb)) {
+            if (!(e instanceof Barrier) && e.getCollisionBounds(0, 0).intersects(cb)) {
                 return true;
             }
         }
@@ -250,11 +260,14 @@ public class Grenade extends Bullet {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(new Color(150, 200, 100));
-        g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
-                width, height);
+        if (useAsset) {
+            g.drawImage(Assets.frag, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+        } else {
+            g.setColor(new Color(150, 200, 100));
+            g.fillOval((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height);
+        }
     }
-
-
 
 }

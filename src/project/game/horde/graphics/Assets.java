@@ -14,7 +14,8 @@ public class Assets {
     public static BufferedImage shadow, dirt, grass, stone, tree;
     //interactable assets
     public static BufferedImage mysteryBox, ammoBox, toxen, perkvendor, fryer,
-            barricade, damagedBarricade, brokenBarricade, wallBuy;
+            barricade, damagedBarricade, brokenBarricade, wallBuy, chipBag,
+            powerOn, powerOff;
     //blood assets
     public static BufferedImage zombieBlood, lickerBlood, toxenBlood, stokerBlood;
     //perk assets
@@ -38,10 +39,11 @@ public class Assets {
             aa12_top, ak47_top, awp_top, flamethrower_top, glock17_top, grenadeLauncher_top,
             m4_top, p90_top, rpd_top, rpg_top, winchester1901_top, minigun_top,
             arisaka_top, bren_top, doubleBarrel_top, g18_top, m1Garand_top, m16_top, m1911_top,
-            m60_top, python_top, thompson_top, type100_top, uzi_top;
+            m60_top, python_top, thompson_top, type100_top, uzi_top, frag;
     public static BufferedImage aa12_buy, ak47_buy, arisaka_buy, awp_buy, bren_buy, glock17_buy,
             m4_buy, p90_buy, rpd_buy, winchester1901_buy, doubleBarrel_buy, g18_buy,
-            m1Garand_buy, m16_buy, m1911_buy, m60_buy, python_buy, thompson_buy, type100_buy, uzi_buy;
+            m1Garand_buy, m16_buy, m1911_buy, m60_buy, python_buy, thompson_buy, type100_buy,
+            uzi_buy;
     public static BufferedImage[] flamethrower_bullet, upgraded_flamethrower_bullet;
     public static BufferedImage[] gas_cloud;
     public static BufferedImage rpg_rocket;
@@ -222,6 +224,9 @@ public class Assets {
         damagedBarricade = ImageLoader.loadImage(folder + "interactables/damaged_barricade.png");
         brokenBarricade = ImageLoader.loadImage(folder + "interactables/broken_barricade.png");
         wallBuy = ImageLoader.loadImage(folder + "interactables/wallbuy.png");
+        chipBag = ImageLoader.loadImage(folder + "interactables/chipbag.png");
+        powerOn = ImageLoader.loadImage(folder + "interactables/power_on.png");
+        powerOff = ImageLoader.loadImage(folder + "interactables/power_off.png");
 
         zombieBlood = sheet.crop(2 * width, height, width, height);
 //		lickerBlood = sheet.crop(2 * width, 2 * height, width, height);
@@ -260,6 +265,7 @@ public class Assets {
         thompson = ImageLoader.loadImage(folder + "guns/thompson.png");
         type100 = ImageLoader.loadImage(folder + "guns/type100.png");
         uzi = ImageLoader.loadImage(folder + "guns/uzi.png");
+        frag = ImageLoader.loadImage(folder + "guns/frag.png");
 
         aa12_top = ImageLoader.loadImage(folder + "gunTop/aa12_top.png");
         ak47_top = ImageLoader.loadImage(folder + "gunTop/ak-47_top.png");
