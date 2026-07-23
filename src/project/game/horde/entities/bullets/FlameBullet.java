@@ -2,7 +2,6 @@ package project.game.horde.entities.bullets;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
@@ -41,8 +40,10 @@ public class FlameBullet extends Bullet {
 
         @Override
 	public boolean checkForImpact() {
-		cb = new Rectangle((int) (x + bounds.x), (int) (y + bounds.y), width, height);
-		staticCollision = new Ellipse2D.Float((x + bounds.x + width/3), (y + bounds.y + height/3), width/3, height/3);
+		cb.setBounds((int) (x + bounds.x), (int) (y + bounds.y), width, height);
+		//cb = new Rectangle((int) (x + bounds.x), (int) (y + bounds.y), width, height);
+		staticCollision.setFrame((int) (x + bounds.x + width/3), (int) (y + bounds.y + height/3), width/3, height/3);
+		//staticCollision = new Ellipse2D.Float((x + bounds.x + width/3), (y + bounds.y + height/3), width/3, height/3);
 
 		float damageMultiplier = 1;
 		if(gunFiredFrom.getPlayer().getInv().getStronghold() > -1) {

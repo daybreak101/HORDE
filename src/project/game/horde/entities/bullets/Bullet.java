@@ -21,7 +21,7 @@ public class Bullet extends Entity {
 
     protected Player player;
     protected float mouseX, mouseY;
-    protected Rectangle cb;
+    protected Rectangle cb = new Rectangle();
     protected Gun gunFiredFrom;
     protected float speed;
     protected float xMove, yMove, angle;
@@ -218,8 +218,8 @@ public class Bullet extends Entity {
     }
 
     public boolean checkForImpact() {
-        cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
-
+        //cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
+        cb.setBounds((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
         float damageMultiplier = 1;
         if (player.getInv().getDoubletap() == 3) {
             damageMultiplier += DoubleTap.LVL3_DAMAGEBUFF;
@@ -269,8 +269,8 @@ public class Bullet extends Entity {
     }
 
     public boolean checkForImpactfromTrap() {
-        cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
-
+        //cb = new Rectangle((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
+        cb.setBounds((int) (x + bounds.x - 1), (int) (y + bounds.y - 1), bounds.width + 1, bounds.height + 1);
         for (Zombie e : handler.getWorld().getEntityManager().getZombies()) {
             if (e.getHitBox(0, 0).intersects(cb) && !zombiesHit.contains(e)) {
                 //System.out.println("found a zombie");

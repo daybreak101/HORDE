@@ -63,12 +63,18 @@ public abstract class Entity {
         return false;
     }
 
+    Rectangle collisionBounds = new Rectangle();
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
-        return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), (int) (bounds.width), (int) (bounds.height));
+        collisionBounds.setBounds((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), (int) (bounds.width), (int) (bounds.height));
+        return collisionBounds;
+        //return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), (int) (bounds.width), (int) (bounds.height));
     }
 
+    Ellipse2D.Float circularBounds = new Ellipse2D.Float();
     public Ellipse2D.Float getCircularBounds() {
-        return new Ellipse2D.Float((int) (x + bounds.x), (int) (y + bounds.y), (int) (bounds.width), (int) (bounds.height));
+        circularBounds.setFrame((int) (x + bounds.x), (int) (y + bounds.y), (int) (bounds.width), (int) (bounds.height));
+        return circularBounds;
+        //return new Ellipse2D.Float((int) (x + bounds.x), (int) (y + bounds.y), (int) (bounds.width), (int) (bounds.height));
     }
 
     public void setClosestNode() {
@@ -169,8 +175,11 @@ public abstract class Entity {
         return renderThis;
     }
 
+    Rectangle renderBounds = new Rectangle();
     public Rectangle getRenderBounds() {
-        return new Rectangle((int) x, (int) y, width, height);
+        renderBounds.setBounds((int) x, (int) y, width, height);
+        return renderBounds;
+        //return new Rectangle((int) x, (int) y, width, height);
     }
 
 }
