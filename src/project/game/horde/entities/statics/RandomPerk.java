@@ -36,6 +36,7 @@ public class RandomPerk extends InteractableStaticEntity {
     private int isSpunTimer, isSpunTime;
     private boolean cantAfford = false;
     private boolean fullPerks = false;
+    private BufferedImage bag;
 
     public RandomPerk(Handler handler, int id, float x, float y) {
         super(handler, id, x, y, 75, 30);
@@ -98,46 +99,57 @@ public class RandomPerk extends InteractableStaticEntity {
         switch (rng) {
             case 0 -> {
                 level = handler.getUnlocks().getJuggLvl();
+                bag = Assets.juggChip;
                 return new Juggernaut(handler, level, player);
             }
             case 1 -> {
                 level = handler.getUnlocks().getSpeedLvl();
+                bag = Assets.fasthandChip;
                 return new SleightOfHand(handler, level, player);
             }
             case 2 -> {
                 level = handler.getUnlocks().getDoubletapLvl();
+                bag = Assets.doubletapChip;
                 return new DoubleTap(handler, level, player);
             }
             case 3 -> {
                 level = handler.getUnlocks().getDeadshotLvl();
+                bag = Assets.deadshotChip;
                 return new DeadShot(handler, level, player);
             }
             case 4 -> {
                 level = handler.getUnlocks().getPhdLvl();
+                bag = Assets.phdChip;
                 return new PhD(handler, level, player);
             }
             case 5 -> {
                 level = handler.getUnlocks().getStaminaLvl();
+                bag = Assets.stamChip;
                 return new StaminUp(handler, level, player);
             }
             case 6 -> {
                 level = handler.getUnlocks().getVampireLvl();
+                bag = Assets.vampChip;
                 return new Vampire(handler, level, player);
             }
             case 7 -> {
                 level = handler.getUnlocks().getMuleLvl();
+                bag = Assets.muleChip;
                 return new MuleKick(handler, level, player);
             }
             case 9 -> {
                 level = handler.getUnlocks().getReviveLvl();
+                bag = Assets.reviveChip;
                 return new Revive(handler, level, player);
             }
             case 11 -> {
                 level = handler.getUnlocks().getStrongholdLvl();
+                bag = Assets.strongholdChip;
                 return new Stronghold(handler, level, player);
             }
             case 12 -> {
                 level = handler.getUnlocks().getLunaLvl();
+                bag = Assets.lunaChip;
                 return new Luna(handler, level, player);
             }
         }
@@ -283,9 +295,8 @@ public class RandomPerk extends InteractableStaticEntity {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 
             //int glow = (int) (6 + pulse * 6);
-
-            for (int ox = -6; ox <= 6; ox+=2) {
-                for (int oy = -6; oy <= 6; oy+=2) {
+            for (int ox = -6; ox <= 6; ox += 2) {
+                for (int oy = -6; oy <= 6; oy += 2) {
                     if (ox == 0 && oy == 0) {
                         continue;
                     }
@@ -313,6 +324,18 @@ public class RandomPerk extends InteractableStaticEntity {
                 height + 60,
                 null
         );
+
+        if (isSpun == true && cooldownTimer >= cooldown && isSpunTimer < isSpunTime
+                && handler.getCurrentPlayer().getPlayerInput().canEat()) {
+            g2.drawImage(bag,
+                    (int) (x - handler.getGameCamera().getxOffset() + 10),
+                    (int) (y - handler.getGameCamera().getyOffset() - 30),
+                    60,
+                    60,
+                    null
+            );
+        }
+
         // g.drawImage(Assets.perkvendor,
         //         (int) (x - handler.getGameCamera().getxOffset() - 24),
         //         (int) (y - handler.getGameCamera().getyOffset() - 60),
