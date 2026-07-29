@@ -37,25 +37,25 @@ public class Cheats {
 		handler.getRoundLogic().setCurrentRound(round);
 
 		// give gun
-		Gun gun =
-				//new Arisaka(handler, handler.getCurrentPlayer());
-				//new AWP(handler, handler.getCurrentPlayer());
-				//new AK47(handler, handler.getCurrentPlayer());
-				//new RPD(handler, handler.getCurrentPlayer());
-				//new GrenadeLauncher(handler, handler.getCurrentPlayer());
-				//new Winchester1901(handler, handler.getCurrentPlayer());
-				//new AA12(handler, handler.getCurrentPlayer());
-				//new RPG(handler, handler.getCurrentPlayer());
-				//new Flamethrower(handler, handler.getCurrentPlayer());
-				//new IceShotgun(handler, handler.getCurrentPlayer());
-				//new P90(handler, handler.getCurrentPlayer());
-				//new Minigun(handler, handler.getCurrentPlayer());
-				//new M4(handler, handler.getCurrentPlayer());
-				//new IceShotgun(handler, handler.getCurrentPlayer());
-				//new Bren(handler, handler.getCurrentPlayer());
-				//new DoubleBarrel(handler, handler.getCurrentPlayer());
-				//new G18(handler, handler.getCurrentPlayer());
-				new M1911(handler, handler.getCurrentPlayer());
+		Gun gun;
+            gun = //new Arisaka(handler, handler.getCurrentPlayer());
+                    //new AWP(handler, handler.getCurrentPlayer());
+                    //new AK47(handler, handler.getCurrentPlayer());
+                    //new RPD(handler, handler.getCurrentPlayer());
+                    //new GrenadeLauncher(handler, handler.getCurrentPlayer());
+                    //new Winchester1901(handler, handler.getCurrentPlayer());
+                    //new AA12(handler, handler.getCurrentPlayer());
+                    //new RPG(handler, handler.getCurrentPlayer());
+                    //new Flamethrower(handler, handler.getCurrentPlayer());
+                    //new IceShotgun(handler, handler.getCurrentPlayer());
+                    //new P90(handler, handler.getCurrentPlayer());
+                    //new Minigun(handler, handler.getCurrentPlayer());
+                    //new M4(handler, handler.getCurrentPlayer());
+                    //new IceShotgun(handler, handler.getCurrentPlayer());
+                    //new Bren(handler, handler.getCurrentPlayer());
+                    //new DoubleBarrel(handler, handler.getCurrentPlayer());
+                    //new G18(handler, handler.getCurrentPlayer());
+                    new M1911(handler, handler.getCurrentPlayer());
 				//new M60(handler, handler.getCurrentPlayer());
 				//new Python(handler, handler.getCurrentPlayer());
 				//new Thompson(handler, handler.getCurrentPlayer());

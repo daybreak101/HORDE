@@ -682,16 +682,6 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         inv.render(g);
-        // hud.render(g);
-//		float mouseX = playerInput.getMouseManager().getMouseX();
-//		float mouseY = playerInput.getMouseManager().getMouseY();
-//		angle = (float) Math.toDegrees(Math.atan2(-(x - handler.getGameCamera().getxOffset() - mouseX + width / 2),
-//				y - handler.getGameCamera().getyOffset() - mouseY + height / 2));
-//		sendRotateUpdate.tick();
-//		if (lastAngle != angle && isOnline && sendRotateUpdate.isReady()) {
-//			peer.sendNewAngle(username, angle);
-//		}
-//		lastAngle = angle;
         renderStronghold(g);
         //renderInteractRadius(g);
         renderShadow(g);

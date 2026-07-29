@@ -16,6 +16,9 @@ public class Assets {
     public static BufferedImage mysteryBox, ammoBox, toxen, perkvendor, fryer,
             barricade, damagedBarricade, brokenBarricade, wallBuy, chipBag,
             powerOn, powerOff;
+    //chips
+    public static BufferedImage juggChip, fasthandChip, doubletapChip, deadshotChip, phdChip, stamChip, vampChip,
+            muleChip, reviveChip, bandolierChip, lunaChip, strongholdChip;
     //blood assets
     public static BufferedImage zombieBlood, lickerBlood, toxenBlood, stokerBlood;
     //perk assets
@@ -100,6 +103,23 @@ public class Assets {
         nuke = sheet.crop(4 * width, 8 * height, width, height);
         healthUp = sheet.crop(5 * width, 8 * height, width, height);
         maxAmmo = sheet.crop(6 * width, 8 * height, width, height);
+
+        SpriteSheet chipSheet = new SpriteSheet(ImageLoader.loadImage(folder + "interactables/bags.png"));
+        int secondWidth = 256;
+        int secondHeight = 341;
+        juggChip = chipSheet.crop(0, 0, secondWidth, secondHeight);
+        fasthandChip = chipSheet.crop(secondWidth, 0, secondWidth, secondHeight);
+        doubletapChip = chipSheet.crop(secondWidth * 2, 0, secondWidth, secondHeight);
+        deadshotChip = chipSheet.crop(secondWidth * 3, 0, secondWidth, secondHeight);
+        phdChip = chipSheet.crop(0, secondHeight, secondWidth, secondHeight);
+        stamChip = chipSheet.crop(secondWidth, secondHeight, secondWidth, secondHeight);
+        vampChip = chipSheet.crop(secondWidth * 2, secondHeight, secondWidth, secondHeight);
+        muleChip = chipSheet.crop(secondWidth * 3, secondHeight, secondWidth, secondHeight);
+        reviveChip = chipSheet.crop(0, secondHeight * 2, secondWidth, secondHeight);
+        bandolierChip = chipSheet.crop(secondWidth, secondHeight * 2, secondWidth, secondHeight);
+        lunaChip = chipSheet.crop(secondWidth * 2, secondHeight * 2, secondWidth, secondHeight);
+        strongholdChip = chipSheet.crop(secondWidth * 3, secondHeight * 2, secondWidth, secondHeight);
+
 
         SpriteSheet zombieSheet = new SpriteSheet(ImageLoader.loadImage(folder + "zombieAnim.png"));
         zombieAnim = new BufferedImage[17];

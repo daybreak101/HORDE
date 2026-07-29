@@ -44,7 +44,7 @@ public class Glock17 extends Gun {
 
     // guess i figured out how to work semi-auto guns
     public void postTick() {
-        if (player.getMouseManager().isLeftPressed() && !isReloading) {
+        if (player.getMouseManager().isLeftPressed() && !isReloading && player.getPlayerInput().canShoot()) {
             heldShot++;
         } else if (!player.getMouseManager().isLeftPressed() && heldShot > 0 && !isReloading
                 && player.getPlayerInput().canShoot()) {

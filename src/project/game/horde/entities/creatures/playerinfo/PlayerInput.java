@@ -124,7 +124,7 @@ public class PlayerInput {
             recoverTimer = new Timer(30);
         }
 
-		//set reloading state when gun automatically reloads without input
+        //set reloading state when gun automatically reloads without input
         if (player.getInv().getGun().getIsReloading()) {
             action = PlayerActionState.RELOADING;
             player.setActionState(PlayerActionState.RELOADING);
@@ -193,10 +193,10 @@ public class PlayerInput {
     public boolean canShoot() {
         PlayerMovementState move = player.getMoveState();
         PlayerActionState action = player.getActionState();
+
         return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
                 && (action == PlayerActionState.IDLE
-                || action == PlayerActionState.SHOOTING
-                );
+                || action == PlayerActionState.SHOOTING);
     }
 
     public boolean canReload() {
@@ -212,9 +212,8 @@ public class PlayerInput {
         PlayerMovementState move = player.getMoveState();
         PlayerActionState action = player.getActionState();
         return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
-                && (action == PlayerActionState.IDLE || action == PlayerActionState.SHOOTING ||
-					action == PlayerActionState.RELOADING
-				);
+                && (action == PlayerActionState.IDLE || action == PlayerActionState.SHOOTING
+                || action == PlayerActionState.RELOADING);
     }
 
     public void getInput() {
@@ -276,10 +275,12 @@ public class PlayerInput {
 
     private void shootInput() {
         if (mouseManager.isLeftPressed() && inv.getGun() != null && canShoot()) {
+            //System.out.println("shooting");
             inv.getGun().shoot();
             player.setActionState(PlayerActionState.SHOOTING);
         }
         if (mouseManager.isRightPressed() && inv.getGun() != null && canShoot()) {
+            //System.out.println("alt shooting");
             inv.getGun().altShoot();
             player.setActionState(PlayerActionState.SHOOTING);
         }

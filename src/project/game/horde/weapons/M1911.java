@@ -41,7 +41,8 @@ public class M1911 extends Gun {
 
     // guess i figured out how to work semi-auto guns
     public void postTick() {
-        if (player.getMouseManager().isLeftPressed() && !isReloading) {
+        System.out.println("held shot: " + heldShot);
+        if (player.getMouseManager().isLeftPressed() && !isReloading && player.getPlayerInput().canShoot()) {
             heldShot++;
         } else if (!player.getMouseManager().isLeftPressed() && heldShot > 0 && !isReloading
                 && player.getPlayerInput().canShoot()) {
@@ -49,7 +50,7 @@ public class M1911 extends Gun {
             heldShot = 0;
         }
 
-        if (player.getMouseManager().isRightPressed() && !isAltReloading) {
+        if (player.getMouseManager().isRightPressed() && !isAltReloading && player.getPlayerInput().canShoot()) {
             altHeldShot++;
         } else if (!player.getMouseManager().isRightPressed()
                 && altHeldShot > 0
