@@ -23,6 +23,15 @@
 - Add more hats?
 - OFC add more maps.
 
+Elemental damages:
+    explosive (base): orange bullets, applies explosion
+    fire: red bullets, applies burn
+    electric: cobalt blue bullets, applies shock and stun
+    ice: white bullets, applies freeze
+    poison: green bullets, applies poison and infection
+    radiation: yellow bullets, applies radiation (weakness, takes more damage from other elements)
+    
+
 - Seattle Map
     Start off at the bottom of Space Needle. 
     You see to the north a disabled elevator to go up to Space Needle.

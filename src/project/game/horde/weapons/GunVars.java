@@ -1,6 +1,20 @@
 package project.game.horde.weapons;
 
 public class GunVars {
+	//wonder weapons
+	public static final String RAYGUN_NAME = "Ray Gun";
+	public static final String RAYGUN_UPGRADEDNAME = "RayGun";
+	public static final int RAYGUN_DAMAGE = 1500;
+	public static final int RAYGUN_FIRERATE = 20;
+	public static final int RAYGUN_RELOADSPEED = 240;
+	public static final int RAYGUN_GUNCLIP = 20;
+	public static final int RAYGUN_MAXRESERVE = 120;
+	public static final float RAYGUN_WEIGHT = 0.7f;
+	public static final int RAYGUN_RANGE = 50;
+
+	//evolution gun
+
+
 	//names
 	public static final String AA12_NAME = "AA12";
 	public static final String AK47_NAME = "AK-47";
