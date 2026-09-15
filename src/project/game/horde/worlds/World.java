@@ -31,6 +31,7 @@ import project.game.horde.entities.statics.traps.IcyWater;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.maps.FarmMap;
+import project.game.horde.maps.SchoolMap;
 import project.game.horde.network.Peer;
 import project.game.horde.network.ZombiePosition;
 import project.game.horde.utils.Timer;
@@ -52,7 +53,7 @@ public class World {
     private RoomLogic rooms;
     private PathingLogic pathing;
     private boolean powerOn;
-    private String map;
+    //private String map;
 
     int ticker = 0, tickerLimit = 600;
 
@@ -60,10 +61,10 @@ public class World {
     boolean test = false;
 
     // offline
-    public World(Handler handler, String path, String entityPath,
+    public World(Handler handler, String map,String path, String entityPath,
             String edgesPath,
             String adjacentRooms,
-            User user, String map) throws IOException {
+            User user) throws IOException {
         initializeWorld(handler, path, entityPath,
                 edgesPath, adjacentRooms, map);
     }
@@ -72,11 +73,11 @@ public class World {
     HashMap<Integer, User> users;
     Peer peer;
 
-    public World(Handler handler, String path,
+    public World(Handler handler, String map, String path,
             String entityPath,
             String edgesPath,
             String adjacentRooms,
-            User user, Peer peer, HashMap<Integer, User> users, String map) throws IOException {
+            User user, Peer peer, HashMap<Integer, User> users) throws IOException {
         this.peer = peer;
         this.users = users;
         initializeWorld(handler, path, entityPath,
@@ -86,20 +87,20 @@ public class World {
     public void initializeWorld(Handler handler, String path, String entityPath,
             String edgesPath,
             String adjacentRooms, String map) throws IOException {
-        this.map = map;
+        //this.map = map;
         this.handler = handler;
         handler.setWorld(this);
         entityManager = new EntityManager(handler);
 
         rooms = new RoomLogic(handler, this, adjacentRooms, entityPath);
-        rounds = new RoundLogic(handler, rooms.getSpawners(), 0);
+        rounds = new RoundLogic(handler, rooms.getSpawners(), map);
 
         handler.setRoundLogic(rounds);
         loadWorld(path);
         handler.setWorld(this);
         createStaticEntities(entityPath);
         pathing = new PathingLogic(handler, this, entityPath, edgesPath);
-
+        //spawnPlayers(entityPath);
         nodesVisible = false;
         powerOn = false;
     }
@@ -190,6 +191,8 @@ public class World {
                         }
                         case "FarmMap" ->
                             entityManager.setMap(new FarmMap(handler, 0, 0, 3400, 1700));
+                        case "SchoolMap" ->
+                            entityManager.setMap(new SchoolMap(handler, x, y, 0, 0));
                         case "IcyWater" ->
                             entityManager.addArea(new IcyWater(handler, x, y));
                         case "Barrier" -> {

@@ -645,6 +645,65 @@
         }, 
         {
          "draworder":"topdown",
+         "id":6,
+         "name":"PlayerSpawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":107,
+                 "name":"Spawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":900,
+                 "y":585
+                }, 
+                {
+                 "height":0,
+                 "id":108,
+                 "name":"Spawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":921,
+                 "y":739
+                }, 
+                {
+                 "height":0,
+                 "id":110,
+                 "name":"Spawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":898,
+                 "y":905
+                }, 
+                {
+                 "height":0,
+                 "id":111,
+                 "name":"Spawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1045,
+                 "y":925
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":5,
          "name":"Nodes",
          "objects":[
@@ -1742,7 +1801,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1969,12 +2028,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":107,
+ "nextlayerid":7,
+ "nextobjectid":112,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

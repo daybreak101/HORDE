@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="107">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="112">
  <editorsettings>
   <export target="entities.json" format="json"/>
  </editorsettings>
@@ -172,7 +172,21 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="5" name="Nodes">
+ <objectgroup id="6" name="PlayerSpawn">
+  <object id="107" name="Spawn" x="900" y="585">
+   <point/>
+  </object>
+  <object id="108" name="Spawn" x="921" y="739">
+   <point/>
+  </object>
+  <object id="110" name="Spawn" x="898" y="905">
+   <point/>
+  </object>
+  <object id="111" name="Spawn" x="1045" y="925">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Nodes" visible="0">
   <object id="47" name="0" type="Node" x="1250" y="450">
    <properties>
     <property name="room" value="1"/>
@@ -486,7 +500,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="4" name="Spawners">
+ <objectgroup id="4" name="Spawners" visible="0">
   <object id="38" name="Spawner" type="Spawner" x="800" y="100">
    <properties>
     <property name="room" value="1"/>

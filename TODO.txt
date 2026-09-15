@@ -1,5 +1,3 @@
-- Create assets for vending machine
-    Floating chip bag with glow background when vending machine is ready
 - Create asset for PAP:
     Frying animation when weapon is upgrading
     Floating weapon with glow background when weapon is ready

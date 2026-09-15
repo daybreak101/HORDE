@@ -55,6 +55,7 @@ public class Assets {
     public static BufferedImage firstFloorFarm;//, secondFloorFarm;
     //public static BufferedImage seattle_needle, seattle_transport, seattle_central;
     //public static BufferedImage iceland;
+    public static BufferedImage schoolMap;
 
     public static void loadFarm() {
         if (firstFloorFarm == null) {
@@ -62,6 +63,13 @@ public class Assets {
         }
         //secondFloorFarm = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
         // = ImageLoader.loadImage(folder + "farmMap/secondFloorFarm.png");
+        init();
+    }
+
+    public static void loadSchool() {
+        if (schoolMap == null) {
+            schoolMap = ImageLoader.loadImage(folder + "schoolMap/school.png");
+        }
         init();
     }
 

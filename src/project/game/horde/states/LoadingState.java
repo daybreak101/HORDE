@@ -73,8 +73,9 @@ public class LoadingState extends State {
             });
             executorAssets = Executors.newSingleThreadExecutor();
             executorAssets.submit(() -> {
-                if (map.equals("test")) {
-                    Assets.loadFarm();
+                switch (map) {
+                    case "test" -> Assets.loadFarm();
+                    case "uni" -> Assets.loadSchool();
                 }
                 loadingState++;
                 assetsReady = true;

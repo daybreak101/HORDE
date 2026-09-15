@@ -87,7 +87,7 @@ public class SettingsState extends State {
         addToggleDamageOptions();
         addHealthBarOptions();
         addMasterVolumeOptions();
-        uiManager.addObject(new TextButton(handler, listX - 50, handler.getHeight() - 100, 100, handler.getHeight() - 200, "Back", new ClickListener() {
+        uiManager.addObject(new TextButton(handler, listX - 50, handler.getHeight() - 100, 100, 50, "Back", new ClickListener() {
 
             @Override
             public void onClick(UIObject ui) {

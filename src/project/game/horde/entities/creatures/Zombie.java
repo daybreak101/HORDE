@@ -17,6 +17,7 @@ import project.game.horde.entities.creatures.zombieinfo.SlownessStatus;
 import project.game.horde.entities.facade.PlayerMP;
 import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
+import project.game.horde.entities.statics.InvisibleBounds;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.graphics.Animation;
 import project.game.horde.graphics.Assets;
@@ -529,6 +530,11 @@ public class Zombie extends Creature {
         }
         for (Wall e : handler.getWorld().getEntityManager().getWalls()) {
             if (z2p[0].intersects(e.getCollisionBounds(0, 0))) {
+                return true;
+            }
+        }
+        for(InvisibleBounds e : handler.getWorld().getEntityManager().getBoundaries()) {
+            if(z2p[0].intersects(e.getCollisionBounds(0, 0))) {
                 return true;
             }
         }
