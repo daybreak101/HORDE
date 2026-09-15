@@ -142,6 +142,7 @@ public abstract class Gun {
 
     // public abstract void render();
     public void tick() {
+        if(player == null) return;
         doubletap = player.getInv().getDoubletap();
         speedcola = player.getInv().getSpeedcola();
         if (isReloading) {

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.geom.AffineTransform;
 
 import javax.swing.JFrame;
@@ -13,7 +14,9 @@ import javax.swing.SwingUtilities;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import project.game.horde.graphics.ImageLoader;
+import project.game.horde.input.KeyManager;
 import project.game.horde.main.Game;
+import project.game.horde.main.Handler;
 
 public class Display {
 
@@ -42,9 +45,9 @@ public class Display {
 
     }
 
-    public void resetDisplay(int displayType) {
+    public void resetDisplay(int displayType, Handler handler) {
         isChangingDisplay = true;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = getDefaultToolkit().getScreenSize();
         frame.dispose();
         switch (displayType) {
             case STANDARD -> {
@@ -102,6 +105,7 @@ public class Display {
         }
         canvas.createBufferStrategy(3);
         isChangingDisplay = false;
+        canvas.addKeyListener(new KeyManager(handler));
     }
 
     // use frame. for more suggestions to change properties of the window

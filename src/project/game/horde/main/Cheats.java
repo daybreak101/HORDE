@@ -2,8 +2,8 @@ package project.game.horde.main;
 
 import project.game.horde.entities.creatures.Zombie;
 import project.game.horde.entities.statics.Wall;
+import project.game.horde.weapons.EvolutionGun;
 import project.game.horde.weapons.Gun;
-import project.game.horde.weapons.M1911;
 
 public class Cheats {
 
@@ -11,7 +11,7 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		//applyCheats();
+		applyCheats();
 	}
 
 	public void applyCheats() {
@@ -55,14 +55,15 @@ public class Cheats {
                     //new Bren(handler, handler.getCurrentPlayer());
                     //new DoubleBarrel(handler, handler.getCurrentPlayer());
                     //new G18(handler, handler.getCurrentPlayer());
-                    new M1911(handler, handler.getCurrentPlayer());
+                    //new M1911(handler, handler.getCurrentPlayer());
 				//new M60(handler, handler.getCurrentPlayer());
 				//new Python(handler, handler.getCurrentPlayer());
 				//new Thompson(handler, handler.getCurrentPlayer());
 				//new Type100(handler, handler.getCurrentPlayer());
 				//new Uzi(handler, handler.getCurrentPlayer());
 				//new M16(handler, handler.getCurrentPlayer());
-				gun.upgradeWeapon();
+				new EvolutionGun(handler, null);
+				//gun.upgradeWeapon();
 		handler.getCurrentPlayer().getInv().setGun(gun);
 		
 		//give gas grenades

@@ -49,28 +49,51 @@ public class EvolutionGun extends Gun {
     public static final int EVOLUTION_RANGE = 50;
 
     public EvolutionGun(Handler handler, Player player) {
-        super(handler, player, GunVars.RAYGUN_DAMAGE, GunVars.RAYGUN_FIRERATE, GunVars.RAYGUN_RELOADSPEED,
-                GunVars.RAYGUN_GUNCLIP, GunVars.RAYGUN_MAXRESERVE, GunVars.RAYGUN_WEIGHT, GunVars.RAYGUN_RANGE, 69);
-        this.name = GunVars.RAYGUN_NAME;
+        super(handler, player, EVOLUTION_DAMAGE, EVOLUTION_FIRERATE, EVOLUTION_RELOADSPEED,
+                EVOLUTION_GUNCLIP, EVOLUTION_MAXRESERVE, EVOLUTION_WEIGHT, EVOLUTION_RANGE, 69);
+        this.name = EVOLUTION_NAME;
         originalName = name;
-        upgradedName = GunVars.RAYGUN_UPGRADEDNAME;
+        upgradedName = EVOLUTION_UPGRADEDNAME;
+
+        //TODO: replace gun image
+        //TODO: replace gun sound
         //reloadSound = GunSounds.RAYGUN_RELOAD_ID;
         //top = Assets.raygun_top;
+        //TODO: replace gun dimensions
         gunImageDim = new GunImageDim(40, 50, 20, 80);
     }
 
     @Override
     public void shootOnline(int x, int y, float angle, float volume) {
+        //TODO: replace bullet
         handler.getWorld().getEntityManager().addEntity(new OnlineBullet(handler, x,
                 y, range, angle, isUpgraded));
 
-        if (isUpgraded) {
-            Sounds.playClip(GunSounds.UPGRADED_ID, 1, volume, false);
-        }
+        //TODO: replace sound
         Sounds.playClip(GunSounds.M1911_SHOT_ID, 1, volume, false);
     }
 
     public void shoot() {
+        if (variant == VARIANT_AUTO || variant == VARIANT_AUTO_DUAL
+                || variant == VARIANT_LASER) {
+            if (readyToFire == true && currentClip > 0 && isReloading == false) {
+                readyToFire = false;
+                currentClip--;
+
+                //TODO: replace sound
+                Sounds.playClip(GunSounds.M4_SHOT_ID, 1, -1.0f, false);
+                //TODO: replace bullet
+                handler.getWorld().getEntityManager().addEntity(new Bullet(handler,
+                        player.getCenterX(),
+                        player.getCenterY(),
+                        range, this));
+                if (player.getPeer() != null) {
+                    player.getPeer().sendPlayerShot(player.getUsername());
+                }
+
+                timerToFire = 0;
+            }
+        }
     }
 
     int heldShot = 0;
@@ -78,24 +101,28 @@ public class EvolutionGun extends Gun {
 
     // guess i figured out how to work semi-auto guns
     public void postTick() {
-        if (player.getMouseManager().isLeftPressed() && !isReloading) {
-            heldShot++;
-        } else if (!player.getMouseManager().isLeftPressed() && heldShot > 0 && !isReloading
-                && player.getPlayerInput().canShoot()) {
-            shootSingleShot();
-            heldShot = 0;
-        }
+        if ((variant == VARIANT_UNUPGRADED || variant == VARIANT_BASE || variant == VARIANT_SNIPER
+                || variant == VARIANT_SHOTGUN || variant == VARIANT_CHARGE || variant == VARIANT_DUAL)
+                && currentClip > 0 && !isReloading) {
+            System.out.println("heldShot" + heldShot);
+            if (player.getMouseManager().isLeftPressed() && !isReloading) {
+                heldShot++;
+            } else if (!player.getMouseManager().isLeftPressed() && heldShot > 0 && !isReloading
+                    && player.getPlayerInput().canShoot()) {
+                shootSingleShot();
+                heldShot = 0;
+            }
 
-        if (player.getMouseManager().isRightPressed() && !isAltReloading) {
-            altHeldShot++;
-        } else if (!player.getMouseManager().isRightPressed()
-                && altHeldShot > 0
-                && !isAltReloading
-                && player.getPlayerInput().canShoot()) {
-            altShootSingleShot();
-            altHeldShot = 0;
+            if (player.getMouseManager().isRightPressed() && !isAltReloading) {
+                altHeldShot++;
+            } else if (!player.getMouseManager().isRightPressed()
+                    && altHeldShot > 0
+                    && !isAltReloading
+                    && player.getPlayerInput().canShoot()) {
+                altShootSingleShot();
+                altHeldShot = 0;
+            }
         }
-
     }
 
     @Override
@@ -105,8 +132,7 @@ public class EvolutionGun extends Gun {
         if (variant == VARIANT_UNUPGRADED) {
             variant = VARIANT_BASE;
             randomNum = VARIANT_BASE;
-        }
-        //if upgraded and attempting to reupgrade, give random new variant
+        } //if upgraded and attempting to reupgrade, give random new variant
         else {
             randomNum = new Random().nextInt(0, 7 + 1);
             //don't allow same variant
@@ -119,6 +145,7 @@ public class EvolutionGun extends Gun {
         //apply variant stats
         switch (randomNum) {
             case VARIANT_BASE -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME;
                 damage = EVOLUTION_DAMAGE * 2;
                 fireRate = EVOLUTION_FIRERATE;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -132,6 +159,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_SNIPER -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Sniper";
                 damage = EVOLUTION_DAMAGE * 5;
                 fireRate = 120;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -145,6 +173,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_SHOTGUN -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Shotgun";
                 damage = EVOLUTION_DAMAGE * 4;
                 fireRate = 90;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -158,6 +187,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_CHARGE -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Charge";
                 damage = (int) ((float) EVOLUTION_DAMAGE * 1.5f);
                 fireRate = 15;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -171,6 +201,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_AUTO -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Auto";
                 damage = EVOLUTION_DAMAGE;
                 fireRate = 5;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -184,6 +215,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_LASER -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Laser";
                 damage = EVOLUTION_DAMAGE;
                 fireRate = 2;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -197,6 +229,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = 0;
             }
             case VARIANT_DUAL -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Dual";
                 damage = EVOLUTION_DAMAGE * 2;
                 fireRate = EVOLUTION_FIRERATE;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -210,6 +243,7 @@ public class EvolutionGun extends Gun {
                 currentAltClip = clip;
             }
             case VARIANT_AUTO_DUAL -> {
+                upgradedName = EVOLUTION_UPGRADEDNAME + "-Auto-Dual";
                 damage = EVOLUTION_DAMAGE;
                 fireRate = 5;
                 reloadSpeed = EVOLUTION_RELOADSPEED;
@@ -226,36 +260,20 @@ public class EvolutionGun extends Gun {
     }
 
     public void shootSingleShot() {
-        if (currentClip > 0 && !isReloading) {
+        System.out.println("shootSingleShot");
             readyToFire = false;
+            System.out.println("is able to single shot");
+            //TODO: replace sound
             Sounds.playClip(GunSounds.M1911_SHOT_ID, 1, -1.0f, false);
-
-            if (isUpgraded) {
-                Sounds.playClip(GunSounds.UPGRADED_ID, 1, -1.0f, false);
-            }
             currentClip--;
-            if (isUpgraded) {
-                handler.getWorld().getEntityManager()
-                        .addEntity(new Grenade(handler, player.getCenterX(), player.getCenterY(),
-                                isUpgraded, player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(),
-                                player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset(), player,
-                                this));
-                if (player.getPeer() != null) {
-                    player.getPeer().sendPlayerGrenadeLauncherShot(player.getUsername(),
-                            (int) (player.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset()),
-                            (int) (player.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset())
-                    );
-                }
-            } else {
-                handler.getWorld().getEntityManager().addEntity(
-                        new Bullet(handler, player.getCenterX(), player.getCenterY(), range, this));
-                if (player.getPeer() != null) {
-                    player.getPeer().sendPlayerShot(player.getUsername());
-                }
+            //TODO: replace bullet
+            handler.getWorld().getEntityManager().addEntity(
+                    new Bullet(handler, player.getCenterX(), player.getCenterY(), range, this));
+            if (player.getPeer() != null) {
+                player.getPeer().sendPlayerShot(player.getUsername());
             }
 
             timerToFire = 0;
-        }
     }
 
     public void altShootSingleShot() {
