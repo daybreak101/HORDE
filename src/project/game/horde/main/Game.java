@@ -2,7 +2,6 @@ package project.game.horde.main;
 
 import java.awt.Cursor;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -15,8 +14,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
 import project.game.horde.display.Display;
 import project.game.horde.graphics.CharAssets;
 import project.game.horde.graphics.MenuAssets;
@@ -153,20 +150,27 @@ public class Game implements Runnable {
             return;
         }
 
-        // clear screen
-        g.clearRect(0, 0, width, height);
-        GraphicsConfiguration gc = display.getFrame().getGraphicsConfiguration();
-        AffineTransform tx = gc.getDefaultTransform();
-        int targetWidth = 1920;
-        int targetHeight = 1080;
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        int screenWidth = (int) screenBounds.getWidth();
-        int screenHeight = (int) screenBounds.getHeight();
+//  OLD CODE       
+//   clear screen
+        // NEW CODE
+        int canvasWidth = display.getCanvas().getWidth();
+        int canvasHeight = display.getCanvas().getHeight();
+        System.out.println("Canvas: " + canvasWidth + " x " + canvasHeight);
+        System.out.println("Frame: " + display.getFrame().getWidth() + " x " + display.getFrame().getHeight());
+        //Reset any transformations
+        g.setTransform(new AffineTransform());
 
-        double scaleX = (double) screenWidth / targetWidth * tx.getScaleX();
-        double scaleY = (double) screenHeight / targetHeight * tx.getScaleY();
-//		double scale = Math.min(scaleX, scaleY);
+        // Clear screen
+        g.clearRect(0, 0, canvasWidth, canvasHeight);
+
+        // Scale the 1000x800 logical game to the actual window
+        double scaleX = Math.min((double) canvasWidth / 1000, 1920.0 / 1000);
+        double scaleY = Math.min((double) canvasHeight / 800, 1080.0 / 800);
+        double offsetX = (canvasWidth - 1000 * scaleX) / 2.0;
+        double offsetY = (canvasHeight - 800 * scaleY) / 2.0;
+        g.translate(offsetX, offsetY);
         g.scale(scaleX, scaleY);
+
         if (State.getState() != null) {
             State.getState().render(g);
             //        Runtime runtime = Runtime.getRuntime();

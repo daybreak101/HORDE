@@ -1,9 +1,5 @@
 package project.game.horde.main;
 
-import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -205,34 +201,34 @@ public class Handler {
         return game.getMouseManager();
     }
 
-    public int getWidth() {
-        GraphicsConfiguration gc = game.getDisplay().getFrame().getGraphicsConfiguration();
-        AffineTransform tx = gc.getDefaultTransform();
-        int targetWidth = 1920;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenWidth = screenSize.width;
-        double scaleX = (double) screenWidth / targetWidth * tx.getScaleX();
-        return (int) (game.getWidth() / scaleX) + 1;
-    }
-
-    public int getHeight() {
-        GraphicsConfiguration gc = game.getDisplay().getFrame().getGraphicsConfiguration();
-        AffineTransform tx = gc.getDefaultTransform();
-        int targetHeight = 1080;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int screenHeight = screenSize.height;
-        double scaleY = (double) screenHeight / targetHeight * tx.getScaleY();
-        return (int) (game.getHeight() / scaleY) + 1;
-    }
-
     // public int getWidth() {
-    // 	return game.getDisplay().getCanvas().getWidth();
+    //     GraphicsConfiguration gc = game.getDisplay().getFrame().getGraphicsConfiguration();
+    //     AffineTransform tx = gc.getDefaultTransform();
+    //     int targetWidth = 1920;
+    //     Toolkit toolkit = Toolkit.getDefaultToolkit();
+    //     Dimension screenSize = toolkit.getScreenSize();
+    //     int screenWidth = screenSize.width;
+    //     double scaleX = (double) screenWidth / targetWidth * tx.getScaleX();
+    //     return (int) (game.getWidth() / scaleX) + 1;
     // }
+
     // public int getHeight() {
-    // 	return game.getDisplay().getCanvas().getHeight();
+    //     GraphicsConfiguration gc = game.getDisplay().getFrame().getGraphicsConfiguration();
+    //     AffineTransform tx = gc.getDefaultTransform();
+    //     int targetHeight = 1080;
+    //     Toolkit toolkit = Toolkit.getDefaultToolkit();
+    //     Dimension screenSize = toolkit.getScreenSize();
+    //     int screenHeight = screenSize.height;
+    //     double scaleY = (double) screenHeight / targetHeight * tx.getScaleY();
+    //     return (int) (game.getHeight() / scaleY) + 1;
     // }
+
+    public int getWidth() {
+    	return game.getWidth();
+    }
+    public int getHeight() {
+    	return game.getHeight();
+    }
     public Game getGame() {
         return game;
     }
