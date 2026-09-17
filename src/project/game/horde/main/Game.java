@@ -1,5 +1,6 @@
 package project.game.horde.main;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
@@ -155,13 +156,15 @@ public class Game implements Runnable {
         // NEW CODE
         int canvasWidth = display.getCanvas().getWidth();
         int canvasHeight = display.getCanvas().getHeight();
-        System.out.println("Canvas: " + canvasWidth + " x " + canvasHeight);
-        System.out.println("Frame: " + display.getFrame().getWidth() + " x " + display.getFrame().getHeight());
+        //System.out.println("Canvas: " + canvasWidth + " x " + canvasHeight);
+        //System.out.println("Frame: " + display.getFrame().getWidth() + " x " + display.getFrame().getHeight());
         //Reset any transformations
         g.setTransform(new AffineTransform());
 
         // Clear screen
-        g.clearRect(0, 0, canvasWidth, canvasHeight);
+        //g.clearRect(0, 0, canvasWidth, canvasHeight);
+        g.setColor(Color.black);
+        g.fillRect(0, 0, canvasWidth, canvasHeight);
 
         // Scale the 1000x800 logical game to the actual window
         double scaleX = Math.min((double) canvasWidth / 1000, 1920.0 / 1000);
@@ -170,6 +173,7 @@ public class Game implements Runnable {
         double offsetY = (canvasHeight - 800 * scaleY) / 2.0;
         g.translate(offsetX, offsetY);
         g.scale(scaleX, scaleY);
+        g.clipRect(0, 0, 1000, 800);
 
         if (State.getState() != null) {
             State.getState().render(g);

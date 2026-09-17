@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -106,10 +107,10 @@ public class GameplayElement extends HudElement {
 
         gun = player.getInv().getGun();
         if (gun == null) {
-            gunText = ""; 
-        }else if (gun.isDual()) {
-            gunText = gun.getName() + "         " + gun.getCurrentClip() + " | " + gun.getCurrentAltClip() + " / " + gun.getCurrentReserve(); 
-        }else {
+            gunText = "";
+        } else if (gun.isDual()) {
+            gunText = gun.getName() + "         " + gun.getCurrentClip() + " | " + gun.getCurrentAltClip() + " / " + gun.getCurrentReserve();
+        } else {
             gunText = gun.getName() + "         " + gun.getCurrentClip() + " / " + gun.getCurrentReserve();
         }
 
@@ -136,7 +137,7 @@ public class GameplayElement extends HudElement {
     }
 
     public void renderGun(Graphics g) {
-		//System.out.println("Rendering GUN" + gun);
+        //System.out.println("Rendering GUN" + gun);
         if (gun != null) {
             g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
             FontMetrics fm = g.getFontMetrics();
@@ -213,7 +214,7 @@ public class GameplayElement extends HudElement {
         // g.drawString(Integer.toString(health + player.getTempHealth()), 100, (int)
         // handler.getHeight() - 100);
         g.setColor(Color.BLUE);
-        g.fillRect((int) 100, (int) handler.getHeight() - 60, (int)((float)armor/(float)Stronghold.LVL2_MAXARMOR * 100.f), 10);
+        g.fillRect((int) 100, (int) handler.getHeight() - 60, (int) ((float) armor / (float) Stronghold.LVL2_MAXARMOR * 100.f), 10);
 
         g.setColor(new Color(128, 0, 0));
         g.fillOval(49, (int) handler.getHeight() - 105, 60, 60);
@@ -291,8 +292,8 @@ public class GameplayElement extends HudElement {
 
                 powerups.add(e);
 
-                if (e.getName().equals("Death Machine") &&
-                       e.getPlayerPicked() != null && !e.getPlayerPicked().equals(handler.getCurrentPlayer().getUsername())) {
+                if (e.getName().equals("Death Machine")
+                        && e.getPlayerPicked() != null && !e.getPlayerPicked().equals(handler.getCurrentPlayer().getUsername())) {
                     powerups.remove(e);
                 }
             }
@@ -478,6 +479,58 @@ public class GameplayElement extends HudElement {
 
     }
 
+   // boolean resetDamageRender = false;
+    int alpha = 0;
+
+    public void renderDamage(Graphics g) {
+        if (player.getResetDamageRender()) {
+            alpha = 255;
+            player.setResetDamageRender(false);
+        }
+        if (player.getJustTookDamage()) {
+            if (alpha > 0) {
+                alpha -= 5;
+                if (alpha < 0) {
+                    alpha = 0;
+                }
+            }
+
+            Graphics2D g2d = (Graphics2D) g;
+
+            int w = handler.getWidth();
+            int h = handler.getHeight();
+            int border = 100; // Thickness of the effect
+
+            // Top
+            g2d.setPaint(new GradientPaint(0, 0,
+                    new Color(255, 0, 0, alpha),
+                    0, border,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, 0, w, border);
+
+            // Bottom
+            g2d.setPaint(new GradientPaint(0, h,
+                    new Color(255, 0, 0, alpha),
+                    0, h - border,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, h - border, w, border);
+
+            // Left
+            g2d.setPaint(new GradientPaint(0, 0,
+                    new Color(255, 0, 0, alpha),
+                    border, 0,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(0, 0, border, h);
+
+            // Right
+            g2d.setPaint(new GradientPaint(w, 0,
+                    new Color(255, 0, 0, alpha),
+                    w - border, 0,
+                    new Color(255, 0, 0, 0)));
+            g2d.fillRect(w - border, 0, border, h);
+        }
+    }
+
     @Override
     public void render(Graphics g) {
         //System.out.println("Rendering HUD");
@@ -495,6 +548,7 @@ public class GameplayElement extends HudElement {
         }
         renderBlessingMeter(g);
         renderFPS(g);
+        renderDamage(g);
 
 //		Point2D center = new Point2D.Float(500, 500);
 //		float radius = 250;

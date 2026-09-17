@@ -305,7 +305,7 @@ public class World {
 
         //lighting.renderLighting(g);
         entityManager.getCurrentPlayer().renderLaser(g2d);
-        entityManager.getCurrentPlayer().renderDamage(g2d);
+       // entityManager.getCurrentPlayer().renderDamage(g2d);
         entityManager.getCurrentPlayer().getHud().renderInWorldHud(g2d);
         g2d.setTransform(originalTransform);
         rooms.render(g2d);

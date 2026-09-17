@@ -40,8 +40,16 @@ public class Display {
         standardWidth = (width);
         standardHeight = (height);
 
-        this.width = (int) standardWidth;
+       this.width = (int) standardWidth;
         this.height = (int) standardHeight;
+
+        //TEMP: simulate 4k
+        // this.width = 3840;
+        // this.height = 2160;
+
+        //TEMP: simulate QHD
+        // this.width = 2560;
+        // this.height = 1440;
 
         createDisplay(game.getHandler().getSettings().getDisplayType());
 
