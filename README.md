@@ -20,18 +20,18 @@ odds using LAN multiplayer!
 A video featuring gameplay is available on YouTube. Click the thumbnail below to watch.
 
 ## Controls
-Mouse left click - shoot primary gun
-Mouse right click - shoot secondary gun (when dual-wielding)
-Mouse scroll up/down - switch weapon
-E - switch weapon
-W - move up
-A - move left
-S - move down
-D - move right
-V - melee
-G - throw grenade (can hold to cook)
-Q - throw special grenade (if equipped)
-ESC - pause game (if solo; if multiplayer, would only prompt the menu)
+Mouse left click - shoot primary gun \
+Mouse right click - shoot secondary gun (when dual-wielding) \
+Mouse scroll up/down - switch weapon \
+E - switch weapon \ 
+W - move up \
+A - move left \
+S - move down \
+D - move right \
+V - melee \
+G - throw grenade (can hold to cook) \
+Q - throw special grenade (if equipped) \
+ESC - pause game (if solo; if multiplayer, would only prompt the menu) \
 
 
 ## Tech Stack
