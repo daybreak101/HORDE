@@ -15,6 +15,7 @@ import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.Music;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.worlds.World;
+import project.game.horde.worlds.World.PlayerPosition;
 
 public class GameState extends State {
 
@@ -35,8 +36,11 @@ public class GameState extends State {
                 "/worlds/" + map + "/adjacentRooms.txt",
                 user
         );
+
+        // initialize player
+        PlayerPosition pos = world.getPlayerPositions().pop();
         world.getEntityManager().addCurrentPlayer(
-                new Player(handler, 900, 650, user));
+                new Player(handler, pos.x, pos.y, user));
 
         cheats = new Cheats(handler);
         Sounds.playClip(Sounds.BACKGROUND_MUSIC_ID, 1, .7f, true);
@@ -61,27 +65,25 @@ public class GameState extends State {
 
         int number = 0;
 
-        // float p1x = 900, p2x = 900, p3x = 1000, p4x = 1100;
-        // float p1y = 650, p2y = 750, p3y = 750, p4y = 750;
-        // float x = p1x;
-        // float y = p2x;
-        // System.out.println(localUser.getUsername());
-        // for (User user : users.values()) {
-        //     if (!user.getUsername().equals(localUser.getUsername())) {
-        //         world.getEntityManager().addOtherPlayer(
-        //                 new PlayerMP(handler, x + number * 100, y + number * 100, user));
-        //         System.out.println("current: " + user.getUsername()
-        //                 + " local: " + localUser.getUsername()
-        //                 + " / added as otherPlayer");
-        //     } else {
-        //         world.getEntityManager().addCurrentPlayer(
-        //                 new Player(handler, x + number * 100, y + number * 100, peer));
-        //         System.out.println("current: " + user.getUsername()
-        //                 + " local: " + localUser.getUsername()
-        //                 + " / added as currentPlayer");
-        //     }
-        //     number++;
-        // }
+        // initialize players and their spawn positions
+        System.out.println(localUser.getUsername());
+        for (User user : users.values()) {
+            PlayerPosition pos = world.getPlayerPositions().pop();
+            if (!user.getUsername().equals(localUser.getUsername())) {
+                world.getEntityManager().addOtherPlayer(
+                        new PlayerMP(handler, pos.x, pos.y, user));
+                System.out.println("current: " + user.getUsername()
+                        + " local: " + localUser.getUsername()
+                        + " / added as otherPlayer");
+            } else {
+                world.getEntityManager().addCurrentPlayer(
+                        new Player(handler, pos.x, pos.y, peer));
+                System.out.println("current: " + user.getUsername()
+                        + " local: " + localUser.getUsername()
+                        + " / added as currentPlayer");
+            }
+            number++;
+        }
 
         cheats = new Cheats(handler);
         Sounds.playClip(Sounds.BACKGROUND_MUSIC_ID, 1, .7f, true);

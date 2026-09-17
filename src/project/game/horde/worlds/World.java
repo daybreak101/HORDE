@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,7 +62,7 @@ public class World {
     boolean test = false;
 
     // offline
-    public World(Handler handler, String map,String path, String entityPath,
+    public World(Handler handler, String map, String path, String entityPath,
             String edgesPath,
             String adjacentRooms,
             User user) throws IOException {
@@ -140,6 +141,53 @@ public class World {
         }
 
         return def;
+    }
+
+    public class PlayerPosition {
+        public int x;
+        public int y;
+        
+        public PlayerPosition(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public Stack<PlayerPosition> playerPositions = new Stack<>();
+    public Stack<PlayerPosition> getPlayerPositions() {
+        return playerPositions;
+    }
+
+    public void playerPositions(String entityPath) {
+        ObjectMapper mapper = new ObjectMapper();
+        try (InputStream is = World.class.getResourceAsStream(entityPath)) {
+
+            if (is == null) {
+                throw new RuntimeException("Could not find map: " + entityPath);
+            }
+
+            JsonNode root = mapper.readTree(is);
+            JsonNode layers = root.get("layers");
+
+            // create a stack to store the player spawns
+            for (JsonNode layer : layers) {
+                if (!"PlayerSpawn".equals(layer.get("name").asText())) {
+                    continue;
+                }
+
+                JsonNode objects = layer.get("objects");
+                for (JsonNode obj : objects) {
+                    int x = obj.get("x").asInt();
+                    int y = obj.get("y").asInt();
+                    playerPositions.push(new PlayerPosition(x, y));
+                }
+            }
+
+            // shuffle the stack
+           // Collections.shuffle(playerPositions);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createStaticEntities(String entityPath) {
@@ -222,6 +270,7 @@ public class World {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        playerPositions(entityPath);
     }
 
     private Timer sendPositions = new Timer(3);
@@ -305,7 +354,7 @@ public class World {
 
         //lighting.renderLighting(g);
         entityManager.getCurrentPlayer().renderLaser(g2d);
-       // entityManager.getCurrentPlayer().renderDamage(g2d);
+        // entityManager.getCurrentPlayer().renderDamage(g2d);
         entityManager.getCurrentPlayer().getHud().renderInWorldHud(g2d);
         g2d.setTransform(originalTransform);
         rooms.render(g2d);

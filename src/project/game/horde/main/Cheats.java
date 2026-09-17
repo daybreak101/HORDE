@@ -11,7 +11,7 @@ public class Cheats {
 
 	public Cheats(Handler handler) {
 		this.handler = handler;
-		applyCheats();
+		//applyCheats();
 	}
 
 	public void applyCheats() {

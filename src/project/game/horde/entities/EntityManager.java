@@ -268,10 +268,14 @@ public class EntityManager {
     }
 
     public void render(Graphics g) {
+        if(handler.getCurrentPlayer() == null) {
+            return;
+        }
 
         if (map != null) {
             map.render(g);
         }
+
         for (Areas e : areas) {
             if (e.getRenderThis()) {
                 e.render(g);
