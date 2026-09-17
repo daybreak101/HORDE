@@ -2,10 +2,13 @@ package project.game.horde.display;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.Toolkit;
 import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -105,6 +108,12 @@ public class Display {
         }
         canvas.createBufferStrategy(3);
         canvas.addKeyListener(new KeyManager(handler));
+
+        // Set blank cursor
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+        getFrame().getContentPane().setCursor(blankCursor);
+        
         isChangingDisplay = false;
 
     }

@@ -17,8 +17,8 @@ public class Vampire extends Perk {
 		super(handler, level, player);
 		this.name = "Dracula's Hunger";
 		this.icon = Assets.vamp;
-		realName = 	"Crimson Bites";
-		jokeDesc = 	"Produced at night, no expiration date, and burns easy with sunlight. The metal-like taste is just coated heavily oxidized ketchup!";
+		realName = 	"Ketchup Bites";
+		jokeDesc = 	"The dark red coating is definitely ketchup...";
 		baseDesc = "Gain temporary health for every kill.";
 		lvl1Desc = "Boss zombie kills gain bigger temporary health";
 		lvl2Desc = "Temporary health can surpass max health";

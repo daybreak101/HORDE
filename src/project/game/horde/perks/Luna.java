@@ -28,7 +28,7 @@ public class Luna extends Perk {
 		this.name = "Luna";
 		this.icon = Assets.luna;
 		realName = "Ghost Pupper";
-		jokeDesc = "There's no such things as ghosts. But if you see one while eating these, you should probably see a doctor! And you're a pansy for not tolerating a scoville rating of 4 billion.";
+		jokeDesc = "So spicy you start hallucinating ghosts!";
 		baseDesc = "Summon Aurora, a dog that aids you in battle";
 		lvl1Desc = "Aurora now drops ammo clips and points";
 		lvl2Desc = "Aurora is eager to help more often";

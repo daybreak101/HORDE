@@ -1,13 +1,10 @@
 package project.game.horde.ui;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Utils;
@@ -130,18 +127,18 @@ public class TextButton extends UIObject {
 			b = 0;
 		if (b >= 255)
 			b = 255;
-		if (isSelected || isOutlined) {
-			g.setColor(Color.black);
-			g.fillRect((int) x, (int) y, width, height);
+		// if (isSelected || isOutlined) {
+		// 	g.setColor(Color.black);
+		// 	g.fillRect((int) x, (int) y, width, height);
 
-			Graphics2D g2 = (Graphics2D) g;
-			float thickness = 2;
-			Stroke oldStroke = g2.getStroke();
-			g2.setStroke(new BasicStroke(thickness));
-			g2.setColor(handler.getSettings().getHudColor());
-			g2.drawRect((int) x, (int) y, width, height);
-			g2.setStroke(oldStroke);
-		}
+		// 	Graphics2D g2 = (Graphics2D) g;
+		// 	float thickness = 2;
+		// 	Stroke oldStroke = g2.getStroke();
+		// 	g2.setStroke(new BasicStroke(thickness));
+		// 	g2.setColor(handler.getSettings().getHudColor());
+		// 	g2.drawRect((int) x, (int) y, width, height);
+		// 	g2.setStroke(oldStroke);
+		// }
 		if (hovering) {
 			g.setColor(new Color(r, gr, b));
 

@@ -30,16 +30,16 @@ public class BlessingInventory {
 			GAIN_POINTS = "EZ Points", 
 			SPAWN_HEALTH = "HP up", 
 			SPAWN_MINIGUN = "Death Machine!",
-			FORCE_CRAWLERS = "Crawl Space", // change to "Beg For Me"
+			FORCE_CRAWLERS = "Humble Knees", // change to "Beg For Me"
 			POINTS_MULTIPLY = "Extra Change", // change to "GREED"
-			GUARANTEE_HEADSHOTS = "So No Head?",
+			GUARANTEE_HEADSHOTS = "Aimbot",
 			UPGRADE_WEAPON = "Graded Up",
 			RANDOM_PERK = "Extra Sodium", // change to																				// "GLUTTONY"
-			SPAWN_ALL_DROPS = "Reign Drops", // change to "Overwhelmed? Overpowered"
-			ROUND_SKIP = "Round Robbin", // "SLOTH"
-			RANDOM_POWERUP = "I'm Feeling Lucky",
-			TELEPORT = "Anywhere But Here", 
-			INVISIBILITY = "In Plain Sight",
+			SPAWN_ALL_DROPS = "Blessing of Plenty", // change to "Overwhelmed? Overpowered"
+			ROUND_SKIP = "Ahead of Schedule", // "SLOTH"
+			RANDOM_POWERUP = "Mystery Gift",
+			TELEPORT = "Emergency Exit", 
+			INVISIBILITY = "Ghosted",
 			FREEZE_ALL_ZOMBIES = "Brain Freeze",
 			GIVE_ALL_PERKS = "Carb-o-load";
 	

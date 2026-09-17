@@ -17,7 +17,7 @@ public class DeadShot extends Perk{
 		this.name = "DeadShot";
 		this.icon = Assets.deadshot;
 		realName = "Buffalo Bullseye";
-		jokeDesc = "Ever feel like you never hit your targets? Introducing a flavor that never misses! Since you now hit 100% of the shots you take, pose for that moneyshot baby!";
+		jokeDesc = "Crazy spicy flavor that hits straight to the dome!";
 		baseDesc = "Increased range";
 		lvl1Desc = "Headshots give more points";
 		lvl2Desc = "Higher chance of headshots";

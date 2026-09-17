@@ -3,8 +3,8 @@ package project.game.horde.states;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
 import project.game.horde.main.Handler;
@@ -74,7 +74,7 @@ public class StatsState extends State {
 		Utils.drawLeftAlignedString(g, "Box Pulls", new Rectangle(categoryX, yStart + dy * 6, 0, 0), font);
 		Utils.drawLeftAlignedString(g, "Box Spins", new Rectangle(categoryX, yStart + dy * 7, 0, 0), font);
 		Utils.drawLeftAlignedString(g, "Traps Used", new Rectangle(categoryX, yStart + dy * 8, 0, 0), font);
-		Utils.drawLeftAlignedString(g, "K/D Ration", new Rectangle(categoryX, yStart + dy * 9, 0, 0), font);
+		Utils.drawLeftAlignedString(g, "K/D Ratio", new Rectangle(categoryX, yStart + dy * 9, 0, 0), font);
 		Utils.drawLeftAlignedString(g, "Average Round", new Rectangle(categoryX, yStart + dy * 10, 0, 0), font);
 
 		Utils.drawLeftAlignedString(g, Long.toString(handler.getGlobalStats().getTotalGames()), new Rectangle(statX, yStart, 0, 0), font);

@@ -100,11 +100,25 @@ public class EntityManager {
         boundaries = new ArrayList<>();
     }
 
+    //vars for this method
+    double zoom;
+    int viewWidth;
+    int viewHeight;
+    Rectangle renderArea = new Rectangle();
+
     public void tick() {
-        Rectangle renderArea = new Rectangle(
-                (int) (currentPlayer.getX() - handler.getWidth() / 2 / handler.getSettings().getZoomLevel(false) - 25),
-                (int) (currentPlayer.getY() - handler.getHeight() / 2 / handler.getSettings().getZoomLevel(false) - 25),
-                (int) (handler.getWidth() + 50), (int) (handler.getHeight() + 50));
+        //zoom = handler.getSettings().getZoomLevel(false);
+        //viewWidth = (int) (handler.getWidth() / zoom);
+        //viewHeight = (int) (handler.getHeight() / zoom);
+
+        viewWidth = handler.getWidth();
+        viewHeight = handler.getHeight();
+
+        renderArea.setBounds(
+                (int) (currentPlayer.getX() - viewWidth / 2.0 - 25),
+                (int) (currentPlayer.getY() - viewHeight / 2.0 - 25),
+                (int) (viewWidth + 50), (int) (viewHeight + 50)
+            );
 
         for (int i = 0; i < otherPlayers.size(); i++) {
             PlayerMP e = otherPlayers.get(i);
@@ -318,7 +332,7 @@ public class EntityManager {
                 e.render(g);
             }
         }
-       // currentPlayer.renderHUD(g);
+        // currentPlayer.renderHUD(g);
 
     }
 

@@ -21,7 +21,7 @@ public class Stronghold extends Perk{
 		this.name = "Stronghold";
 		this.icon = Assets.stronghold;
 		realName = "Fortified Kettle";
-		jokeDesc = 	"Stand your ground. This is your favorite flavor. You'll feel more confident defending your bad opinions. (Look how confident you are!)";
+		jokeDesc = "If the other chips give you superpowers, imagine what kettle chips would do to you.";
 		baseDesc = "Gain armor when standing still and remaining within the circle";
 		lvl1Desc = "Gain damage as well";
 		lvl2Desc = "Max armor and damage is increased";

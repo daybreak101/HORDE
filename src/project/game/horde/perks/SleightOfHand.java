@@ -17,7 +17,7 @@ public class SleightOfHand extends Perk {
 		this.name = "Sleight Of Hand";
 		this.icon = Assets.fasthand;
 		realName = "Reload Ranch";
-		jokeDesc = "Are you a caffeine junkie? Are you also a fan of Cool Ranch? Well look no further! These addictive chips contain 10000mg of caffeine each serving. Now look who's heart beats with joy!";
+		jokeDesc = "An unnecessary amount of caffeine is mixed with our ranch seasoning, guaranteed to make you jittery.";
 		baseDesc = "Reload faster by 10%";
 		lvl1Desc = "Reload faster by 25%";
 		lvl2Desc = "Reload faster by 50%";

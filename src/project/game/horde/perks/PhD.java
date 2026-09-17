@@ -16,7 +16,7 @@ public class PhD extends Perk {
 		this.name = "PhD Armor";
 		this.icon = Assets.phd;
 		realName = "Bomb-B-Q's";
-		jokeDesc = "An explosion of barbeque sauce flavor in your mouth! Will hurt at first but you'll adapt to its explosiveness. (Must have a strong jaw before eating)";
+		jokeDesc = "An explosive flavor of hickory BBQ.";
 		baseDesc = "Increase explosive damage resistance by 50%";
 		lvl1Desc = "Equip cluster grenades";
 		lvl2Desc = "Immune to all explosive damage";

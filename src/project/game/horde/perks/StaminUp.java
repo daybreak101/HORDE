@@ -15,7 +15,7 @@ public class StaminUp extends Perk {
 		this.name = "StaminUp!";
 		this.icon = Assets.stam;
 		realName = "Keto Kardio";
-		jokeDesc = "Feeling overweight? Feeling like cutting out carbs while not compromising flavor? These chips are (not) clinically proven to be the best weight-loss solution on the planet. Just ignore the sodium content, we had to make it taste good somehow!";
+		jokeDesc = "The best weightloss solution on the planet!";
 		baseDesc = "Increase sprint speed and walk speed";
 		lvl1Desc = "Decrease sprint cooldown";
 		lvl2Desc = "Increase stamina regeneration";

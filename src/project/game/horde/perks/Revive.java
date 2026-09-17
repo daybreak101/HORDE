@@ -10,8 +10,9 @@ public class Revive extends Perk{
 		super(handler, level, player);
 		this.name = "Revive";
 		this.icon = Assets.revive;
-		realName = "Cardiac Resurrect";
-		jokeDesc = "These taste like the ones they give out at church... except saltier. No it's not the same thing, we just like symbolism!";
+		//realName = "Cardiac Resurrect";
+		realName = "Afterbite";
+		jokeDesc = "Chips laced with smelling salts to bring you back to life";
 		baseDesc = "Revive yourself in solo / revive faster in co-op";
 		lvl1Desc = "Take less damage while reviving";
 		lvl2Desc = "Ability to attack and move while downed";

@@ -17,7 +17,7 @@ public class DoubleTap extends Perk{
 		this.name = "Double Tap";
 		this.icon = Assets.doubletap;
 		realName = "Double STUFF3D";
-		jokeDesc = "A chip within a chip. These revolutionary chips won't stay for long, so remember not to get too excited, go slow, make eye-contact, and savor every swallow! (Choking hazard)";
+		jokeDesc = "Chip within a chip! Guaranteed to run out twice as fast!";
 		baseDesc = "Slightly increase fire rate";
 		lvl1Desc = "Increase bullet penetration";
 		lvl2Desc = "Increase fire rate";

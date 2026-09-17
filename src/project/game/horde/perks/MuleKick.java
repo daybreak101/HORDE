@@ -14,7 +14,7 @@ public class MuleKick extends Perk {
 		this.name = "Mule Kick";
 		this.icon = Assets.mule;
 		realName = "Party Size";
-		jokeDesc = "Twosome's are vanilla, Threesome's a party! We are revolutionizing the chip game by adding ONE more chip per bag! Chester's been silent after this one!";
+		jokeDesc = "Family size. Family size. Family size.";
 		baseDesc = "Carry a third weapon";
 		lvl1Desc = "Chance to regain any grenades after throwing one";
 		lvl2Desc = "Carry extra magazines";

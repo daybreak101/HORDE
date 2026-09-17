@@ -294,7 +294,7 @@ public class Zombie extends Creature {
     }
 
     public boolean isCritical(Player player) {
-        if ("So No Head?".equals(player.getInv().getBlessings().getBlessing()) && player.getInv().getBlessings().isRunning()) {
+        if (BlessingInventory.GUARANTEE_HEADSHOTS.equals(player.getInv().getBlessings().getBlessing()) && player.getInv().getBlessings().isRunning()) {
             return true;
         }
 

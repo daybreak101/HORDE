@@ -16,8 +16,8 @@ public class Juggernaut extends Perk {
 		super(handler, level, player);
 		this.name = "Juggernaut";
 		this.icon = Assets.jugg;
-		realName = "Meatmunchers";
-		jokeDesc = "Many of us like to be called it, but how many of us are? Now you can prove your worth, by putting 7 different kinds of meat in your mouth!";
+		realName = "Jerky-knots";
+		jokeDesc = "0g of carbs, 250g of PROTEIN.";
 		baseDesc = "Increase health by 10 hp";
 		lvl1Desc = "Increase health by 25 hp";
 		lvl2Desc = "Increase health by 50 hp";
