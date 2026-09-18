@@ -32,7 +32,11 @@ public class LeaderboardElement extends HudElement {
 
 
     private void checkIfTop10() {
-        handler.getLeaderboard().addLeaderboard(handler.getRoundLogic().getCurrentRound());
+        int kills = handler.getCurrentPlayer().getStats().getKills();
+        int downs = handler.getCurrentPlayer().getStats().getDowns();
+        int headshots = handler.getCurrentPlayer().getStats().getHeadshots();
+        handler.getLeaderboard().addLeaderboard(
+            handler.getRoundLogic().getCurrentRound(), kills, headshots, downs);
     }
 
     @Override

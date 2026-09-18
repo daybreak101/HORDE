@@ -35,10 +35,13 @@ public class Leaderboard {
             return;
         }
         String[] tokens = file.split("\\s+");
-        for (int i = 0; i < tokens.length; i += 2) {
+        for (int i = 0; i < tokens.length; i += 5) {
             String name = tokens[i];
             int round = Integer.parseInt(tokens[i + 1]);
-            spots.add(new LeaderboardSpot(name, round));
+            int kills = Integer.parseInt(tokens[i + 2]);
+            int headshots = Integer.parseInt(tokens[i + 3]);
+            int downs = Integer.parseInt(tokens[i + 4]);
+            spots.add(new LeaderboardSpot(name, round, kills, headshots, downs));
         }
 
     }
@@ -60,8 +63,10 @@ public class Leaderboard {
         }
     }
 
-    public void addLeaderboard(int round) {
-        LeaderboardSpot newSpot = new LeaderboardSpot(handler.getGame().getUser().getUsername(), round);
+    public void addLeaderboard(int round, int kills, int headshots, int downs) {
+        String username = handler.getGame().getUser().getUsername();
+
+        LeaderboardSpot newSpot = new LeaderboardSpot(username, round, kills, headshots, downs);
         if (spots.size() < 10) {
             ArrayList<LeaderboardSpot> temp = new ArrayList<>();
             temp = spots;
@@ -78,13 +83,22 @@ public class Leaderboard {
     public void organize() {
         spots.sort(new Comparator<LeaderboardSpot>() {
 
+            //highest rounds first
+            //then resolve ties by kills
             @Override
             public int compare(LeaderboardSpot o1, LeaderboardSpot o2) {
                 if (o1.round > o2.round) {
                     return -1;
                 } else if (o1.round < o2.round) {
                     return 1;
-                } else {
+                }
+                else if (o1.kills > o2.kills) {
+                    return -1;
+                }
+                else if (o1.kills < o2.kills) {
+                    return 1;
+                }
+                else {
                     return 0;
                 }
             }
