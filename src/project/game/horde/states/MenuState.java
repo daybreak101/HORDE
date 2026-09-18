@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import project.game.horde.input.KeyManager;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
 import project.game.horde.ui.ClickListener;
@@ -22,6 +23,7 @@ public class MenuState extends State {
         this.user = user;
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
+        handler.getGame().setKeyManager(new KeyManager(handler));
 
         int width = 300;
         int x = handler.getWidth() / 2 - width / 2;

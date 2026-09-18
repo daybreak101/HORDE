@@ -27,3 +27,6 @@ mvnw.cmd
 # Ignore Gradle wrapper
 gradle-wrapper.jar
 gradle-wrapper.properties
+
+# Don't give away my secrets...
+TODO.txt

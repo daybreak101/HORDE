@@ -25,6 +25,7 @@ public class Handler {
     public static final String BLESSINGS_FILE = "horde_blessings.txt";
     public static final String CUSTOMSKIN_FILE = "horde_skins.txt";
     public static final String CUSTOMHAT_FILE = "horde_hats.txt";
+    public static final String LEADERBOARD_FILE = "horde_leaderboard.txt";
 
     private Game game;
     private World world;
@@ -37,6 +38,7 @@ public class Handler {
     private BlessingInventory blessings;
     private CustomSkinInventory customSkin;
     private CustomHatInventory customHat;
+    private Leaderboard leaderboard;
 
     public Handler(Game game) {
         this.game = game;
@@ -47,6 +49,7 @@ public class Handler {
         blessings = new BlessingInventory(this);
         customSkin = new CustomSkinInventory(this);
         customHat = new CustomHatInventory(this);
+        leaderboard = new Leaderboard(this);
     }
 
     public void setCurrentPlayer(Player player) {
@@ -55,6 +58,10 @@ public class Handler {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public Leaderboard getLeaderboard() {
+        return leaderboard;
     }
 
     public boolean noVisibleOrAlivePlayers() {

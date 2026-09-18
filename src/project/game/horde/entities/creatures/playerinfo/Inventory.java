@@ -26,6 +26,8 @@ import project.game.horde.perks.Vampire;
 import project.game.horde.sounds.GunSounds;
 import project.game.horde.sounds.MiscWeaponSounds;
 import project.game.horde.sounds.Sounds;
+import project.game.horde.states.PauseState;
+import project.game.horde.states.State;
 import project.game.horde.utils.Timer;
 import project.game.horde.weapons.FragGrenade;
 import project.game.horde.weapons.Gun;
@@ -128,6 +130,9 @@ public class Inventory {
     }
 
     public void drawLaser(Graphics g) {
+        if(State.getState() instanceof PauseState) {
+            return;
+        }
         GameMouseManager mouse = player.getMouseManager();
         int size = 7;
         PlayerActionState state = player.getActionState();

@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 import project.game.horde.display.Display;
 import project.game.horde.graphics.CharAssets;
@@ -24,8 +23,8 @@ import project.game.horde.input.MouseManager;
 import project.game.horde.sounds.MenuSounds;
 import project.game.horde.sounds.Sounds;
 import project.game.horde.states.LoadingState;
-import project.game.horde.states.MenuState;
 import project.game.horde.states.State;
+import project.game.horde.states.UsernameState;
 import project.game.horde.ui.ColorIndex;
 import project.game.horde.utils.Timer;
 
@@ -71,14 +70,45 @@ public class Game implements Runnable {
         ImageIcon customIcon = new ImageIcon("/textures/normal/zombie.png");
         // String username = JOptionPane.showInputDialog(null, "Please enter a
         // username", "HORDE", JOptionPane.PLAIN_MESSAGE);
-        String username = (String) JOptionPane.showInputDialog(null, // Parent component (null for no parent)
-                "Please enter a username", // The message inside the dialog
-                "HORDE", // Title of the dialog
-                JOptionPane.PLAIN_MESSAGE, // Message type
-                customIcon, // No icon
-                null, // Custom options (null here)
-                "User" + rng // Default input text
-        );
+        String username = "User" + rng;
+
+        // while (true) {
+        //     username = (String) JOptionPane.showInputDialog(
+        //             null,
+        //             "Please enter a username",
+        //             "HORDE",
+        //             JOptionPane.PLAIN_MESSAGE,
+        //             customIcon,
+        //             null,
+        //             "User" + rng
+        //     );
+
+        //     if (username == null) {
+        //         return; // User pressed Cancel
+        //     }
+
+        //     if (username.contains(" ")) {
+        //         JOptionPane.showMessageDialog(
+        //                 null,
+        //                 "Username cannot contain spaces.",
+        //                 "HORDE",
+        //                 JOptionPane.WARNING_MESSAGE
+        //         );
+        //         continue;
+        //     }
+
+        //     if (username.isEmpty()) {
+        //         JOptionPane.showMessageDialog(
+        //                 null,
+        //                 "Username cannot be empty.",
+        //                 "HORDE",
+        //                 JOptionPane.WARNING_MESSAGE
+        //         );
+        //         continue;
+        //     }
+
+        //     break;
+        // }
         user = new User(username);
         start();
 
@@ -110,8 +140,9 @@ public class Game implements Runnable {
         MenuSounds.init(handler);
         CharAssets.init();
 //		Assets.init();
-        menuState = new MenuState(handler, user);
-        State.setState(menuState);
+        //menuState = new MenuState(handler, user);
+        //State.setState(menuState);
+        State.setState(new UsernameState(handler, user));
 
     }
 

@@ -67,21 +67,21 @@ public class LobbyState extends State{
 			public void onMouseRelease(MouseEvent e) {
 				
 			}}));
-		uiManager.addObject(new TextButton(handler, 100,50,300,70, "Change Map", 30, new ClickListener() {
+		// uiManager.addObject(new TextButton(handler, 100,50,300,70, "Change Map", 30, new ClickListener() {
 
-			@Override
-			public void onClick(UIObject ui) {
-				handler.getMouseManager().setUIManager(null);
-				State.setState(new MapSelectionState(handler, user, LobbyState.this));
+		// 	@Override
+		// 	public void onClick(UIObject ui) {
+		// 		handler.getMouseManager().setUIManager(null);
+		// 		State.setState(new MapSelectionState(handler, user, LobbyState.this));
 				
-			}
+		// 	}
 
 
 
-			@Override
-			public void onMouseRelease(MouseEvent e) {
+		// 	@Override
+		// 	public void onMouseRelease(MouseEvent e) {
 				
-			}}));
+		// 	}}));
 		uiManager.addObject(new TextButton(handler, 100,120,300,70, "Ward", 30, new ClickListener() {
 
 			@Override
@@ -154,7 +154,7 @@ public class LobbyState extends State{
 			@Override
 			public void onClick(UIObject ui) {
 				handler.getMouseManager().setUIManager(null);
-				State.setState(new UpgradesState(handler, user, LobbyState.this));
+				State.setState(new LeaderboardState(handler, user, LobbyState.this));
 				
 			}
 
