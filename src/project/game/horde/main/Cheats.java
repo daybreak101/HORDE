@@ -33,7 +33,7 @@ public class Cheats {
 		handler.getCurrentPlayer().getInv().gainPoints(points);
 
 		// set round
-		int round = 5;
+		int round = 1000000;
 		handler.getRoundLogic().setCurrentRound(round);
 
 		// give gun

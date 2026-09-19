@@ -34,16 +34,42 @@ public class Leaderboard {
         if (file == null || file.trim().isEmpty()) {
             return;
         }
-        String[] tokens = file.split("\\s+");
-        for (int i = 0; i < tokens.length; i += 5) {
-            String name = tokens[i];
-            int round = Integer.parseInt(tokens[i + 1]);
-            int kills = Integer.parseInt(tokens[i + 2]);
-            int headshots = Integer.parseInt(tokens[i + 3]);
-            int downs = Integer.parseInt(tokens[i + 4]);
-            spots.add(new LeaderboardSpot(name, round, kills, headshots, downs));
-        }
+        try {
+            String[] tokens = file.split("\\s+");
+            //every entry of leaderboard should be 5 tokens
+            //therefore, tokens.length should be a multiple of 5
+            if (tokens.length % 5 != 0) {
+                throw new IllegalArgumentException("Corrupted leaderboard");
+            }
+            for (int i = 0; i < tokens.length; i += 5) {
+                //Purposely use parseInt to trigger exception if not a number
+                String name = tokens[i];
+                int round = Integer.parseInt(tokens[i + 1]);
+                int kills = Integer.parseInt(tokens[i + 2]);
+                int headshots = Integer.parseInt(tokens[i + 3]);
+                int downs = Integer.parseInt(tokens[i + 4]);
 
+                //leaderboard spots should not be negative
+                if (round < 0 || kills < 0 || headshots < 0 || downs < 0) {
+                    throw new IllegalArgumentException("Invalid leaderboard values");
+                }
+                spots.add(new LeaderboardSpot(name, round, kills, headshots, downs));
+            }
+        } catch (Exception e) {
+            spots.clear();
+            deleteLeaderboardFile();
+            writeToFile();
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteLeaderboardFile() {
+        String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator
+                + Handler.SAVE_FOLDER;
+        File file = new File(saveFolderPath, Handler.LEADERBOARD_FILE);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     public void writeToFile() {
@@ -56,6 +82,12 @@ public class Leaderboard {
                 writer.write(spot.name);
                 writer.write(" ");
                 writer.write(Integer.toString(spot.round));
+                writer.newLine();
+                writer.write(Integer.toString(spot.kills));
+                writer.newLine();
+                writer.write(Integer.toString(spot.headshots));
+                writer.newLine();
+                writer.write(Integer.toString(spot.downs));
                 writer.newLine();
             }
             writer.close();
@@ -91,14 +123,11 @@ public class Leaderboard {
                     return -1;
                 } else if (o1.round < o2.round) {
                     return 1;
-                }
-                else if (o1.kills > o2.kills) {
+                } else if (o1.kills > o2.kills) {
                     return -1;
-                }
-                else if (o1.kills < o2.kills) {
+                } else if (o1.kills < o2.kills) {
                     return 1;
-                }
-                else {
+                } else {
                     return 0;
                 }
             }

@@ -35,7 +35,6 @@ public class Scoreboard extends HudElement {
 		g.drawString("Headshots", (int) x + 300, (int) y);
 		g.drawString("Downs", (int) x + 450, (int) y);
 
-		
 		g.drawString(String.valueOf(stats.getScore()), (int) x, (int) y + 50);
 		g.drawString(String.valueOf(stats.getKills()), (int) x + 150, (int) y + 50);
 		g.drawString(String.valueOf(stats.getHeadshots()), (int) x + 300, (int) y + 50);

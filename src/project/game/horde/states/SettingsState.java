@@ -36,9 +36,11 @@ public class SettingsState extends State {
     int listWidth = 300;
     int listX = (int) (handler.getWidth() / 2);
     int textX = (int) (listX - 250);
+    boolean fromPause = false;
 
-    public SettingsState(Handler handler, User user) {
+    public SettingsState(Handler handler, User user, boolean fromPause) {
         super(handler);
+        this.fromPause = fromPause;
         this.user = user;
         uiManager = new UIManager(handler);
         addScreenModeOptions();
@@ -56,7 +58,7 @@ public class SettingsState extends State {
             public void onClick(UIObject ui) {
                 handler.getSettings().writeToFile();
                 handler.getMouseManager().setUIManager(null);
-                if (handler.getWorld() != null) {
+                if (fromPause) {
                     State.setState(new PauseState(handler, user));
                 } else {
                     State.setState(new MenuState(handler, user));
@@ -93,7 +95,7 @@ public class SettingsState extends State {
             public void onClick(UIObject ui) {
                 handler.getSettings().writeToFile();
                 handler.getMouseManager().setUIManager(null);
-                if (handler.getWorld() != null) {
+                if (fromPause) {
                     State.setState(new PauseState(handler, user));
                 } else {
                     State.setState(new MenuState(handler, user));
@@ -252,27 +254,18 @@ public class SettingsState extends State {
             public void handleSelection() {
                 System.out.println("Handle Selection called. Current Selection: " + currentSelection);
                 switch (currentSelection) {
-                    case 0:
-                        handler.getSettings().setZoomLevel(1.25);
-                        break;
-                    case 1:
-                        handler.getSettings().setZoomLevel(1.30);
-                        break;
-                    case 2:
-                        handler.getSettings().setZoomLevel(1.35);
-                        break;
-                    case 3:
-                        handler.getSettings().setZoomLevel(1.40);
-                        break;
-                    case 4:
-                        handler.getSettings().setZoomLevel(1.45);
-                        break;
-                    case 5:
-                        handler.getSettings().setZoomLevel(1.50);
-                        break;
-                    default:
-                        handler.getSettings().setZoomLevel(1.25);
-                        break;
+                    case 0 -> handler.getSettings().setZoomLevel(1.25);
+                    case 1 -> handler.getSettings().setZoomLevel(1.325);
+                    case 2 -> handler.getSettings().setZoomLevel(1.4);
+                    case 3 -> handler.getSettings().setZoomLevel(1.475);
+                    case 4 -> handler.getSettings().setZoomLevel(1.55);
+                    case 5 -> handler.getSettings().setZoomLevel(1.625);
+                    case 6 -> handler.getSettings().setZoomLevel(1.7);
+                    case 7 -> handler.getSettings().setZoomLevel(1.775);
+                    case 8 -> handler.getSettings().setZoomLevel(1.85);
+                    case 9 -> handler.getSettings().setZoomLevel(1.925);
+                    case 10 -> handler.getSettings().setZoomLevel(2.0);
+                    default -> handler.getSettings().setZoomLevel(1.25);
                 }
                 if (handler.getCurrentPlayer() != null) {
                     handler.getGameCamera().centerOnEntity(handler.getCurrentPlayer());
@@ -285,14 +278,19 @@ public class SettingsState extends State {
         zoomLevelOptions.addOption("3");
         zoomLevelOptions.addOption("4");
         zoomLevelOptions.addOption("5");
+        zoomLevelOptions.addOption("6");
+        zoomLevelOptions.addOption("7");
+        zoomLevelOptions.addOption("8");
+        zoomLevelOptions.addOption("9");
+        zoomLevelOptions.addOption("10");
         uiManager.addObject(zoomLevelOptions);
 
-        int currentZoom = (int) Math.round((handler.getSettings().getZoomLevel(true) - 1.25) / .05);
+        int currentZoom = (int) Math.round((handler.getSettings().getZoomLevel(true) - 1.25) / .075);
         zoomLevelOptions.setCurrentSelection(currentZoom);
     }
 
     public void addScreenModeOptions() {
-        if (handler.getWorld() == null) {
+        if (!fromPause) {
             screenModeOptions = new UIListSelect(handler, uiManager, listX, 215, listWidth, dh) {
                 public void handleSelection() {
                     System.out.println("Handle Selection called. Current Selection: " + currentSelection);
@@ -352,7 +350,7 @@ public class SettingsState extends State {
             handler.getSettings().writeToFile();
             handler.getMouseManager().setUIManager(null);
 			handler.getKeyManager().escape = false;
-            if (handler.getWorld() != null) {
+            if (fromPause) {
                 State.setState(new PauseState(handler, user));
             } else {
                 State.setState(new MenuState(handler, user));
@@ -363,7 +361,7 @@ public class SettingsState extends State {
 
     @Override
     public void render(Graphics g) {
-        if (handler.getWorld() != null) {
+        if (fromPause) {
             handler.getWorld().render(g);
         } else {
             g.setColor(Color.black);
@@ -378,7 +376,7 @@ public class SettingsState extends State {
         Utils.drawCenteredString(g, "SETTINGS", new Rectangle(handler.getWidth() / 2, 100, 0, 0), new Font(Font.DIALOG, Font.PLAIN, 50));
         g.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));
         g.drawString("Display Type", textX, 250);
-        if (handler.getWorld() != null) {
+        if (fromPause) {
             Utils.drawCenteredString(g, "Can only be changed in Main Menu", new Rectangle(listX, 215, listWidth, 50), new Font(Font.DIALOG, Font.PLAIN, 13));
         }
         g.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));

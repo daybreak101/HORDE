@@ -8,7 +8,8 @@ public class MenuAssets {
     private static final String folder = "/textures/menu/";
     private static int width = 100 * upscaleFactor, height = 100 * upscaleFactor;
 
-    public static BufferedImage coins[], jugg, fasthand, doubletap, deadshot, phd, stam, vamp, mule, revive, bandolier,
+    public static BufferedImage coins[], crown,
+            jugg, fasthand, doubletap, deadshot, phd, stam, vamp, mule, revive, bandolier,
             luna, stronghold, farmhouseLoading,
             doubleTimeBlessing, kaboomBlessing, fullSupplyBlessing, infiniteSupplyBlessing,
             noMercyBlessing, ezPointsBlessing, hpUpBlessing, deathMachineBlessing,
@@ -23,20 +24,21 @@ public class MenuAssets {
         for (int i = 0; i < 4; i++) {
             coins[i] = coinSheet.crop(0, 44 * i * 3, 40 * 3, 44 * 3);
         }
+        crown = ImageLoader.loadImage(folder + "crown.png");
 
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/normal/entities.png"));
 
         jugg = sheet.crop(0, 7 * height, width, height);
-        fasthand = sheet.crop(width - 1, 7 * height, width, height);
-        doubletap = sheet.crop(2 * width - 1, 7 * height, width, height);
-        deadshot = sheet.crop(3 * width + 1, 7 * height, width, height);
-        phd = sheet.crop(4 * width - 1, 7 * height, width, height);
-        stam = sheet.crop(5 * width - 1, 7 * height, width, height);
+        fasthand = sheet.crop(width, 7 * height, width, height);
+        doubletap = sheet.crop(2 * width, 7 * height, width, height);
+        deadshot = sheet.crop(3 * width, 7 * height, width, height);
+        phd = sheet.crop(4 * width, 7 * height, width, height);
+        stam = sheet.crop(5 * width, 7 * height, width, height);
         vamp = sheet.crop(6 * width + 1, 7 * height, width - 1, height);
-        mule = sheet.crop(7 * width - 2, 7 * height, width, height);
-        revive = sheet.crop(8 * width - 1, 7 * height, width, height);
+        mule = sheet.crop(7 * width, 7 * height, width - 1, height);
+        revive = sheet.crop(8 * width, 7 * height, width + 1, height);
         bandolier = sheet.crop(9 * width - 1, 7 * height, width, height);
-        luna = sheet.crop(10 * width - 2, 7 * height, width - 1, height);
+        luna = sheet.crop(10 * width, 7 * height, width - 1, height);
         stronghold = sheet.crop(11 * width, 7 * height, width + 2, height);
 
         farmhouseLoading = ImageLoader.loadImage(folder + "farmhouse.png");

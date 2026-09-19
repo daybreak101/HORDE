@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import project.game.horde.graphics.MenuAssets;
 import project.game.horde.hud.LeaderboardSpot;
 import project.game.horde.main.Handler;
 import project.game.horde.main.User;
@@ -75,8 +76,21 @@ public class LeaderboardState extends State {
         g.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
 
         //draw category names
-        g.drawString("Name", 200, y - 5);
-        g.drawString("Round", 795, y- 5);
+        Utils.drawLeftAlignedString(g, "Name",
+                new Rectangle(100, y - 15, 150, 5),
+                new Font(Font.DIALOG, Font.PLAIN, 20));
+        Utils.drawCenteredString(g, "Round",
+                new Rectangle(350, y - 15, 150, 5),
+                new Font(Font.DIALOG, Font.PLAIN, 20));
+        Utils.drawCenteredString(g, "Kills",
+                new Rectangle(500, y - 15, 150, 5),
+                new Font(Font.DIALOG, Font.PLAIN, 20));
+        Utils.drawCenteredString(g, "Headshots",
+                new Rectangle(650, y - 15, 150, 5),
+                new Font(Font.DIALOG, Font.PLAIN, 20));
+        Utils.drawCenteredString(g, "Downs",
+                new Rectangle(800, y - 15, 150, 5),
+                new Font(Font.DIALOG, Font.PLAIN, 20));
 
         //draw line separator
         g.fillRect(100, y, 800, 2);
@@ -85,10 +99,27 @@ public class LeaderboardState extends State {
             if (i == 10) {
                 break;
             }
-            g.drawString(spots.get(i).name, (int) 200, (int) y + ((i + 1) * 40));
-            g.drawString(Integer.toString(spots.get(i).round), (int) 800, (int) y + ((i + 1) * 40));
-        }
 
+            if(i == 0){
+                g.drawImage(MenuAssets.crown, (int) 60, (int) 177, 30, 30, null);
+            }
+            Utils.drawLeftAlignedString(g, spots.get(i).name,
+                    new Rectangle(100, (int) y + ((i + 1) * 40), 150, 5),
+                    new Font(Font.DIALOG, Font.PLAIN, 20));
+            Utils.drawCenteredString(g, Integer.toString(spots.get(i).round),
+                    new Rectangle(350, (int) y + ((i + 1) * 40), 150, 5),
+                    new Font(Font.DIALOG, Font.PLAIN, 20));
+            Utils.drawCenteredString(g, Integer.toString(spots.get(i).kills),
+                    new Rectangle(500, (int) y + ((i + 1) * 40), 150, 5),
+                    new Font(Font.DIALOG, Font.PLAIN, 20));
+            Utils.drawCenteredString(g, Integer.toString(spots.get(i).headshots),
+                    new Rectangle(650, (int) y + ((i + 1) * 40), 150, 5),
+                    new Font(Font.DIALOG, Font.PLAIN, 20));
+            Utils.drawCenteredString(g, Integer.toString(spots.get(i).downs),
+                    new Rectangle(800, (int) y + ((i + 1) * 40), 150, 5),
+                    new Font(Font.DIALOG, Font.PLAIN, 20));
+
+        }
 
         g.setColor(handler.getSettings().getLaserColor());
         g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 8, 8);

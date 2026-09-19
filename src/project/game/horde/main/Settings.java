@@ -7,306 +7,326 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import project.game.horde.ui.ColorIndex;
-import project.game.horde.utils.Utils;
 import project.game.horde.utils.saved.SaveFileReader;
 import project.game.horde.utils.saved.SaveFileUtils;
 import project.game.horde.utils.saved.SaveFileWriter;
 
 public class Settings {
 
-	private Handler handler;
-	private double zoomLevel;
-	private boolean gore, zombieCounter, toggleCrits, toggleDamage, healthBar;
-	private Color laserColor;
-	private Color hudColor;
-	private float masterVolume;
-	private int displayType;
+    private Handler handler;
+    private double zoomLevel;
+    private boolean gore, zombieCounter, toggleCrits, toggleDamage, healthBar;
+    private Color laserColor;
+    private Color hudColor;
+    private float masterVolume;
+    private int displayType;
 
-	public Settings(Handler handler) {
-		this.handler = handler;
-		// default settings
-		displayType = 0;
-		zoomLevel = 1;
-		gore = true;
-		zombieCounter = false;
-		toggleCrits = false;
-		toggleDamage = false;
-		healthBar = false;
-		laserColor = Color.red;
-		hudColor = Color.green;
-		masterVolume = 10;
+    public Settings(Handler handler) {
+        this.handler = handler;
+        // default settings
+        nullValues();
 
-		String settingsData;
-		String settingsFilePath = Handler.SAVE_FOLDER + File.separator + Handler.SETTINGS_FILE;
+        String settingsData;
+        String settingsFilePath = Handler.SAVE_FOLDER + File.separator + Handler.SETTINGS_FILE;
 
-		if (!SaveFileUtils.fileExists(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE)) {
-			// Create a new save file with default data
-			settingsData = "0\n0\n0\n2\n0\n0\n0\n0\n10";
-			SaveFileWriter.writeToFile(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE, settingsData);
-			//System.out.println("Settings file created with default data.");
-		} else {
-			// Load existing save file
-			settingsData = SaveFileReader.readFromFile(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE);
-			//System.out.println("Loaded Settings Data:");
-			//System.out.println(settingsData);
-		}
+        if (!SaveFileUtils.fileExists(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE)) {
+            // Create a new save file with default data
+            settingsData = "0\n0\n0\n2\n0\n0\n0\n0\n10";
+            SaveFileWriter.writeToFile(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE, settingsData);
+            //System.out.println("Settings file created with default data.");
+        } else {
+            // Load existing save file
+            settingsData = SaveFileReader.readFromFile(Handler.SAVE_FOLDER, Handler.SETTINGS_FILE);
+            //System.out.println("Loaded Settings Data:");
+            //System.out.println(settingsData);
+        }
 
-		useSavedSettings(settingsData);
-	}
+        useSavedSettings(settingsData);
+    }
 
-	public void useSavedSettings(String file) {
-		// String file = Utils.loadFileAsString("/info/settings.txt");
-		String[] tokens = file.split("[\\n\\s]+");
-		// String[] tokens = file.split("\\s+");
-		int i = 0;
+    public void nullValues() {
+        displayType = 0;
+        zoomLevel = 1;
+        hudColor = Color.green;
+        laserColor = Color.red;
+        zombieCounter = false;
+        toggleCrits = false;
+        toggleDamage = false;
+        healthBar = false;
+        masterVolume = 10;
+    }
 
-		if (tokens.length == 0) {
-			return;
-		}
-		int displayTypeToken = Utils.parseInt(tokens[i++]);
-		int zoomLevelToken = Utils.parseInt(tokens[i++]);
-		int hudColorToken = Utils.parseInt(tokens[i++]);
-		int laserColorToken = Utils.parseInt(tokens[i++]);
-		int zombieCounterToken = Utils.parseInt(tokens[i++]);
-		int toggleCritsToken = Utils.parseInt(tokens[i++]);
-		int toggleDamageToken = Utils.parseInt(tokens[i++]);
-		int healthBarToken = Utils.parseInt(tokens[i++]);
-		int masterVolumeToken = Utils.parseInt(tokens[i++]);
+    public void useSavedSettings(String file) {
+        String[] tokens = file.split("[\\n\\s]+");
+        int i = 0;
 
-		displayType = displayTypeToken;
-		switch (zoomLevelToken) {
-		case 0:
-			zoomLevel = 1.25;
-			break;
-		case 1:
-			zoomLevel = 1.3;
-			break;
-		case 2:
-			zoomLevel = 1.35;
-			break;
-		case 3:
-			zoomLevel = 1.4;
-			break;
-		case 4:
-			zoomLevel = 1.45;
-			break;
-		case 5:
-			zoomLevel = 1.5;
-			break;
-		default:
-			zoomLevel = 1.25;
-			break;
-		}
-		hudColor = ColorIndex.getColor(hudColorToken);
-		laserColor = ColorIndex.getColor(laserColorToken);
+        if (tokens.length == 0) {
+            return;
+        }
+        try {
+            int displayTypeToken = Integer.parseInt(tokens[i++]);
+            int zoomLevelToken = Integer.parseInt(tokens[i++]);
+            int hudColorToken = Integer.parseInt(tokens[i++]);
+            int laserColorToken = Integer.parseInt(tokens[i++]);
+            int zombieCounterToken = Integer.parseInt(tokens[i++]);
+            int toggleCritsToken = Integer.parseInt(tokens[i++]);
+            int toggleDamageToken = Integer.parseInt(tokens[i++]);
+            int healthBarToken = Integer.parseInt(tokens[i++]);
+            int masterVolumeToken = Integer.parseInt(tokens[i++]);
 
-		switch (zombieCounterToken) {
-		case 0:
-			zombieCounter = false;
-			break;
-		case 1:
-			zombieCounter = true;
-			break;
-		default:
-			zombieCounter = false;
-			break;
-		}
+            displayType = displayTypeToken;
+            zoomLevel = switch (zoomLevelToken) {
+                case 0 ->
+                    1.25;
+                case 1 ->
+                    1.325;
+                case 2 ->
+                    1.4;
+                case 3 ->
+                    1.475;
+                case 4 ->
+                    1.55;
+                case 5 ->
+                    1.625;
+                case 6 ->
+                    1.7;
+                case 7 ->
+                    1.775;
+                case 8 ->
+                    1.85;
+                case 9 ->
+                    1.925;
+                case 10 ->
+                    2.0;
+                default ->
+                    1.25;
+            };
+            hudColor = ColorIndex.getColor(hudColorToken);
+            laserColor = ColorIndex.getColor(laserColorToken);
 
-		switch (toggleCritsToken) {
-		case 0:
-			toggleCrits = false;
-			break;
-		case 1:
-			toggleCrits = true;
-			break;
-		default:
-			toggleCrits = false;
-			break;
-		}
+            zombieCounter = switch (zombieCounterToken) {
+                case 0 ->
+                    false;
+                case 1 ->
+                    true;
+                default ->
+                    false;
+            };
 
-		switch (toggleDamageToken) {
-		case 0:
-			toggleDamage = false;
-			break;
-		case 1:
-			toggleDamage = true;
-			break;
-		default:
-			toggleDamage = false;
-			break;
-		}
+            toggleCrits = switch (toggleCritsToken) {
+                case 0 ->
+                    false;
+                case 1 ->
+                    true;
+                default ->
+                    false;
+            };
 
-		switch (healthBarToken) {
-		case 0:
-			healthBar = false;
-			break;
-		case 1:
-			healthBar = true;
-			break;
-		default:
-			healthBar = false;
-			break;
-		}
+            toggleDamage = switch (toggleDamageToken) {
+                case 0 ->
+                    false;
+                case 1 ->
+                    true;
+                default ->
+                    false;
+            };
 
-		if (masterVolumeToken > 10 || masterVolumeToken < 0) {
-			masterVolume = 10;
-		} else {
-			masterVolume = masterVolumeToken;
-		}
+            healthBar = switch (healthBarToken) {
+                case 0 ->
+                    false;
+                case 1 ->
+                    true;
+                default ->
+                    false;
+            };
 
-	}
+            if (masterVolumeToken > 10 || masterVolumeToken < 0) {
+                masterVolume = 10;
+            } else {
+                masterVolume = masterVolumeToken;
+            }
 
-	public void writeToFile() {
-		String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator
-				+ Handler.SAVE_FOLDER;
-		String progressionFilePath = saveFolderPath + File.separator + Handler.SETTINGS_FILE;
+        } catch (Exception e) {
+            deleteProgressionFile();
+            nullValues();
+            writeToFile();
+            e.printStackTrace();
+        }
+    }
 
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(progressionFilePath))) {
-			writer.write(Integer.toString(displayType));
-			writer.newLine();
-			if (zoomLevel == 1.25) {
-				writer.write("0");
-			} else if (zoomLevel == 1.3) {
-				writer.write("1");
-			} else if (zoomLevel == 1.35) {
-				writer.write("2");
-			} else if (zoomLevel == 1.4) {
-				writer.write("3");
-			} else if (zoomLevel == 1.45) {
-				writer.write("4");
-			} else if (zoomLevel == 1.5) {
-				writer.write("5");
-			}
-			writer.newLine();
-			writer.write(Integer.toString(ColorIndex.getKeyByValue(hudColor)));
-			writer.newLine();
-			writer.write(Integer.toString(ColorIndex.getKeyByValue(laserColor)));
-			writer.newLine();
-			if (zombieCounter == true) {
-				writer.write("1");
-			} else {
-				writer.write("0");
-			}
-			writer.newLine();
+    private void deleteProgressionFile() {
+        String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator
+                + Handler.SAVE_FOLDER;
+        File file = new File(saveFolderPath, Handler.SETTINGS_FILE);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 
-			if (toggleCrits == true) {
-				writer.write("1");
-			} else {
-				writer.write("0");
-			}
-			writer.newLine();
+    public void writeToFile() {
+        String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator
+                + Handler.SAVE_FOLDER;
+        String progressionFilePath = saveFolderPath + File.separator + Handler.SETTINGS_FILE;
 
-			if (toggleDamage == true) {
-				writer.write("1");
-			} else {
-				writer.write("0");
-			}
-			writer.newLine();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(progressionFilePath))) {
+            writer.write(Integer.toString(displayType));
+            writer.newLine();
+            if (zoomLevel == 1.25) {
+                writer.write("0");
+            } else if (zoomLevel == 1.325) {
+                writer.write("1");
+            } else if (zoomLevel == 1.4) {
+                writer.write("2");
+            } else if (zoomLevel == 1.475) {
+                writer.write("3");
+            } else if (zoomLevel == 1.55) {
+                writer.write("4");
+            } else if (zoomLevel == 1.625) {
+                writer.write("5");
+            } else if (zoomLevel == 1.7) {
+                writer.write("6");
+            } else if (zoomLevel == 1.775) {
+                writer.write("7");
+            } else if (zoomLevel == 1.85) {
+                writer.write("8");
+            } else if (zoomLevel == 1.925) {
+                writer.write("9");
+            } else if (zoomLevel == 2.0) {
+                writer.write("10");
+            } else {
+                writer.write("0");
+            }
+            writer.newLine();
+            writer.write(Integer.toString(ColorIndex.getKeyByValue(hudColor)));
+            writer.newLine();
+            writer.write(Integer.toString(ColorIndex.getKeyByValue(laserColor)));
+            writer.newLine();
+            if (zombieCounter == true) {
+                writer.write("1");
+            } else {
+                writer.write("0");
+            }
+            writer.newLine();
 
-			if (healthBar == true) {
-				writer.write("1");
-			} else {
-				writer.write("0");
-			}
-			writer.newLine();
+            if (toggleCrits == true) {
+                writer.write("1");
+            } else {
+                writer.write("0");
+            }
+            writer.newLine();
 
-			writer.write(Integer.toString(Math.round(masterVolume)));
+            if (toggleDamage == true) {
+                writer.write("1");
+            } else {
+                writer.write("0");
+            }
+            writer.newLine();
 
-			writer.close();
-		} catch (IOException e) {
-		}
-	}
+            if (healthBar == true) {
+                writer.write("1");
+            } else {
+                writer.write("0");
+            }
+            writer.newLine();
 
-	public Handler getHandler() {
-		return handler;
-	}
+            writer.write(Integer.toString(Math.round(masterVolume)));
 
-	public void setHandler(Handler handler) {
-		this.handler = handler;
-	}
+            writer.close();
+        } catch (IOException e) {
+        }
+    }
 
-	public double getZoomLevel(boolean forSettings) {
-		if(forSettings)
-			return zoomLevel;
-		if(handler.getSettings().getDisplayType() != handler.getGame().getDisplay().STANDARD)
-			return zoomLevel + .5;
-		return zoomLevel;
-	}
-	
+    public Handler getHandler() {
+        return handler;
+    }
 
-	public void setZoomLevel(double zoomLevel) {
-		this.zoomLevel = zoomLevel;
-	}
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
 
-	public boolean isGore() {
-		return gore;
-	}
+    public double getZoomLevel(boolean forSettings) {
+        if (forSettings) {
+            return zoomLevel;
+        }
+        if (handler.getSettings().getDisplayType() != handler.getGame().getDisplay().STANDARD) {
+            return zoomLevel + .5;
+        }
+        return zoomLevel;
+    }
 
-	public void setGore(boolean gore) {
-		this.gore = gore;
-	}
+    public void setZoomLevel(double zoomLevel) {
+        this.zoomLevel = zoomLevel;
+    }
 
-	public Color getLaserColor() {
-		return laserColor;
-	}
+    public boolean isGore() {
+        return gore;
+    }
 
-	public void setLaserColor(Color laserColor) {
-		this.laserColor = laserColor;
-	}
+    public void setGore(boolean gore) {
+        this.gore = gore;
+    }
 
-	public Color getHudColor() {
-		return hudColor;
-	}
+    public Color getLaserColor() {
+        return laserColor;
+    }
 
-	public void setHudColor(Color hudColor) {
-		this.hudColor = hudColor;
-	}
+    public void setLaserColor(Color laserColor) {
+        this.laserColor = laserColor;
+    }
 
-	public boolean isZombieCounter() {
-		return zombieCounter;
-	}
+    public Color getHudColor() {
+        return hudColor;
+    }
 
-	public void setZombieCounter(boolean zombieCounter) {
-		this.zombieCounter = zombieCounter;
-	}
+    public void setHudColor(Color hudColor) {
+        this.hudColor = hudColor;
+    }
 
-	public boolean isToggleCrits() {
-		return toggleCrits;
-	}
+    public boolean isZombieCounter() {
+        return zombieCounter;
+    }
 
-	public void setToggleCrits(boolean toggleCrits) {
-		this.toggleCrits = toggleCrits;
-	}
+    public void setZombieCounter(boolean zombieCounter) {
+        this.zombieCounter = zombieCounter;
+    }
 
-	public boolean isToggleDamage() {
-		return toggleDamage;
-	}
+    public boolean isToggleCrits() {
+        return toggleCrits;
+    }
 
-	public void setToggleDamage(boolean toggleDamage) {
-		this.toggleDamage = toggleDamage;
-	}
+    public void setToggleCrits(boolean toggleCrits) {
+        this.toggleCrits = toggleCrits;
+    }
 
-	public boolean isHealthBar() {
-		return healthBar;
-	}
+    public boolean isToggleDamage() {
+        return toggleDamage;
+    }
 
-	public void setHealthBar(boolean healthBar) {
-		this.healthBar = healthBar;
-	}
+    public void setToggleDamage(boolean toggleDamage) {
+        this.toggleDamage = toggleDamage;
+    }
 
-	public void setMasterVolume(float masterVolume) {
-		this.masterVolume = masterVolume;
-	}
+    public boolean isHealthBar() {
+        return healthBar;
+    }
 
-	public float getMasterVolume() {
-		return masterVolume;
-	}
-	
-	public void setDisplayType(int type) {
-		this.displayType = type;
-	}
-	
-	public int getDisplayType() {
-		return displayType;
-	}
+    public void setHealthBar(boolean healthBar) {
+        this.healthBar = healthBar;
+    }
+
+    public void setMasterVolume(float masterVolume) {
+        this.masterVolume = masterVolume;
+    }
+
+    public float getMasterVolume() {
+        return masterVolume;
+    }
+
+    public void setDisplayType(int type) {
+        this.displayType = type;
+    }
+
+    public int getDisplayType() {
+        return displayType;
+    }
 }

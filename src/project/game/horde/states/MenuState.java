@@ -69,7 +69,7 @@ public class MenuState extends State {
             @Override
             public void onClick(UIObject ui) {
                 handler.getMouseManager().setUIManager(null);
-                State.setState(new SettingsState(handler, user));
+                State.setState(new SettingsState(handler, user, false));
 
             }
 

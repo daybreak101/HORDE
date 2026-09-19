@@ -10,10 +10,10 @@ public class ImageLoader {
     static int upscaleFactor = 1;
 
     public static BufferedImage loadImage(String path) {
-        System.out.println("Loading image: " + path);
+        //System.out.println("Loading image: " + path);
         try {
             BufferedImage image = ImageIO.read(ImageLoader.class.getResource(path));
-            System.out.println("Loaded image: " + path);
+            //System.out.println("Loaded image: " + path);
 
             return image;
             //return ImageUtils.upscaleImage(image, image.getWidth() * upscaleFactor, image.getHeight() * upscaleFactor);

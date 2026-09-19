@@ -24,6 +24,7 @@ import project.game.horde.perks.Perk;
 import project.game.horde.perks.Stronghold;
 import project.game.horde.utils.Utils;
 import project.game.horde.weapons.Gun;
+import project.game.horde.weapons.Minigun;
 
 public class GameplayElement extends HudElement {
 
@@ -108,6 +109,8 @@ public class GameplayElement extends HudElement {
         gun = player.getInv().getGun();
         if (gun == null) {
             gunText = "";
+        } else if (gun instanceof Minigun) {
+            gunText = gun.getName();
         } else if (gun.isDual()) {
             gunText = gun.getName() + "         " + gun.getCurrentClip() + " | " + gun.getCurrentAltClip() + " / " + gun.getCurrentReserve();
         } else {
@@ -153,7 +156,9 @@ public class GameplayElement extends HudElement {
 
             String alert = "";
             Color color = Color.white;
-            if (gun.getIsReloading()) {
+            if (gun instanceof Minigun) {
+                //ignore Minigun
+            } else if (gun.getIsReloading()) {
                 alert = "Reloading...";
                 color = Color.white;
             } else if (gun.getCurrentClip() == 0 && gun.getCurrentReserve() == 0) {
@@ -479,7 +484,7 @@ public class GameplayElement extends HudElement {
 
     }
 
-   // boolean resetDamageRender = false;
+    // boolean resetDamageRender = false;
     int alpha = 0;
 
     public void renderDamage(Graphics g) {
@@ -547,7 +552,7 @@ public class GameplayElement extends HudElement {
             renderZombiesLeft(g);
         }
         renderBlessingMeter(g);
-        renderFPS(g);
+        //renderFPS(g);
         renderDamage(g);
 
 //		Point2D center = new Point2D.Float(500, 500);

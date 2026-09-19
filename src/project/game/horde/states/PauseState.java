@@ -50,7 +50,7 @@ public class PauseState extends State {
             @Override
             public void onClick(UIObject ui) {
                 handler.getMouseManager().setUIManager(null);
-                State.setState(new SettingsState(handler, user));
+                State.setState(new SettingsState(handler, user, true));
             }
 
             @Override
@@ -64,12 +64,21 @@ public class PauseState extends State {
 
             @Override
             public void onClick(UIObject ui) {
-                handler.getGlobalStats().calculateNewAverageRound(handler.getRoundLogic().getCurrentRound());
-                handler.getGlobalStats().writeToFile();
-                handler.getMouseManager().setUIManager(null);
-                System.gc();
-                handler.setWorld(null);
-                State.setState(new MenuState(handler, user));
+                if (handler.getCurrentPlayer().getPeer() == null) {
+                    handler.getMouseManager().setUIManager(null);
+                    Sounds.resumeClips();
+                    State.setState(handler.getGame().gameState);
+                    handler.getCurrentPlayer().die(true);
+
+                } else {
+                    handler.getGlobalStats().calculateNewAverageRound(handler.getRoundLogic().getCurrentRound());
+                    handler.getGlobalStats().writeToFile();
+                    handler.getMouseManager().setUIManager(null);
+
+                    System.gc();
+                    handler.setWorld(null);
+                    State.setState(new MenuState(handler, user));
+                }
 
             }
 
@@ -99,9 +108,9 @@ public class PauseState extends State {
         g.setFont(new Font(Font.DIALOG, Font.PLAIN, 50));
         g.setColor(handler.getSettings().getHudColor());
         //g.drawString("PAUSED", handler.getWidth() / 2 - 140, 200);
-        Utils.drawCenteredString(g, "PAUSED", 
-		new Rectangle(handler.getWidth() / 2, 200, 0, 0), 
-		new Font(Font.DIALOG, Font.PLAIN, 50));
+        Utils.drawCenteredString(g, "PAUSED",
+                new Rectangle(handler.getWidth() / 2, 200, 0, 0),
+                new Font(Font.DIALOG, Font.PLAIN, 50));
         uiManager.render(g);
         g.setColor(handler.getSettings().getLaserColor());
         g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 8, 8);
@@ -109,20 +118,19 @@ public class PauseState extends State {
         // 
         // g.drawString(Long.toString(handler.getProgression().getXP()), 600, 700);
         // g.drawString("/ " + Long.toString(handler.getProgression().getXPNeeded()), 700, 700);
-		g.setColor(Color.white);
-		g.fillRect(99, 699, 702, 12);
-
+        g.setColor(Color.white);
+        g.fillRect(99, 699, 702, 12);
 
         g.setColor(Color.black);
         g.fillRect(100, 700, 700, 10);
         g.setColor(handler.getSettings().getHudColor());
         g.fillRect(100, 700,
                 (int) ((float) handler.getProgression().getXP() / (float) handler.getProgression().getXPNeeded() * 700),
-		 10);
-		 Utils.drawCenteredString(g, 
-			Integer.toString(handler.getProgression().getLevel()), 
-			new Rectangle(800, 675, 100, 50), 
-			new Font(Font.DIALOG, Font.PLAIN, 50));
+                10);
+        Utils.drawCenteredString(g,
+                Integer.toString(handler.getProgression().getLevel()),
+                new Rectangle(800, 675, 100, 50),
+                new Font(Font.DIALOG, Font.PLAIN, 50));
     }
 
 }

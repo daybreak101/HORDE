@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import project.game.horde.graphics.CharAssets;
-import project.game.horde.utils.Utils;
 import project.game.horde.utils.saved.SaveFileReader;
 import project.game.horde.utils.saved.SaveFileUtils;
 import project.game.horde.utils.saved.SaveFileWriter;
@@ -19,7 +18,7 @@ public class CustomHatInventory {
     public static HashMap<String, Integer> inventory = new HashMap<>();
 
     public static final int COMMON = 0, RARE = 1, EPIC = 2, LEGENDARY = 3;
-
+    public final int NUM_HATS = 3;
     public static final int NONE = 0,
             CHRISTMAS = 1,
             REINDEER = 2,
@@ -97,14 +96,52 @@ public class CustomHatInventory {
 
     private void readUnlockedHats(String file) {
         String[] tokens = file.split("[\\n\\s]+");
-        if (tokens.length == 0) {
-            christmas = 0;
-            reindeer = 0;
-            bunny = 0;
-        } else {
-            christmas = Utils.parseInt(tokens[0]);
-            reindeer = Utils.parseInt(tokens[1]);
-            bunny = Utils.parseInt(tokens[2]);
+        try {
+            // File is corrupted if number of tokens is not equal to number of hats
+            if(tokens.length != NUM_HATS) {
+                throw new IllegalArgumentException("Corrupted hats");
+            }
+            else {
+                //initialize valid values
+                christmas = getToken(tokens[0]);
+                reindeer = getToken(tokens[1]);
+                bunny = getToken(tokens[2]);
+            }
+        } catch (Exception e) {
+            //if corrupted, delete file and set to default values and save new file
+            deleteHatsFile();
+            nullValues();
+            writeToFile();
+            e.printStackTrace();
+        }
+
+    }
+
+    private int getToken(String token) {
+        //function created to always check for valid tokens
+        //if token is not a number, it will throw an exception
+        //if token is not 0 or 1, it will throw an exception
+        //throwing exceptions is to trigger file deletion
+        int value = Integer.parseInt(token);
+        if(value < 0 || value > 1) {
+            throw new IllegalArgumentException("Corrupted hats");
+        }
+        return value;
+    }
+
+    //default values
+    private void nullValues() {
+        christmas = 0;
+        reindeer = 0;
+        bunny = 0;
+    }
+
+    private void deleteHatsFile() {
+        String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator
+                + Handler.SAVE_FOLDER;
+        File file = new File(saveFolderPath, Handler.CUSTOMHAT_FILE);
+        if (file.exists()) {
+            file.delete();
         }
     }
 

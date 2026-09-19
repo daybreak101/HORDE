@@ -101,15 +101,11 @@ public class EntityManager {
     }
 
     //vars for this method
-    double zoom;
     int viewWidth;
     int viewHeight;
     Rectangle renderArea = new Rectangle();
 
     public void tick() {
-        //zoom = handler.getSettings().getZoomLevel(false);
-        //viewWidth = (int) (handler.getWidth() / zoom);
-        //viewHeight = (int) (handler.getHeight() / zoom);
 
         viewWidth = handler.getWidth();
         viewHeight = handler.getHeight();

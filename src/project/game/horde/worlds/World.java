@@ -35,6 +35,8 @@ import project.game.horde.maps.FarmMap;
 import project.game.horde.maps.SchoolMap;
 import project.game.horde.network.Peer;
 import project.game.horde.network.ZombiePosition;
+import project.game.horde.states.GameState;
+import project.game.horde.states.State;
 import project.game.horde.utils.Timer;
 import project.game.horde.utils.Utils;
 import project.game.horde.zombieLogic.LightingLogic;
@@ -54,7 +56,7 @@ public class World {
     private RoomLogic rooms;
     private PathingLogic pathing;
     private boolean powerOn;
-    //private String map;
+    private String map;
 
     int ticker = 0, tickerLimit = 600;
 
@@ -88,7 +90,7 @@ public class World {
     public void initializeWorld(Handler handler, String path, String entityPath,
             String edgesPath,
             String adjacentRooms, String map) throws IOException {
-        //this.map = map;
+        this.map = map;
         this.handler = handler;
         handler.setWorld(this);
         entityManager = new EntityManager(handler);
@@ -144,9 +146,10 @@ public class World {
     }
 
     public class PlayerPosition {
+
         public int x;
         public int y;
-        
+
         public PlayerPosition(int x, int y) {
             this.x = x;
             this.y = y;
@@ -154,6 +157,7 @@ public class World {
     }
 
     public Stack<PlayerPosition> playerPositions = new Stack<>();
+
     public Stack<PlayerPosition> getPlayerPositions() {
         return playerPositions;
     }
@@ -184,7 +188,7 @@ public class World {
             }
 
             // shuffle the stack
-           // Collections.shuffle(playerPositions);
+            // Collections.shuffle(playerPositions);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -359,7 +363,9 @@ public class World {
         g2d.setTransform(originalTransform);
         rooms.render(g2d);
 
-        entityManager.getCurrentPlayer().renderHUD(g2d);
+        if (State.getState() instanceof GameState) {
+            entityManager.getCurrentPlayer().renderHUD(g2d);
+        }
 
     }
 

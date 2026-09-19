@@ -30,13 +30,12 @@ public class LeaderboardElement extends HudElement {
         checkIfTop10();
     }
 
-
     private void checkIfTop10() {
         int kills = handler.getCurrentPlayer().getStats().getKills();
         int downs = handler.getCurrentPlayer().getStats().getDowns();
         int headshots = handler.getCurrentPlayer().getStats().getHeadshots();
         handler.getLeaderboard().addLeaderboard(
-            handler.getRoundLogic().getCurrentRound(), kills, headshots, downs);
+                handler.getRoundLogic().getCurrentRound(), kills, headshots, downs);
     }
 
     @Override
@@ -49,7 +48,8 @@ public class LeaderboardElement extends HudElement {
         if (newGameTicker >= newGameCountdown) {
             handler.getGlobalStats().addGame();
             handler.getGlobalStats().writeToFile();
-            //handler.getGame().gameState = new GameState(handler, user);
+            handler.getMouseManager().setUIManager(null);
+
             if (handler.getCurrentPlayer().getPeer() != null) {
                 State.setState(handler.getCurrentPlayer().getPeer().getLobby());
                 handler.getCurrentPlayer().getPeer().getLobby().endGame();
@@ -57,6 +57,7 @@ public class LeaderboardElement extends HudElement {
                 State.setState(new LobbyState(handler, user));
             }
             //Sounds.shutdownThreadPool();
+            return;
         }
     }
 

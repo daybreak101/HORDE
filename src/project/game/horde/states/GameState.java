@@ -93,6 +93,14 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        if (world != null) {
+            if (State.getState() != this) {
+                handler.setWorld(null);
+                world = null;
+                return;
+            }
+        }
+
         world.tick();
         boolean oneAlive = false;
         if (!outroPlaying) {
