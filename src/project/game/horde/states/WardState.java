@@ -34,9 +34,11 @@ public class WardState extends State {
 
 				@Override
 				public void onClick(UIObject ui) {
-					System.out.println("Popup removed");
-					isPopup = false;
-					popup.clearRewards();
+					if (popup.shownAllRewards()) {
+						System.out.println("Popup removed");
+						isPopup = false;
+						popup.clearRewards();
+					}
 				}
 
 				@Override
@@ -158,6 +160,7 @@ public class WardState extends State {
 		} else {
 			handler.getMouseManager().setUIManager(uiManager);
 			uiManager.tick();
+			popup.reset();
 		}
 
 	}

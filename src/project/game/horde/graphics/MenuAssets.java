@@ -11,11 +11,14 @@ public class MenuAssets {
     public static BufferedImage coins[], crown, none,
             jugg, fasthand, doubletap, deadshot, phd, stam, vamp, mule, revive, bandolier,
             luna, stronghold, farmhouseLoading,
-            doubleTimeBlessing, kaboomBlessing, fullSupplyBlessing, infiniteSupplyBlessing,
-            noMercyBlessing, ezPointsBlessing, hpUpBlessing, deathMachineBlessing,
+            doubleTimeBlessing, kaboomBlessing, fullSupplyBlessing, 
+            infiniteSupplyBlessing,
+            noMercyBlessing, ezPointsBlessing, hpUpBlessing, 
+            deathMachineBlessing,
             crawlSpaceBlessing, extraChangeBlessing, soNoHeadBlessing,
             gradedUpBlessing, extraSodiumBlessing, reignDropsBlessing,
-            roundRobbinBlessing, imFeelingLuckyBlessing, anywhereButHereBlessing,
+            roundRobbinBlessing, imFeelingLuckyBlessing, 
+            anywhereButHereBlessing,
             inPlainSightBlessing, brainFreezeBlessing, carboloadBlessing;
 
     public static void init() {
