@@ -19,15 +19,17 @@ public class CustomHatInventory {
     public static HashMap<Integer, Integer> inventory = new HashMap<>();
 
     public static final int COMMON = 0, RARE = 1, EPIC = 2, LEGENDARY = 3;
-    public final int NUM_HATS = 4;
+    public final int NUM_HATS = 5;
     public static final int NONE = 0,
             CHRISTMAS = 1,
             REINDEER = 2,
-            BUNNY = 3;
+            BUNNY = 3,
+            BASEBALL_CAP = 4;
 
     public static final int CHRISTMAS_PRICE = 10;
     public static final int REINDEER_PRICE = 10;
     public static final int BUNNY_PRICE = 10;
+    public static final int BASEBALL_CAP_PRICE = 10;
 
     private int equipped = NONE;
 
@@ -39,6 +41,8 @@ public class CustomHatInventory {
                 CharAssets.reindeer;
             case BUNNY ->
                 CharAssets.bunny;
+            case BASEBALL_CAP ->
+                CharAssets.baseballCap;
             default ->
                 null;
         };
@@ -69,7 +73,7 @@ public class CustomHatInventory {
 
         if (!SaveFileUtils.fileExists(Handler.SAVE_FOLDER, Handler.CUSTOMHAT_FILE)) {
             // Create a new save file with default data
-            unlockData = "0\n0\n0";
+            unlockData = "0\n0\n0\n0";
             SaveFileWriter.writeToFile(Handler.SAVE_FOLDER, Handler.CUSTOMHAT_FILE, unlockData);
         } else {
             // Load existing save file
@@ -82,13 +86,12 @@ public class CustomHatInventory {
         String[] tokens = file.split("[\\n\\s]+");
         try {
             // File is corrupted if number of tokens is not equal to number of hats - 1 (excluding none)
-            if(tokens.length != NUM_HATS - 1) {
+            if (tokens.length != NUM_HATS - 1) {
                 throw new IllegalArgumentException("Corrupted hats");
-            }
-            else {
+            } else {
                 //initialize valid values
 
-                for(int i = 1; i < NUM_HATS; i++) {
+                for (int i = 1; i < NUM_HATS; i++) {
                     inventory.put(i, getToken(tokens[i - 1]));
                 }
             }
@@ -108,7 +111,7 @@ public class CustomHatInventory {
         //if token is not 0 or 1, it will throw an exception
         //throwing exceptions is to trigger file deletion
         int value = Integer.parseInt(token);
-        if(value < 0 || value > 1) {
+        if (value < 0 || value > 1) {
             throw new IllegalArgumentException("Corrupted hats");
         }
         return value;
@@ -116,7 +119,7 @@ public class CustomHatInventory {
 
     //default values
     private void nullValues() {
-        for(int i = 1; i < NUM_HATS; i++) {
+        for (int i = 1; i < NUM_HATS; i++) {
             inventory.put(i, 0);
         }
     }
@@ -129,7 +132,6 @@ public class CustomHatInventory {
             file.delete();
         }
     }
-    
 
     public void writeToFile() {
         String saveFolderPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator

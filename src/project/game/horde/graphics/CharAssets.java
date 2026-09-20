@@ -8,7 +8,7 @@ public class CharAssets {
 	private static final int width = 100 * upscaleFactor, height = 100 * upscaleFactor;
 	
 	public static BufferedImage[] harry, blueAlien, robot;
-	public static BufferedImage christmasHat, reindeer, bunny;
+	public static BufferedImage christmasHat, reindeer, bunny, baseballCap;
 
 	public static void init() {
 		SpriteSheet charSheet = new SpriteSheet(ImageLoader.loadImage(folder + "player/characters.png"));
@@ -31,6 +31,7 @@ public class CharAssets {
 		christmasHat = ImageLoader.loadImage(folder + "hats/christmas_hat.png");
 		reindeer = ImageLoader.loadImage(folder + "hats/reindeer.png");
 		bunny = ImageLoader.loadImage(folder + "hats/bunny.png");
+		baseballCap = ImageLoader.loadImage(folder + "hats/baseball_cap.png");
 
 	}
 

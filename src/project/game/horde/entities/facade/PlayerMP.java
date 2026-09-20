@@ -241,6 +241,9 @@ public class PlayerMP extends Entity {
                 case CustomHatInventory.BUNNY ->
                     g2d.drawImage(CharAssets.bunny, (int) (x - handler.getGameCamera().getxOffset()),
                             (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.BASEBALL_CAP ->
+                    g2d.drawImage(CharAssets.baseballCap, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
                 default -> {
                 }
             }

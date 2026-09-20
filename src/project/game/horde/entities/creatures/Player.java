@@ -516,49 +516,6 @@ public class Player extends Creature {
         this.resetDamageRender = resetDamageRender;
     }
 
-    // int alpha = 0;
-    // public void renderDamage(Graphics g) {
-    //     if (resetDamageRender) {
-    //         alpha = 255;
-    //         resetDamageRender = false;
-    //     }
-    //     if (justTookDamage) {
-    //         if (alpha > 0) {
-    //             alpha -= 5;
-    //             if (alpha < 0) {
-    //                 alpha = 0;
-    //             }
-    //         }
-    //         Graphics2D g2d = (Graphics2D) g;
-    //         int w = handler.getWidth();
-    //         int h = handler.getHeight();
-    //         int border = 100; // Thickness of the effect
-    //         // Top
-    //         g2d.setPaint(new GradientPaint(0, 0,
-    //                 new Color(255, 0, 0, alpha),
-    //                 0, border,
-    //                 new Color(255, 0, 0, 0)));
-    //         g2d.fillRect(0, 0, w, border);
-    //         // Bottom
-    //         g2d.setPaint(new GradientPaint(0, h,
-    //                 new Color(255, 0, 0, alpha),
-    //                 0, h - border,
-    //                 new Color(255, 0, 0, 0)));
-    //         g2d.fillRect(0, h - border, w, border);
-    //         // Left
-    //         g2d.setPaint(new GradientPaint(0, 0,
-    //                 new Color(255, 0, 0, alpha),
-    //                 border, 0,
-    //                 new Color(255, 0, 0, 0)));
-    //         g2d.fillRect(0, 0, border, h);
-    //         // Right
-    //         g2d.setPaint(new GradientPaint(w, 0,
-    //                 new Color(255, 0, 0, alpha),
-    //                 w - border, 0,
-    //                 new Color(255, 0, 0, 0)));
-    //         g2d.fillRect(w - border, 0, border, h);
-    //     }
-    // }
     public void renderStronghold(Graphics g) {
         if (getInv().strongholdActivation) {
             g.setColor(new Color(0, 0, 200, 50));
@@ -647,12 +604,9 @@ public class Player extends Creature {
 
             g2d.drawImage(skin[0], (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
             renderGun(g2d);
-
             g2d.drawImage(skin[1], (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
             switch (hat) {
                 case CustomHatInventory.CHRISTMAS ->
                     g2d.drawImage(CharAssets.christmasHat, (int) (x - handler.getGameCamera().getxOffset()),
@@ -663,6 +617,9 @@ public class Player extends Creature {
                 case CustomHatInventory.BUNNY ->
                     g2d.drawImage(CharAssets.bunny, (int) (x - handler.getGameCamera().getxOffset()),
                             (int) (y + 25 - handler.getGameCamera().getyOffset()), width, height, null);
+                case CustomHatInventory.BASEBALL_CAP ->
+                    g2d.drawImage(CharAssets.baseballCap, (int) (x - handler.getGameCamera().getxOffset()),
+                            (int) (y + 12 - handler.getGameCamera().getyOffset()), width, height, null);
                 default -> {
                 }
             }

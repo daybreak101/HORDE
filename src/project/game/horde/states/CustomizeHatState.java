@@ -60,7 +60,8 @@ public class CustomizeHatState extends State {
         grid = new GridContainer(handler, startx, 100, size * columns, size * rows, columns, rows, false);
 
         // default
-        GridElementImage hat = new GridElementImage(handler, MenuAssets.none, (element, g) -> {}) {
+        GridElementImage hat = new GridElementImage(handler, MenuAssets.none, (element, g) -> {
+        }) {
             @Override
             public void onMouseRelease(MouseEvent e) {
                 if (hovering) {
@@ -87,7 +88,7 @@ public class CustomizeHatState extends State {
 
         // christmas
         hat = new GridElementImage(handler, CharAssets.christmasHat, (element, g) -> {
-            if(!handler.getHatInv().checkOwned(CustomHatInventory.CHRISTMAS)){
+            if (!handler.getHatInv().checkOwned(CustomHatInventory.CHRISTMAS)) {
                 g.setColor(new Color(200, 0, 0, 100));
                 g.fillRect((int) element.getX(), (int) element.getY(), element.getWidth(), element.getHeight());
             }
@@ -125,7 +126,7 @@ public class CustomizeHatState extends State {
 
         //reindeer
         hat = new GridElementImage(handler, CharAssets.reindeer, (element, g) -> {
-            if(!handler.getHatInv().checkOwned(CustomHatInventory.REINDEER)){
+            if (!handler.getHatInv().checkOwned(CustomHatInventory.REINDEER)) {
                 g.setColor(new Color(200, 0, 0, 100));
                 g.fillRect((int) element.getX(), (int) element.getY(), element.getWidth(), element.getHeight());
             }
@@ -164,7 +165,7 @@ public class CustomizeHatState extends State {
 
         //bunny
         hat = new GridElementImage(handler, CharAssets.bunny, (element, g) -> {
-            if(!handler.getHatInv().checkOwned(CustomHatInventory.BUNNY)){
+            if (!handler.getHatInv().checkOwned(CustomHatInventory.BUNNY)) {
                 g.setColor(new Color(200, 0, 0, 100));
                 g.fillRect((int) element.getX(), (int) element.getY(), element.getWidth(), element.getHeight());
             }
@@ -199,6 +200,45 @@ public class CustomizeHatState extends State {
         };
 
         hat.setSelected(handler.getHatInv().getEquippedHat() == CustomHatInventory.BUNNY);
+        grid.addElement(hat);
+
+        //baseball
+        hat = new GridElementImage(handler, CharAssets.baseballCap, (element, g) -> {
+            if (!handler.getHatInv().checkOwned(CustomHatInventory.BASEBALL_CAP)) {
+                g.setColor(new Color(200, 0, 0, 100));
+                g.fillRect((int) element.getX(), (int) element.getY(), element.getWidth(), element.getHeight());
+            }
+        }) {
+            @Override
+            public void onMouseRelease(MouseEvent e) {
+                if (hovering) {
+                    //if not owned, prompt to buy
+                    if (!inventory.checkOwned(CustomHatInventory.BASEBALL_CAP)) {
+                        //create dialog
+                        createDialog(CustomHatInventory.BASEBALL_CAP, CustomHatInventory.BASEBALL_CAP_PRICE, "Buy Baseball Cap?", CharAssets.baseballCap);
+                    } else {
+                        //if already owned
+                        for (UIObject ui : grid.getUiElements()) {
+                            ((GridElementImage) ui).setSelected(false);
+                        }
+                        isSelected = inventory.setHat(CustomHatInventory.BASEBALL_CAP);
+                        handler.getMouseManager().reset();
+
+                        if (lastState instanceof MultiLobbyState multiLobbyState) {
+                            multiLobbyState.getPeer().sendUserHatChange(user.getUsername(), CustomHatInventory.BASEBALL_CAP);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onMouseMove(MouseEvent e
+            ) {
+                hovering = bounds.contains(e.getX(), e.getY());
+
+            }
+        };
+        hat.setSelected(handler.getHatInv().getEquippedHat() == CustomHatInventory.BASEBALL_CAP);
         grid.addElement(hat);
 
         for (UIObject ui : grid.getUiElements()) {
@@ -249,14 +289,14 @@ public class CustomizeHatState extends State {
         buttons.add(cancelButton);
         dialog = new UIDialog(handler, 100, 100, handler.getWidth() - 200, handler.getHeight() - 200,
                 prompt, image,
-                buttons, 
+                buttons,
                 //biconsumer, function get passed into postRender() function
                 //element is the this UIObject that its within (dialog), in order to access its values
-                (element, g) -> { 
+                (element, g) -> {
                     g.setColor(handler.getSettings().getHudColor());
                     g.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));
                     g.drawString(Integer.toString(price), (int) element.getX() + element.getWidth() / 2, 265);
-                    g.drawImage(MenuAssets.coins[0],  (int) element.getX() + element.getWidth() / 2 - 55, 230, 50, 50, null);
+                    g.drawImage(MenuAssets.coins[0], (int) element.getX() + element.getWidth() / 2 - 55, 230, 50, 50, null);
                 });
         dialogManager.addObject(cancelButton);
         dialogManager.addObject(buyButton);
