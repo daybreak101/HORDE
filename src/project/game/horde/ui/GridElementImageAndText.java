@@ -1,10 +1,11 @@
 package project.game.horde.ui;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.awt.Rectangle;
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
 import project.game.horde.main.Handler;
 import project.game.horde.utils.Utils;
 
@@ -203,6 +204,11 @@ public class GridElementImageAndText extends UIObject {
 
 	public boolean isSelected() {
 		return isSelected;
+	}
+
+	@Override
+	protected void postRender(Graphics g) {
+		// TODO Auto-generated method stub
 	}
 
 }

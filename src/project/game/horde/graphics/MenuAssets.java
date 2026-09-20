@@ -8,7 +8,7 @@ public class MenuAssets {
     private static final String folder = "/textures/menu/";
     private static int width = 100 * upscaleFactor, height = 100 * upscaleFactor;
 
-    public static BufferedImage coins[], crown,
+    public static BufferedImage coins[], crown, none,
             jugg, fasthand, doubletap, deadshot, phd, stam, vamp, mule, revive, bandolier,
             luna, stronghold, farmhouseLoading,
             doubleTimeBlessing, kaboomBlessing, fullSupplyBlessing, infiniteSupplyBlessing,
@@ -25,6 +25,7 @@ public class MenuAssets {
             coins[i] = coinSheet.crop(0, 44 * i * 3, 40 * 3, 44 * 3);
         }
         crown = ImageLoader.loadImage(folder + "crown.png");
+        none = ImageLoader.loadImage(folder + "none.png");
 
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/normal/entities.png"));
 

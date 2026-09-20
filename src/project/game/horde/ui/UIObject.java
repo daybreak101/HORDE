@@ -1,117 +1,137 @@
 package project.game.horde.ui;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.function.BiConsumer;
 
 import project.game.horde.main.Handler;
 import project.game.horde.sounds.MenuSounds;
 import project.game.horde.sounds.Sounds;
 
 public abstract class UIObject {
-	protected float x, y;
-	protected int width, height;
-	protected Rectangle bounds;
-	protected boolean hovering = false;
-	protected Handler handler;
-	protected boolean isVisible = true;
-	protected String clickSound = MenuSounds.MENU_BUTTON_CLICKS_ID;
-	
-	public UIObject(Handler handler) {
-		this.handler = handler;
-		bounds = new Rectangle();
-	}
-	
-	public UIObject(Handler handler, float x, float y, int width, int height) {
-		this.handler = handler;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		bounds = new Rectangle((int)x, (int) y, width, height);
-	}
-	
-	public abstract void tick();
-	public abstract void render(Graphics g);
-	public abstract void onClick(UIObject ui);
-	
-	public void onMouseMove(MouseEvent e) {
-            hovering = bounds.contains(e.getX(), e.getY());
 
-	}
-	
-	public void onMouseRelease(MouseEvent e) {
-		if(hovering) {
-			onClick(this);
-			Sounds.playClip(clickSound, 1, 1, false);
-		}
-			
-	}
-		
-	public void setClickSound(String clipId) {
-		this.clickSound = clipId;
-	}
-	
-	public float getX() {
-		return x;
-	}
+    protected float x, y;
+    protected int width, height;
+    protected Rectangle bounds;
+    protected boolean hovering = false;
+    protected Handler handler;
+    protected boolean isVisible = true;
+    protected String clickSound = MenuSounds.MENU_BUTTON_CLICKS_ID;
+    protected BiConsumer<UIObject,Graphics> postRenderAction;
 
+    public UIObject(Handler handler) {
+        this.handler = handler;
+        bounds = new Rectangle();
+        this.postRenderAction = null;
+    }
 
-	public void setX(float x) {
-		this.x = x;
-		bounds.x = (int) x;
-	}
+    public UIObject(Handler handler, BiConsumer<UIObject,Graphics> postRenderAction) {
+        this.handler = handler;
+        bounds = new Rectangle();
+        this.postRenderAction = postRenderAction;
+    }
 
+    public UIObject(Handler handler, float x, float y, int width, int height) {
+        this.handler = handler;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        bounds = new Rectangle((int) x, (int) y, width, height);
+        this.postRenderAction = null;
+    }
 
-	public float getY() {
-		return y;
-	}
+    public UIObject(Handler handler, float x, float y, int width, int height, BiConsumer<UIObject,Graphics> postRenderAction) {
+        this.handler = handler;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        bounds = new Rectangle((int) x, (int) y, width, height);
+        this.postRenderAction = postRenderAction;
+    }
 
+    public abstract void tick();
 
-	public void setY(float y) {
-		this.y = y;
-		bounds.y = (int) y;
-	}
+    public abstract void render(Graphics g);
 
+    public abstract void onClick(UIObject ui);
 
-	public int getWidth() {
-		return width;
-	}
+    public void onMouseMove(MouseEvent e) {
+        hovering = bounds.contains(e.getX(), e.getY());
 
+    }
 
-	public void setWidth(int width) {
-		this.width = width;
-		bounds.width = width;
-	}
+    public void onMouseRelease(MouseEvent e) {
+        if (hovering) {
+            onClick(this);
+            Sounds.playClip(clickSound, 1, 1, false);
+        }
 
+    }
 
-	public int getHeight() {
-		return height;
-	}
+    public void setClickSound(String clipId) {
+        this.clickSound = clipId;
+    }
 
+    public float getX() {
+        return x;
+    }
 
-	public void setHeight(int height) {
-		this.height = height;
-		bounds.height = height;
-	}
+    public void setX(float x) {
+        this.x = x;
+        bounds.x = (int) x;
+    }
 
+    public float getY() {
+        return y;
+    }
 
-	public boolean isHovering() {
-		return hovering;
-	}
+    public void setY(float y) {
+        this.y = y;
+        bounds.y = (int) y;
+    }
 
+    public int getWidth() {
+        return width;
+    }
 
-	public void setHovering(boolean hovering) {
-		this.hovering = hovering;
-	}
+    public void setWidth(int width) {
+        this.width = width;
+        bounds.width = width;
+    }
 
+    public int getHeight() {
+        return height;
+    }
 
-	public void setIsVisible(boolean isVisible) {
-		this.isVisible = isVisible;
-	}
-	
-	public boolean getIsVisible() {
-		return isVisible;
-	}
+    public void setHeight(int height) {
+        this.height = height;
+        bounds.height = height;
+    }
 
-	protected abstract Object getInfo();
+    public boolean isHovering() {
+        return hovering;
+    }
+
+    public void setHovering(boolean hovering) {
+        this.hovering = hovering;
+    }
+
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
+    public boolean getIsVisible() {
+        return isVisible;
+    }
+
+    protected abstract Object getInfo();
+
+    protected void postRender(Graphics g) {
+        if (postRenderAction != null) {
+            postRenderAction.accept(this, g);
+        }
+    }
 }

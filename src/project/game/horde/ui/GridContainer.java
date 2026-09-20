@@ -211,4 +211,10 @@ public class GridContainer {
 		return hoveringUI;
 	}
 
+	public void postRender(Graphics g) {
+		for (UIObject ui : uiElements) {
+			ui.postRender(g);
+		}
+	}
+
 }

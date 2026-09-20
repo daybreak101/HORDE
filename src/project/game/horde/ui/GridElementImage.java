@@ -3,6 +3,7 @@ package project.game.horde.ui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.function.BiConsumer;
 
 import project.game.horde.main.Handler;
 
@@ -13,13 +14,13 @@ public class GridElementImage extends UIObject {
 	private int imageBorder = 3;
 	protected boolean isSelected = false;
 
-	public GridElementImage(Handler handler, BufferedImage image) {
-		super(handler);
+	public GridElementImage(Handler handler, BufferedImage image, BiConsumer<UIObject,Graphics> postRenderAction) {
+		super(handler, postRenderAction);
 		this.image = image;
 	}
 	
-	public GridElementImage(Handler handler, BufferedImage[] images) {
-		super(handler);
+	public GridElementImage(Handler handler, BufferedImage[] images, BiConsumer<UIObject,Graphics> postRenderAction) {
+		super(handler, postRenderAction);
         int width = Math.max(images[0].getWidth(), images[1].getWidth());
         int height = Math.max(images[0].getHeight(), images[1].getHeight());
 

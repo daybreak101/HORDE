@@ -39,5 +39,10 @@ public class UIImageButton extends UIObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	protected void postRender(Graphics g) {
+		// TODO Auto-generated method stub
+	}
 	
 }

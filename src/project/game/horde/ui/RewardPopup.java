@@ -147,4 +147,9 @@ public class RewardPopup extends UIObject {
 		return rewards;
 	}
 
+	@Override
+	protected void postRender(Graphics g) {
+		// TODO Auto-generated method stub
+	}
+
 }

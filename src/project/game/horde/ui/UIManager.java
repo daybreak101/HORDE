@@ -28,6 +28,14 @@ public class UIManager {
 			if(o.isVisible)
 				o.render(g);
 	}
+
+	public void postRender(Graphics g) {
+		for (UIObject o : objects) {
+			if (o.isVisible) {
+				o.postRender(g);
+			}
+		}
+	}
 	
 	public void onMouseMove(MouseEvent e) {
 		for(UIObject o: objects)

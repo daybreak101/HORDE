@@ -249,4 +249,8 @@ public class TextButton extends UIObject {
 		return null;
 	}
 
+	@Override
+	protected void postRender(Graphics g) {
+	}
+
 }
