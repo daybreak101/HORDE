@@ -12,6 +12,7 @@ import project.game.horde.states.GameState;
 import project.game.horde.states.PauseState;
 import project.game.horde.states.State;
 import project.game.horde.utils.Timer;
+import project.game.horde.weapons.GunVars;
 
 public class PlayerInput {
 
@@ -164,6 +165,9 @@ public class PlayerInput {
 
     public boolean canSprint() {
         PlayerMovementState move = player.getMoveState();
+        if (player.getInv().getGun().getOriginalName().equals(GunVars.MINIGUN_NAME)) {
+            return false;
+        }
         return (move == PlayerMovementState.SPRINTING || move == PlayerMovementState.WALKING);
     }
 
@@ -184,6 +188,9 @@ public class PlayerInput {
     public boolean canSwitchWeapon() {
         PlayerMovementState move = player.getMoveState();
         PlayerActionState action = player.getActionState();
+        if (player.getInv().getGun().getOriginalName().equals(GunVars.MINIGUN_NAME)) {
+            return false;
+        }
         return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
                 && (action == PlayerActionState.IDLE || action == PlayerActionState.RELOADING
                 || action == PlayerActionState.SHOOTING || action == PlayerActionState.SWITCHING_WEAPON
@@ -211,6 +218,9 @@ public class PlayerInput {
     public boolean canInteract() {
         PlayerMovementState move = player.getMoveState();
         PlayerActionState action = player.getActionState();
+        if (player.getInv().getGun().getOriginalName().equals(GunVars.MINIGUN_NAME)) {
+            return false;
+        }
         return (move == PlayerMovementState.IDLE || move == PlayerMovementState.WALKING)
                 && (action == PlayerActionState.IDLE || action == PlayerActionState.SHOOTING
                 || action == PlayerActionState.RELOADING);
