@@ -15,7 +15,7 @@ public class Assets {
     //interactable assets
     public static BufferedImage mysteryBox, ammoBox, toxen, perkvendor, fryer,
             barricade, damagedBarricade, brokenBarricade, wallBuy, chipBag,
-            powerOn, powerOff;
+            powerOn, powerOff, ritual, ritualOff;
     //chips
     public static BufferedImage juggChip, fasthandChip, doubletapChip, deadshotChip, phdChip, stamChip, vampChip,
             muleChip, reviveChip, bandolierChip, lunaChip, strongholdChip;
@@ -350,7 +350,8 @@ public class Assets {
         whiteStar = ImageLoader.loadImage(folder + "glow/white-star.png");
         yellowStar = ImageLoader.loadImage(folder + "glow/yellow-star.png");
 
-
+        ritual = ImageLoader.loadImage(folder + "interactables/ritual.png");
+        ritualOff = ImageLoader.loadImage(folder + "interactables/ritual_off.png");
 
     }
 }

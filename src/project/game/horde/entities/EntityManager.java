@@ -24,6 +24,7 @@ import project.game.horde.entities.powerups.PowerUps;
 import project.game.horde.entities.statics.Barrier;
 import project.game.horde.entities.statics.InteractableStaticEntity;
 import project.game.horde.entities.statics.InvisibleBounds;
+import project.game.horde.entities.statics.RitualCircle;
 import project.game.horde.entities.statics.Wall;
 import project.game.horde.entities.statics.traps.Trap;
 import project.game.horde.main.Handler;
@@ -294,6 +295,9 @@ public class EntityManager {
             }
         }
         for (InteractableStaticEntity e : interactables) {
+            if(e instanceof RitualCircle) {
+                System.out.println("renderThis? " + e.getRenderThis());
+            }
             if (e.getRenderThis()) {
                 e.render(g);
             }

@@ -175,9 +175,12 @@ public abstract class Entity {
         return renderThis;
     }
 
-    Rectangle renderBounds = new Rectangle();
+    protected Rectangle renderBounds = new Rectangle();
     public Rectangle getRenderBounds() {
         renderBounds.setBounds((int) x, (int) y, width, height);
+        if(width == 0 || height == 0) {
+            renderBounds.setBounds((int) x, (int) y, 1, 1);
+        }
         return renderBounds;
         //return new Rectangle((int) x, (int) y, width, height);
     }

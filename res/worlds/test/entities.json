@@ -636,6 +636,18 @@
                  "width":30,
                  "x":1911,
                  "y":649
+                }, 
+                {
+                 "height":0,
+                 "id":113,
+                 "name":"RitualCircle",
+                 "point":true,
+                 "rotation":0,
+                 "type":"RitualCircle",
+                 "visible":true,
+                 "width":0,
+                 "x":1702,
+                 "y":697
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2033,7 +2045,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":112,
+ "nextobjectid":114,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
