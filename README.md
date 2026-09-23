@@ -18,6 +18,7 @@ odds using LAN multiplayer!
 
 ## Gameplay
 A video featuring gameplay is available on YouTube. Click the thumbnail below to watch.
+[![HORDE Gameplay](https://img.youtube.com/vi/jUIxdYZkAaU/maxresdefault.jpg)](https://youtu.be/jUIxdYZkAaU)
 
 ## Controls
 Mouse left click - shoot primary gun \
