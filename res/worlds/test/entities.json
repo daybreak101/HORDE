@@ -28,7 +28,7 @@
                  "visible":true,
                  "width":150,
                  "x":1700,
-                 "y":455
+                 "y":443
                 }, 
                 {
                  "height":30,
@@ -168,7 +168,7 @@
                  "type":"Wall",
                  "visible":true,
                  "width":25,
-                 "x":600,
+                 "x":593,
                  "y":700
                 }, 
                 {
@@ -184,8 +184,8 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":350,
-                 "x":600,
+                 "width":357,
+                 "x":593,
                  "y":1000
                 }, 
                 {
@@ -201,8 +201,8 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":600,
-                 "x":600,
+                 "width":607,
+                 "x":593,
                  "y":480
                 }, 
                 {
@@ -304,7 +304,7 @@
                  "type":"Wall",
                  "visible":true,
                  "width":25,
-                 "x":600,
+                 "x":593,
                  "y":500
                 }, 
                 {
@@ -356,7 +356,7 @@
                  "visible":true,
                  "width":125,
                  "x":1625,
-                 "y":880
+                 "y":888
                 }, 
                 {
                  "height":25,
@@ -371,9 +371,9 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":200,
+                 "width":244,
                  "x":1850,
-                 "y":880
+                 "y":888
                 }, 
                 {
                  "height":25,
@@ -388,9 +388,9 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":475,
+                 "width":494,
                  "x":1600,
-                 "y":430
+                 "y":417
                 }, 
                 {
                  "height":475,
@@ -406,7 +406,7 @@
                  "type":"Wall",
                  "visible":true,
                  "width":25,
-                 "x":2050,
+                 "x":2069,
                  "y":430
                 }, 
                 {
@@ -440,7 +440,7 @@
                  "type":"Barrier",
                  "visible":true,
                  "width":25,
-                 "x":600,
+                 "x":593,
                  "y":600
                 }, 
                 {
@@ -492,7 +492,7 @@
                  "visible":true,
                  "width":100,
                  "x":1750,
-                 "y":880
+                 "y":888
                 }, 
                 {
                  "height":435,
@@ -636,18 +636,6 @@
                  "width":30,
                  "x":1911,
                  "y":649
-                }, 
-                {
-                 "height":0,
-                 "id":113,
-                 "name":"RitualCircle",
-                 "point":true,
-                 "rotation":0,
-                 "type":"RitualCircle",
-                 "visible":true,
-                 "width":0,
-                 "x":1702,
-                 "y":697
                 }],
          "opacity":1,
          "type":"objectgroup",

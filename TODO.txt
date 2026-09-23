@@ -1,3 +1,8 @@
+- Luna needs recharge timer, too low
+- Skins need to be visible on both perspectives of multiplayer
+- Multiplayer, other player grenades explode immediately
+- Multiplayer, other players dead bodies have collision
+
 - Expand map, specifically garage to include ritual area and more barricades
 - Frozen zombies not being rendered (via Brain Freeze)
 - Player animation for activating scroll, character pulls out scroll and then opens it.

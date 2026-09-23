@@ -22,7 +22,6 @@ import project.game.horde.main.Handler;
 
 public class Display {
 
-    private final Game game;
     private JFrame frame;
     private Canvas canvas;
     private JFXPanel fxPanel;
@@ -34,7 +33,6 @@ public class Display {
     private double standardWidth, standardHeight;
 
     public Display(Game game, String title, int width, int height) {
-        this.game = game;
         this.title = title;
 
         standardWidth = (width);

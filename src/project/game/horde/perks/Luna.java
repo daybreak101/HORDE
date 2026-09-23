@@ -10,7 +10,7 @@ import project.game.horde.utils.Timer;
 
 public class Luna extends Perk {
 
-	public static final int REFRESH_DURATION = 10 * 60;
+	public static final int REFRESH_DURATION = 300 * 60;
 	public static final int ACTIVE_DURATION = 60 * 60;
 	public static final int SMALL_POINTS_REWARD = 50;
 	public static final int SMALL_HEALTH_REWARD = 5;
